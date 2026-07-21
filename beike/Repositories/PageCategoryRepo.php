@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageCategoryRepo.php
  *
@@ -136,10 +137,11 @@ class PageCategoryRepo
      */
     public static function autocomplete($name)
     {
+
         $pageCategories = self::getBuilder()
             ->whereHas('description', function ($query) use ($name) {
                 $query->where('title', 'like', "%{$name}%");
-            })->limit(10)->get();
+            })->orderBy('updated_at', 'desc')->limit(50)->get();
 
         $results = [];
         foreach ($pageCategories as $item) {

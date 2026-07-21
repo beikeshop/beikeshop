@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -21,9 +22,7 @@ class Page extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -33,10 +32,11 @@ class Page extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'page',
-            'sort' => 0,
-            'name' => trans('admin/design_builder.module_page'),
-            'icon' => asset('image/module/page_icon.png'),
+            'code'  => 'page',
+            'sort'  => 0,
+            'name'  => trans('admin/design_builder.module_page'),
+            'image' => asset('image/module/page_preview.webp'),
+            'icon'  => asset('image/module/page_icon.png'),
         ];
 
         return view('admin::pages.design.module.page', $data);

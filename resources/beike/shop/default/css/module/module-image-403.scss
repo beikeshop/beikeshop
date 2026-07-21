@@ -3,7 +3,7 @@
 /**
  * @copyright     2024 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2024-11-12 15:14:28
  * @LastEditTime  2024-11-12 15:14:34
  */
@@ -12,6 +12,8 @@
   .image-wrap {
     position: relative;
     color: #fff;
+    border-radius: 10px;
+
     &::after {
       position: absolute;
       content: '';

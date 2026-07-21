@@ -2,11 +2,10 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -123,7 +122,7 @@ class ModelMakeCommand extends GeneratorCommand
 
             $this->call('plugin:make-controller', array_filter([
                 'controller' => $controllerName,
-                'plugin' => $this->argument('plugin'),
+                'plugin'     => $this->argument('plugin'),
             ]));
         }
     }
@@ -139,7 +138,7 @@ class ModelMakeCommand extends GeneratorCommand
             $seedName = "{$this->getModelName()}Seeder";
 
             $this->call('plugin:make-seed', array_filter([
-                'name' => $seedName,
+                'name'   => $seedName,
                 'plugin' => $this->argument('plugin'),
             ]));
         }
@@ -154,7 +153,7 @@ class ModelMakeCommand extends GeneratorCommand
     {
         if ($this->option('factory') === true) {
             $this->call('plugin:make-factory', array_filter([
-                'name' => $this->getModelName(),
+                'name'   => $this->getModelName(),
                 'plugin' => $this->argument('plugin'),
             ]));
         }
@@ -171,7 +170,7 @@ class ModelMakeCommand extends GeneratorCommand
             $requestName = "{$this->getModelName()}Request";
 
             $this->call('plugin:make-request', array_filter([
-                'name' => $requestName,
+                'name'   => $requestName,
                 'plugin' => $this->argument('plugin'),
             ]));
         }
@@ -223,7 +222,7 @@ class ModelMakeCommand extends GeneratorCommand
     {
         $fillable = $this->option('fillable');
 
-        if (!is_null($fillable)) {
+        if (! is_null($fillable)) {
             $arrays = explode(',', $fillable);
 
             return json_encode($arrays);

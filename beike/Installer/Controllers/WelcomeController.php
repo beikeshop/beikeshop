@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WelcomeController.php
  *
@@ -11,8 +12,8 @@
 
 namespace Beike\Installer\Controllers;
 
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class WelcomeController extends BaseController
 {
@@ -35,6 +36,7 @@ class WelcomeController extends BaseController
     {
         $lang = $request->get('code');
         setcookie('locale', $lang, 0, '/');
+
         return Redirect::to(route('installer.welcome'));
     }
 }

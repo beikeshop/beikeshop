@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Base.php
  *
@@ -25,7 +26,7 @@ class Base extends Model
 
         $extraFillable = hook_filter($hookKey, []);
 
-        if (!is_array($extraFillable)) {
+        if (! is_array($extraFillable)) {
             $extraFillable = [];
         }
 
@@ -40,14 +41,14 @@ class Base extends Model
     protected static function booted(): void
     {
         parent::boot();
-        static::addGlobalScope(new SelectScope());
+        static::addGlobalScope(new SelectScope);
 
         /**
          * 动态扩展模型关系（Relation）
          * Hook Key：model.relations:{模型类名}
          * 插件可通过 return ['relationName' => function ($model) { return $model->xxx(...); }];
          */
-        $hookKey = 'model.relations:' . static::class;
+        $hookKey   = 'model.relations:' . static::class;
         $relations = hook_filter($hookKey, []);
 
         if (is_array($relations)) {
@@ -64,9 +65,9 @@ class Base extends Model
     public function getColumns($scene = 'default')
     {
         $model_name  = get_class($this);
-        $field_class = str_replace('Models','Fields\Local',$model_name);
+        $field_class = str_replace('Models', 'Fields\Local', $model_name);
         if (class_exists($field_class)) {
-           return  (new $field_class)->getColumns($scene);
+            return (new $field_class)->getColumns($scene);
         }
 
         return null;
@@ -74,11 +75,10 @@ class Base extends Model
 
     public function scopeGetList($query)
     {
-        if ($columns = $this->getColumns()){
+        if ($columns = $this->getColumns()) {
             return $query->select($columns);
         }
 
         return $query->select();
     }
-
 }

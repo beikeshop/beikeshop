@@ -101,7 +101,7 @@ class EnvironmentManager
             'APP_NAME=\'' . ($request->app_name ?: 'BeikeShop') . "'\n" .
             'APP_ENV=' . $request->environment . "\n" .
             'APP_KEY=' . 'base64:' . base64_encode(Str::random(32)) . "\n" .
-            'APP_DEBUG=false' . "\n" .
+            'APP_DEBUG=null' . "\n" .
             'APP_LOG_LEVEL=' . $request->app_log_level . "\n" .
             'APP_URL=' . $appUrl . "\n\n" .
             'DB_CONNECTION=' . $request->database_connection . "\n" .

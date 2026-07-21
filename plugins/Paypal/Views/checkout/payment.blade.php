@@ -31,9 +31,9 @@
 @else
 <!-- Include the PayPal JavaScript SDK -->
 @if($payment_setting['sandbox_mode'])
-    <script src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.sandbox_client_id') }}&currency={{ system_setting('base.currency') }}"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.sandbox_client_id') }}&currency={{ plugin_setting('paypal.currency') }}"></script>
 @else
-    <script src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.live_client_id') }}&currency={{ system_setting('base.currency') }}"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.live_client_id') }}&currency={{ plugin_setting('paypal.currency') }}"></script>
 @endif
 
 <script>

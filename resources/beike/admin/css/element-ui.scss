@@ -3,10 +3,63 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-02 19:19:52
  * @LastEditTime  2022-09-16 19:06:18
  */
+
+.el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
+  html[data-bs-theme="dark"] & {
+    background-color: #3f3f3f;
+    color: #ccc;
+  }
+}
+
+.el-color-picker__panel {
+  html[data-bs-theme="dark"] & {
+    background-color: #3f3f3f;
+    border-color: #444;
+  }
+}
+
+.el-color-picker__trigger {
+  html[data-bs-theme="dark"] & {
+    border-color: #3f3f3f;
+  }
+}
+
+.el-loading-mask {
+  html[data-bs-theme="dark"] & {
+    background-color: rgba($color: #000000, $alpha: 0.3);
+  }
+}
+
+.el-tabs--card>.el-tabs__header {
+  html[data-bs-theme="dark"] & {
+    border-color: #3f3f3f !important;
+  }
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__item.is-active {
+  html[data-bs-theme="dark"] & {
+    background: var(--bs-body-bg);
+    border-bottom-color: var(--bs-body-bg);
+  }
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__nav {
+  html[data-bs-theme="dark"] & {
+    border-color: #3f3f3f;
+  }
+}
+
+.pb-image-selector .el-tabs__nav > div {
+  html[data-bs-theme="dark"] & {
+    background: #3f3f3f;
+    color: #aaa;
+    border-left-color: #444 !important;
+  }
+}
 
 .el-tabs__header {
   margin-bottom: 25px;
@@ -14,6 +67,52 @@
 
 .el-tabs__item {
   padding: 0 10px;
+}
+
+.el-form-item__label, .el-dialog__title {
+  html[data-bs-theme="dark"] & {
+    color: #dee2e6;
+  }
+}
+
+.el-popper[x-placement^=bottom] .popper__arrow {
+  html[data-bs-theme="dark"] & {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    &:after {
+      border-bottom-color: #212529;
+    }
+  }
+}
+
+.el-select-dropdown__item {
+  html[data-bs-theme="dark"] & {
+    color: #dee2e6;
+    &:hover, &.hover {
+      background-color: #333;
+    }
+  }
+}
+
+.el-select-dropdown {
+  html[data-bs-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+.el-dialog, .el-select-dropdown {
+  html[data-bs-theme="dark"] & {
+    background-color: #212529;
+  }
+}
+
+.el-input__inner {
+  color: var(--bs-body-color);
+}
+
+.form-control, .form-select, .el-input__inner {
+  html[data-bs-theme="dark"] & {
+    border-color: #454749;
+    background-color: #1e1e1e;
+  }
 }
 
 .language-inputs {
@@ -81,4 +180,11 @@
 .el-switch.is-checked .el-switch__core {
   border-color: #71c20b;
   background-color: #71c20b;
+}
+
+.el-switch__core {
+  html[data-bs-theme="dark"] & {
+    background: #434447;
+    border-color: #585a5d;
+  }
 }

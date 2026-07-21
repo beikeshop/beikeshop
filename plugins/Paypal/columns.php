@@ -1,10 +1,11 @@
 <?php
+
 /**
  * Stripe 字段
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-29 21:16:23
  * @modified   2022-06-29 21:16:23
  */
@@ -49,6 +50,14 @@ return [
         'type'        => 'string',
         'required'    => true,
         'description' => '正式环境 Secret',
+    ],
+    [
+        'name'        => 'currency',
+        'label'       => 'Currency Code',
+        'type'        => 'string',
+        'required'    => true,
+        'rules'       => 'required|size:3',
+        'description' => '结算货币代码',
     ],
     [
         'name'        => 'sandbox_mode',

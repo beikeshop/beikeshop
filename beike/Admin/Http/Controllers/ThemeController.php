@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ThemeController.php
  *
@@ -33,7 +34,7 @@ class ThemeController extends Controller
             'name'   => trans('admin/theme.theme_name'),
             'code'   => 'default',
             'demo'   => true,
-            'image'  => image_origin('image/default-theme.jpg'),
+            'image'  => image_origin('image/default-theme.webp'),
             'status' => $currentTheme == 'default',
         ];
 
@@ -66,7 +67,7 @@ class ThemeController extends Controller
         $importDemo = $request->get('import_demo');
         if ($importDemo) {
             if ($themeCode == 'default') {
-                $seeder = new ThemeSeeder();
+                $seeder = new ThemeSeeder;
                 $seeder->run();
             } else {
                 $plugin = plugin($themeCode);

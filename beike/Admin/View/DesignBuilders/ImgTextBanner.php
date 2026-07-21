@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -9,7 +10,7 @@
  * @modified   2022-07-08 17:09:15
  */
 
- namespace Beike\Admin\View\DesignBuilders;
+namespace Beike\Admin\View\DesignBuilders;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -21,9 +22,7 @@ class ImgTextBanner extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -35,8 +34,9 @@ class ImgTextBanner extends Component
         $data['register'] = [
             'code'      => 'img_text_banner',
             'sort'      => 0,
-            'name' => trans('admin/design_builder.module_img_text_banner'),
-            'icon' => asset('image/module/img_text_banner.png'),
+            'name'      => trans('admin/design_builder.module_img_text_banner'),
+            'image'     => asset('image/module/img_text_banner_preview.webp'),
+            'icon'      => asset('image/module/img_text_banner.png'),
         ];
 
         return view('admin::pages.design.module.img_text_banner', $data);

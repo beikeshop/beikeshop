@@ -1,6 +1,6 @@
-@section('page-title-right')
+{{-- @section('page-title-right')
   <button type="button" class="btn btn-primary save-btn" onclick="app.submit('form')">{{ __('common.save') }}</button>
-@endsection
+@endsection --}}
 
   <div class="mb-5" id="app">
     {{-- <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
@@ -101,7 +101,7 @@
       <a target="_blank" href="https://developers.facebook.com/">Facebook</a>
     </li>
     <li>{{ __('Social::setting.text_twitter_title') }}
-      <a target="_blank" href="https://developer.twitter.com/">Twitter</a>
+      <a target="_blank" href="https://developer.x.com/">X</a>
     </li>
     <li>{{ __('Social::setting.text_google_title') }}
       <a target="_blank" href="https://console.developers.google.com/">Google</a>
@@ -184,4 +184,8 @@
       }
     }
   })
+
+  $('.submit-form').on('click', function() {
+    app.submit('form');
+  });
 </script>

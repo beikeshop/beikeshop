@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageRepo.php
  *
@@ -24,11 +25,23 @@ class PageRepo
      *
      * @return LengthAwarePaginator
      */
-    public static function getList(): LengthAwarePaginator
+    public static function getList(array $filters = []): LengthAwarePaginator
     {
         $builder = Page::query()->with([
-            'description',
+            'description:id,page_id,title,summary',
         ])->orderByDesc('updated_at');
+
+        // 分类筛选
+        if (! empty($filters['category_id'])) {
+            $builder->where('page_category_id', $filters['category_id']);
+        }
+
+        // 标题筛选
+        if (! empty($filters['title'])) {
+            $builder->whereHas('description', function ($query) use ($filters) {
+                $query->where('title', 'like', '%' . trim($filters['title']) . '%');
+            });
+        }
 
         return $builder->paginate(perPage());
     }
@@ -69,7 +82,7 @@ class PageRepo
         if ($id) {
             $page = Page::query()->findOrFail($id);
         } else {
-            $page = new Page();
+            $page = new Page;
         }
         $page->fill([
             'page_category_id' => (int) ($data['page_category_id'] ?? 0),
@@ -154,7 +167,7 @@ class PageRepo
         $pages = Page::query()->with('description')
             ->whereHas('description', function ($query) use ($name) {
                 $query->where('title', 'like', "%{$name}%");
-            })->limit(10)->get();
+            })->orderBy('updated_at', 'desc')->limit(50)->get();
         $results = [];
         foreach ($pages as $page) {
             $results[] = [

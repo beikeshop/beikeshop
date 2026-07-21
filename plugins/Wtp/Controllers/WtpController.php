@@ -1,13 +1,13 @@
 <?php
+
 /**
  * WtpController.php
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2024-05-13 18:57:56
  * @modified   2024-05-13 18:57:56
- *
  */
 
 namespace Plugin\Wtp\Controllers;
@@ -20,15 +20,15 @@ class WtpController
     public function pay(Request $request, int $id)
     {
         $paymentInformation = [];
-        $paymentInfo = $request->get('payment_information');
+        $paymentInfo        = $request->get('payment_information');
         if ($paymentInfo) {
-            $expiryYearMonth = explode('/', $paymentInfo['expiry_year_month']);
+            $expiryYearMonth    = explode('/', $paymentInfo['expiry_year_month']);
             $paymentInformation = json_encode([
-                'card_number' => $paymentInfo['card_number'],
+                'card_number'  => $paymentInfo['card_number'],
                 'expiry_month' => $expiryYearMonth[0],
-                'expiry_year' => '20' . $expiryYearMonth[1],
-                'cvv' => $paymentInfo['cvv'],
-                'holder_name' => $paymentInfo['holder_name'],
+                'expiry_year'  => '20' . $expiryYearMonth[1],
+                'cvv'          => $paymentInfo['cvv'],
+                'holder_name'  => $paymentInfo['holder_name'],
             ]);
         }
 
@@ -53,5 +53,4 @@ class WtpController
     {
         $result = WtpService::notify();
     }
-
 }

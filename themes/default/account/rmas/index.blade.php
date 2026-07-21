@@ -21,6 +21,7 @@
                     <th>{{ __('shop/account/rma.commodity') }}</th>
                     <th class="text-nowrap">{{ __('shop/account/rma.quantity') }}</th>
                     <th class="text-nowrap">{{ __('shop/account/rma.service_type') }}</th>
+                    <th class="text-nowrap">{{ __('common.status') }}</th>
                     <th class="text-nowrap">{{ __('shop/account/rma.creation_time') }}</th>
                     <th class="text-end">{{ __('common.action') }}</th>
                   </tr>
@@ -34,6 +35,7 @@
                         </td>
                         <td>{{ $rma['quantity'] }}</td>
                         <td>{{ $rma['type_format'] }}</td>
+                        <td>{{ $rma['status_format'] ?? $rma['status'] }}</td>
                         <td class="text-nowrap">{{ $rma['created_at'] }}</td>
                         <td class="text-end"><a href="{{ shop_route('account.rma.show', [$rma['id']]) }}"
                             class="btn text-nowrap btn-outline-secondary btn-sm">{{ __('shop/account/rma.check') }}</a> </td>
@@ -41,7 +43,7 @@
                     @endforeach
                   @else
                     <tr>
-                      <td colspan="6" class="border-0">
+                      <td colspan="7" class="border-0">
                         <x-shop-no-data />
                       </td>
                     </tr>

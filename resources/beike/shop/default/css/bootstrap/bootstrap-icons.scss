@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-02 19:19:52
  * @LastEditTime  2022-09-16 20:57:06
  */
@@ -13,7 +13,7 @@ $bootstrap-icons-font-src: url("/vendor/bootstrap/icon/bootstrap-icons.woff2?08e
 url("/vendor/bootstrap/icon/bootstrap-icons.woff?08efbba7c53d8c5413793eecb19b20bb") format("woff") !default;
 
 @font-face {
-  font-display: block;
+  font-display: swap;
   font-family: $bootstrap-icons-font;
   src: $bootstrap-icons-font-src;
 }

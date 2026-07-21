@@ -2,8 +2,8 @@
 
 namespace App\Tools\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Tools\Contracts\RepositoryInterface;
+use Illuminate\Support\ServiceProvider;
 
 class BootstrapServiceProvider extends ServiceProvider
 {

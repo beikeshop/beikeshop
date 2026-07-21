@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AdminUserRepo.php
  *
@@ -41,7 +42,7 @@ class AdminUserRepo
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
-            'locale'   => $data['locale'],
+            'locale'   => $data['locale'] ?? '',
             'active'   => true,
         ]);
         $adminUser->save();
@@ -67,7 +68,7 @@ class AdminUserRepo
         $userData  = [
             'name'   => $data['name'],
             'email'  => $data['email'],
-            'locale' => $data['locale'],
+            'locale' => $data['locale'] ?? '',
             'active' => true,
         ];
         if ($password) {
@@ -80,7 +81,13 @@ class AdminUserRepo
             $adminUser->syncRoles($roles);
         }
 
-        $tokens = $data['tokens'] ?? [];
+        return $adminUser;
+    }
+
+    public static function updateAdminTokens($adminUserId, $data)
+    {
+        $adminUser = AdminUser::query()->findOrFail($adminUserId);
+        $tokens    = $data['tokens'] ?? [];
         AdminUserTokenRepo::updateTokensByUser($adminUser, $tokens);
 
         return $adminUser;

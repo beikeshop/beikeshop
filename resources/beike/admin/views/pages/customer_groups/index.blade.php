@@ -12,7 +12,7 @@
         @hook('admin.customer_group.index.content.top_buttons.after')
       </div>
       <div class="table-push">
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="group, index in customer_groups" :key="index">
+            <tr v-for="group, index in customer_groups" class="cursor-pointer" :key="index" @click="checkedCustomersCreate('edit', index)">
               <td>@{{ group.id }}</td>
               <td>@{{ group.description?.name || '' }}</td>
               <td>
@@ -35,8 +35,7 @@
               @hook('admin.customer_group.index.table.body')
               <td>
                 @hook('admin.customer_group.index.table.body.actions.before')
-                <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">{{ __('common.edit') }}</button>
-                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)" v-if="customer_groups.length > 1">{{ __('common.delete') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click.stop="deleteCustomer(group.id, index)" v-if="customer_groups.length > 1">{{ __('common.delete') }}</button>
                 @hook('admin.customer_group.index.table.body.actions.after')
               </td>
             </tr>
@@ -65,6 +64,7 @@
             <el-input size="mini" v-model="dialog.form.description[lang.code]" placeholder="{{ __('admin/region.describe') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
           </el-form-item>
         </el-form-item>
+
         @hookwrapper('admin.customer_group.dialog.from.discount_factor')
         <el-form-item label="{{ __('admin/customer_group.discount_rate') }}">
           <el-input class="mb-0" type="number" v-model="dialog.form.discount_factor" placeholder="{{ __('admin/customer_group.discount_rate') }}">
@@ -72,6 +72,7 @@
           </el-input>
         </el-form-item>
         @endhookwrapper
+
         @if (0)
         <el-form-item label="{{ __('customer_group.level') }}">
           <el-input class="mb-0" v-model="dialog.form.level" placeholder="{{ __('customer_group.level') }}"></el-input>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CurrencyController.php
  *
@@ -18,12 +19,16 @@ class CurrencyController extends Controller
 {
     public function index($currency)
     {
-        if (in_array($currency, currencies()->where('status', true)->pluck('code')->toArray())) {
+        if (in_array($currency, currencies()->where('active', true)->pluck('code')->toArray())) {
             Session::put('currency', $currency);
         }
 
         hook_action('currency.index.after', $currency);
 
-        return Redirect::back();
+        $previousUrl = url()->previous();
+
+        $cleanUrl = remove_url_param($previousUrl, 'price');
+
+        return Redirect::to($cleanUrl);
     }
 }

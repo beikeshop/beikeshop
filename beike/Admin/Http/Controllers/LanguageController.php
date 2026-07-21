@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LanguageController.php
  *
@@ -55,7 +56,7 @@ class LanguageController extends Controller
      */
     public function update(Request $request, int $id): JsonResponse
     {
-        $language = LanguageRepo::update($id, $request->except('status'));
+        $language = LanguageRepo::update($id, $request->except('active'));
 
         return json_success(trans('common.updated_success'), $language);
     }

@@ -15,7 +15,7 @@
 
 		<div class="d-flex justify-content-center flex-column align-items-center">
 
-			<div class="welcome-img mb-5" style="max-width: 230px;"><img src="https://beikeshop.com/install/install-2.png?version={{ config('beike.version') }}&build_date={{ config('beike.build') }}" class="img-fluid"></div>
+			<div class="welcome-img mb-5" style="max-width: 230px;"><img width="600" height="680" src="https://beikeshop.com/install/install-2.png?version={{ config('beike.version') }}&build_date={{ config('beike.build') }}" class="img-fluid"></div>
 
 			<h5 class="text-center mb-4">{{ __('installer::installer_messages.final.finished') }}</h5>
 

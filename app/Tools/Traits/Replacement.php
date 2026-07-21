@@ -4,6 +4,7 @@ namespace App\Tools\Traits;
 
 use App\Tools\Support\Config\GenerateConfigReader;
 use Illuminate\Support\Str;
+
 trait Replacement
 {
     /**
@@ -73,9 +74,10 @@ trait Replacement
     {
         if ($this->module->config('paths.generator.controller.namespace')) {
             return $this->module->config('paths.generator.controller.namespace');
-        } else {
-            return $this->path_namespace(ltrim($this->module->config('paths.generator.controller.path', 'app/Http/Controllers'), config('plugins.paths.app_folder')));
         }
+
+        return $this->path_namespace(ltrim($this->module->config('paths.generator.controller.path', 'app/Http/Controllers'), config('plugins.paths.app_folder')));
+
     }
 
     /**
@@ -85,7 +87,7 @@ trait Replacement
      */
     protected function getAppFolderNameReplacement()
     {
-        return  $this->module->config('paths.app_folder');
+        return $this->module->config('paths.app_folder');
     }
 
     protected function getProviderNamespaceReplacement(): string

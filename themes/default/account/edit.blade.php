@@ -18,6 +18,7 @@
         <div class="card h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">{{ __('shop/account/edit.index') }}</h5>
+            <button class="btn btn-sm btn-outline-danger account-destroy" type="button" data-bs-toggle="modal" data-bs-target="#destroyModal">{{ __('shop/account/edit.destroy_account') }}</button>
           </div>
           <div class="card-body h-600">
             <form novalidate class="needs-validation" action="{{ shop_route('account.edit.update') }}" method="POST">
@@ -104,6 +105,27 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="destroyModal" tabindex="-1" aria-labelledby="destroyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="destroyModalLabel">{{ __('shop/account/edit.destroy_account') }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{ __('shop/account/edit.destroy_account_confirm') }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('common.cancel') }}</button>
+          <form action="{{ shop_route('account.destroy') }}" method="POST" id="account-destroy-form">
+            @csrf
+            {{ method_field('DELETE') }}
+            <button type="submit" class="btn btn-danger" form="account-destroy-form">{{ __('common.confirm') }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 @endsection
 

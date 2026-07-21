@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TranslationService.php
  *

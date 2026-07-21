@@ -86,7 +86,6 @@
 
 @push('add-scripts')
 <script>
-  const currencyRate = {{ current_currency_rate() }};
   $(document).ready(function() {
     if (!$('#price-slider').length) {
       return;
@@ -102,8 +101,8 @@
         filterProductData();
       },
       slide: function(event, ui) {
-        $('.price-select-min').val((ui.values[0] * currencyRate).toFixed(2));
-        $('.price-select-max').val((ui.values[1] * currencyRate).toFixed(2));
+        $('.price-select-min').val((ui.values[0]).toFixed(2));
+        $('.price-select-max').val((ui.values[1]).toFixed(2));
       }
     });
 

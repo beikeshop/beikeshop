@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ShareViewData.php
  *
@@ -11,15 +12,15 @@
 
 namespace App\Http\Middleware;
 
+use Beike\Admin\Services\MarketingService;
+use Beike\Libraries\ToolCache as Cache;
 use Beike\Repositories\FooterRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\MenuRepo;
+use Beike\Repositories\SettingRepo;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
-use Beike\Admin\Services\MarketingService;
-use Beike\Libraries\ToolCache as Cache;
-use Beike\Repositories\SettingRepo;
 
 class ShareViewData
 {
@@ -57,7 +58,8 @@ class ShareViewData
             $adminLanguages  = $this->handleAdminLanguages();
             $loggedAdminUser = current_user();
             if ($loggedAdminUser) {
-                $currentLanguage = $loggedAdminUser->locale ?: 'en';
+                // 使用当前实际设置的语言（可能来自用户设置或浏览器语言）
+                $currentLanguage = app()->getLocale();
                 View::share('admin_languages', $adminLanguages);
                 View::share('admin_language', collect($adminLanguages)->where('code', $currentLanguage)->first());
             }
@@ -96,7 +98,7 @@ class ShareViewData
 
     private function handleToolSearch($enabledCodes)
     {
-        if (!$enabledCodes) {
+        if (! $enabledCodes) {
             return;
         }
 
@@ -104,15 +106,15 @@ class ShareViewData
 
         $domain      = clean_domain((string) config('app.url', ''));
         $cacheKey    = 'tool_data_' . $domain;
-        $cached = Cache::get($cacheKey);
+        $cached      = Cache::get($cacheKey);
 
-        if (!$cached) {
-            if (!$this->limitOnce($domain)) {
+        if (! $cached) {
+            if (! $this->limitOnce($domain)) {
                 return;
             }
 
             $result = MarketingService::getInstance()->toolSearch($enabledCodesJson, $domain);
-            if (!empty($result['data'])) {
+            if (! empty($result['data'])) {
                 $cached = $result['data'];
                 Cache::put($cacheKey, $cached, now()->addDays(7));
             }
@@ -125,7 +127,7 @@ class ShareViewData
     {
         $data         = $this->formatTool($data);
 
-        if (!$data) {
+        if (! $data) {
             return;
         }
 
@@ -134,17 +136,19 @@ class ShareViewData
         if ($enabledCodesJson !== $pluginsJson) {
             Cache::forget($cacheKey);
             $this->handleToolSearch($enabledCodes);
+
             return;
         }
 
         if ($data['token'] !== system_setting('base.developer_token')) {
             Cache::forget($cacheKey);
             $this->handleToolSearch($enabledCodes);
+
             return;
         }
 
         foreach ($data['plugins'] as $code => $isValid) {
-            if (!$isValid) {
+            if (! $isValid) {
                 SettingRepo::update('plugin', $code, ['status' => false]);
             }
         }
@@ -153,12 +157,12 @@ class ShareViewData
     private function formatTool($data)
     {
         try {
-            if (!is_string($data) || $data === '') {
+            if (! is_string($data) || $data === '') {
                 return null;
             }
 
             $websiteKey = config('beike.website_key');
-            if (!is_string($websiteKey) || $websiteKey === '') {
+            if (! is_string($websiteKey) || $websiteKey === '') {
                 return null;
             }
 
@@ -179,7 +183,7 @@ class ShareViewData
             }
 
             $json = openssl_decrypt($cipher, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
-            if (!is_string($json) || $json === '') {
+            if (! is_string($json) || $json === '') {
                 return null;
             }
 
@@ -200,7 +204,7 @@ class ShareViewData
         Cache::put($debounceKey, 1, 30);
 
         $limitKey = "tool_data_limit_$domain";
-        $count = Cache::get($limitKey, 0);
+        $count    = Cache::get($limitKey, 0);
 
         if ($count >= 10) {
             return false;

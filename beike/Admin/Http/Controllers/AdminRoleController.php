@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AdminUserController.php
  *
@@ -31,9 +32,16 @@ class AdminRoleController extends Controller
         return view('admin::pages.admin_roles.index', $data);
     }
 
+    public function ajaxList(Request $request)
+    {
+        $data = Role::query()->get();
+
+        return json_success(trans('common.created_success'), $data);
+    }
+
     public function create(Request $request)
     {
-        $permissionRepo = (new PermissionRepo());
+        $permissionRepo = (new PermissionRepo);
         $data           = [
             'core_permissions'   => $permissionRepo->getRoleCorePermissions(),
             'plugin_permissions' => $permissionRepo->getRolePluginPermissions(),
@@ -48,7 +56,7 @@ class AdminRoleController extends Controller
     {
         Cache::forget('spatie.permission.cache');
         $role           = Role::query()->findOrFail($id);
-        $permissionRepo = (new PermissionRepo())->setRole($role);
+        $permissionRepo = (new PermissionRepo)->setRole($role);
         $data           = [
             'core_permissions'   => $permissionRepo->getRoleCorePermissions(),
             'plugin_permissions' => $permissionRepo->getRolePluginPermissions(),

@@ -1,12 +1,16 @@
 @extends('admin::layouts.master')
 
+@if ($type != 'trashed')
 @section('title', __('admin/common.customers_index'))
+@else
+@section('title', __('admin/common.customers_trashed'))
+@endif
 
 @section('content')
   <div id="customer-app" class="card h-min-600" v-cloak>
     <div class="card-body">
       @hook('admin.customer.index.content.before')
-      <div class="bg-light p-4 mb-3">
+      <div class="bg-light p-4 mb-3 rounded-3">
         <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="70px">
           <div>
             @hook('admin.customer.index.content.filter.before')
@@ -64,7 +68,7 @@
 
       @if ($customers->total())
         <div class="table-push">
-          <table class="table">
+          <table class="table table-hover">
             <thead>
             <tr>
               <th>{{ __('common.id') }}</th>
@@ -83,7 +87,7 @@
             </thead>
             <tbody>
             @foreach ($customers as $customer)
-              <tr data-item="{{ json_encode($customer) }}">
+              <tr data-item="{{ json_encode($customer) }}" class="cursor-pointer row-link" data-to-url="{{ admin_route('customers.edit', [$customer->id, http_build_query(request()->query())]) }}">
                 <td>{{ $customer['id'] }}</td>
                 <td>{{ $customer['email'] }}</td>
                 <td>
@@ -126,18 +130,15 @@
                 @hook('admin.customer.list.column_value', $customer)
                 <td>
                   @if ($type != 'trashed')
-                    <a class="btn btn-outline-primary btn-sm" target="_blank"
-                       href="{{ admin_route('customers.login', [$customer->id]) }}">{{ __('common.login') }}</a>
-                    <a class="btn btn-outline-secondary btn-sm"
-                       href="{{ admin_route('customers.edit', [$customer->id]) }}">{{ __('common.edit') }}</a>
+                    <a class="btn btn-outline-primary btn-sm" target="_blank" @click.stop href="{{ admin_route('customers.login', [$customer->id]) }}">{{ __('common.login') }}</a>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button"
-                            @click="deleteCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
+                            @click.stop="deleteCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
                     @hook('admin.customer.list.action', $customer)
                   @else
                     <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
-                       @click.prevent="restore({{ $customer['id'] }})">{{ __('common.restore') }}</a>
+                       @click.stop="restore({{ $customer['id'] }})">{{ __('common.restore') }}</a>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button"
-                            @click="deleteTrashedCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
+                            @click.stop="deleteTrashedCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
                     @hook('admin.customer.trashed.action', $customer)
                   @endif
                 </td>

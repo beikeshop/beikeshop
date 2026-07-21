@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OrderRepo.php
  *
@@ -108,12 +109,12 @@ class OrderRepo
 
         $start = $filters['start'] ?? null;
         if ($start) {
-            $builder->where('created_at', '>', $start);
+            $builder->whereDate('created_at', '>=', $start);
         }
 
         $end = $filters['end'] ?? null;
         if ($end) {
-            $builder->where('created_at', '<', $end);
+            $builder->whereDate('created_at', '<=', $end);
         }
 
         $orderIds = $filters['order_ids'] ?? null;
@@ -215,7 +216,7 @@ class OrderRepo
             $shippingAddressId = $current['shipping_address_id'] ?? 0;
             $paymentAddressId  = $current['payment_address_id']  ?? 0;
 
-            $shippingAddress = $shippingAddressId ? Address::query()->findOrFail($shippingAddressId) : new Address();
+            $shippingAddress = $shippingAddressId ? Address::query()->findOrFail($shippingAddressId) : new Address;
             $paymentAddress  = Address::query()->findOrFail($paymentAddressId);
             $email           = $customer->email;
         } else {

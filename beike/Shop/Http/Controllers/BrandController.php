@@ -28,6 +28,7 @@ class BrandController extends Controller
         }
 
         $products = $brand->products()
+            ->where('active', 1)
             ->with([
                 'masterSku',
                 'description',

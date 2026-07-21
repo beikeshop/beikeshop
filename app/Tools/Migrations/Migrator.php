@@ -2,11 +2,11 @@
 
 namespace App\Tools\Migrations;
 
+use App\Tools\Module;
+use App\Tools\Support\Config\GenerateConfigReader;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use App\Tools\Module;
-use App\Tools\Support\Config\GenerateConfigReader;
 
 class Migrator
 {
@@ -40,13 +40,13 @@ class Migrator
 
     /**
      * Create new instance.
-     * @param Module $module
+     * @param Module      $module
      * @param Application $application
      * @param string|null $subpath
      */
     public function __construct(Module $module, Application $application, $subpath = null)
     {
-        $this->module = $module;
+        $this->module  = $module;
         $this->laravel = $application;
         $this->subpath = $subpath;
     }
@@ -85,7 +85,7 @@ class Migrator
         $config = $this->module->get('migration');
 
         $migrationPath = GenerateConfigReader::read('migration');
-        $path = (is_array($config) && array_key_exists('path', $config)) ? $config['path'] : $migrationPath->getPath();
+        $path          = (is_array($config) && array_key_exists('path', $config)) ? $config['path'] : $migrationPath->getPath();
 
         return $this->module->getExtraPath($path);
     }
@@ -93,12 +93,12 @@ class Migrator
     /**
      * Get migration files.
      *
-     * @param boolean $reverse
+     * @param bool $reverse
      * @return array
      */
     public function getMigrations($reverse = false)
     {
-        if (!empty($this->subpath)) {
+        if (! empty($this->subpath)) {
             $files = $this->laravel['files']->glob($this->getPath() . '/' . $this->subpath);
         } else {
             $files = $this->laravel['files']->glob($this->getPath() . '/*_*.php');
@@ -216,17 +216,17 @@ class Migrator
 
         $class = Str::studly($name);
 
-        if (!class_exists($class) && file_exists($this->getPath() . '/' . $file . '.php')) {
+        if (! class_exists($class) && file_exists($this->getPath() . '/' . $file . '.php')) {
             return include $this->getPath() . '/' . $file . '.php';
         }
 
-        return new $class();
+        return new $class;
     }
 
     /**
      * Require in all the migration files in a given path.
      *
-     * @param array  $files
+     * @param array $files
      */
     public function requireFiles(array $files)
     {
@@ -269,7 +269,7 @@ class Migrator
     {
         return $this->table()->insert([
             'migration' => $migration,
-            'batch' => $this->getNextBatchNumber(),
+            'batch'     => $this->getNextBatchNumber(),
         ]);
     }
 

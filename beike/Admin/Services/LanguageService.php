@@ -19,7 +19,7 @@ class LanguageService
 
         $result = [];
         foreach (admin_languages() as $languageCode) {
-            $langFile = resource_path("lang/$languageCode/admin/base.php");
+            $langFile = base_path("lang/$languageCode/admin/base.php");
             if (! is_file($langFile)) {
                 throw new \Exception("File ($langFile) not exist!");
             }
@@ -31,7 +31,7 @@ class LanguageService
                 'id'         => $languages[$languageCode]['id']         ?? 0,
                 'image'      => $languages[$languageCode]['image']      ?? '',
                 'sort_order' => $languages[$languageCode]['sort_order'] ?? '',
-                'status'     => $languages[$languageCode]['status']     ?? '',
+                'active'     => $languages[$languageCode]['active']     ?? '',
             ];
         }
 

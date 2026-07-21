@@ -2,7 +2,6 @@
 
 namespace App\Tools\Publishing;
 
-use App\Tools\Publishing\AssetPublisher;
 use App\Tools\Migrations\Migrator;
 
 class MigrationPublisher extends AssetPublisher

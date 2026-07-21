@@ -2,7 +2,7 @@
 
 namespace App\Tools;
 
-use App\Tools\Json;
+use App\Tools\Contracts\ActivatorInterface;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
@@ -10,7 +10,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Translation\Translator;
-use App\Tools\Contracts\ActivatorInterface;
 
 abstract class Module
 {
@@ -41,18 +40,22 @@ abstract class Module
      * @var array of cached Json objects, keyed by filename
      */
     protected $moduleJson = [];
+
     /**
      * @var CacheManager
      */
     private $cache;
+
     /**
      * @var Filesystem
      */
     private $files;
+
     /**
      * @var Translator
      */
     private $translator;
+
     /**
      * @var ActivatorInterface
      */
@@ -61,18 +64,18 @@ abstract class Module
     /**
      * The constructor.
      * @param Container $app
-     * @param $name
-     * @param $path
+     * @param           $name
+     * @param           $path
      */
     public function __construct(Container $app, string $name, $path)
     {
-        $this->name = $name;
-        $this->path = $path;
-        $this->cache = $app['cache'];
-        $this->files = $app['files'];
+        $this->name       = $name;
+        $this->path       = $path;
+        $this->cache      = $app['cache'];
+        $this->files      = $app['files'];
         $this->translator = $app['translator'];
-        $this->activator = $app[ActivatorInterface::class];
-        $this->app = $app;
+        $this->activator  = $app[ActivatorInterface::class];
+        $this->app        = $app;
     }
 
     /**
@@ -193,7 +196,7 @@ abstract class Module
      *
      * @return $this
      */
-    public function setPath($path): Module
+    public function setPath($path): self
     {
         $this->path = $path;
 
@@ -245,7 +248,8 @@ abstract class Module
             $file = 'plugin.json';
         }
 
-        $path = storage_path('app/plugins/'.strtolower($this->getName()).'.json');
+        $path = storage_path('app/plugins/' . strtolower($this->getName()) . '.json');
+
         return Arr::get($this->moduleJson, $file, function () use ($file, $path) {
             return $this->moduleJson[$file] = new Json($path, $this->files);
         });
@@ -255,7 +259,7 @@ abstract class Module
      * Get a specific data from json file by given the key.
      *
      * @param string $key
-     * @param null $default
+     * @param null   $default
      *
      * @return mixed
      */
@@ -267,7 +271,7 @@ abstract class Module
     /**
      * Get a specific data from composer.json file by given the key.
      *
-     * @param $key
+     * @param      $key
      * @param null $default
      *
      * @return mixed
@@ -369,7 +373,7 @@ abstract class Module
      */
     public function isDisabled(): bool
     {
-        return !$this->isEnabled();
+        return ! $this->isEnabled();
     }
 
     /**
@@ -443,7 +447,7 @@ abstract class Module
     {
         return config('plugins.register.files', 'register') === 'boot' &&
             // force register method if option == boot && app is AsgardCms
-            !class_exists('\Modules\Core\Foundation\AsgardCms');
+            ! class_exists('\Modules\Core\Foundation\AsgardCms');
     }
 
     private function flushCache(): void
@@ -456,8 +460,8 @@ abstract class Module
     /**
      * Register a translation file namespace.
      *
-     * @param  string  $path
-     * @param  string  $namespace
+     * @param string $path
+     * @param string $namespace
      * @return void
      */
     private function loadTranslationsFrom(string $path, string $namespace): void

@@ -223,7 +223,7 @@ class Html
             return;
         }
 
-        $arguments       = new stdClass();
+        $arguments       = new stdClass;
         $arguments->ql   = $ql;
         $arguments->data = $this->data;
 

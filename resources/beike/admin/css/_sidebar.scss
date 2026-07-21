@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-02 19:19:52
  * @LastEditTime  2022-09-16 19:05:52
  */
@@ -11,7 +11,6 @@
 .sidebar-box {
   direction: ltr;
   transition: all .2s ease-in-out;
-  background: #fff;
 
   @media (max-width: 768px) {
     position: absolute;
@@ -45,6 +44,9 @@
       bottom: 0;
       z-index: 999;
       border-top: 1px solid #eee;
+      html[data-bs-theme="dark"] & {
+        border-top: 1px solid #222;
+      }
     }
 
     > .left {
@@ -55,6 +57,10 @@
       // background-color: #e4ebf2;
       background-color: #ebf1f6;
       max-width: 130px;
+      html[data-bs-theme="dark"] & {
+        // background-color: #55585b;
+        background-color: #0c1117;
+      }
 
       // 背景图
       background-image: url('/image/admin-menu.png');
@@ -71,8 +77,9 @@
             color: #333;
             display: flex;
             text-decoration: none;
-            // 文字强制换行
-            // word-break: break-all;
+            html[data-bs-theme="dark"] & {
+              color: #ffffff;
+            }
 
             i {
               margin-right: 7px;
@@ -87,9 +94,15 @@
 
           &.active, &:hover {
             background-color: #fff;
+            html[data-bs-theme="dark"] & {
+              background-color: #181f26;
+            }
 
             body.admin-home & {
               background-color: #f9fbfd;
+              html[data-bs-theme="dark"] & {
+                background-color: #181f26;
+              }
             }
 
             &:before, &:after {
@@ -106,6 +119,10 @@
             overflow: hidden;
             display: none;
             background: radial-gradient(circle closest-side,transparent 0,transparent 50%,#fff 0) 200% 200%/400% 400%;
+
+            html[data-bs-theme="dark"] & {
+              background: radial-gradient(circle closest-side,transparent 0,transparent 50%,#181f26 0) 200% 200%/400% 400%;
+            }
           }
 
           &:before {
@@ -127,9 +144,16 @@
       background-color: #fff;
       overflow-y: auto;
       max-width: 200px;
+      html[data-bs-theme="dark"] & {
+        // background-color: #3e3e3e;
+        background-color: #181f26;
+      }
 
       @media (min-width: 768px) {
         border-right: 1px solid #f1f1f1;
+        html[data-bs-theme="dark"] & {
+          border-right: none;
+        }
       }
 
       > .title {
@@ -148,6 +172,9 @@
             color: #333;
             transition: all .1s ease-in-out;
             border-radius: .3rem;
+            html[data-bs-theme="dark"] & {
+              color: #eee;
+            }
 
             &:hover {
               background-color: rgba(189, 197, 209, 0.2);
@@ -163,6 +190,10 @@
               // background-color: rgba(189, 197, 209, 0.2);
               position: relative;
               color: $primary;
+
+              html[data-bs-theme="dark"] & {
+                color: $primary;
+              }
 
               &::after {
                 // content: "\F138";

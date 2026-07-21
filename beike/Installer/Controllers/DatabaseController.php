@@ -33,23 +33,23 @@ class DatabaseController extends BaseController
     {
         $this->checkInstalled();
         $params = request()->all();
-//        if ($params['database_connection'] != 'pgsql'){
-//            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-//            $rows     = DB::select('SHOW TABLES');
-//            $database = config('database.connections.mysql.database');
-//            $tables   = array_column($rows, 'Tables_in_' . $database);
-//            foreach ($tables as $table) {
-//                Schema::drop($table);
-//            }
-//            DB::statement('SET FOREIGN_KEY_CHECKS = 1');
-//        }
-//
-//        if ($params['database_connection'] == 'pgsql'){
-//            if ($this->getTableSum() > 0)
-//            {
-//                return redirect()->route('installer.environment')->withInput($params)->withErrors(['error' =>__('installer::installer_messages.environment.table_already_exists')]);
-//            }
-//        }
+        //        if ($params['database_connection'] != 'pgsql'){
+        //            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        //            $rows     = DB::select('SHOW TABLES');
+        //            $database = config('database.connections.mysql.database');
+        //            $tables   = array_column($rows, 'Tables_in_' . $database);
+        //            foreach ($tables as $table) {
+        //                Schema::drop($table);
+        //            }
+        //            DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        //        }
+        //
+        //        if ($params['database_connection'] == 'pgsql'){
+        //            if ($this->getTableSum() > 0)
+        //            {
+        //                return redirect()->route('installer.environment')->withInput($params)->withErrors(['error' =>__('installer::installer_messages.environment.table_already_exists')]);
+        //            }
+        //        }
 
         try {
             $response = $this->databaseManager->migrateAndSeed();
@@ -62,8 +62,8 @@ class DatabaseController extends BaseController
             return redirect()->route('installer.environment')->withInput($params)->withErrors(['error' => $e->getMessage()]);
         }
 
-        if ($params['database_connection'] == 'pgsql'){
-            //fix sequence
+        if ($params['database_connection'] == 'pgsql') {
+            // fix sequence
             Artisan::call('postgreSQL:sequence');
         }
 
@@ -72,7 +72,7 @@ class DatabaseController extends BaseController
             'name'     => substr($email, 0, strpos($email, '@')),
             'email'    => $email,
             'password' => request('admin_password'),
-            'locale'   => session('locale') ?? 'zh_cn',
+            'locale'   => $_COOKIE['locale'] ?? 'zh_cn',
             'active'   => true,
         ];
 
@@ -84,6 +84,7 @@ class DatabaseController extends BaseController
     private function getTableSum()
     {
         $results = DB::selectOne("SELECT COUNT(*) as sum FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';");
+
         return $results->sum;
     }
 }

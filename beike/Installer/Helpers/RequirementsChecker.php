@@ -62,7 +62,7 @@ class RequirementsChecker
     {
         $results = [];
         foreach ($requirements as $key => $requirement) {
-            $requirement = strtolower($requirement);
+            $requirement   = strtolower($requirement);
             $results[$key] = true;
             if (! extension_loaded($requirement)) {
                 $results[$key] = false;
@@ -77,7 +77,7 @@ class RequirementsChecker
      *
      * @return array
      */
-    public function checkPHPversion(string $minPhpVersion = null)
+    public function checkPHPversion(?string $minPhpVersion = null)
     {
         $minVersionPhp     = $minPhpVersion;
         $currentPhpVersion = $this->getPhpVersionInfo();

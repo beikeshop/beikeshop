@@ -1,19 +1,14 @@
 @extends('admin::layouts.master')
 
-@section('title', __('admin/common.admin_user'))
+@section('title', __('admin/common.admin_role'))
+
+@section('page-title-back', true)
+
+@section('page-title-right')
+<a class="btn btn-primary" href="{{ admin_route('admin_users.index') }}"><i class="bi bi-box-arrow-up-right"></i> {{ __('admin/common.admin_user') }}</a>
+@endsection
 
 @section('content')
-  <ul class="nav-bordered nav nav-tabs mb-3">
-    @hook('admin.admin_roles.index.tabs.before')
-    <li class="nav-item">
-      <a class="nav-link" href="{{ admin_route('admin_users.index') }}">{{ __('admin/common.admin_user') }}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" href="{{ admin_route('admin_roles.index') }}">{{ __('admin/common.admin_role') }}</a>
-    </li>
-    @hook('admin.admin_roles.index.tabs.after')
-  </ul>
-
   <div id="tax-classes-app" class="card">
     <div class="card-body h-min-600">
       @hook('admin.admin_roles.index.content.before')
@@ -21,23 +16,23 @@
         <a href="{{ admin_route('admin_roles.create') }}"
           class="btn btn-primary">{{ __('admin/role.admin_roles_create') }}</a>
       </div>
-      <div class="table-push">
-        @hook('admin.admin_roles.index.before')
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>{{ __('common.name') }}</th>
-              <th>{{ __('common.created_at') }}</th>
-              <th>{{ __('common.updated_at') }}</th>
-              @hook('admin.admin_roles.index.thead')
-              <th class="text-end">{{ __('common.action') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            @if (count($roles))
+      @if (count($roles))
+        <div class="table-push">
+          @hook('admin.admin_roles.index.before')
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>{{ __('common.name') }}</th>
+                <th>{{ __('common.created_at') }}</th>
+                <th>{{ __('common.updated_at') }}</th>
+                @hook('admin.admin_roles.index.thead')
+                <th class="text-end">{{ __('common.action') }}</th>
+              </tr>
+            </thead>
+            <tbody>
               @foreach ($roles as $role)
-                <tr>
+                <tr class="cursor-pointer row-link" data-to-url="{{ admin_route('admin_roles.edit', [$role->id]) }}">
                   <td>{{ $role->id }}</td>
                   <td>{{ $role->name }}</td>
                   <td>{{ $role->created_at }}</td>
@@ -45,23 +40,21 @@
                   @hook('admin.admin_roles.index.tbody', $role)
                   <td class="text-end">
                     @hook('admin.admin_roles.index.tbody.actions.before', $role)
-                    <a href="{{ admin_route('admin_roles.edit', [$role->id]) }}"
-                      class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                     <button class="btn btn-outline-danger btn-sm ml-1 delete-role" data-id="{{ $role->id }}"
                       type="button">{{ __('common.delete') }}</button>
                     @hook('admin.admin_roles.index.tbody.actions.after', $role)
                   </td>
                 </tr>
               @endforeach
-            @else
-              <tr>
-                <td colspan="5" class="border-0"><x-admin-no-data /></td>
-              </tr>
-            @endif
-          </tbody>
-        </table>
-        @hook('admin.admin_roles.index.after')
-      </div>
+            </tbody>
+          </table>
+          @hook('admin.admin_roles.index.after')
+        </div>
+      @else
+        <div>
+          <x-admin-no-data />
+        </div>
+      @endif
       @hook('admin.admin_roles.index.content.after')
     </div>
   </div>
@@ -70,6 +63,7 @@
 @push('footer')
   <script>
     $('.delete-role').click(function(event) {
+      event.stopPropagation();
       const id = $(this).data('id');
       const self = $(this);
 

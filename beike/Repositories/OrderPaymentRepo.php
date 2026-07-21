@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OrderPaymentRepo.php
  *
@@ -30,7 +31,7 @@ class OrderPaymentRepo
 
         $orderPayment = OrderPayment::query()->where('order_id', $orderId)->first();
         if (empty($orderPayment)) {
-            $orderPayment = new OrderPayment();
+            $orderPayment = new OrderPayment;
         }
 
         $paymentData = [

@@ -172,6 +172,7 @@
 
     getProducrReports(id, () => {
       $('.chart-title span').text(self.parents('tr').find('.product-name').text());
+      $('#product-autocomplete').val(self.parents('tr').find('.product-name').text());
     });
   });
 

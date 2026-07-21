@@ -40,7 +40,7 @@ abstract class BaseCommand extends Command implements PromptsForMissingInput
 
     abstract public function executeAction($name);
 
-    public function getInfo(): string|null
+    public function getInfo(): ?string
     {
         return null;
     }
@@ -104,5 +104,4 @@ abstract class BaseCommand extends Command implements PromptsForMissingInput
             ? $name
             : $this->laravel['plugins']->findOrFail($name);
     }
-
 }

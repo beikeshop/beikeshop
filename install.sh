@@ -102,12 +102,8 @@ detect_manual_php_upstream() {
     local socket_candidates=(
         "/run/php/php-fpm.sock"
         "/run/php/php8.2-fpm.sock"
-        "/run/php/php8.3-fpm.sock"
-        "/run/php/php8.4-fpm.sock"
         "/var/run/php/php-fpm.sock"
         "/var/run/php/php8.2-fpm.sock"
-        "/var/run/php/php8.3-fpm.sock"
-        "/var/run/php/php8.4-fpm.sock"
         "/var/run/php-fpm/php-fpm.sock"
         "/run/php-fpm/www.sock"
     )
@@ -877,12 +873,20 @@ precheck_baota_environment() {
     local disabled_functions
     local required_functions=(putenv proc_open)
     local disabled_required_functions=()
+    local php_version
     local failed=0
 
     if ! detect_bt_php_runtime; then
         print_error "BT PHP CLI not found"
         echo "Please install PHP 8.2 in BT Panel."
         exit 1
+    fi
+
+    php_version="$("$BT_PHP_BIN" -r 'echo PHP_VERSION;' 2>/dev/null || true)"
+    if [ -z "$php_version" ] || ! version_ge "$php_version" "8.2.0"; then
+        print_error "PHP 8.2+ is required. Current: ${php_version:-unknown}"
+        echo "Please install PHP 8.2 in BT Panel."
+        failed=1
     fi
 
     if [ ! -f "/www/server/mysql/bin/mysql" ]; then
@@ -897,7 +901,7 @@ precheck_baota_environment() {
         failed=1
     fi
 
-    for extension in pdo_mysql mbstring gd zip bcmath fileinfo; do
+    for extension in pdo pdo_mysql mbstring gd zip bcmath curl fileinfo iconv openssl simplexml; do
         if ! "$BT_PHP_BIN" -m | grep -qi "^${extension}$"; then
             missing_extensions+=("$extension")
         fi
@@ -959,6 +963,63 @@ precheck_baota_environment() {
     fi
 
     print_success "BT Panel runtime requirements passed"
+}
+
+precheck_manual_environment() {
+    print_info "Checking Manual LNMP runtime requirements..."
+
+    local missing_extensions=()
+    local required_functions=(putenv proc_open)
+    local disabled_required_functions=()
+    local disabled_functions
+    local php_version
+    local failed=0
+
+    if ! command -v php >/dev/null 2>&1; then
+        print_error "PHP CLI not found"
+        echo "Please install PHP 8.2+ before running this installer."
+        exit 1
+    fi
+
+    php_version="$(php -r 'echo PHP_VERSION;' 2>/dev/null || true)"
+    if [ -z "$php_version" ] || ! version_ge "$php_version" "8.2.0"; then
+        print_error "PHP 8.2+ is required. Current: ${php_version:-unknown}"
+        failed=1
+    fi
+
+    for extension in pdo pdo_mysql mbstring gd zip bcmath curl fileinfo iconv openssl simplexml; do
+        if ! php -m | grep -qi "^${extension}$"; then
+            missing_extensions+=("$extension")
+        fi
+    done
+
+    if [ ${#missing_extensions[@]} -gt 0 ]; then
+        print_error "Missing PHP extensions: ${missing_extensions[*]}"
+        failed=1
+    fi
+
+    disabled_functions="$(php -r 'echo ini_get("disable_functions");' 2>/dev/null || true)"
+    for function_name in "${required_functions[@]}"; do
+        if echo ",${disabled_functions}," | grep -qi ",${function_name},"; then
+            disabled_required_functions+=("$function_name")
+        fi
+    done
+
+    if [ ${#disabled_required_functions[@]} -gt 0 ]; then
+        print_error "Required PHP functions are disabled: ${disabled_required_functions[*]}"
+        failed=1
+    fi
+
+    if ! command -v composer >/dev/null 2>&1; then
+        print_error "Composer not found"
+        failed=1
+    fi
+
+    if [ "$failed" = "1" ]; then
+        exit 1
+    fi
+
+    print_success "Manual LNMP runtime requirements passed"
 }
 
 # ============================================
@@ -1186,6 +1247,7 @@ install_baota() {
 
 install_manual() {
     print_info "Starting manual LNMP deployment..."
+    precheck_manual_environment
 
     # Create website directory
     sudo mkdir -p "${WEB_ROOT}"

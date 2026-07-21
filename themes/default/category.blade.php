@@ -21,6 +21,27 @@
       </div>
 
       <div class="col-12 col-lg-9 right-column">
+        @if($category->image || $category->description->content)
+          <div class="category-intro mb-3 p-3 border rounded-3 border-light-subtle">
+            <div class="row g-4 align-items-center">
+              @if($category->image)
+                <div class="col-auto">
+                  <div class="category-avatar wh-150 d-flex align-items-center">
+                    <img src="{{ image_origin($category->image) }}" alt="{{ $category->description->name }}" class="img-fluid">
+                  </div>
+                </div>
+              @endif
+              @if($category->description->content)
+                <div class="col">
+                  <div class="category-desc">
+                    <p class="mb-2 fs-3 fw-bold">{{ $category->description->name }}</p>
+                    <p class="mb-0 lh-base opacity-75">{{ $category->description->content }}</p>
+                  </div>
+                </div>
+              @endif
+            </div>
+          </div>
+        @endif
         @hook('category.products.before')
         <div class="filter-value-wrap mb-2 d-none">
           <ul class="list-group list-group-horizontal">

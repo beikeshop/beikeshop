@@ -1,18 +1,18 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @Date          2022-08-19 18:21:32
  * @LastEditTime  2023-11-30 11:12:53
  */
 
-$(document).on('click', '.quantity-wrap .right i, .quantity-wrap-line .right i', function(event) {
+$(document).on('click', '.quantity-wrap .btn', function(event) {
   event.stopPropagation();
   event.preventDefault();
 
-  let input = $(this).parent().siblings('input')
+  let input = $(this).siblings('input')
 
-  if ($(this).hasClass('bi-chevron-up')) {
+  if ($(this).hasClass('quantity-increase')) {
     input.val(input.val() * 1 + 1)
     input.get(0).dispatchEvent(new Event('input'));
     return;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CurrencyRepo.php
  *
@@ -88,7 +89,7 @@ class CurrencyRepo
             return self::$enabledCurrencies;
         }
 
-        return self::$enabledCurrencies = Currency::query()->where('status', true)->get();
+        return self::$enabledCurrencies = Currency::query()->where('active', true)->get();
     }
 
     /**

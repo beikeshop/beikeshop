@@ -49,7 +49,7 @@
                        data-key="payment_method_code" data-value="{{ $payment['code'] }}">
                     <div class="left">
                       <span class="radio"></span>
-                      <img src="{{ $payment['icon'] }}" class="img-fluid" alt="{{ $payment['name'] }}">
+                      <img src="{{ $payment['icon'] }}" class="img-fluid rounded-2" alt="{{ $payment['name'] }}">
                     </div>
                     <div class="right ms-2">
                       <div class="title">{{ $payment['name'] }}</div>
@@ -71,7 +71,7 @@
                         data-key="shipping_method_code" data-value="{{ $shipping['code'] }}">
                         <div class="left">
                           <span class="radio"></span>
-                          <img src="{{ $shipping['icon'] }}" class="img-fluid" alt="{{ $shipping['name'] }}">
+                          <img src="{{ $shipping['icon'] }}" class="img-fluid rounded-2" alt="{{ $shipping['name'] }}">
                         </div>
                         <div class="right ms-2">
                           <div class="title">{{ $shipping['name'] }}</div>
@@ -247,7 +247,7 @@
           html += `<div class="radio-line-item d-flex align-items-center ${shipping_method_code == quote.code ? 'active' : ''}" data-key="shipping_method_code" data-value="${quote.code}">
           <div class="left">
             <span class="radio"></span>
-            <img src="${quote.icon}" class="img-fluid" alt="${quote.name}">
+            <img src="${quote.icon}" class="img-fluid rounded-2" alt="${quote.name}">
           </div>
           <div class="right ms-2">
             <div class="title">${quote.name}</div>
@@ -267,7 +267,7 @@
         html += `<div class="radio-line-item d-flex align-items-center ${payment_method_code == item.code ? 'active' : ''}" data-key="payment_method_code" data-value="${item.code}">
         <div class="left">
           <span class="radio"></span>
-          <img src="${item.icon}" class="img-fluid" alt="${item.name}">
+          <img src="${item.icon}" class="img-fluid rounded-2" alt="${item.name}">
         </div>
         <div class="right ms-2">
           <div class="title">${item.name}</div>

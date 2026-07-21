@@ -1,12 +1,60 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2024-12-25 00:04:54
+ * @LastEditTime  2023-04-28 11:18:47
  */
 
 $(function () {
+  // 设置明暗主题图标
+  const ldTheme = localStorage.getItem('ld_theme') || '';
+  const LDIcons = {
+    dark: 'bi bi-moon-stars-fill fs-5',
+    light: 'bi bi-brightness-high fs-5',
+    auto: 'bi bi-circle-half fs-5'
+  };
+  // 设置明暗主题图标
+  $('.theme-icon i').prop('class', LDIcons[ldTheme] || LDIcons.auto);
+
+  // 应用明暗主题
+  const applyTheme = (theme, save = true, checkedTheme = 'auto') => {
+    $('html').attr('data-bs-theme', theme);
+    $('.theme-icon i').prop('class', LDIcons[checkedTheme] || LDIcons.auto);
+    if (save) localStorage.setItem('ld_theme', checkedTheme);
+
+    if (typeof tinymce !== 'undefined') {
+      tinymce.remove();
+      tinymceInit();
+    }
+
+    if (typeof window.applyThemeToggle === 'function') {
+      window.applyThemeToggle(theme, save, checkedTheme);
+    }
+  }
+
+  // 切换明暗主题
+  $('.top-change-theme li').on('click', function () {
+    let theme = $(this).data('bs-theme') || 'auto';
+    let checkedTheme = theme;
+
+    if (theme === 'auto') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    applyTheme(theme, true, checkedTheme);
+  });
+
+  // 系统主题变化
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    const storedTheme = localStorage.getItem('ld_theme');
+
+    // 用户已手动选择，不跟随系统
+    if (storedTheme != 'auto' && storedTheme) return;
+
+    applyTheme(e.matches ? 'dark' : 'light', false, 'auto');
+  });
+
   // 响应式下弹窗菜单交互
   $(document).on("click", ".mobile-open-menu", function () {
     $('.sidebar-box').toggleClass('active');
@@ -140,5 +188,52 @@ $(function () {
 
   $('.update-pop .btn-outline-secondary').click(function() {
     layer.close(updatePop)
+  });
+
+  // .page-title-box 滚动悬浮
+  if ($('.page-title-box').hasClass('head-edit-tool')) {
+    let pageTitleBoxLeft = $('.page-title-box').offset().left;
+    let pageTitleBoxWidth = $('.content-info').width();
+
+    // 窗口变化时重新获取
+    $(window).on('resize', function () {
+      pageTitleBoxLeft = $('.page-title-box').offset().left;
+      pageTitleBoxWidth = $('.content-info').width();
+
+      // 如果当前已经是 fixed 状态，也要更新位置和宽度
+      if ($('.page-title-box').hasClass('fixed')) {
+        $('.page-title-box').css({
+          left: pageTitleBoxLeft,
+          width: pageTitleBoxWidth,
+        });
+      }
+    });
+
+    $('.main-content > #content').scroll(function() {
+      if ($(this).scrollTop() == 0) {
+        $('.page-title-box').removeClass('disable-fixed');
+      }
+
+      if ($(this).scrollTop() > 0 && !$('.page-title-box').hasClass('disable-fixed')) {
+        if ($('.page-title-box').hasClass('fixed')) return;
+
+        $('.page-title-box').before('<div class="page-title-box-placeholder" style="height: 46px;"></div>');
+        $('.page-title-box').addClass('fixed').css({
+          left: pageTitleBoxLeft,
+          width: pageTitleBoxWidth,
+        });
+      } else {
+        $('.page-title-box').removeClass('fixed').removeAttr('style');
+        $('.page-title-box-placeholder').remove();
+      }
+    });
+  }
+
+
+  $('.close-form-btns').click(function() {
+    $('.page-title-box').addClass('disable-fixed');
+    $('.page-title-box').removeClass('fixed');
+    $('.page-title-box').removeAttr('style');
+    $('.page-title-box-placeholder').remove();
   });
 });

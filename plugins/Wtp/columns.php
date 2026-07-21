@@ -1,10 +1,11 @@
 <?php
+
 /**
  * Wtp 字段
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2024-05-13 21:16:23
  * @modified   2024-05-13 21:16:23
  */

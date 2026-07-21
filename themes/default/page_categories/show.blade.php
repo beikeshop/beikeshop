@@ -24,7 +24,7 @@
               @foreach ($category_pages as $page)
                 <div class="post-item">
                   @if ($page->image)
-                  <a class="image" href="{{ shop_route('pages.show', [$page->id]) }}">
+                  <a class="image rounded-2" href="{{ shop_route('pages.show', [$page->id]) }}">
                     <img src="{{ image_origin($page->image) }}" class="img-fluid seo-img" alt="{{ $page->description->title }}">
                   </a>
                   @endif

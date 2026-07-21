@@ -2,9 +2,9 @@
 
 namespace App\Tools\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Tools\Contracts\RepositoryInterface;
 use App\Tools\Laravel\LaravelFileRepository;
+use Illuminate\Support\ServiceProvider;
 
 class ContractsServiceProvider extends ServiceProvider
 {

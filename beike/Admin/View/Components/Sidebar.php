@@ -4,8 +4,8 @@ namespace Beike\Admin\View\Components;
 
 use Beike\Models\AdminUser;
 use Beike\Plugin\Plugin;
-use Illuminate\View\Component;
 use Illuminate\Support\Str;
+use Illuminate\View\Component;
 
 class Sidebar extends Component
 {
@@ -313,7 +313,7 @@ class Sidebar extends Component
     {
         $prefix = [
             'settings', 'admin_users', 'admin_roles', 'tax_classes', 'tax_rates',
-            'regions', 'currencies', 'languages', 'countries', 'zones', 'account',
+            'regions', 'currencies', 'languages', 'countries', 'zones', 'account', 'mail_logs',
         ];
 
         return hook_filter('admin.sidebar.setting.prefix', $prefix);
@@ -452,18 +452,7 @@ class Sidebar extends Component
      */
     public function getSettingSubRoutes()
     {
-        $routes = [
-            ['route' => 'settings.index', 'prefixes' => ['settings']],
-            ['route' => 'account.index', 'prefixes' => ['account']],
-            ['route' => 'admin_users.index', 'prefixes' => ['admin_users', 'admin_roles']],
-            ['route' => 'regions.index', 'prefixes' => ['regions']],
-            ['route' => 'tax_rates.index', 'prefixes' => ['tax_rates']],
-            ['route' => 'tax_classes.index', 'prefixes' => ['tax_classes']],
-            ['route' => 'currencies.index', 'prefixes' => ['currencies']],
-            ['route' => 'languages.index', 'prefixes' => ['languages']],
-            ['route' => 'countries.index', 'prefixes' => ['countries']],
-            ['route' => 'zones.index', 'prefixes' => ['zones']],
-        ];
+        $routes = [];
 
         return hook_filter('admin.sidebar.setting_routes', $routes);
     }

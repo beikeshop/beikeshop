@@ -91,7 +91,7 @@ Vue.component('module-editor-image403', {
       images: [
         {
           image: {
-            src: 'catalog/demo/banner/banner-403-1.jpg',
+            src: 'image/catalog/demo/banner/banner-403-1.webp',
             alt: languagesFill(''),
           },
           sub_title: languagesFill(''),
@@ -104,7 +104,7 @@ Vue.component('module-editor-image403', {
         },
         {
           image: {
-            src: 'catalog/demo/banner/banner-403-2.jpg',
+            src: 'image/catalog/demo/banner/banner-403-2.webp',
             alt: languagesFill(''),
           },
           sub_title: languagesFill(''),
@@ -117,7 +117,7 @@ Vue.component('module-editor-image403', {
         },
         {
           image: {
-            src: 'catalog/demo/banner/banner-403-3.jpg',
+            src: 'image/catalog/demo/banner/banner-403-3.webp',
             alt: languagesFill(''),
           },
           sub_title: languagesFill(''),
@@ -130,7 +130,7 @@ Vue.component('module-editor-image403', {
         },
         {
           image: {
-            src: 'catalog/demo/banner/banner-403-4.jpg',
+            src: 'image/catalog/demo/banner/banner-403-4.webp',
             alt: languagesFill(''),
           },
           sub_title: languagesFill(''),

@@ -2,11 +2,10 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ObserverMakeCommand extends GeneratorCommand
@@ -55,11 +54,11 @@ class ObserverMakeCommand extends GeneratorCommand
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 
         return (new Stub('/observer.stub', [
-                'NAMESPACE' => $this->getClassNamespace($module),
-                'NAME' => $this->getModelName(),
-                'MODEL_NAMESPACE' => $this->getModelNamespace(),
-                'NAME_VARIABLE' => $this->getModelVariable(),
-            ]))->render();
+            'NAMESPACE'       => $this->getClassNamespace($module),
+            'NAME'            => $this->getModelName(),
+            'MODEL_NAMESPACE' => $this->getModelNamespace(),
+            'NAME_VARIABLE'   => $this->getModelVariable(),
+        ]))->render();
     }
 
     /**

@@ -2,6 +2,4 @@
 
 namespace App\Tools\Generators;
 
-abstract class Generator
-{
-}
+abstract class Generator {}

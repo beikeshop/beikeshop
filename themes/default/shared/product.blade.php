@@ -1,20 +1,26 @@
-<div class="product-wrap {{ request('style_list') ?? '' }}">
+<div class="product-wrap {{ request('style_list') ?? '' }} {{ $style_list ?? '' }}">
   <div class="image">
     @hook('product_list.item.image.tag')
 
     <a href="{{ $product['url'] }}">
-      <div class="image-old">
-        @hookwrapper('product_list.item.image')
+      @hookwrapper('product_list.item.image')
+      <img
+        data-sizes="auto"
+        data-src="{{ $product['images'][0] ?? image_resize('', 500, 500) }}"
+        src="{{ image_resize('', 500, 500) }}"
+        alt="{{ $product['name'] }}"
+        class="img-fluid image-before lazyload">
+        @if (count($product['images']) > 1)
         <img
-          data-sizes="auto"
-          data-src="{{ $product['images'][0] ?? image_resize('', 500, 500) }}"
-          src="{{ image_resize('', 500, 500) }}"
-          alt="{{ $product['name'] }}"
-          class="img-fluid lazyload">
-        @endhookwrapper
-      </div>
+        width="600"
+        height="600"
+        src="{{ $product['images'][1] ?? image_resize('', 500, 500) }}"
+        alt="{{ $product['name'] }}"
+        class="img-fluid image-after">
+        @endif
+      @endhookwrapper
     </a>
-    @if (!request('style_list') || request('style_list') == 'grid')
+    @if (!request('style_list') || request('style_list') == 'grid' || ($style_list ?? '' == 'grid'))
       <div class="button-wrap">
         @hookwrapper('shared.product.btn.add_cart')
         <button
@@ -57,6 +63,8 @@
   <div class="product-bottom-info">
     @hook('product_list.item.name.before')
     <div class="product-name">{{ $product['name_format'] }}</div>
+
+    @hookwrapper('product_list.item.price')
     @if ((system_setting('base.show_price_after_login') and current_customer()) or !system_setting('base.show_price_after_login'))
       <div class="product-price" product-id="{{ $product['sku_id'] }}">
         <span class="price-new">{{ $product['price_format'] }}</span>
@@ -69,8 +77,9 @@
         <div class="text-dark fs-6">{{ __('common.before') }} <a class="price-new fs-6 login-before-show-price" href="javascript:void(0);">{{ __('common.login') }}</a> {{ __('common.show_price') }}</div>
       </div>
     @endif
+    @endhookwrapper
 
-    @if (request('style_list') == 'list')
+    @if (request('style_list') == 'list' || ($style_list ?? '' == 'list'))
       <div class="button-wrap mt-3">
         <button
           class="btn btn-dark text-light"
@@ -80,15 +89,15 @@
         </button>
       </div>
 
-      <div class="mt-2">
+      <div class="mt-2 quick-view-wish">
         <button
-        class="btn btn-link p-0 btn-quick-view text-secondary"
-        product-id="{{ $product['sku_id'] }}"
-        product-price="{{ $product['price'] }}"
-        onclick="bk.productQuickView({{ $product['id'] }})">
-        <i class="bi bi-eye"></i>
-        {{ __('common.quick_view') }}
-      </button>
+          class="btn btn-link p-0 btn-quick-view text-secondary"
+          product-id="{{ $product['sku_id'] }}"
+          product-price="{{ $product['price'] }}"
+          onclick="bk.productQuickView({{ $product['id'] }})">
+          <i class="bi bi-eye"></i>
+          {{ __('common.quick_view') }}
+        </button>
         <br>
         <button class="btn btn-link p-0 mt-1 text-secondary btn-wishlist" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
           <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> {{ __('shop/products.add_to_favorites') }}

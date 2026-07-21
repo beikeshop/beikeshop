@@ -90,14 +90,14 @@
       <div class="right-btn">
         <ul class="navbar-nav flex-row">
           @hookwrapper('header.menu.icon')
-          <li class="nav-item"><a href="#offcanvas-search-top" data-bs-toggle="offcanvas" aria-controls="offcanvasExample" class="nav-link"><img src="{{ asset('image/icons/search.svg') }}" class="img-fluid"></a></li>
+          <li class="nav-item"><a href="#offcanvas-search-top" data-bs-toggle="offcanvas" class="nav-link"><img src="{{ asset('image/icons/search.svg') }}" class="img-fluid"></a></li>
           <li class="nav-item"><a href="{{ shop_route('account.wishlist.index') }}" class="nav-link"><img src="{{ asset('image/icons/favorite.svg') }}" class="img-fluid"></a></li>
           <li class="nav-item dropdown">
             <a href="{{ shop_route('account.index') }}" class="nav-link"><img src="{{ asset('image/icons/account.svg') }}" class="img-fluid"></a>
             <ul class="dropdown-menu">
               @auth('web_shop')
                 <li class="dropdown-item">
-                  <h6 class="mb-0">{{ current_customer()->name }}</h6>
+                  <a href="{{ shop_route('account.index') }}" class="fw-bold dropdown-item p-0">{{ current_customer()->name }}</a>
                 </li>
                 <li>
                   <hr class="dropdown-divider opacity-100">
@@ -138,8 +138,7 @@
     <div class="mobile-content">
       <div class="left">
         <div class="mobile-open-menu"><img src="{{ asset('image/icons/menu.svg') }}" alt="menu" class="img-fluid"></div>
-        <div class="mobile-open-search" href="#offcanvas-search-top" data-bs-toggle="offcanvas"
-             aria-controls="offcanvasExample">
+        <div class="mobile-open-search" href="#offcanvas-search-top" data-bs-toggle="offcanvas">
              <img src="{{ asset('image/icons/search.svg') }}" class="img-fluid" alt="search">
         </div>
       </div>
@@ -168,15 +167,9 @@
     </div>
   </div>
 
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart"
-       aria-labelledby="offcanvasRightLabel"></div>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel"></div>
 
-  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-search-top" aria-labelledby="offcanvasTopLabel">
-    <div class="offcanvas-header">
-      <input type="text" class="form-control input-group-lg border-0 fs-4" focus placeholder="{{ __('common.input') }}"
-             value="{{ request('keyword') }}" data-lang="{{ locale() === system_setting('base.locale') ? '' : session()->get('locale') }}">
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-  </div>
+  <x-shop-search-popover />
+
   @hook('header.after')
 </header>

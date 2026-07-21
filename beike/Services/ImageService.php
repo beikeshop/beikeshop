@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ImageService.php
  *
@@ -21,7 +22,7 @@ class ImageService
 
     private $imagePath;
 
-    private $placeholderImage = 'catalog/placeholder.png';
+    private $placeholderImage = 'image/placeholder.png';
 
     /**
      * @param             $image
@@ -93,10 +94,10 @@ class ImageService
             }
 
             $data = [
-                'image' => $this->image,
-                'newImage' => $newImage
+                'image'    => $this->image,
+                'newImage' => $newImage,
             ];
-            $data = hook_filter('service.image.resize', $data);
+            $data     = hook_filter('service.image.resize', $data);
             $newImage = $data['newImage'];
 
             return asset($newImage);

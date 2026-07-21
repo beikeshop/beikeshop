@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Url.php
  *
@@ -16,6 +17,7 @@ use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\PageCategoryRepo;
 use Beike\Repositories\PageRepo;
 use Beike\Repositories\ProductRepo;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class Url
@@ -26,7 +28,7 @@ class Url
 
     public static function getInstance(): self
     {
-        return new self();
+        return new self;
     }
 
     /**
@@ -38,6 +40,10 @@ class Url
     public function link($type, $value)
     {
         if (empty($type) || empty($value) || ! in_array($type, self::TYPES)) {
+            $result = hook_filter('url.link', ['type' => $type, 'value' => $value, 'url' => '']);
+            if (!empty($result['url'])) {
+                return $result['url'];
+            }
             return '';
         }
 
@@ -80,6 +86,10 @@ class Url
         } elseif ($type == 'rma') {
             return shop_route('account.rma.show', ['id' => $value]);
         } elseif ($type == 'static') {
+            if (! Route::has('shop.' . $value)) {
+                return '';
+            }
+
             return shop_route($value);
         } elseif ($type == 'custom') {
             if (Str::startsWith($value, ['http://', 'https://'])) {
@@ -104,6 +114,10 @@ class Url
     {
         $types = ['category', 'product', 'brand', 'page', 'page_category', 'static', 'custom'];
         if (empty($type) || empty($value) || ! in_array($type, $types)) {
+            $result = hook_filter('url.label', ['type' => $type, 'value' => $value, 'texts' => $texts, 'label' => '']);
+            if (!empty($result['label'])) {
+                return $result['label'];
+            }
             return '';
         }
 

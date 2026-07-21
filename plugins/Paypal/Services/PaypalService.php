@@ -1,10 +1,11 @@
 <?php
+
 /**
  * PaypalService.php
  *
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-08-22 11:49:51
  * @modified   2023-08-22 11:49:51
  */
@@ -50,14 +51,14 @@ class PaypalService extends PaymentService
             'mode'    => $mode,
             'sandbox' => [
                 'client_id'     => $paypalSetting['sandbox_client_id'] ?? '',
-                'client_secret' => $paypalSetting['sandbox_secret']    ?? '',
+                'client_secret' => $paypalSetting['sandbox_secret'] ?? '',
             ],
             'live' => [
                 'client_id'     => $paypalSetting['live_client_id'] ?? '',
-                'client_secret' => $paypalSetting['live_secret']    ?? '',
+                'client_secret' => $paypalSetting['live_secret'] ?? '',
             ],
             'payment_action' => 'Sale',
-            'currency'       => system_setting('base.currency'),
+            'currency'       => $this->getPaymentCurrency(),
             'notify_url'     => '',
             'locale'         => 'en_US',
             'validate_ssl'   => false,
@@ -84,10 +85,10 @@ class PaypalService extends PaymentService
             return [
                 'apiMode'     => self::API_MODE_NVP,
                 'clientId'    => '',
-                'currency'    => $this->getOrderCurrency(),
+                'currency'    => $this->getPaymentCurrency(),
                 'environment' => $mode,
-                'orderId'     => $paypalOrder['id']           ?? null,
-                'token'       => $paypalOrder['token']        ?? null,
+                'orderId'     => $paypalOrder['id'] ?? null,
+                'token'       => $paypalOrder['token'] ?? null,
                 'approvalUrl' => $paypalOrder['approval_url'] ?? null,
                 'userAction'  => 'paynow',
             ];
@@ -104,10 +105,10 @@ class PaypalService extends PaymentService
         return [
             'apiMode'     => self::API_MODE_REST,
             'clientId'    => $clientId,
-            'currency'    => $this->getOrderCurrency(),
+            'currency'    => $this->getPaymentCurrency(),
             'environment' => $mode,
             'orderId'     => $paypalOrder['id'],
-            'userAction'  => 'paynow',  //'paynow/continue'
+            'userAction'  => 'paynow',  // 'paynow/continue'
         ];
     }
 
@@ -126,14 +127,14 @@ class PaypalService extends PaymentService
         }
 
         $order = $this->order;
-        $total = $this->formatAmount($order->total);
+        $total = $this->formatPaymentAmount();
 
         return $this->paypalClient->createOrder([
             'intent'         => 'CAPTURE',
             'purchase_units' => [
                 [
                     'amount' => [
-                        'currency_code' => $this->getOrderCurrency(),
+                        'currency_code' => $this->getPaymentCurrency(),
                         'value'         => $total,
                     ],
                     'description' => $this->getOrderDescription(),
@@ -145,8 +146,8 @@ class PaypalService extends PaymentService
     public function createNvpOrder(array $urls = []): array
     {
         $orderNumber = $this->getOrderNumber();
-        $total       = $this->formatAmount($this->order->total);
-        $currency    = $this->getOrderCurrency();
+        $total       = $this->formatPaymentAmount();
+        $currency    = $this->getPaymentCurrency();
         $returnUrl   = $urls['return_url'] ?? $urls['returnUrl'] ?? $this->defaultNvpReturnUrl($orderNumber);
         $cancelUrl   = $urls['cancel_url'] ?? $urls['cancelUrl'] ?? $this->defaultNvpCancelUrl($orderNumber);
         $notifyUrl   = $urls['notify_url'] ?? $urls['notifyUrl'] ?? $this->defaultNvpNotifyUrl($orderNumber);
@@ -213,8 +214,8 @@ class PaypalService extends PaymentService
             'TOKEN'                          => $token,
             'PAYERID'                        => $payerId,
             'PAYMENTREQUEST_0_PAYMENTACTION' => 'Sale',
-            'PAYMENTREQUEST_0_AMT'           => $this->formatAmount($this->order->total),
-            'PAYMENTREQUEST_0_CURRENCYCODE'  => $this->getOrderCurrency(),
+            'PAYMENTREQUEST_0_AMT'           => $this->formatPaymentAmount(),
+            'PAYMENTREQUEST_0_CURRENCYCODE'  => $this->getPaymentCurrency(),
             'PAYMENTREQUEST_0_DESC'          => $this->getOrderDescription(),
         ];
 
@@ -334,13 +335,13 @@ class PaypalService extends PaymentService
     {
         $amount = $details['PAYMENTREQUEST_0_AMT'] ?? $details['AMT'] ?? null;
 
-        if ($amount === null || $this->formatAmount($amount) !== $this->formatAmount($this->order->total)) {
+        if ($amount === null || $this->formatAmount($amount) !== $this->formatPaymentAmount()) {
             throw new \RuntimeException('PayPal payment amount does not match the order amount.');
         }
 
         $currency = $details['PAYMENTREQUEST_0_CURRENCYCODE'] ?? $details['CURRENCYCODE'] ?? null;
 
-        if ($currency === null || strtoupper((string) $currency) !== $this->getOrderCurrency()) {
+        if ($currency === null || strtoupper((string) $currency) !== $this->getPaymentCurrency()) {
             throw new \RuntimeException('PayPal payment currency does not match the order currency.');
         }
 
@@ -409,11 +410,16 @@ class PaypalService extends PaymentService
         return url($path) . '?' . http_build_query($parameters);
     }
 
-    private function getOrderCurrency(): string
+    private function getPaymentCurrency(): string
     {
-        $currency = $this->order->currency_code ?? system_setting('base.currency');
+        $currency = plugin_setting('paypal.currency') ?: system_setting('base.currency');
 
         return strtoupper((string) $currency);
+    }
+
+    private function formatPaymentAmount(): string
+    {
+        return (string) currency_format($this->order->total, $this->getPaymentCurrency(), '', false);
     }
 
     private function formatAmount($amount): string

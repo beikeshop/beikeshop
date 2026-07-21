@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BrandController.php
  *
@@ -25,7 +26,7 @@ class BrandController
      */
     public function index(Request $request)
     {
-        $brands = BrandRepo::list($request->only('name', 'first', 'status'));
+        $brands = BrandRepo::list($request->only('name', 'first', 'active'));
         $data   = [
             'brands' => $brands,
         ];

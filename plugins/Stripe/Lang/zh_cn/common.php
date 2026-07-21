@@ -11,13 +11,13 @@
  */
 
 return [
-    'publishable_key' => '公钥',
-    'webhook_secret'  => 'Webhook 密钥',
-    'webhook_secret_desc' => <<<HTML
+    'publishable_key'     => '公钥',
+    'webhook_secret'      => 'Webhook 密钥',
+    'webhook_secret_desc' => <<<'HTML'
 <div class="mt-2 rounded-3 border border-warning-subtle bg-light p-3">
   <div class="fw-bold mb-2">如何获取这个值</div>
-  <div class="text-muted mb-2">这里必须填写 Stripe Webhook 的签名密钥，通常以 <code>whsec_</code> 开头。不要填写 API 密钥，例如 <code>sk_test_...</code> 或 <code>sk_live_...</code>。</div>
-  <div class="text-muted mb-2">为什么需要这个密钥：BeikeShop 会用它校验 Webhook 回调是否真的来自 Stripe，防止有人伪造支付成功回调，把未支付订单错误标记为已支付。</div>
+  <div class="text-muted mb-2">如需验证 Stripe Webhook 签名，请填写签名密钥，通常以 <code>whsec_</code> 开头。不要填写 API 密钥，例如 <code>sk_test_...</code> 或 <code>sk_live_...</code>。</div>
+  <div class="text-muted mb-2">填写后，BeikeShop 会用它校验 Webhook 回调是否真的来自 Stripe；不填写则不会验证回调签名。</div>
   <div class="mb-1">具体步骤：</div>
   <ol class="mb-2 ps-3">
     <li>登录 Stripe Dashboard。</li>

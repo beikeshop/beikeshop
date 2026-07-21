@@ -2,53 +2,79 @@
 
 @section('title', __('admin/common.customer'))
 
+@section('content-area-class', 'w-max-1200')
+
+@section('page-title-back', true)
+
 @section('content')
-  <div id="customer-app-form" class="card" v-cloak>
-    <div class="card-body">
+  <div id="customer-app-form" v-cloak>
+    <div class="row">
       @hook('admin.customer.form.content.before')
-      <el-form :model="form" :rules="rules" ref="form" label-width="140px">
-        <el-tabs v-model="customerTab">
-          @hook('admin.customer.form.tabs.before')
-          <el-tab-pane label="{{ __('admin/customer.user_info') }}" name="customer">
-            <div class="form-max-w">
-              @hook('admin.customer.form.tabs.customer.before')
-              <el-form-item label="{{ __('admin/customer.user_name') }}" prop="name">
-                <el-input v-model="form.name" placeholder="{{ __('admin/customer.user_name') }}"></el-input>
-              </el-form-item>
-              <el-form-item label="{{ __('common.email') }}" prop="email">
-                <el-input v-model="form.email" placeholder="{{ __('common.email') }}"></el-input>
-              </el-form-item>
-              <el-form-item label="{{ __('shop/login.password') }}" prop="password">
-                <el-input v-model="form.password" placeholder="{{ __('admin/customer.password_info') }}"></el-input>
-              </el-form-item>
-              @hookwrapper('admin.customer.form.from.customer_group')
-              <el-form-item label="{{ __('admin/customer_group.index') }}">
-                <el-select v-model="form.customer_group_id" placeholder="请选择">
-                  <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
-                    :value="item.id">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              @endhookwrapper
-              <el-form-item label="{{ __('common.status') }}" prop="active">
-                <el-switch v-model="form.active" :active-value="1" :inactive-value="0"></el-switch>
-              </el-form-item>
-              <el-form-item label="{{ __('common.examine') }}" prop="examine">
-                <el-select v-model="form.status" placeholder="请选择">
-                  <el-option v-for="item in source.statuses" :key="item.code" :label="item.label"
-                    :value="item.code">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              @hook('admin.customer.form.from.customer.after')
-              <el-form-item>
-                @hook('admin.customer.form.from.customer.submit')
-                <el-button type="primary" @click="submitForm('form')">{{ __('common.submit') }}</el-button>
-                @hook('admin.customer.form.from.customer.submit.after')
-              </el-form-item>
-            </div>
-          </el-tab-pane>
-          <el-tab-pane label="{{ __('admin/customer.address_management') }}" name="address" v-if="form.id">
+      <div class="col-12 col-lg-5">
+        @hook('admin.customer.form.main.before')
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="mb-3">{{ __('admin/customer.user_info') }}</h5>
+
+            @hook('admin.customer.form.main.card.user_info.before')
+
+            <el-form :model="form" :rules="rules" ref="form" label-width="140px" label-position="top">
+              <div class="">
+                @hook('admin.customer.form.tabs.customer.before')
+                <el-form-item label="{{ __('admin/customer.user_name') }}" prop="name">
+                  <el-input v-model="form.name" placeholder="{{ __('admin/customer.user_name') }}"></el-input>
+                </el-form-item>
+                <el-form-item label="{{ __('common.email') }}" prop="email">
+                  <el-input v-model="form.email" placeholder="{{ __('common.email') }}"></el-input>
+                </el-form-item>
+                <el-form-item label="{{ __('shop/login.password') }}" prop="password">
+                  <el-input v-model="form.password" placeholder="{{ __('admin/customer.password_info') }}"></el-input>
+                </el-form-item>
+                @hookwrapper('admin.customer.form.from.customer_group')
+                <el-form-item label="{{ __('admin/customer_group.index') }}">
+                  <el-select v-model="form.customer_group_id" placeholder="" class="w-100">
+                    <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
+                      :value="item.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                @endhookwrapper
+                <el-form-item label="{{ __('common.status') }}" prop="active">
+                  <el-switch v-model="form.active" :active-value="1" :inactive-value="0"></el-switch>
+                </el-form-item>
+                <el-form-item label="{{ __('common.examine') }}" prop="examine">
+                  <el-select v-model="form.status" placeholder="" class="w-100">
+                    <el-option v-for="item in source.statuses" :key="item.code" :label="item.label"
+                      :value="item.code">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                @hook('admin.customer.form.from.customer.after')
+                <el-form-item>
+                  @hook('admin.customer.form.from.customer.submit')
+                  <el-button type="primary" class="w-100" @click="submitForm('form')">{{ __('common.submit') }}</el-button>
+                  @hook('admin.customer.form.from.customer.submit.after')
+                </el-form-item>
+              </div>
+            </el-form>
+
+            @hook('admin.customer.form.main.card.user_info.after')
+          </div>
+        </div>
+
+        @hook('admin.customer.form.main.after')
+      </div>
+
+      <div class="col-12 col-lg-7">
+        @hook('admin.customer.form.sidebar.before')
+
+        <div class="card h-min-700">
+          <div class="card-body">
+            <h5 class="mb-3">{{ __('admin/customer.address_management') }}</h5>
+
+            @hook('admin.customer.form.sidebar.card.addresses.before')
+
             <button class="btn btn-primary mb-3" type="button" @click="editAddress">{{ __('common.add') }}</button>
             <div class="table-push">
               <table class="table">
@@ -91,10 +117,13 @@
                 </tbody>
               </table>
             </div>
-          </el-tab-pane>
-          @hook('admin.customer.form.tabs.after')
-        </el-tabs>
-      </el-form>
+
+            @hook('admin.customer.form.sidebar.card.addresses.after')
+          </div>
+        </div>
+
+        @hook('admin.customer.form.sidebar.after')
+      </div>
       @hook('admin.customer.form.content.after')
     </div>
 
@@ -104,9 +133,6 @@
         @hook('admin.customer.form.from.addresses.dialog.before')
         <el-form-item label="{{ __('address.name') }}" prop="name">
           <el-input v-model="dialogAddress.form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="{{ __('common.phone') }}" prop="phone">
-          <el-input maxlength="11" v-model="dialogAddress.form.phone"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('admin/customer.address') }}" required>
           <div class="row">
@@ -137,6 +163,9 @@
         </el-form-item>
         <el-form-item label="{{ __('admin/customer.zipcode') }}" prop="zipcode">
           <el-input v-model="dialogAddress.form.zipcode"></el-input>
+        </el-form-item>
+        <el-form-item label="{{ __('common.phone') }}">
+          <el-input v-model="dialogAddress.form.phone"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('admin/customer.address_1') }}" prop="address_1">
           <el-input v-model="dialogAddress.form.address_1"></el-input>
@@ -215,11 +244,6 @@
             message: '{{ __('common.error_required', ['name' => __('admin/customer.user_name')] ) }}',
             trigger: 'blur'
           }, ],
-          phone: [{
-            required: true,
-            message: '{{ __('common.error_required', ['name' => __('common.phone')] ) }}',
-            trigger: 'blur'
-          }, ],
           address_1: [{
             required: true,
             message: '{{ __('common.error_required', ['name' => __('admin/customer.address_1')] ) }}',
@@ -258,9 +282,20 @@
             }
 
             $http.put(`customers/{{ $customer['id'] }}`, self.form).then((res) => {
-              layer.msg(res.message);
-                location = '{{ admin_route("customers.index") }}'
-            })
+              const alertDiv = document.createElement('div');
+              alertDiv.innerHTML = `<x-admin-alert type="success" msg="${res.message}" class="mt-4"/>`;
+              document.querySelector('.container-fluid').insertBefore(alertDiv, document.querySelector('.container-fluid').firstChild);
+
+            }).catch(error => {
+              const errorDiv = document.createElement('div');
+              if (error.response && error.response.data) {
+                errorDiv.innerHTML = `<div class="alert alert-danger">${error.response.data.message || '{{__('common.error_form')}}'}</div>`;
+              } else {
+                errorDiv.innerHTML = '<div class="alert alert-danger">{{__('common.error_form')}}</div>';
+              }
+              document.querySelector('.container-fluid').insertBefore(errorDiv, document.querySelector('.container-fluid').firstChild);
+
+            });
           });
         },
 

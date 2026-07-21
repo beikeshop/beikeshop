@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PermissionRepo.php
  *
@@ -48,6 +49,7 @@ class PermissionRepo
             ['title' => trans('admin/common.rma'), 'permissions' => $this->getRmaPermissions()],
             ['title' => trans('admin/common.rma_reason'), 'permissions' => $this->getRmaReasonPermissions()],
             ['title' => trans('admin/common.product'), 'permissions' => $this->getProductPermissions()],
+            ['title' => trans('admin/common.multi_filter_index'), 'permissions' => $this->getMultiFilterPermissions()],
             ['title' => trans('admin/common.category'), 'permissions' => $this->getCategoryPermissions()],
             ['title' => trans('admin/common.brand'), 'permissions' => $this->getBrandPermissions()],
             ['title' => trans('admin/common.attribute'), 'permissions' => $this->getAttributePermissions()],
@@ -62,6 +64,7 @@ class PermissionRepo
             ['title' => trans('admin/common.design_index'), 'permissions' => $this->getDesignIndexPermissions()],
             ['title' => trans('admin/common.design_footer_index'), 'permissions' => $this->getDesignFooterPermissions()],
             ['title' => trans('admin/common.design_app_settings'), 'permissions' => $this->getDesignAppHomePermissions()],
+            ['title' => trans('admin/common.app_push_index'), 'permissions' => $this->getAppPushPermissions()],
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
             ['title' => trans('admin/common.marketing'), 'permissions' => $this->getMarketingPermissions()],
             ['title' => trans('admin/common.report'), 'permissions' => $this->getReportPermissions()],
@@ -77,6 +80,7 @@ class PermissionRepo
             ['title' => trans('admin/common.country'), 'permissions' => $this->getCountryPermissions()],
             ['title' => trans('admin/common.help_index'), 'permissions' => $this->getHelpPermissions()],
             ['title' => trans('admin/common.account_index'), 'permissions' => $this->getAccountPermissions()],
+            ['title' => '邮件发送记录', 'permissions' => $this->getMailLogPermissions()],
         ];
 
         $corePermissions   = hook_filter('role.permissions.all', $corePermissions);
@@ -145,10 +149,23 @@ class PermissionRepo
      */
     private function getProductPermissions(): array
     {
-        $routes = ['products_index', 'products_create', 'products_show', 'products_update', 'products_delete', 'products_trashed', 'products_restore', 'products_filter_index', 'products_filter_update'];
+        $routes = ['products_index', 'products_create', 'products_show', 'products_update', 'products_delete', 'products_trashed', 'products_restore'];
         $items  = $this->getPermissionList('product', $routes);
 
         return hook_filter('role.product_permissions', $items);
+    }
+
+    /**
+     * 高级筛选权限列表
+     *
+     * @return array
+     */
+    private function getMultiFilterPermissions(): array
+    {
+        $routes = ['products_filter_index', 'products_filter_update'];
+        $items  = $this->getPermissionList('products_filter', $routes);
+
+        return hook_filter('role.products_filter_permissions', $items);
     }
 
     /**
@@ -403,7 +420,7 @@ class PermissionRepo
      */
     private function getFileManagerPermissions(): array
     {
-        $routes = ['file_manager_create', 'file_manager_show', 'file_manager_update', 'file_manager_delete'];
+        $routes = ['file_manager_index', 'file_manager_create', 'file_manager_update', 'file_manager_delete'];
         $items  = $this->getPermissionList('file_manager', $routes);
 
         return hook_filter('role.file_manager_permissions', $items);
@@ -416,7 +433,7 @@ class PermissionRepo
      */
     private function getZonePermissions(): array
     {
-        $routes = ['zones_create', 'zones_index', 'zones_update', 'zones_delete'];
+        $routes = ['zones_index', 'zones_create', 'zones_update', 'zones_delete'];
         $items  = $this->getPermissionList('zone', $routes);
 
         return hook_filter('role.zone_permissions', $items);
@@ -429,7 +446,7 @@ class PermissionRepo
      */
     private function getCountryPermissions(): array
     {
-        $routes = ['countries_create', 'countries_index', 'countries_update', 'countries_delete'];
+        $routes = ['countries_index', 'countries_create', 'countries_update', 'countries_delete'];
         $items  = $this->getPermissionList('country', $routes);
 
         return hook_filter('role.country_permissions', $items);
@@ -485,10 +502,18 @@ class PermissionRepo
 
     private function getDesignAppHomePermissions(): array
     {
-        $routes = ['design_app_home_index', 'design_app_home_update', 'app_push_index'];
+        $routes = ['design_app_home_index', 'design_app_home_update'];
         $items  = $this->getPermissionList('design_builder', $routes);
 
         return hook_filter('role.design_app_home_permissions', $items);
+    }
+
+    private function getAppPushPermissions(): array
+    {
+        $routes = ['app_push_index'];
+        $items  = $this->getPermissionList('design_builder', $routes);
+
+        return hook_filter('role.app_push_permissions', $items);
     }
 
     /**
@@ -522,6 +547,19 @@ class PermissionRepo
     }
 
     /**
+     * 邮件记录权限列表
+     *
+     * @return array
+     */
+    private function getMailLogPermissions(): array
+    {
+        $routes = ['mail_logs_index', 'mail_logs_show', 'mail_logs_delete', 'mail_logs_update'];
+        $items  = $this->getPermissionList('mail_log', $routes);
+
+        return hook_filter('role.mail_log_permissions', $items);
+    }
+
+    /**
      * 根据模块和路由返回权限列表
      *
      * @param $module
@@ -530,9 +568,37 @@ class PermissionRepo
      */
     private function getPermissionList($module, $routes): array
     {
+        $commonActions = [
+            '_index'  => 'text_list',
+            '_show'   => 'text_show',
+            '_create' => 'text_create',
+            '_update' => 'text_update',
+            '_delete' => 'text_delete',
+        ];
+
         $items = [];
         foreach ($routes as $route) {
-            $items[] = ['code' => $route, 'name' => trans("admin/{$module}.{$route}"), 'selected' => $this->hasPermission($route)];
+            $transKey = null;
+
+            foreach ($commonActions as $suffix => $commonKey) {
+                if (str_ends_with($route, $suffix)) {
+                    $transKey = $commonKey;
+
+                    break;
+                }
+            }
+
+            if ($transKey) {
+                $name = trans("admin/common.{$transKey}");
+            } else {
+                $name = trans("admin/{$module}.{$route}");
+            }
+
+            $items[] = [
+                'code'     => $route,
+                'name'     => $name,
+                'selected' => $this->hasPermission($route),
+            ];
         }
 
         return $items;

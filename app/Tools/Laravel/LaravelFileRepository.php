@@ -2,7 +2,6 @@
 
 namespace App\Tools\Laravel;
 
-use App\Tools\Laravel\Module;
 use App\Tools\FileRepository;
 
 class LaravelFileRepository extends FileRepository

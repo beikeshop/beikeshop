@@ -116,6 +116,23 @@
         </li>
         @endhookwrapper
 
+        <li class="nav-item top-change-theme">
+          <div class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle theme-icon" data-bs-toggle="dropdown">
+              <i class="bi bi-circle-half fs-5"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+              <li class="dropdown-item py-2 cursor-pointer" data-bs-theme="light"><i class="bi bi-brightness-high"></i> {{ __('admin/common.text_light') }}</li>
+              <li class="dropdown-item py-2 cursor-pointer" data-bs-theme="dark"><i class="bi bi-moon-stars-fill"></i> {{ __('admin/common.text_dark') }}</li>
+              <li class="dropdown-item py-2 cursor-pointer" data-bs-theme="auto"><i class="bi bi-circle-half"></i> {{ __('admin/common.text_auto') }}</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a target="_blank" href="{{ shop_route('home.index') }}" class="nav-link"><i class="bi bi-shop fs-5"></i></a>
+        </li>
+
         @hookwrapper('admin.header.user')
         <li class="nav-item me-3">
           <div class="dropdown">
@@ -125,13 +142,8 @@
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
               <li>
-                <a target="_blank" href="{{ shop_route('home.index') }}" class="dropdown-item py-2">
-                  <i class="bi bi-send me-1"></i> {{ __('admin/common.access_frontend') }}
-                </a>
-              </li>
-              <li>
-                <a href="{{ admin_route('account.index') }}" class="dropdown-item py-2">
-                  <i class="bi bi-person-circle me-1"></i> {{ __('admin/common.account_index') }}
+                <a href="{{ admin_route('admin_users.index') }}" class="dropdown-item py-2">
+                  <i class="bi bi-person-gear me-1"></i> {{ __('admin/common.admin_users_index') }}
                 </a>
               </li>
               <li>
@@ -162,7 +174,7 @@
       <div class="mobile-open-menu"><i class="bi bi-list"></i></div>
     </div>
     <div class="logo">
-      <a href=""><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a>
+      <a href=""><img src="{{ asset(system_setting('base.admin_logo', 'image/logo.png')) }}" class="img-fluid"></a>
     </div>
     <div class="header-mobile-right">
       <div class="mobile-to-front">

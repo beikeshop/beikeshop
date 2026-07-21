@@ -12,8 +12,8 @@
         <button type="button" class="btn btn-primary" @click="checkedCustomersCreate('add', null)">{{ __('admin/attribute_group.create_at_groups') }}</button>
         @hook('admin.attribute_group.content.top_buttons.after')
       </div>
-      <div class="table-push">
-        <table class="table">
+      <div class="table-push" v-if="attribute_groups.length">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
@@ -24,8 +24,8 @@
               <th width="130px">{{ __('common.action') }}</th>
             </tr>
           </thead>
-          <tbody v-if="attribute_groups.length">
-            <tr v-for="group, index in attribute_groups" :key="index">
+          <tbody>
+            <tr v-for="group, index in attribute_groups" :key="index" class="cursor-pointer" @click="checkedCustomersCreate('edit', index)">
               <td>@{{ group.id }}</td>
               <td>@{{ group.description?.name || '' }}</td>
               <td>@{{ group.sort_order }}</td>
@@ -33,15 +33,14 @@
               @hook('admin.attribute_group.table.body')
               <td>
                 @hook('admin.attribute_group.table.body.actions.before')
-                <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">{{ __('common.edit') }}</button>
-                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)">{{ __('common.delete') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click.stop="deleteCustomer(group.id, index)">{{ __('common.delete') }}</button>
                 @hook('admin.attribute_group.table.body.actions.after')
               </td>
             </tr>
           </tbody>
-          <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
         </table>
       </div>
+      <div v-else><x-admin-no-data /></div>
 
       @hook('admin.attribute_group.content.after')
     </div>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BreadCrumb.php
  *
@@ -22,6 +23,7 @@ use Illuminate\View\Component;
 class Breadcrumb extends Component
 {
     public Collection $breadcrumbs;
+
     public string $isFull;
 
     /**
@@ -55,9 +57,9 @@ class Breadcrumb extends Component
             $breadcrumbs = array_merge($breadcrumbs, $this->handleLinks($type, $value, $text));
         }
 
-        $breadcrumbs = hook_filter('breadcrumb.construct.after', $breadcrumbs);
+        $breadcrumbs       = hook_filter('breadcrumb.construct.after', $breadcrumbs);
         $this->breadcrumbs = collect($breadcrumbs);
-        $this->isFull = $isFull;
+        $this->isFull      = $isFull;
     }
 
     /**

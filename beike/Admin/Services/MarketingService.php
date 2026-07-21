@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MarketingService.php
  *
@@ -11,17 +12,13 @@
 
 namespace Beike\Admin\Services;
 
-use Exception;
 use Beike\Facades\BeikeHttp\Facade\Http;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Storage;
+use Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use ZanySoft\Zip\Zip;
-use ZipArchive;
 
 class MarketingService
 {
-    public static function getInstance(): MarketingService
+    public static function getInstance(): self
     {
         return new self;
     }
@@ -137,67 +134,18 @@ class MarketingService
      * @param            $pluginCode
      * @throws Exception
      */
-    public function download($pluginCode)
+    public function download($pluginCode): void
     {
-        $datetime         = date('Y-m-d');
-        $apiEndPoint      = "/v1/plugins/{$pluginCode}/download";
+        $download = new \Beike\Admin\Services\DownloadService;
 
-        $content = Http::sendGet($apiEndPoint, ['timeout' => null], 'body');
-        $pluginPath = "plugins/{$pluginCode}-{$datetime}.zip";
-        Storage::disk('local')->put($pluginPath, $content);
-
-        $pluginZip = storage_path('app/' . $pluginPath);
-        $info = $this->getPluginInfo($pluginZip);
-
-        //是否beikeshop 插件
-        if ($info['is_beikeshop_plugin']) {
-
+        try {
+            $download->download($pluginCode, 'oss');
+        } catch (Exception $e) {
             try {
-                $zipFile   = (new Zip)->open($pluginZip);
-
-                if ($info['is_error']) {
-                    $info2 = $info['dir_info'];
-                    if ($info['error_dir']) {
-
-                        //文件跟命名空间不符合的插件
-                        if (count($info2) > 1) {
-                            $dir   = $info2[1];
-                            $plugin_dir = base_path('plugins');
-                            $zipFile->extract($plugin_dir);
-
-                            $error_dir = base_path('plugins/' . $info['error_dir']);
-                            $ok_dir    = base_path('plugins/' . $dir);
-
-                            $result = @rename($error_dir, $ok_dir);
-//                            if (! $result) {
-//                                throw new Exception('重命名插件文件夹失败');
-//                            }
-                        }
-                    } else {
-                        //散开的文件
-                        if (count($info2) > 1) {
-                            $dir        = $info2[1];
-                            $plugin_dir = base_path('plugins/' . $dir);
-
-                            if (! is_dir($plugin_dir)) {
-                                (new Filesystem)->makeDirectory($plugin_dir);
-                            }
-                            $zipFile->extract($plugin_dir);
-                        }
-                    }
-
-                } else {
-                    $zipFile->extract(base_path('plugins')); //正常的beikeshop 插件
-                }
-                $zipFile->close();
-            } catch (Exception $exception) {
-                throw new Exception($exception->getMessage());
+                $download->download($pluginCode, 'local');
+            } catch (Exception $localEx) {
+                throw new Exception($e->getMessage());
             }
-        } else {
-            throw new Exception('无法识别的beikeshop插件！');
-        }
-        if (file_exists($pluginZip)) {
-            @unlink($pluginZip);
         }
     }
 
@@ -219,7 +167,7 @@ class MarketingService
         return Http::sendGet($apiEndPoint);
     }
 
-    public function getLicensedPro($domain,$from)
+    public function getLicensedPro($domain, $from)
     {
         $apiEndPoint = '/v1/licensed_pro';
         request()->query->add(['domain' => $domain, 'from' => $from]);
@@ -231,7 +179,7 @@ class MarketingService
     public function checkToken($domain, $token)
     {
         $apiEndPoint = '/v1/website/check_token';
-        request()->query->add(['domain' => $domain , 'token' => $token]);
+        request()->query->add(['domain' => $domain, 'token' => $token]);
 
         return Http::sendGet($apiEndPoint);
     }
@@ -244,113 +192,27 @@ class MarketingService
         return Http::sendGet($apiEndPoint);
     }
 
-    /**
-     *  get plugin dir by preg match content
-     *
-     * @param $content
-     * @return string[]
-     */
-    public function getPluginDir($content)
-    {
-        preg_match('/namespace\s+([^\s;]+);/', $content, $matches);
-
-        return explode('\\', $matches[1]);
-    }
-
-    /**
-     *  get plugin info
-     *
-     * @throws Exception
-     */
-    public function getPluginInfo($zip_file): array
-    {
-        $dir_info            = [];
-        $configInfo          = [];
-        $error_dir           = '';
-        $is_error            = false;
-        $is_beikeshop_plugin = false;
-
-        $zip                 = new ZipArchive;
-
-        if ($zip->open($zip_file) === true) {
-            for ($i = 0; $i < $zip->numFiles; $i++) {
-                $stat = $zip->statIndex($i);
-                $name = $stat['name'];
-                $fileExtension = pathinfo($name);
-                if ($fileExtension['basename'] =='config.json') {
-                    $configInfo = $fileExtension;
-                    break;
-                }
-            }
-
-            for ($i = 0; $i < $zip->numFiles; $i++) {
-                $stat = $zip->statIndex($i);
-                $name = $stat['name'];
-                $fileExtension = pathinfo($name,PATHINFO_EXTENSION);
-                if ($fileExtension == 'php') {
-                    $content  = $zip->getFromIndex($i);
-                     preg_match('/namespace\s+([^\s;]+);/', $content, $matches);
-                    if ($matches) {
-                        $dir_info = explode('\\', $matches[1]);
-                        break;
-                    }
-                }
-            }
-
-            if (isset($configInfo['dirname']))
-            {
-                $dirName = $configInfo['dirname'];
-                if ($dirName == '.') {
-                    $is_error = true;
-                } else {
-                    if (count($dir_info) > 1) {
-                        $_pluginDir = $dir_info[1];
-                        if (rtrim($dirName, '/') != $_pluginDir) {
-                            $is_error  = true;
-                            $error_dir = rtrim($dirName, '/');
-                        }
-                    } else {
-                        $is_beikeshop_plugin = true;
-                    }
-                }
-
-            }
-
-            if (count($dir_info) > 1 && $dir_info[0] == 'Plugin') {
-                $is_beikeshop_plugin = true;
-            }
-
-            $zip->close();
-        } else {
-            throw new Exception('无法打开ZIP文件或文件不存在!');
-        }
-
-        return [
-            'is_beikeshop_plugin' => $is_beikeshop_plugin,
-            'is_error'            => $is_error,
-            'error_dir'           => $error_dir,
-            'dir_info'            => $dir_info,
-        ];
-    }
-
     public function checkPluginVersion($pluginCodes)
     {
-        $apiEndPoint = "/v1/plugins/version";
+        $apiEndPoint = '/v1/plugins/version';
         request()->query->add(['fields' => $pluginCodes, 'throwException' => false]);
+
         return Http::sendGet($apiEndPoint);
     }
 
     public function toolSearch($search, $domain)
     {
-        $apiEndPoint = "/v1/tool/plugin_search";
+        $apiEndPoint = '/v1/tool/plugin_search';
         request()->query->add(['search' => $search, 'domain' => $domain, 'timeout' => 5, 'throwException' => false]);
+
         return Http::sendGet($apiEndPoint);
     }
 
     public function checkPluginTicketExpired($pluginCode)
     {
-        $apiEndPoint = "/v1/plugins/ticket_expired";
+        $apiEndPoint = '/v1/plugins/ticket_expired';
         request()->query->add(['plugin_code' => $pluginCode]);
+
         return Http::sendGet($apiEndPoint);
     }
 }

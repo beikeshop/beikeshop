@@ -15,7 +15,7 @@ class FileManagerController extends Controller
     {
         $class = hook_filter('controller.file_manager.construct', \Beike\Admin\Services\FileManagerService::class);
 
-        $this->fileManagerService = new $class();
+        $this->fileManagerService = new $class;
     }
 
     /**
@@ -25,10 +25,10 @@ class FileManagerController extends Controller
      */
     public function index(): mixed
     {
-        $data = $this->fileManagerService->getDirectories();
-        $data = hook_filter('admin.file_manager.index.data', $data);
+        $data              = $this->fileManagerService->getDirectories();
+        $data              = hook_filter('admin.file_manager.index.data', $data);
         $uploadMaxFilesize = ini_get('upload_max_filesize');
-        $maxSizeBytes = $this->convertToBytes($uploadMaxFilesize);
+        $maxSizeBytes      = $this->convertToBytes($uploadMaxFilesize);
 
         return view('admin::pages.file_manager.index', ['directories' => $data, 'maxSizeBytes' => $maxSizeBytes]);
     }
@@ -62,8 +62,7 @@ class FileManagerController extends Controller
     public function getDirectories(Request $request): mixed
     {
         $baseFolder = $request->get('base_folder');
-
-        $data = $this->fileManagerService->getDirectories($baseFolder);
+        $data       = $this->fileManagerService->getDirectories();
 
         return hook_filter('admin.file_manager.directories.data', $data);
     }
@@ -96,11 +95,11 @@ class FileManagerController extends Controller
             // 验证请求参数
             $request->validate([
                 'origin_name' => 'required|string|max:255',
-                'new_name' => 'required|string|max:255'
+                'new_name'    => 'required|string|max:255',
             ]);
 
             $originPath = $request->get('origin_name');
-            $newName = $request->get('new_name');
+            $newName    = $request->get('new_name');
 
             // 基本的路径验证
             if (str_contains($originPath, '..') || str_contains($newName, '..')) {
@@ -108,7 +107,7 @@ class FileManagerController extends Controller
             }
 
             // 验证新文件名的安全性
-            if (!$this->isValidFileName($newName)) {
+            if (! $this->isValidFileName($newName)) {
                 throw new \Exception(trans('admin/file_manager.invalid_filename'));
             }
 
@@ -117,9 +116,9 @@ class FileManagerController extends Controller
             // 记录重命名操作
             \Log::info('File renamed', [
                 'origin_name' => $originPath,
-                'new_name' => $newName,
-                'user_id' => auth()->id(),
-                'ip' => $request->ip()
+                'new_name'    => $newName,
+                'user_id'     => auth()->id(),
+                'ip'          => $request->ip(),
             ]);
 
             return json_success(trans('common.updated_success'));
@@ -127,9 +126,9 @@ class FileManagerController extends Controller
             // 记录错误日志
             \Log::error('File rename error: ' . $e->getMessage(), [
                 'origin_name' => $request->get('origin_name'),
-                'new_name' => $request->get('new_name'),
-                'user_id' => auth()->id(),
-                'ip' => $request->ip()
+                'new_name'    => $request->get('new_name'),
+                'user_id'     => auth()->id(),
+                'ip'          => $request->ip(),
             ]);
 
             return json_fail($e->getMessage());
@@ -147,26 +146,26 @@ class FileManagerController extends Controller
             $requestData = json_decode($request->getContent(), true);
 
             // 验证请求数据
-            if (!is_array($requestData)) {
+            if (! is_array($requestData)) {
                 throw new \Exception(trans('admin/file_manager.invalid_request_data'));
             }
 
-            $basePath = $requestData['path'] ?? '';
-            $files = $requestData['files'] ?? [];
+            $basePath = $requestData['path']  ?? '';
+            $files    = $requestData['files'] ?? [];
 
             // 验证基础路径
-            if (!is_string($basePath) || str_contains($basePath, '..')) {
+            if (! is_string($basePath) || str_contains($basePath, '..')) {
                 throw new \Exception(trans('admin/file_manager.invalid_path'));
             }
 
             // 验证文件列表
-            if (!is_array($files)) {
+            if (! is_array($files)) {
                 throw new \Exception(trans('admin/file_manager.invalid_files_parameter'));
             }
 
             // 验证每个文件名
             foreach ($files as $file) {
-                if (!is_string($file) || !$this->isValidFileName($file)) {
+                if (! is_string($file) || ! $this->isValidFileName($file)) {
                     throw new \Exception(trans('admin/file_manager.invalid_filename'));
                 }
 
@@ -181,9 +180,9 @@ class FileManagerController extends Controller
             // 记录删除操作
             \Log::info('Files deleted', [
                 'base_path' => $basePath,
-                'files' => $files,
-                'user_id' => auth()->id(),
-                'ip' => $request->ip()
+                'files'     => $files,
+                'user_id'   => auth()->id(),
+                'ip'        => $request->ip(),
             ]);
 
             return json_success(trans('common.deleted_success'));
@@ -191,8 +190,8 @@ class FileManagerController extends Controller
             // 记录错误日志
             \Log::error('File deletion error: ' . $e->getMessage(), [
                 'request_data' => $request->getContent(),
-                'user_id' => auth()->id(),
-                'ip' => $request->ip()
+                'user_id'      => auth()->id(),
+                'ip'           => $request->ip(),
             ]);
 
             return json_fail($e->getMessage());
@@ -229,6 +228,7 @@ class FileManagerController extends Controller
         try {
             $sourcePath = $request->get('source_path');
             $destPath   = $request->get('dest_path');
+
             $this->fileManagerService->moveDirectory($sourcePath, $destPath);
 
             return json_success(trans('common.updated_success'));
@@ -266,7 +266,7 @@ class FileManagerController extends Controller
         try {
             // 验证请求参数
             $request->validate([
-                'path' => 'required|string|max:255'
+                'path' => 'required|string|max:255',
             ]);
 
             $imagePath = $request->get('path');
@@ -290,9 +290,9 @@ class FileManagerController extends Controller
         } catch (Exception $e) {
             // 记录错误日志
             \Log::error('File export error: ' . $e->getMessage(), [
-                'path' => $request->get('path'),
+                'path'    => $request->get('path'),
                 'user_id' => auth()->id(),
-                'ip' => $request->ip()
+                'ip'      => $request->ip(),
             ]);
 
             abort(400, $e->getMessage());
@@ -311,12 +311,16 @@ class FileManagerController extends Controller
         $file     = $request->file('file');
         $savePath = $request->get('path');
 
-        $originName = $file->getClientOriginalName();
-        $fileUrl    = $this->fileManagerService->uploadFile($file, $savePath, $originName);
+        $originName  = $file->getClientOriginalName();
+        $fileData    = $this->fileManagerService->uploadFile($file, $savePath, $originName);
+
+        $files = $this->getFiles($request);
 
         return [
-            'name' => $originName,
-            'url'  => $fileUrl,
+            'name'  => $originName,
+            'url'   => $fileData['url'],
+            'path'  => $fileData['path'],
+            'files' => $files,
         ];
     }
 
@@ -344,7 +348,7 @@ class FileManagerController extends Controller
         }
 
         // 检查保留文件名 (Windows)
-        $reservedNames = ['CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9'];
+        $reservedNames  = ['CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9'];
         $nameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
         if (in_array(strtoupper($nameWithoutExt), $reservedNames)) {
             return false;
@@ -352,9 +356,9 @@ class FileManagerController extends Controller
 
         // 如果是文件（有扩展名），验证扩展名
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
-        if (!empty($extension)) {
+        if (! empty($extension)) {
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
-            if (!in_array(strtolower($extension), $allowedExtensions)) {
+            if (! in_array(strtolower($extension), $allowedExtensions)) {
                 return false;
             }
         }
@@ -362,21 +366,26 @@ class FileManagerController extends Controller
         return true;
     }
 
-    private function convertToBytes($sizeStr) {
+    protected function convertToBytes($sizeStr)
+    {
         $sizeStr = trim($sizeStr);
-        $last  = strtolower($sizeStr[strlen($sizeStr) - 1]);
-        $val   = substr($sizeStr, 0, -1);
+        $last    = strtolower($sizeStr[strlen($sizeStr) - 1]);
+        $val     = substr($sizeStr, 0, -1);
         switch ($last) {
             case 'g':
                 $val *= 1024 * 1024 * 1024;
+
                 break;
             case 'm':
                 $val *= 1024 * 1024;
+
                 break;
             case 'k':
                 $val *= 1024;
+
                 break;
         }
+
         return $val;
     }
 }

@@ -38,7 +38,7 @@ class SettingsSeeder extends Seeder
     public function getItems()
     {
         return [
-            ["type" => "system", "space" => "base", "name" => "country_id", "value" => "44", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "country_id", "value" => "38", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "locale", "value" => "en", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "theme", "value" => "default", "json" => 0],
             ["type" => "plugin", "space" => "service_charge", "name" => "status", "value" => "1", "json" => 0],
@@ -47,19 +47,20 @@ class SettingsSeeder extends Seeder
             ["type" => "system", "space" => "base", "name" => "tax", "value" => "1", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "tax_address", "value" => "payment", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "currency", "value" => "USD", "json" => 0],
-            ["type" => "system", "space" => "base", "name" => "zone_id", "value" => "710", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "zone_id", "value" => "602", "json" => 0],
             ["type" => "plugin", "space" => "header_menu", "name" => "status", "value" => "1", "json" => 0],
             ["type" => "plugin", "space" => "stripe", "name" => "publishable_key", "value" => "pk_test_Flhi0NU77hK1IBFNpl02o5hN", "json" => 0],
             ["type" => "plugin", "space" => "stripe", "name" => "secret_key", "value" => "sk_test_FlsXnYjhoqLb6d5JzvpgKdMM", "json" => 0],
             ["type" => "plugin", "space" => "stripe", "name" => "test_mode", "value" => "1", "json" => 0],
+            ["type" => "plugin", "space" => "paypal", "name" => "currency", "value" => "USD", "json" => 0],
             ["type" => "plugin", "space" => "paypal", "name" => "sandbox_client_id", "value" => "AYnGaFvGXr3WIkcVL_xeJHjCa4ypZe3mL0cPWYYHzeQgrObCx0qtHd0dvKWuRPc68WHF85obrwZoIpkp", "json" => 0],
             ["type" => "plugin", "space" => "paypal", "name" => "sandbox_secret", "value" => "EAgcYU-K5hLJpxjXotuanZDXK-CZcRTnlUdb4gx3K3CBipCv5l_fTAQPD4FxdJn7GhxuD4UvhaOsiTY8", "json" => 0],
             ["type" => "plugin", "space" => "paypal", "name" => "live_client_id", "value" => "AYnGaFvGXr3WIkcVL_xeJHjCa4ypZe3mL0cPWYYHzeQgrObCx0qtHd0dvKWuRPc68WHF85obrwZoIpkp", "json" => 0],
             ["type" => "plugin", "space" => "paypal", "name" => "live_secret", "value" => "EAgcYU-K5hLJpxjXotuanZDXK-CZcRTnlUdb4gx3K3CBipCv5l_fTAQPD4FxdJn7GhxuD4UvhaOsiTY8", "json" => 0],
             ["type" => "plugin", "space" => "paypal", "name" => "sandbox_mode", "value" => "1", "json" => 0],
-            ["type" => "system", "space" => "base", "name" => "logo", "value" => "catalog/logo.png", "json" => 0],
-            ["type" => "system", "space" => "base", "name" => "placeholder", "value" => "catalog/placeholder.png", "json" => 0],
-            ["type" => "system", "space" => "base", "name" => "favicon", "value" => "catalog/favicon.png", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "logo", "value" => "image/logo.png", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "placeholder", "value" => "image/placeholder.png", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "favicon", "value" => "image/favicon.png", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "meta_title", "value" => "开源好用的跨境电商系统", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "meta_description", "value" => "BeikeShop 是一款开源好用的跨境电商建站系统，基于 Laravel 开发。主要面向外贸，和跨境行业。系统提供商品管理、订单管理、会员管理、支付、物流、系统管理等丰富功能", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "meta_keywords", "value" => "开源电商,开源代码,开源电商项目,b2b独立站,dtc独立站,跨境电商网", "json" => 0],
@@ -73,6 +74,10 @@ class SettingsSeeder extends Seeder
             ["type" => "plugin", "space" => "flat_shipping", "name" => "status", "value" => "1", "json" => 0],
             ["type" => "plugin", "space" => "paypal", "name" => "status", "value" => "1", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "rate_api_key", "value" => "", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "hot_keywords", "value" => json_encode([
+                "zh_cn" =>"连衣裙,运动鞋,T恤,牛仔裤,时尚,潮流,可爱童装,瑜伽健身服",
+                "en" =>"Dress,Sneakers,T-shirt,Jeans,Fashion,Vintage Style,Kidswear,Yoga Activewear"
+            ], JSON_UNESCAPED_UNICODE), "json" => 1],
         ];
     }
 }

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * order.php
+ *
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     guangda <service@guangda.work>
+ * @created    2022-08-02 14:22:41
+ * @modified   2022-08-02 14:22:41
+ */
+
+return [
+    'plugins_index'   => ':store_name 백그라운드로 로그인하기',
+    'log_in'          => '로그인',
+    'forgot_password' => '비밀번호를 잊어버렸어요',
+];

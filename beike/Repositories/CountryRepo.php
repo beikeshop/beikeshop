@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CountryRepo.php
  *
@@ -29,7 +30,7 @@ class CountryRepo
             'code'       => $data['code']             ?? '',
             'continent'  => $data['continent']        ?? '',
             'sort_order' => (int) ($data['sort_order'] ?? 0),
-            'status'     => (bool) ($data['status']    ?? 0),
+            'active'     => (bool) ($data['active']    ?? true),
         ];
     }
 
@@ -109,8 +110,8 @@ class CountryRepo
         if (isset($filters['code'])) {
             $builder->where('countries.code', 'like', "%{$filters['code']}%");
         }
-        if (isset($filters['status'])) {
-            $builder->where('countries.status', $filters['status']);
+        if (isset($filters['active'])) {
+            $builder->where('countries.active', $filters['active']);
         }
         if (isset($filters['continent'])) {
             $continent = $filters['continent'];
@@ -129,7 +130,8 @@ class CountryRepo
      */
     public static function listEnabled(): Collection|array
     {
-        $countries = Country::query()->where('status', true)->select('id', 'name')->get();
+        $countries = Country::query()->where('active', true)->select('id', 'name')->get();
+
         return hook_filter('repo.country.list.enabled', $countries);
     }
 

@@ -141,17 +141,36 @@
               </div>
               <el-button slot="reference" size="small" plain type="primary" icon="el-icon-s-operation"></el-button>
             </el-popover>
-            <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{
-              __('admin/file_manager.upload_files') }}</el-button>
+            <el-upload
+              class=""
+              action=""
+              :show-file-list="false"
+              multiple
+              icon="el-icon-upload2"
+              :on-change="handleUploadChange"
+              :http-request="uploadFile"
+              :multiple="true">
+              <el-button size="small" plain type="primary">{{ __('admin/file_manager.upload_files') }}</el-button>
+            </el-upload>
             @hook('admin.file_manager.content_head.right.after')
           </div>
         </div>
-        <div v-if="images.length" class="content-center"
+        <div v-if="images.length"
+          :class="{
+            'content-center': true,
+            'drag-over': isDragOver,
+          }"
+          @dragover.prevent="isDragOver = true"
+          @dragleave="handleDragLeave"
+          @drop.prevent="onDrop"
           v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus, imgMove: imgMove }">
-          <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images" :key="index"
+          <span class="drag-drop-upload-text"><i class="bi bi-layers-half"></i> {{ __('admin/product.drag_drop_upload') }}</span>
+          <div :class="['image-list', file.selected ? 'active' : '']"
+            v-for="file, index in images" :key="index"
             @click="checkedImage(index)" @dblclick="checkedImageDouble(index)">
-            <div class="img">
-              <i class="el-icon-video-play" v-if="file.mime == 'video/mp4'"></i>
+            <div :class="['img', file.mime == 'video/mp4' ? 'product-item-video' : '']">
+              <div @click="showVideo(file.url)" v-if="file.mime == 'video/mp4'" class="video-icon"><i class="bi bi-play-circle"></i></div>
+              <video :src="file.url" class="img-fluid" v-if="file.mime == 'video/mp4'" preload="metadata"></video>
               <img v-else :src="file.url + '?v=' + randomString()" draggable="false" />
             </div>
             <div class="text">
@@ -179,21 +198,12 @@
       <div class="text-center mt-5 w-100 fs-4">{{ __('admin/file_manager.show_pc') }}</div>
       @endif
 
-      <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="4vh" :visible.sync="uploadFileDialog.show"
+      <el-dialog title="{{ __('common.text_hint') }}" top="4vh" :visible.sync="uploadFileDialog.show"
         width="580px" @close="uploadFileDialogClose" custom-class="upload-wrap">
-        <div class="alert alert-info mb-2">
-          {{ __('admin/file_manager.upload_hint_1') }} <@{{ folderCurrentName }}>,
+        <div class="alert alert-info mb-3">
           {{ __('admin/file_manager.upload_hint_2', ['max_size' => ini_get('upload_max_filesize')]) }}
           <a class="fw-bold" href="https://docs.beikeshop.com/config/upload_max_filesize.html" target="_blank">{{ __('admin/file_manager.modify_size_limit') }}</a>
         </div>
-        <el-upload class="photos-upload" target="photos-upload" id="photos-upload"
-          element-loading-text="{{ __('admin/file_manager.image_uploading') }}..."
-          element-loading-background="rgba(0, 0, 0, 0.6)" drag action="" :show-file-list="false"
-          accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4,.gif,.webp"
-          :on-change="handleUploadChange" :http-request="uploadFile" :multiple="true">
-          <i class="el-icon-upload"></i>
-          <div class="el-upload__text">{{ __('admin/file_manager.click_upload') }}</div>
-        </el-upload>
         <div class="upload-image">
           <div v-for="image, index in uploadFileDialog.images" :key="index" class="list">
             <div class="info">
@@ -229,6 +239,7 @@
       data: {
         min: 10,
         max: 40,
+        isDragOver: false,
         paneLengthPercent: 26,
         triggerLength: 10,
         isShift: false,
@@ -282,10 +293,6 @@
       computed: {
         paneLengthValue() {
           return `calc(${this.paneLengthPercent}% - ${this.triggerLength / 2 + 'px'})`
-        },
-
-        folderCurrentName() {
-          return this.folderCurrent == '/' ? '{{ __('admin/file_manager.picture_space') }}' : this.folderCurrent.split('/').pop();
         },
 
         @hook('admin.file_manager.vue.computed')
@@ -367,6 +374,40 @@
       },
 
       methods: {
+        showVideo(src) {
+          layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            shadeClose: true,
+            area: ['500px', '500px'],
+            skin: 'product-video-preview-layer',
+            content: `
+              <div class="product-video-preview-dialog">
+                <video src="${src}" controls autoplay playsinline class="product-video-preview-player"></video>
+              </div>
+            `,
+          });
+        },
+
+        handleDragLeave(e) {
+          if (!e.currentTarget.contains(e.relatedTarget)) {
+            this.isDragOver = false
+          }
+        },
+
+        onDrop(e) {
+          console.log(e.dataTransfer.files);
+          this.isDragOver = false;
+          const files = Array.from(e.dataTransfer.files);
+
+          if (files.length > 0) {
+            files.forEach(file => {
+              this.uploadFile({file: file})
+            })
+          }
+        },
+
         searchFile() {
           this.image_page = 1;
           this.loadData()
@@ -414,10 +455,6 @@
         },
 
         uploadFileDialogClose() {
-          if (this.uploadFileDialog.images.length) {
-            this.loadData()
-          }
-
           this.uploadFileDialog.images = [];
         },
 
@@ -430,6 +467,7 @@
           const path = draggingNode.data.path;
           const dropPath = dropNode.data.path;
           const dropName = dropNode.data.name;
+          let dropNodeChildNodes = dropNode.childNodes;
 
           $('.drop_folder_hint').find('span:first-child').text(name).siblings('span').text(dropPath);
           this.$confirm($('.drop_folder_hint').html(),"{{ __('common.text_hint') }}", {
@@ -437,13 +475,40 @@
             type: "warning"
           }).then(() => {
             $http.post('file_manager/move_directories', {source_path:path, dest_path:dropPath }).then((res) => {
-              // 修改path
-              dropNode.data.children[dropNode.data.children.length - 1].path = dropPath + '/' + name;
-              // 如果当前激活目录是移动的目录，则修改当前激活目录为移动后的目录 path
-              if (this.folderCurrent == path) {
-                this.folderCurrent = dropPath + '/' + name;
+              const newBasePath = dropPath === '/' ? `/${name}` : `${dropPath}/${name}`;
+
+              // 递归更新子节点路径
+              const updateChildrenPath = (node, oldBasePath, newBasePath) => {
+                if (!node || !node.data) return;
+
+                // 更新当前节点的路径
+                if (node.data.path && node.data.path.startsWith(oldBasePath)) {
+                  const relativePath = node.data.path.substring(oldBasePath.length);
+                  node.data.path = newBasePath + relativePath;
+                }
+
+                // 递归更新子节点
+                if (node.childNodes && node.childNodes.length > 0) {
+                  node.childNodes.forEach(child => {
+                    updateChildrenPath(child, oldBasePath, newBasePath);
+                  });
+                }
+              };
+
+              // 更新当前节点的路径
+              draggingNode.data.path = newBasePath;
+
+              // 递归更新所有子节点的路径
+              updateChildrenPath(draggingNode, path, newBasePath);
+
+              // 如果当前激活目录是被移动的目录或其子目录，则更新当前激活目录
+              if (this.folderCurrent === path || this.folderCurrent.startsWith(path + '/')) {
+                const relativePath = this.folderCurrent.substring(path.length);
+                this.folderCurrent = newBasePath + relativePath;
                 sessionStorage.setItem('folderCurrent', this.folderCurrent);
               }
+
+              this.loadData();
             })
           }).catch(() => {
             this.treeData = this.copyTreeData
@@ -476,9 +541,7 @@
             dangerouslyUseHTMLString:true,
             type: "warning"
           }).then(() => {
-            // console.log(path, dropPath, dropName);
             const imagePaths = this.images.filter((item, index) => selectImageIndex.includes(index)).map(e => e.path);
-            console.log(path, imagePaths);
 
             $http.post('file_manager/move_files', {images:imagePaths, dest_path:path }).then((res) => {
               this.loadData()
@@ -488,30 +551,35 @@
 
         // 文件上传
         uploadFile(file) {
-          const that = this;
           let newFile = {};
 
           var formData = new FormData();
           formData.append("file", file.file, file.file.name);
           formData.append("path", this.folderCurrent);
+          formData.append("base_folder", this.folderCurrent);
+          formData.append("page", this.image_page);
+          formData.append("per_page", this.per_page);
+          formData.append("sort", this.filter.sort);
+          formData.append("keyword", this.filterKeyword);
+          formData.append("order", this.filter.order);
 
           newFile = {
-            // index: this.images.length,
             name: file.file.name,
             progre: 0,
             status: 'padding'
           };
 
-          this.uploadFileDialog.images.push(newFile);
-
-          let index = this.uploadFileDialog.images.length - 1;
-
           $http.post('file_manager/upload', formData, {hmsg: true}).then((res) => {
-            this.uploadFileDialog.images[index].status = 'complete';
-            this.uploadFileDialog.images[index].progre = 100;
+            this.images = res.files.images
+            this.image_page = res.files.image_page
+            this.image_total = res.files.image_total
           }).catch((err) => {
+            this.uploadFileDialog.images.push(newFile);
+            let index = this.uploadFileDialog.images.length - 1;
+
             this.uploadFileDialog.images[index].status = 'fail';
-            this.uploadFileDialog.images[index].progre = 80;
+            this.uploadFileDialog.images[index].progre = 100;
+            this.uploadFileDialog.show = true
 
             let message = err.response.data.message;
             if (file.file.size > this.uploadMaxFilesize) {
@@ -519,8 +587,6 @@
             }
 
             this.uploadFileDialog.images[index].fail_text = message;
-          }).finally(() => {
-            index += 1
           });
         },
 
@@ -802,6 +868,7 @@
                 this.folderCurrent = this.folderCurrent.replace(/\/[^\/]*$/, '/' + value);
                 // 递归修改 data 内所有 children -> path 的对应 level = value
                 this.changeChildren(data, node, value);
+                this.loadData();
               })
             }
 
@@ -813,7 +880,7 @@
                 origin_name: origin_name,
                 new_name: value + '.' + fileSuffix
               }).then((res) => {
-                this.images[this.selectImageIndex].name = value + '.' + fileSuffix;
+                this.loadData();
                 layer.msg(res.message)
               })
             }

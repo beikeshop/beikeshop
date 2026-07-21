@@ -1,7 +1,7 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @Date          2022-08-17 15:42:46
  * @LastEditTime  2024-12-20 16:56:01
  */
@@ -13,6 +13,11 @@ $(function () {
   // 触发表单提交
   $(document).on('click', '.submit-form', function(event) {
     const form = $(this).attr('form');
+
+    if (typeof submitFormBefore === 'function') {
+      submitFormBefore();
+      return;
+    }
 
     if ($(`form#${form}`).find('button[type="submit"]').length > 0) {
       $(`form#${form}`).find('button[type="submit"]')[0].click();

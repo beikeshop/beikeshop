@@ -23,12 +23,18 @@ class AddressRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name'       => 'required|min:2|max:64',
             'country_id' => 'required|exists:countries,id',
             'zone_id'    => 'required|exists:zones,id',
             'address_1'  => 'required',
         ];
+
+        if (system_setting('base.address_phoner_equired', '0') == '1') {
+            $rules['phone'] = 'required';
+        }
+
+        return $rules;
     }
 
     public function attributes()
@@ -38,6 +44,7 @@ class AddressRequest extends FormRequest
             'country_id' => trans('address.country_id'),
             'zone_id'    => trans('address.zone_id'),
             'address_1'  => trans('address.address_1'),
+            'phone'      => trans('shop/account/addresses.enter_phone'),
         ];
     }
 }

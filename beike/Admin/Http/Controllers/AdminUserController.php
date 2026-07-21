@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AdminUserController.php
  *
@@ -57,6 +58,13 @@ class AdminUserController extends Controller
     public function update(AdminUserRequest $request, int $adminUserId)
     {
         $adminUser = AdminUserRepo::updateAdminUser($adminUserId, $request->toArray());
+
+        return json_success(trans('common.updated_success'), $adminUser);
+    }
+
+    public function updateTokens(Request $request, int $adminUserId)
+    {
+        $adminUser = AdminUserRepo::updateAdminTokens($adminUserId, $request->toArray());
 
         return json_success(trans('common.updated_success'), $adminUser);
     }

@@ -2,6 +2,4 @@
 
 namespace App\Tools\Exceptions;
 
-class ModuleNotFoundException extends \Exception
-{
-}
+class ModuleNotFoundException extends \Exception {}

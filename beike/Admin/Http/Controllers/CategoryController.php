@@ -70,28 +70,42 @@ class CategoryController extends Controller
         return json_success(trans('common.get_success'), $name);
     }
 
-    protected function form(Request $request, Category $category = null)
+    protected function form(Request $request, ?Category $category = null)
     {
         if ($category) {
-            $descriptions = $category->descriptions->keyBy('locale');
+            $descriptions  = $category->descriptions->keyBy('locale');
+            $descendantIds = $category->getDescendantIds();
+        }
+
+        // 取出所有分类
+        $categories = CategoryRepo::flatten(locale());
+
+        // 如果是编辑分类，就排除自己和所有后代
+        if ($category && $category->id) {
+            $categories = $categories->reject(function ($item) use ($category, $descendantIds) {
+                return $item->id == $category->id || in_array($item->id, $descendantIds);
+            });
         }
 
         $data = [
-            'category'     => $category ?? new Category(),
+            'category'     => $category ?? new Category,
             'languages'    => LanguageRepo::all(),
             'descriptions' => $descriptions ?? null,
-            'categories'   => CategoryRepo::flatten(locale()),
+            'categories'   => $categories,
             '_redirect'    => $this->getRedirect(),
         ];
+
         $data = hook_filter('admin.category.form.data', $data);
 
         return view('admin::pages.categories.form', $data);
     }
 
-    protected function save(Request $request, Category $category = null)
+    protected function save(Request $request, ?Category $category = null)
     {
         $requestData = $request->all();
-        $category    = (new CategoryService())->createOrUpdate($requestData, $category);
+
+        $isUpdate    = ! is_null($category);
+        $category    = (new CategoryService)->createOrUpdate($requestData, $category);
         $data        = [
             'category'     => $category,
             'request_data' => $requestData,
@@ -99,7 +113,11 @@ class CategoryController extends Controller
 
         hook_action('admin.category.save.after', $data);
 
-        return redirect($this->getRedirect())->with('success', trans('common.updated_success'));
+        $success = trans('common.updated_success');
+
+        return $isUpdate
+        ? redirect()->back()->with('success', $success)
+        : redirect($this->getRedirect())->with('success', $success);
     }
 
     public function autocomplete(Request $request)

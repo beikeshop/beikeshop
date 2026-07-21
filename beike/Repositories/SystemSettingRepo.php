@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SystemSettingRepo.php
  *
@@ -11,6 +12,4 @@
 
 namespace Beike\Repositories;
 
-class SystemSettingRepo
-{
-}
+class SystemSettingRepo {}

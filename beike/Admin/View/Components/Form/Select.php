@@ -29,7 +29,7 @@ class Select extends Component
         mixed $value,
         array $options,
         ?string $title = '',
-        string $width = '400',
+        string $width = '',
         ?string $key = 'value',
         ?string $label = 'label',
         ?string $class = '',
@@ -42,8 +42,8 @@ class Select extends Component
         $this->width   = $width;
         $this->key     = $key;
         $this->label   = $label;
-        $this->class   = $class ?: "form-select me-3 wp-".$width;
-        $this->format = $format;
+        $this->class   = $class ?: 'form-select me-3 wp-' . $width;
+        $this->format  = $format;
     }
 
     public function render()

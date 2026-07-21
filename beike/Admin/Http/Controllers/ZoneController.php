@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ZoneController.php
  *
@@ -37,14 +38,14 @@ class ZoneController extends Controller
 
     public function store(Request $request)
     {
-        $zone = ZoneRepo::create($request->only('country_id', 'name', 'code', 'sort_order', 'status'));
+        $zone = ZoneRepo::create($request->only('country_id', 'name', 'code', 'sort_order', 'active'));
 
         return json_success(trans('common.created_success'), $zone);
     }
 
     public function update(Request $request, int $id)
     {
-        $zone = ZoneRepo::update($id, $request->only('country_id', 'name', 'code', 'sort_order', 'status'));
+        $zone = ZoneRepo::update($id, $request->only('country_id', 'name', 'code', 'sort_order', 'active'));
         $zone->load('country');
 
         return json_success(trans('common.updated_success'), $zone);
@@ -59,10 +60,10 @@ class ZoneController extends Controller
 
     public function listByCountry(Request $request, int $countryId)
     {
-        ZoneRepo::listByCountry($countryId);
+        $active = $request->get('active', false);
 
         $data = [
-            'zones' => ZoneRepo::listByCountry($countryId),
+            'zones' => ZoneRepo::listByCountry($countryId, $active), // 管理后台显示所有zones
         ];
 
         return json_success(trans('common.success'), $data);

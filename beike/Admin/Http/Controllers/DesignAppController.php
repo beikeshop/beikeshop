@@ -2,6 +2,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Facades\BeikeHttp\Facade\Http;
 use Beike\Repositories\SettingRepo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -35,6 +36,13 @@ class DesignAppController extends Controller
      */
     public function update(Request $request): JsonResponse
     {
+        $apiEndPoint      = '/v1/solutions/bk_app/purchased';
+        $purchasedContent = Http::sendGet($apiEndPoint);
+
+        if (! $purchasedContent['data']['purchased']) {
+            return json_fail(trans('admin/app_builder.not_purchased'));
+        }
+
         $content = json_decode($request->getContent(), true);
 
         SettingRepo::storeValue('app_home_setting', $content);

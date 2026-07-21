@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Brand.php
  *
@@ -18,7 +19,7 @@ class Brand extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'first', 'logo', 'sort_order', 'status'];
+    protected $fillable = ['name', 'first', 'logo', 'sort_order', 'active'];
 
     public function products(): HasMany
     {

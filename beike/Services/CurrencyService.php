@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CurrencyService.php
  *
@@ -22,7 +23,7 @@ class CurrencyService
 
     public function __construct()
     {
-        foreach (CurrencyRepo::listEnabled() as $result) {
+        foreach (CurrencyRepo::all() as $result) {
             $this->currencies[$result->code] = $result;
         }
     }
@@ -30,7 +31,7 @@ class CurrencyService
     public static function getInstance()
     {
         if (! self::$instance) {
-            self::$instance = new self();
+            self::$instance = new self;
         }
 
         return self::$instance;
@@ -42,7 +43,7 @@ class CurrencyService
             return $amount;
         }
 
-        if (!isset($this->currencies[$currency])) {
+        if (! isset($this->currencies[$currency])) {
             throw (new \Exception("Currency {$currency} not exist. Please contact the administrator to create it"));
         }
 

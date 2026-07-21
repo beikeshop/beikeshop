@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-09-09 19:16:39
  * @LastEditTime  2022-09-16 20:55:07
  */
@@ -12,8 +12,33 @@
   display: none;
 }
 
+:root {
+  --bs-border-radius: 0.5rem;
+}
+
+.btn {
+  --bs-btn-border-radius: 10rem;
+}
+
+textarea.form-control {
+  border-radius: var(--bs-border-radius);
+}
+
+.bk-page-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999999999999;
+}
+
 body[class^="page-account"] {
-  background-color: #f4f4f4;
+  background-color: #f7f7f7;
 
   .breadcrumb-wrap {
     background-color: #eeeeee;
@@ -25,39 +50,38 @@ body {
   -webkit-font-smoothing: antialiased;
   font-style: normal;
   -webkit-text-size-adjust: none;
-}
+  &.app {
+    .breadcrumb-wrap {
+      height: 10px;
 
-body.app {
-  .breadcrumb-wrap {
-    height: 10px;
+      .container {
+        display: none;
+      }
+    }
 
-    .container {
+    .col-lg-3.col-12 {
       display: none;
     }
   }
-
-  .col-lg-3.col-12 {
-    display: none;
-  }
 }
 
-@font-face {font-family: 'Poppins';
-  src: url('/fonts/poppins/Poppins-Regular.ttf') format("truetype");
+@font-face {font-family: 'Jost';
+  src: url('/fonts/jost/Jost-Regular.ttf') format("truetype");
   font-style: normal;
-  font-weight: 500;
+  // font-weight: 500;
   font-weight: normal;
   font-display: swap;
 }
 
-@font-face {font-family: 'Poppins';
-  src: url('/fonts/poppins/Poppins-Medium.ttf') format("truetype");
+@font-face {font-family: 'Jost';
+  src: url('/fonts/jost/Jost-Medium.ttf') format("truetype");
   font-style: normal;
   font-display: swap;
   font-weight: 600;
 }
 
-@font-face {font-family: 'Poppins';
-  src: url('/fonts/poppins/Poppins-SemiBold.ttf') format("truetype");
+@font-face {font-family: 'Jost';
+  src: url('/fonts/jost/Jost-SemiBold.ttf') format("truetype");
   font-style: normal;
   font-display: swap;
   font-weight: 700;
@@ -116,7 +140,7 @@ h1,h2,h3, h4, h5, h6, b, strong {
 }
 
 // 生成 10 20 30 ... 90 的高宽
-@for $i from 1 through 10 {
+@for $i from 1 through 20 {
   .wh-#{$i}0 {
     height: #{$i}0px;
     width: #{$i}0px;
@@ -136,6 +160,11 @@ h1,h2,h3, h4, h5, h6, b, strong {
     th, td {
       width: auto !important;
     }
+  }
+
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box;
   }
 }
 
@@ -242,7 +271,7 @@ img {
 
   @media (min-width: 992px) {
     font-size: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.4rem;
   }
 }
 
@@ -306,43 +335,22 @@ img {
 }
 
 .quantity-wrap {
-  width: 80px;
-  height: 37px;
-  display: flex;
-  align-content: space-between;
-  border: 1px solid #ced4da;
+  width: 120px;
 
-  @media (max-width: 768px) {
-    width: 60px;
-    flex: 0 0 60px;
+  @media (min-width: 768px) {
+    height: 37px;
+  }
+  .btn {
+    border-color: var(--bs-border-color);
+    &:active {
+      background-color: #eee;
+    }
   }
 
   input {
-    border: none;
     padding: 0.5rem;
-  }
-
-  > .right {
-    display: flex;
-    flex-direction: column;
-    // align-items: center;
-    border-left: 1px solid #ced4da;
-
-    i {
-      flex: 1;
-      width: 20px;
-      height: 17px;
-      text-align: center;
-      cursor: pointer;
-      background-color: #fff;
-      &:last-of-type {
-        border-top: 1px solid #ced4da;
-      }
-
-      &:hover {
-        background-color: #eee;
-      }
-    }
+    text-align: center;
+    background-color: transparent !important;
   }
 }
 
@@ -377,6 +385,9 @@ img {
 }
 
 .account-sides-info {
+  border-radius: var(--bs-border-radius);
+  overflow: hidden;
+
   @media (max-width: 768px) {
     position: fixed;
     z-index: 1046;
@@ -400,15 +411,15 @@ img {
   .head {
     display: flex;
     align-items: center;
-    padding: 2rem 1rem;
+    padding: 1.4rem 1rem;
     background-color: #fff;
     border-bottom: 1px solid #eee;
     border-top-left-radius: 0.275rem;
     border-top-right-radius: 0.275rem;
 
-    @media (min-width: 768px) {
-      flex-direction: column;
-    }
+    // @media (min-width: 768px) {
+    //   flex-direction: column;
+    // }
 
     @media (max-width: 768px) {
       padding: 1rem;
@@ -416,16 +427,18 @@ img {
     }
 
     .portrait {
-      width: 100px;
-      height: 100px;
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
       border-radius: 50%;
       box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
       border: 2px solid #FFFFFF;
       overflow: hidden;
+      margin-right: 10px;
 
-      @media (min-width: 768px) {
-        margin-bottom: 1rem;
-      }
+      // @media (min-width: 768px) {
+      //   margin-bottom: 1rem;
+      // }
 
       @media (max-width: 768px) {
         width: 60px;
@@ -446,13 +459,20 @@ img {
   }
 
   .account-links {
+    border-radius: 0;
+
     > a {
-      color: #4B566B;
       border: none;
+      font-weight: bold;
       padding: 0.8rem 1rem;
       border-bottom: 1px solid #EEEEEE;
       transition: all .2s ease-in-out;
       text-decoration: none !important;
+
+      > span.icon {
+        margin-right: 8px;
+        line-height: 1;
+      }
 
       &:last-of-type {
         border-bottom: none;
@@ -464,7 +484,7 @@ img {
 
       &.active {
         background-color: #E9ECEF;
-        color: #4B566B;
+        color: #111;
       }
 
       .badge {

@@ -85,7 +85,7 @@ Vue.component('module-editor-image402', {
       images: [
         {
           image: {
-            src: 'catalog/demo/banner/banner-402-1.jpg',
+            src: 'image/catalog/demo/banner/banner-402-1.jpg',
             alt: languagesFill(''),
           },
           show: true,
@@ -97,7 +97,7 @@ Vue.component('module-editor-image402', {
         },
         {
           image: {
-            src: 'catalog/demo/banner/banner-402-2.jpg',
+            src: 'image/catalog/demo/banner/banner-402-2.jpg',
             alt: languagesFill(''),
           },
           show: false,
@@ -109,7 +109,7 @@ Vue.component('module-editor-image402', {
         },
         {
           image: {
-            src: 'catalog/demo/banner/banner-402-3.jpg',
+            src: 'image/catalog/demo/banner/banner-402-3.jpg',
             alt: languagesFill(''),
           },
           show: false,
@@ -121,7 +121,7 @@ Vue.component('module-editor-image402', {
         },
         {
           image: {
-            src: 'catalog/demo/banner/banner-402-4.jpg',
+            src: 'image/catalog/demo/banner/banner-402-4.jpg',
             alt: languagesFill(''),
           },
           show: false,

@@ -2,9 +2,9 @@
 
 namespace App\Tools\Process;
 
+use App\Tools\Contracts\RepositoryInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use App\Tools\Contracts\RepositoryInterface;
 use Symfony\Component\Process\Process;
 
 class Installer
@@ -49,10 +49,12 @@ class Installer
      * @var int
      */
     protected $timeout = 3360;
+
     /**
      * @var null|string
      */
     private $type;
+
     /**
      * @var bool
      */
@@ -68,10 +70,10 @@ class Installer
      */
     public function __construct($name, $version = null, $type = null, $tree = false)
     {
-        $this->name = $name;
+        $this->name    = $name;
         $this->version = $version;
-        $this->type = $type;
-        $this->tree = $tree;
+        $this->type    = $type;
+        $this->tree    = $tree;
     }
 
     /**

@@ -82,7 +82,7 @@ class RichText extends Component
 
             return old($oldKey, Arr::get($this->value, $valueKey, ''));
         } elseif (is_array($this->value)) {
-            $value = Arr::get($this->value, $code, '');
+            $value    = Arr::get($this->value, $code, '');
             $segments = explode('.', $this->name);
             $valueKey = end($segments);
 

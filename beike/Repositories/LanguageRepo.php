@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LanguageRepo.php
  *
@@ -32,7 +33,7 @@ class LanguageRepo
             'locale'     => $data['locale'] ?? '',
             'image'      => $data['image']  ?? '',
             'sort_order' => (int) ($data['sort_order'] ?? 0),
-            'status'     => (bool) ($data['status'] ?? 1),
+            'active'     => (bool) ($data['active'] ?? true),
         ];
 
         $result = Language::query()->create($languageData);
@@ -59,10 +60,11 @@ class LanguageRepo
             'locale'     => $data['locale'] ?? '',
             'image'      => $data['image']  ?? '',
             'sort_order' => (int) ($data['sort_order'] ?? 0),
-            'status'     => (bool) ($data['status'] ?? 1),
+            'active'     => (bool) ($data['active'] ?? true),
         ];
         $item->update($languageData);
         self::clearCache();
+
         return $item;
     }
 
@@ -115,7 +117,7 @@ class LanguageRepo
             return Cache::get('language_cache');
         }
 
-        $data = Language::query()->where('status', true)->orderBy('sort_order', 'asc')->get();
+        $data = Language::query()->where('active', true)->orderBy('sort_order', 'asc')->get();
         Cache::forever('language_cache', $data);
 
         return $data;

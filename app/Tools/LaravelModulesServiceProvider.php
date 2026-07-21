@@ -2,9 +2,6 @@
 
 namespace App\Tools;
 
-use App\Tools\ModulesServiceProvider;
-use Composer\InstalledVersions;
-use Illuminate\Foundation\Console\AboutCommand;
 use App\Tools\Contracts\RepositoryInterface;
 use App\Tools\Exceptions\InvalidActivatorClass;
 use App\Tools\Support\Stub;
@@ -60,7 +57,7 @@ class LaravelModulesServiceProvider extends ModulesServiceProvider
         });
         $this->app->singleton(\App\Tools\Contracts\ActivatorInterface::class, function ($app) {
             $activator = $app['config']->get('plugins.activator');
-            $class = $app['config']->get('plugins.activators.' . $activator)['class'];
+            $class     = $app['config']->get('plugins.activators.' . $activator)['class'];
 
             if ($class === null) {
                 throw InvalidActivatorClass::missingConfig();

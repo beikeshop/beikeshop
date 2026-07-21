@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -21,9 +22,7 @@ class SlideShow extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -36,6 +35,7 @@ class SlideShow extends Component
             'code'  => 'slideshow',
             'sort'  => 0,
             'name'  => trans('admin/design_builder.module_slideshow'),
+            'image' => asset('image/module/slideshow_preview.webp'),
             'icon'  => '&#xe61b;',
             'style' => 'font-size: 40px;',
         ];

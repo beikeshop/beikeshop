@@ -1,4 +1,5 @@
 <?php
+
 /**
  * RmaRepo.php
  *
@@ -28,7 +29,7 @@ class RmaRepo
      * @param $data
      * @return Rma|Model
      */
-    public static function create($data) : Rma
+    public static function create($data): Rma
     {
         $item           = Rma::query()->create($data);
         $data['notify'] = 0;
@@ -63,6 +64,12 @@ class RmaRepo
     public static function find($id)
     {
         return Rma::query()->find($id);
+    }
+
+    // 获取当前商品已经退换的数量
+    public static function getRmaQuantity($orderProductId)
+    {
+        return Rma::query()->where('order_product_id', $orderProductId)->where('status', '!=', 'rejected')->sum('quantity');
     }
 
     /**

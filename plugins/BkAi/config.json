@@ -1,0 +1,18 @@
+{
+    "code": "bk_ai",
+    "name": {
+        "zh_cn": "AI智能生成商品描述文案/图片",
+        "en": "AI intelligently generates product description text/pictures"
+    },
+    "description": {
+        "zh_cn": "AI智能生成商品描述文案/图片",
+        "en": "AI intelligently generates product description text/pictures"
+    },
+    "type": "feature",
+    "version": "v1.1.0",
+    "icon": "/image/logo.png",
+    "author": {
+        "name": "成都光大网络科技有限公司",
+        "email": "pushuo@guangda.work"
+    }
+}

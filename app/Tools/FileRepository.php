@@ -2,9 +2,11 @@
 
 namespace App\Tools;
 
-use App\Tools\Collection;
-use App\Tools\Json;
-use App\Tools\Module;
+use App\Tools\Contracts\RepositoryInterface;
+use App\Tools\Exceptions\InvalidAssetPath;
+use App\Tools\Exceptions\ModuleNotFoundException;
+use App\Tools\Process\Installer;
+use App\Tools\Process\Updater;
 use Countable;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
@@ -13,13 +15,8 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
-use App\Tools\Contracts\RepositoryInterface;
-use App\Tools\Exceptions\InvalidAssetPath;
-use App\Tools\Exceptions\ModuleNotFoundException;
-use App\Tools\Process\Installer;
-use App\Tools\Process\Updater;
 
-abstract class FileRepository implements RepositoryInterface, Countable
+abstract class FileRepository implements Countable, RepositoryInterface
 {
     use Macroable;
 
@@ -48,18 +45,22 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * @var string
      */
     protected $stubPath;
+
     /**
      * @var UrlGenerator
      */
     private $url;
+
     /**
      * @var ConfigRepository
      */
     private $config;
+
     /**
      * @var Filesystem
      */
     private $files;
+
     /**
      * @var CacheManager
      */
@@ -67,17 +68,17 @@ abstract class FileRepository implements RepositoryInterface, Countable
 
     /**
      * The constructor.
-     * @param Container $app
+     * @param Container   $app
      * @param string|null $path
      */
     public function __construct(Container $app, $path = null)
     {
-        $this->app = $app;
-        $this->path = $path;
-        $this->url = $app['url'];
+        $this->app    = $app;
+        $this->path   = $path;
+        $this->url    = $app['url'];
         $this->config = $app['config'];
-        $this->files = $app['files'];
-        $this->cache = $app['cache'];
+        $this->files  = $app['files'];
+        $this->cache  = $app['cache'];
     }
 
     /**
@@ -130,8 +131,8 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * Creates a new Module instance
      *
      * @param Container $app
-     * @param string $args
-     * @param string $path
+     * @param string    $args
+     * @param string    $path
      * @return \App\Tools\Module
      */
     abstract protected function createModule(...$args);
@@ -154,8 +155,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
 
             foreach ($manifests as $manifest) {
                 $name = Json::make($manifest)->get('name');
-                if ($name)
-                {
+                if ($name) {
                     $modules[$name] = $this->createModule($this->app, $name, plugin_path($name));
                 }
             }
@@ -171,7 +171,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function all(): array
     {
-        if (!$this->config('cache.enabled')) {
+        if (! $this->config('cache.enabled')) {
             return $this->scan();
         }
 
@@ -310,7 +310,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getPath(): string
     {
@@ -318,7 +318,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function register(): void
     {
@@ -328,7 +328,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function boot(): void
     {
@@ -338,7 +338,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function find(string $name)
     {
@@ -348,7 +348,6 @@ abstract class FileRepository implements RepositoryInterface, Countable
             }
         }
 
-        return;
     }
 
     /**
@@ -399,7 +398,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function assetPath(string $module): string
     {
@@ -407,7 +406,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function config(string $key, $default = null)
     {
@@ -427,7 +426,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
         }
 
         $path = storage_path('app/plugins/plugins.used');
-        if (!$this->getFiles()->exists($path)) {
+        if (! $this->getFiles()->exists($path)) {
             $this->getFiles()->put($path, '');
         }
 
@@ -499,7 +498,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
         if (Str::contains($asset, ':') === false) {
             throw InvalidAssetPath::missingModuleName($asset);
         }
-        list($name, $url) = explode(':', $asset);
+        [$name, $url] = explode(':', $asset);
 
         $baseUrl = str_replace(public_path() . DIRECTORY_SEPARATOR, '', $this->getAssetsPath());
 
@@ -509,7 +508,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function isEnabled(string $name): bool
     {
@@ -517,11 +516,11 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function isDisabled(string $name): bool
     {
-        return !$this->isEnabled($name);
+        return ! $this->isEnabled($name);
     }
 
     /**
@@ -547,7 +546,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function delete(string $name): bool
     {

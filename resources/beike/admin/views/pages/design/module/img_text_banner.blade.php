@@ -10,11 +10,32 @@
       </div>
       <link-selector v-model="module.link" style="margin-bottom: 10px"></link-selector>
 
+      <div class="module-edit-title">{{ __('admin/builder.image_position') }}</div>
+      <el-radio-group v-model="module.image_position" size="mini" class="mb-1">
+        <el-radio-button label="left">{{ __('admin/builder.text_start') }}</el-radio-button>
+        <el-radio-button label="right">{{ __('admin/builder.text_end') }}</el-radio-button>
+      </el-radio-group>
+
       <div class="module-edit-title">{{ __('admin/builder.text_title') }}</div>
       <text-i18n v-model="module.title" style="margin-bottom: 10px"></text-i18n>
 
+      <div class="module-edit-title">{{ __('admin/builder.sub_title') }}</div>
+      <text-i18n v-model="module.sub_title" style="margin-bottom: 10px"></text-i18n>
+
       <div class="module-edit-title">{{ __('admin/builder.text_describe') }}</div>
       <text-i18n v-model="module.description" style="margin-bottom: 10px"></text-i18n>
+
+      <div class="module-edit-title">{{ __('admin/builder.text_position') }}</div>
+      <el-radio-group v-model="module.text_position" size="mini" class="mb-1">
+        <el-radio-button label="left">{{ __('admin/builder.text_start') }}</el-radio-button>
+        <el-radio-button label="center">{{ __('admin/builder.text_center') }}</el-radio-button>
+        <el-radio-button label="right">{{ __('admin/builder.text_end') }}</el-radio-button>
+      </el-radio-group>
+
+      <div class="module-edit-title">{{ __('admin/builder.text_max_width') }}</div>
+      <el-input v-model="module.text_max_width" :min="1" size="mini" class="mb-1">
+        <template #append>px</template>
+      </el-input>
 
       <div>
         <div style="margin-right: 20px;">
@@ -85,8 +106,12 @@ Vue.component('module-editor-img-text-banner', {
       text_color: '#222222',
       btn_bg: '#fd560f',
       btn_color: '#ffffff',
+      image_position: 'right',
+      text_position: 'left',
+      text_max_width: '',
       image: 'https://dummyimage.com/1000x600/eeeeee',
       title: languagesFill(''),
+      sub_title: languagesFill(''),
       description: languagesFill(''),
       link: {
         type: 'product',

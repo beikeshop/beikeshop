@@ -19,6 +19,7 @@
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
+  <link rel="shortcut icon" href="{{ image_origin(system_setting('base.favicon')) }}">
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/index.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/admin/css/design.css') }}">
   @stack('header')
@@ -172,7 +173,7 @@
               </div>
               <div class="module-edit-group">
                 <div class="module-edit-title">{{ __('admin/builder.text_email') }}</div>
-                <el-input placeholder="{{ __('admin/builder.text_email') }}" size="small" v-model="form.content.contact.email"></el-input>
+                <el-switch v-model="form.content.contact.email"></el-switch>
               </div>
             </el-collapse-item>
 

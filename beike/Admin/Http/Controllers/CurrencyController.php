@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CurrencyController.php
  *
@@ -14,9 +15,9 @@ namespace Beike\Admin\Http\Controllers;
 use Beike\Admin\Http\Requests\CurrencyRequest;
 use Beike\Models\Order;
 use Beike\Repositories\CurrencyRepo;
-use Illuminate\Http\Request;
 use Beike\Repositories\SettingRepo;
 use Exception;
+use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
@@ -43,7 +44,7 @@ class CurrencyController extends Controller
             'symbol_right'  => $request->get('symbol_right', ''),
             'decimal_place' => (float) $request->get('decimal_place', 0),
             'value'         => (float) $request->get('value', 1),
-            'status'        => (int) $request->get('status', 0),
+            'active'        => (bool) $request->get('active', true),
         ];
 
         if ($request->default_currency) {
@@ -69,7 +70,7 @@ class CurrencyController extends Controller
             'symbol_right'  => $request->get('symbol_right', ''),
             'decimal_place' => (float) $request->get('decimal_place', 0),
             'value'         => (float) $request->get('value', 1),
-            'status'        => (int) $request->get('status', 0),
+            'active'        => (bool) $request->get('active', true),
         ];
 
         if ($request->default_currency) {

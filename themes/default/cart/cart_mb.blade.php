@@ -3,12 +3,13 @@
     <div v-for="product, index in products" :key="index" :class="['mb-product-list', product.selected ? 'active' : '']">
       <div class="d-flex align-items-center product-img">
         <input class="form-check-input" type="checkbox" @change="checkedCartTr(index)" v-model="product.selected">
-        <div class="border d-flex align-items-center justify-content-center wh-80 ms-3"><img :src="product.image_url" :alt="product.name"
-            class="img-fluid"></div>
+        <a :href="product.url" class="border d-flex align-items-center justify-content-center wh-80 ms-3">
+          <img :src="product.image_url" :alt="product.name"class="img-fluid">
+        </a>
       </div>
       <div class="product-mb-info ms-2">
         <div>
-          <a class="name text-truncate-2 mb-1 text-black fw-bold" :href="'products/' + product.product_id"
+          <a class="name text-truncate-2 mb-1 text-black fw-bold" :href="product.url"
             v-text="product.name"></a>
             @hook('cart.product.name.after')
           <div class="text-size-min text-muted mb-1">@{{ product.variant_labels }}</div>
@@ -16,10 +17,10 @@
         </div>
 
         <div class="d-flex justify-content-between">
-          <div class="quantity-wrap-line">
-            <div class="right"><i class="bi bi-chevron-down"></i></div>
+          <div class="quantity-wrap input-group input-group-sm">
+            <button class="btn quantity-reduce" type="button"><i class="bi bi-dash-lg"></i></button>
             <input type="text" class="form-control" @input="quantityChange(product.quantity, product.cart_id, product.sku_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
-            <div class="right"><i class="bi bi-chevron-up"></i></div>
+            <button class="btn quantity-increase" type="button"><i class="bi bi-plus-lg"></i></button>
           </div>
 
           <div class="text-end">

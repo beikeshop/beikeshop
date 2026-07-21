@@ -12,7 +12,6 @@
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/index.css') }}">
-  {{-- <link href="{{ mix('build/css/admin/login.css') }}" rel="stylesheet"> --}}
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <link href="{{ mix('build/beike/admin/css/app.css') }}" rel="stylesheet">
   <title>forgotten</title>
@@ -31,10 +30,6 @@
           <div class="card-body">
             <el-form ref="form" :model="form" :rules="rules" label-position="top">
               <div class="card-body p-0">
-{{--                 <h4 class="fw-bold">{{ __('shop/forgotten.follow_prompt') }}</h4>
-                <p class="text-muted" v-if="!isCode">{{ __('shop/forgotten.email_forCode') }}</p>
-                <p class="text-muted" v-else>{{ __('shop/forgotten.enter_password') }}</p> --}}
-
                 <el-form-item label="{{ __('shop/forgotten.email') }}" prop="email" v-if="!isCode">
                   <el-input v-model="form.email" placeholder="{{ __('shop/forgotten.email_address') }}"></el-input>
                 </el-form-item>
@@ -53,7 +48,6 @@
 
                 <div class="mt-5 mb-3 d-flex justify-content-between">
                   <button type="button" @click="submitForm('form')" class="btn w-50 btn-dark">
-                    {{-- @{{ !isCode ? '发送验证码'  :  '提交'  }} --}}
                     <template v-if="!isCode">{{ __('shop/forgotten.send_code') }}</template>
                     <template v-else>{{ __('common.submit') }}</template>
                   </button>

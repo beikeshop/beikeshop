@@ -1,4 +1,5 @@
 <?php
+
 /**
  * GenerateDatabaseDict.php
  *

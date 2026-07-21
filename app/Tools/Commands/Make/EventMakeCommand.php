@@ -2,11 +2,10 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 
 class EventMakeCommand extends GeneratorCommand
@@ -35,7 +34,7 @@ class EventMakeCommand extends GeneratorCommand
 
         return (new Stub('/event.stub', [
             'NAMESPACE' => $this->getClassNamespace($module),
-            'CLASS' => $this->getClass(),
+            'CLASS'     => $this->getClass(),
         ]))->render();
     }
 

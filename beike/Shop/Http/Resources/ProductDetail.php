@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ProductDetail.php
  *
@@ -20,6 +21,12 @@ class ProductDetail extends JsonResource
      */
     public function toArray($request): array
     {
+        $images = array_filter($this->images, function ($image) {
+            $isYouTube = str_contains($image, 'youtube.com/watch') || str_contains($image, 'youtu.be/');
+
+            return ! str_ends_with($image, '.mp4') && ! $isYouTube;
+        });
+
         $data = [
             'id'               => $this->id,
             'name'             => $this->description->name             ?? '',
@@ -38,7 +45,7 @@ class ProductDetail extends JsonResource
                     'popup'   => image_resize($image, 800, calculate_height_by_ratio(800)),
                     'thumb'   => image_resize($image, 150, calculate_height_by_ratio(150)),
                 ];
-            }, $this->images ?? []),
+            }, $images ?? []),
             'attributes'       => $this->formatAttributes(),
             'variables'        => $this->decodeVariables($this->variables),
             'skus'             => SkuDetail::collection($this->skus)->jsonSerialize(),
@@ -84,16 +91,16 @@ class ProductDetail extends JsonResource
     private function formatAttributes(): array
     {
         return $this->attributes
-            ->sortBy(fn($a) => $a->attribute->attributeGroup->sort_order) // 对属性组排序
-            ->groupBy(fn($item) => $item->attribute->attribute_group_id) // 按属性组分组
+            ->sortBy(fn ($a) => $a->attribute->attributeGroup->sort_order) // 对属性组排序
+            ->groupBy(fn ($item) => $item->attribute->attribute_group_id) // 按属性组分组
             ->map(function ($items) {
                 $first = $items->first();
 
                 return [
                     'attribute_group_name' => $first->attribute->attributeGroup->description->name,
-                    'attributes' => $items
-                        ->sortBy(fn($a) => $a->attribute->sort_order) // 对组内属性排序
-                        ->map(fn($a) => [
+                    'attributes'           => $items
+                        ->sortBy(fn ($a) => $a->attribute->sort_order) // 对组内属性排序
+                        ->map(fn ($a) => [
                             'attribute'       => $a->attribute->description->name,
                             'attribute_value' => $a->attributeValue->description->name,
                         ])

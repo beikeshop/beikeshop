@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BrandController.php
  *
@@ -26,7 +27,7 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        $brands = BrandRepo::list($request->only('name', 'first', 'status'));
+        $brands = BrandRepo::list($request->only('name', 'first', 'active'));
         $data   = [
             'brands' => $brands,
         ];
@@ -101,10 +102,10 @@ class BrandController extends Controller
         $brands = BrandRepo::autocomplete($request->get('name') ?? '', 0);
         $brands = $brands->map(function ($brand) {
             return [
-                'id'   => $brand->id,
-                'name' => $brand->name ?? '',
-                'logo' => image_resize($brand->logo, 100, 100),
-                'status' => $brand->status ?? 0,
+                'id'     => $brand->id,
+                'name'   => $brand->name ?? '',
+                'logo'   => image_resize($brand->logo, 100, 100),
+                'status' => $brand->active ?? 0,
             ];
         })->toArray();
 

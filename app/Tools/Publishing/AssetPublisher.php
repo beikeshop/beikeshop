@@ -2,7 +2,6 @@
 
 namespace App\Tools\Publishing;
 
-use App\Tools\Publishing\Publisher;
 use App\Tools\Support\Config\GenerateConfigReader;
 
 class AssetPublisher extends Publisher

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PluginServiceProvider.php
  *
@@ -30,7 +31,7 @@ class PluginServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('plugin', function () {
-            return new Manager();
+            return new Manager;
         });
     }
 
@@ -46,7 +47,7 @@ class PluginServiceProvider extends ServiceProvider
 
         // 如果是 artisan migrate 命令行操作，则跳过
         if (app()->runningInConsole()) {
-            $argv = $_SERVER['argv'] ?? [];
+            $argv            = $_SERVER['argv'] ?? [];
             $migrateCommands = ['migrate', 'migrate:fresh', 'migrate:refresh', 'migrate:rollback'];
             if (isset($argv[1]) && in_array($argv[1], $migrateCommands)) {
                 return;
@@ -120,12 +121,12 @@ class PluginServiceProvider extends ServiceProvider
         $this->registerAdminRoutes($pluginCode);
         $this->registerShopRoutes($pluginCode);
         $pluginBasePath = $this->pluginBasePath;
-        $routePath = "{$pluginBasePath}/{$pluginCode}/Routes/";
+        $routePath      = "{$pluginBasePath}/{$pluginCode}/Routes/";
 
         if (is_dir($routePath)) {
             // 获取$adminRoutePath目录下除了admin.php和shop.php之外的所有扩展名为".php"的文件
             $excludeFiles = ['admin.php', 'shop.php'];
-            $files = glob($routePath. "*.php");
+            $files        = glob($routePath . '*.php');
             foreach ($files as $file) {
                 $fileName = basename($file);
                 if (in_array($fileName, $excludeFiles)) {
@@ -263,7 +264,7 @@ class PluginServiceProvider extends ServiceProvider
             $builderName   = basename($builder, '.php');
             $aliasName     = Str::snake($builderName);
             $componentName = Str::studly($builderName);
-            $classBaseName = "\\Plugin\\{$pluginCode}\\Admin\\View\\DesignBuilders\\{$componentName}";
+            $classBaseName = "Plugin\\{$pluginCode}\\Admin\\View\\DesignBuilders\\{$componentName}";
 
             if (method_exists($classBaseName, 'registerDesignBuilder') && $classBaseName::registerDesignBuilder() === false) {
                 continue;
@@ -284,13 +285,13 @@ class PluginServiceProvider extends ServiceProvider
      */
     private function registerCommands(mixed $plugin): void
     {
-        if (is_dir($plugin->getPath().'/Console/')){
-            $builders = glob($plugin->getPath().'/Console/' . '*');
+        if (is_dir($plugin->getPath() . '/Console/')) {
+            $builders   = glob($plugin->getPath() . '/Console/' . '*');
             $pluginCode = $plugin->getDirname();
             foreach ($builders as $builder) {
                 $builderName   = basename($builder, '.php');
                 $componentName = Str::studly($builderName);
-                $classBaseName = "\\Plugin\\{$pluginCode}\\Console\\{$componentName}";
+                $classBaseName = "Plugin\\{$pluginCode}\\Console\\{$componentName}";
 
                 if (! class_exists($classBaseName)) {
                     throw new Exception("命令行类名不存在 {$classBaseName}");
@@ -300,5 +301,4 @@ class PluginServiceProvider extends ServiceProvider
             }
         }
     }
-
 }

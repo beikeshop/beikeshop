@@ -1,4 +1,5 @@
 <?php
+
 /**
  * UploadRequest.php
  *
@@ -50,13 +51,13 @@ class UploadRequest extends FormRequest
             if ($file) {
                 // 验证文件名安全性
                 $originalName = $file->getClientOriginalName();
-                if (!$this->isValidFileName($originalName)) {
+                if (! $this->isValidFileName($originalName)) {
                     $validator->errors()->add('file', trans('shop/file.invalid_filename'));
                 }
             }
 
             // 验证类型参数安全性
-            if ($type && !$this->isValidType($type)) {
+            if ($type && ! $this->isValidType($type)) {
                 $validator->errors()->add('type', trans('shop/file.invalid_type'));
             }
         });

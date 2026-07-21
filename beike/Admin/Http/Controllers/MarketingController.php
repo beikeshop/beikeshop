@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MarketingController.php
  *
@@ -12,7 +13,6 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Services\MarketingService;
-use Beike\Repositories\PluginRepo;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -57,7 +57,7 @@ class MarketingController
             $pluginCode = $request->code;
             $result     = MarketingService::getInstance()->buy($pluginCode, $postData);
 
-            return json_success('获取成功', $result);
+            return json_success(trans('admin/marketing.fetch_success'), $result);
         } catch (Exception $e) {
             return json_fail($e->getMessage());
         }
@@ -89,7 +89,7 @@ class MarketingController
             $pluginServiceOrder     = MarketingService::getInstance()->getPluginServiceOrder($id);
 
             if ($request->expectsJson()) {
-                return json_success('成功', $pluginServiceOrder);
+                return json_success(trans('common.success'), $pluginServiceOrder);
             }
         } catch (Exception $e) {
             return json_fail($e->getMessage());
@@ -104,23 +104,22 @@ class MarketingController
         try {
             $pluginCode = $request->code;
 
-            if ($request->get('type') == 'update'){
+            if ($request->get('type') == 'update') {
                 app('plugin')->getPluginOrFail($pluginCode);
             }
 
             $plugin = MarketingService::getInstance()->getPlugin($pluginCode);
 
-            $version_name_format = data_get($plugin,'data.version_name_format');
-            $version_name_format_max = max(explode(', ', str_replace('v', '',$version_name_format)));
+            $version_name_format     = data_get($plugin, 'data.version_name_format');
+            $version_name_format_max = max(explode(', ', str_replace('v', '', $version_name_format)));
 
             $version = config('beike.version');
-            $parts = explode('.', $version);
+            $parts   = explode('.', $version);
 
             $first_three = array_slice($parts, 0, 3);
-            $bkversion = implode('.', $first_three);
+            $bkversion   = implode('.', $first_three);
 
-            if ($bkversion > $version_name_format_max)
-            {
+            if ($bkversion > $version_name_format_max) {
                 throw new Exception(__('admin/marketing.version_compatible_text'));
             }
 
@@ -130,7 +129,7 @@ class MarketingController
 
             MarketingService::getInstance()->download($pluginCode);
 
-            if ($request->get('type') == 'update'){
+            if ($request->get('type') == 'update') {
                 return json_success(trans('admin/marketing.update_success'));
             }
 
@@ -153,7 +152,7 @@ class MarketingController
                 return json_success('fail', trans('admin/marketing.domain_token_domain_error', ['domain' => $location_host, 'token_domain' => $tokenDomain]));
             }
 
-            return json_success('获取成功', $domain);
+            return json_success(trans('admin/marketing.fetch_success'), $domain);
         } catch (Exception $e) {
             return json_fail($e->getMessage());
         }
@@ -167,7 +166,7 @@ class MarketingController
             return is_string($domain) && trim($domain) !== '' ? trim($domain) : null;
         }
 
-        if (!is_string($domainData)) {
+        if (! is_string($domainData)) {
             return null;
         }
 
@@ -193,7 +192,7 @@ class MarketingController
             $version = $request->get('version', config('beike.version'));
             $result  = MarketingService::getInstance()->getVersionInfo($version);
 
-            return json_success('获取成功', $result);
+            return json_success(trans('admin/marketing.fetch_success'), $result);
         } catch (Exception $e) {
             return json_fail($e->getMessage());
         }
@@ -206,7 +205,7 @@ class MarketingController
             $domain     = $request->domain;
             $result     = MarketingService::getInstance()->getToken($domain);
 
-            return json_success('获取成功', $result);
+            return json_success(trans('admin/marketing.fetch_success'), $result);
         } catch (Exception $e) {
             return json_fail($e->getMessage());
         }
@@ -217,9 +216,9 @@ class MarketingController
         try {
             $domain     = $request->domain;
             $from       = $request->from;
-            $result     = MarketingService::getInstance()->getLicensedPro($domain,$from);
+            $result     = MarketingService::getInstance()->getLicensedPro($domain, $from);
 
-            return json_success('获取成功', $result);
+            return json_success(trans('admin/marketing.fetch_success'), $result);
         } catch (Exception $e) {
             return json_fail($e->getMessage());
         }
@@ -231,9 +230,9 @@ class MarketingController
         try {
             $domain     = $request->domain;
             $token      = $request->token;
-            $result     = MarketingService::getInstance()->checkToken($domain,$token);
+            $result     = MarketingService::getInstance()->checkToken($domain, $token);
 
-            return json_success('获取成功', $result);
+            return json_success(trans('admin/marketing.fetch_success'), $result);
         } catch (Exception $e) {
             return json_fail($e->getMessage());
         }

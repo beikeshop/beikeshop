@@ -26,13 +26,13 @@
           <el-form-item label="{{ __('address.address_2') }}" class="w-50">
             <el-input v-model="form.address_2" placeholder="{{ __('address.address_2') }}"></el-input>
           </el-form-item>
-          <el-form-item label="{{ __('address.post_code') }}" class="w-50 ms-3">
+          <el-form-item label="{{ __('address.post_code') }}" class="w-50 ms-3" @if (system_setting('base.address_post_code', '0') == '1') prop="zipcode" @endif>
             <el-input v-model="form.zipcode" placeholder="{{ __('address.post_code') }}"></el-input>
           </el-form-item>
         </div>
         <div class="d-flex dialog-address">
-          <el-form-item label="{{ __('address.phone') }}" class="w-50">
-            <el-input maxlength="11" v-model="form.phone" type="number" placeholder="{{ __('address.phone') }}"></el-input>
+          <el-form-item label="{{ __('address.phone') }}" class="w-50" @if (system_setting('base.address_phoner_equired', '0') == '1') prop="phone" @endif>
+            <el-input v-model="form.phone" type="text" placeholder="{{ __('address.phone') }}"></el-input>
           </el-form-item>
           <el-form-item prop="city" label="{{ __('shop/account/addresses.enter_city') }}" required class="w-50 ms-3">
             <el-input v-model="form.city" placeholder="{{ __('shop/account/addresses.enter_city') }}"></el-input>
@@ -111,6 +111,13 @@
           message: ' {{ __('shop/account/addresses.enter_address') }}',
           trigger: 'blur'
         }, ],
+        @if (system_setting('base.address_phoner_equired', '0') == '1')
+          zipcode: [{
+            required: true,
+            message: ' {{ __('shop/account/addresses.enter_post_code') }}',
+            trigger: 'blur'
+          }, ],
+        @endif
         zone_id: [{
           required: true,
           message: '{{ __('shop/account/addresses.select_province') }}',
@@ -121,6 +128,13 @@
           message: '{{ __('shop/account/addresses.enter_city') }}',
           trigger: 'blur'
         }, ],
+        @if (system_setting('base.address_phoner_equired', '0') == '1')
+          phone: [{
+            required: true,
+            message: '{{ __('shop/account/addresses.enter_phone') }}',
+            trigger: 'blur'
+          }, ],
+        @endif
       },
 
       source: {
@@ -148,6 +162,14 @@
       this.countryChange(this.form.country_id);
       this.shippingRequired = shippingRequired;
       this.editShow = true
+
+      if (!this.form.phone) {
+        $http.get('user_country', null, {hload: true}).then((res) => {
+          if (res.data.callingCode) {
+            this.form.phone = res.data.callingCode;
+          }
+        })
+      }
     },
 
     addressFormSubmit(form) {

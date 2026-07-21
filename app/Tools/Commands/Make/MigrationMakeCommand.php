@@ -2,13 +2,12 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Migrations\NameParser;
 use App\Tools\Support\Migrations\SchemaParser;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -67,9 +66,8 @@ class MigrationMakeCommand extends GeneratorCommand
     }
 
     /**
-     * @throws \InvalidArgumentException
-     *
      * @return mixed
+     * @throws \InvalidArgumentException
      */
     protected function getTemplateContents()
     {
@@ -77,28 +75,28 @@ class MigrationMakeCommand extends GeneratorCommand
 
         if ($parser->isCreate()) {
             return Stub::create('/migration/create.stub', [
-                'class' => $this->getClass(),
-                'table' => $parser->getTableName(),
+                'class'  => $this->getClass(),
+                'table'  => $parser->getTableName(),
                 'fields' => $this->getSchemaParser()->render(),
             ]);
         } elseif ($parser->isAdd()) {
             return Stub::create('/migration/add.stub', [
-                'class' => $this->getClass(),
-                'table' => $parser->getTableName(),
-                'fields_up' => $this->getSchemaParser()->up(),
+                'class'       => $this->getClass(),
+                'table'       => $parser->getTableName(),
+                'fields_up'   => $this->getSchemaParser()->up(),
                 'fields_down' => $this->getSchemaParser()->down(),
             ]);
         } elseif ($parser->isDelete()) {
             return Stub::create('/migration/delete.stub', [
-                'class' => $this->getClass(),
-                'table' => $parser->getTableName(),
+                'class'       => $this->getClass(),
+                'table'       => $parser->getTableName(),
                 'fields_down' => $this->getSchemaParser()->up(),
-                'fields_up' => $this->getSchemaParser()->down(),
+                'fields_up'   => $this->getSchemaParser()->down(),
             ]);
         } elseif ($parser->isDrop()) {
             return Stub::create('/migration/drop.stub', [
-                'class' => $this->getClass(),
-                'table' => $parser->getTableName(),
+                'class'  => $this->getClass(),
+                'table'  => $parser->getTableName(),
                 'fields' => $this->getSchemaParser()->render(),
             ]);
         }

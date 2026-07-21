@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-17 19:26:53
  * @LastEditTime  2022-09-16 20:57:12
  */
@@ -11,8 +11,8 @@
 $primary: #fd560f;
 $success: #71c20b;
 
-$font-size-base: 0.8rem;
-$font-family-base: "Poppins","Helvetica","Arial","sans-serif";
+$font-size-base: 0.9rem;
+$font-family-base: "Jost","Helvetica","Arial","sans-serif";
 $border-radius: 0.275rem;
 $form-check-input-width: 1.2em;
 // $form-check-input-border-radius: 0;
@@ -38,6 +38,7 @@ $breadcrumb-bg:                     transparent;
 // $breadcrumb-border-radius:          null !default;
 
 // $border-radius:               0;
+$input-border-radius:          10rem;
 $input-btn-padding-y:         .46rem;
 $input-btn-font-size:         0.85rem;
 $input-btn-focus-box-shadow:  0  0 11px 0 rgba($color: $primary, $alpha: .1);
@@ -47,8 +48,8 @@ $form-select-focus-box-shadow: 0 0 11px 0 rgba($color: $primary, $alpha: .1);
 $btn-focus-width: 0;
 // $border-radius:  0;
 // $btn-border-radius: 0;
-$btn-border-radius-sm: 0.175rem;
-$btn-border-radius-lg: 0.275rem;
+$btn-border-radius-sm: 10rem;
+$btn-border-radius-lg: 10rem;
 // $btn-padding-y:               $input-btn-padding-y !default;
 // $btn-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
 
@@ -88,14 +89,30 @@ $pagination-focus-color: #606266;
 
 $table-bg: transparent;
 
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 4,
+  7: $spacer * 5,
+  8: $spacer * 6,
+  9: $spacer * 7,
+);
+
 // $dropdown-divider-bg:               rgba(0, 0, 0, 0.1);
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap/scss/bootstrap';
 
-.col-lg-20 {
-  @include media-breakpoint-up(lg) {
-    flex: 0 0 calc(100% / 5); // 宽度为 1/5
-    max-width: calc(100% / 5); // 同时限制最大宽度
+@each $breakpoint in map-keys($grid-breakpoints) {
+  .col-#{$breakpoint}-20 {
+    @include media-breakpoint-up($breakpoint) {
+      flex: 0 0 calc(100% / 5); // 宽度为 1/5
+      max-width: calc(100% / 5); // 同时限制最大宽度
+    }
   }
 }
 
@@ -130,6 +147,8 @@ $table-bg: transparent;
 // }
 
 .card {
+  --bs-card-border-radius: .7rem;
+
   .card-header {
     padding: 1rem 1rem .3rem;
     background-color: rgba(255,255,255, 0.03);
@@ -189,6 +208,8 @@ $table-bg: transparent;
 }
 
 .pagination {
+  margin-top: 20px;
+
   > li {
     margin: 0 5px;
     font-weight: bold;

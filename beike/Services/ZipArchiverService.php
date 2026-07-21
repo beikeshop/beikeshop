@@ -5,6 +5,7 @@ namespace Beike\Services;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ZipArchive;
+
 /**
  * 目录ZIP打包工具类
  */
@@ -70,7 +71,7 @@ class ZipArchiverService
      */
     public function create()
     {
-        $zip = new ZipArchive();
+        $zip = new ZipArchive;
         if ($zip->open($this->outputPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
             return false;
         }

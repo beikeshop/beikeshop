@@ -4,6 +4,7 @@ namespace Beike\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+
 class Sequence extends Command
 {
     /**
@@ -25,12 +26,12 @@ class Sequence extends Command
      */
     public function handle()
     {
-        $results = DB::select("SELECT sequencename FROM pg_sequences;");
+        $results = DB::select('SELECT sequencename FROM pg_sequences;');
         foreach ($results as $row) {
             $tableName = str_replace('_id_seq', '', $row->sequencename);
-            $maxId = $this->getTableMax($tableName);
+            $maxId     = $this->getTableMax($tableName);
             if ($maxId) {
-                DB::select("SELECT setval('".$row->sequencename."', (SELECT MAX(id) FROM ".$tableName."));");
+                DB::select("SELECT setval('" . $row->sequencename . "', (SELECT MAX(id) FROM " . $tableName . '));');
             }
         }
     }
@@ -38,6 +39,7 @@ class Sequence extends Command
     private function getTableMax($table)
     {
         $results = DB::selectOne("SELECT MAX(id) as id FROM {$table}");
+
         return $results->id;
     }
 }

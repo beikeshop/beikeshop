@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SitemapService.php
  *
@@ -34,7 +35,7 @@ class SitemapService
             $sitemap->add(shop_route('products.show', ['product' => $item->id]), $item->updated_at->format('c'));
         }
 
-        $brands = Brand::query()->where('status', 1)->orderBy('updated_at', 'desc')->get();
+        $brands = Brand::query()->where('active', 1)->orderBy('updated_at', 'desc')->get();
         foreach ($brands as $item) {
             $sitemap->add(shop_route('brands.show', ['id' => $item->id]), $item->updated_at->format('c'));
         }

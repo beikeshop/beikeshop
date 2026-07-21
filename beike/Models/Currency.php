@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Currency.php
  *
@@ -18,7 +19,7 @@ class Currency extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'code', 'symbol_left', 'symbol_right', 'decimal_place', 'value', 'status'];
+    protected $fillable = ['name', 'code', 'symbol_left', 'symbol_right', 'decimal_place', 'value', 'active'];
 
     protected $appends = ['latest_value'];
 

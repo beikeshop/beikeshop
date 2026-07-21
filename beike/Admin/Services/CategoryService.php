@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CategoryService.php
  *
@@ -22,7 +23,7 @@ class CategoryService
     {
         $isUpdating = $category !== null;
         if ($category === null) {
-            $category = new Category();
+            $category = new Category;
         }
 
         try {

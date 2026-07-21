@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug'           => (bool) env('APP_DEBUG', false),
+    'debug'           => env('APP_DEBUG'),
 
     /*
     |--------------------------------------------------------------------------
@@ -171,12 +171,10 @@ return [
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
+        App\Providers\SmartTranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
-
-        \App\Tools\LaravelModulesServiceProvider::class,
-
+        App\Tools\LaravelModulesServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -194,10 +192,11 @@ return [
         Beike\Admin\Providers\AdminServiceProvider::class,
         Beike\Shop\Providers\ShopServiceProvider::class,
         Beike\Shop\Providers\PluginServiceProvider::class,
+        Beike\Shop\Providers\DocumentServiceProvider::class,
         Beike\Installer\Providers\InstallerServiceProvider::class,
         Beike\AdminAPI\Providers\AdminAPIServiceProvider::class,
         Beike\Hook\HookServiceProvider::class,
-        Beike\Facades\BeikeHttp\BeikeHttpServiceProvider::class
+        Beike\Facades\BeikeHttp\BeikeHttpServiceProvider::class,
     ],
 
     /*
@@ -253,11 +252,27 @@ return [
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
         'Hook'         => Beike\Hook\Facades\Hook::class,
-        'BeikeHttp'    => Beike\Facades\BeikeHttp\Facade\Http::class
+        'BeikeHttp'    => Beike\Facades\BeikeHttp\Facade\Http::class,
     ],
 
     'langs' => [
-        'de','en','es','fr','id','it','ja','ko','ru','zh_cn','zh_hk'
+        'de', 'en', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'ru', 'zh_cn', 'zh_hk',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for the admin dashboard data visualization
+    |
+    */
+    'dashboard' => [
+        'use_mock_data'             => env('DASHBOARD_USE_MOCK_DATA', false),
+        'mock_data_multiplier'      => env('DASHBOARD_MOCK_MULTIPLIER', 1.0),
+        'enable_cache'              => env('DASHBOARD_ENABLE_CACHE', false), // 缓存开关
+        'cache_duration'            => env('DASHBOARD_CACHE_DURATION', 300), // 5 minutes
+        'real_time_update_interval' => env('DASHBOARD_REAL_TIME_INTERVAL', 30), // 30 seconds
     ],
 
     'free_plugin_codes' => [
@@ -269,10 +284,12 @@ return [
         'social',
         'stripe',
         'wintopay',
-        'youdao'
+        'youdao',
+        'bk_ai',
+        'gd_migrate_image_paths',
     ],
 
-    //html hook ignore dirs
+    // html hook ignore dirs
     'ignore_dirs' => [
         '/themes/.*?/layout/',
         '/themes/.*?/components/',

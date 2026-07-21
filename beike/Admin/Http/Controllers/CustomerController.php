@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CustomerController.php
  *
@@ -125,7 +126,6 @@ class CustomerController extends Controller
 
         return redirect()->to(shop_route('account.index'));
     }
-
 
     public function destroy(Request $request, int $customerId)
     {

@@ -2,6 +2,7 @@
 
 namespace App\Tools\Commands\Actions;
 
+use App\Tools\Facades\Module;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Database\Console\PruneCommand;
 use Illuminate\Support\Collection;
@@ -10,7 +11,6 @@ use InvalidArgumentException;
 
 use function Laravel\Prompts\multiselect;
 
-use App\Tools\Facades\Module;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
@@ -121,5 +121,4 @@ class ModelPruneCommand extends PruneCommand implements PromptsForMissingInput
                 return $this->isPrunable($model);
             })->values();
     }
-
 }

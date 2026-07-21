@@ -32,7 +32,7 @@ class AddressResource extends JsonResource
 
         $rs   = hook_filter('account.address.resource.after', [
             'data'    => $data,
-            'address' => $this
+            'address' => $this,
         ]);
         $data = $rs['data'];
 

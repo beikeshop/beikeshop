@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OrderController.php
  *
@@ -125,7 +126,11 @@ class OrderController extends Controller
             throw new \Exception(trans('shop/order.invalid_order'));
         }
         $comment = trans('shop/order.cancel_order');
-        StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $comment);
+        if ($order->status == StateMachineService::PAID) {
+            StateMachineService::getInstance($order)->changeStatus(StateMachineService::REFUNDING, $comment);
+        } else {
+            StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $comment);
+        }
 
         return json_success(trans('shop/account/order.cancelled'));
     }

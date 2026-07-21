@@ -27,7 +27,7 @@ class Http extends PendingRequest
     private const FLEXIBLE_SIGNATURE_PATHS = [
         '/api/v1/plugins/*',
         '/api/v1/tool/plugin_search',
-        '/api/v1/plugins/ticket_expired'
+        '/api/v1/plugins/ticket_expired',
     ];
 
     private const FILTERED_QUERY_PARAMS = [
@@ -51,12 +51,12 @@ class Http extends PendingRequest
 
     private static ?ApiTokenService $tokenServiceInstance = null;
 
-    public function __construct(Factory $factory = null, $middleware = [])
+    public function __construct(?Factory $factory = null, $middleware = [])
     {
         parent::__construct($factory, $middleware);
 
         if (self::$tokenServiceInstance === null) {
-            self::$tokenServiceInstance = new ApiTokenService();
+            self::$tokenServiceInstance = new ApiTokenService;
         }
         $this->tokenService = self::$tokenServiceInstance;
 
@@ -69,23 +69,23 @@ class Http extends PendingRequest
     /**
      * GET request to the given URL.
      *
-     * @param  string  $apiEndPoint
-     * @param  array|string|null  $query
-     * @param  string  $format
+     * @param string            $apiEndPoint
+     * @param array|string|null $query
+     * @param string            $format
      * @return array|mixed
      */
-    public function sendGet(string $apiEndPoint, array|string $query = null, string $format = 'json'): mixed
+    public function sendGet(string $apiEndPoint, array|string|null $query = null, string $format = 'json'): mixed
     {
-        $startTime   = microtime(true);
-        $queryParams = $this->parseQueryParams($query);
-        $timeout     = $queryParams['timeout'] ?? request()->query('timeout');
+        $startTime      = microtime(true);
+        $queryParams    = $this->parseQueryParams($query);
+        $timeout        = $queryParams['timeout']        ?? request()->query('timeout');
         $throwException = $queryParams['throwException'] ?? request()->query('throwException') ?? true;
 
         [$url, $path, $queryString] = $this->buildRequestUrl($apiEndPoint, $queryParams);
-        $timestamp   = time();
-        $nonce       = Str::random(40);
-        $host        = $this->getFormattedHost();
-        $skipSignature = $this->shouldSkipSignature($path);
+        $timestamp                  = time();
+        $nonce                      = Str::random(40);
+        $host                       = $this->getFormattedHost();
+        $skipSignature              = $this->shouldSkipSignature($path);
 
         if ($skipSignature) {
             $this->prepareRequest($timestamp, $nonce, $host, '', '', $timeout);
@@ -108,6 +108,7 @@ class Http extends PendingRequest
                 return $this->handleSignatureError($e, (bool) $throwException);
             }
         }
+
         try {
             $response = $this->get($url);
         } catch (ConnectionException $e) {
@@ -121,7 +122,7 @@ class Http extends PendingRequest
             ]);
 
             if ($this->shouldRetry($e)) {
-                return $this->retryWithBackoff(fn() => $this->get($url), $startTime, $url, $throwException, $format);
+                return $this->retryWithBackoff(fn () => $this->get($url), $startTime, $url, $throwException, $format);
             }
 
             if (! $throwException) {
@@ -200,6 +201,7 @@ class Http extends PendingRequest
     private function shouldRetry(ConnectionException $e): bool
     {
         $message = strtolower($e->getMessage());
+
         return str_contains($message, 'connection refused')
             || str_contains($message, 'timeout')
             || str_contains($message, 'empty reply')
@@ -236,6 +238,7 @@ class Http extends PendingRequest
                             'message' => $e->getMessage(),
                         ];
                     }
+
                     throw $e;
                 }
             }
@@ -250,10 +253,10 @@ class Http extends PendingRequest
     /**
      * POST request to the given URL.
      *
-     * @param  string  $apiEndPoint
-     * @param  string  $body
-     * @param  array  $data
-     * @param  string  $format
+     * @param string $apiEndPoint
+     * @param string $body
+     * @param array  $data
+     * @param string $format
      * @return array|mixed
      */
     public function sendPost(string $apiEndPoint, string $body = '', array $data = [], string $format = 'json', bool $throwException = true): mixed
@@ -261,11 +264,11 @@ class Http extends PendingRequest
         $startTime = microtime(true);
 
         [$url, $path, $queryString] = $this->buildRequestUrl($apiEndPoint);
-        $requestBody = $body !== '' ? $body : $this->encodeRequestData($data);
-        $timestamp   = time();
-        $nonce       = Str::random(40);
-        $host        = $this->getFormattedHost();
-        $skipSignature = $this->shouldSkipSignature($path);
+        $requestBody                = $body !== '' ? $body : $this->encodeRequestData($data);
+        $timestamp                  = time();
+        $nonce                      = Str::random(40);
+        $host                       = $this->getFormattedHost();
+        $skipSignature              = $this->shouldSkipSignature($path);
 
         if ($skipSignature) {
             $this->prepareRequest($timestamp, $nonce, $host, '', '');
@@ -308,7 +311,7 @@ class Http extends PendingRequest
             ]);
 
             if ($this->shouldRetry($e)) {
-                return $this->retryWithBackoff(fn() => $this->send('POST', $url), $startTime, $url, $throwException, $format);
+                return $this->retryWithBackoff(fn () => $this->send('POST', $url), $startTime, $url, $throwException, $format);
             }
 
             if (! $throwException) {
@@ -331,7 +334,7 @@ class Http extends PendingRequest
     /**
      * Parse and decode the response result.
      *
-     * @param  mixed  $result
+     * @param mixed $result
      * @return mixed
      */
     private function parseResult(mixed $result): mixed
@@ -373,7 +376,7 @@ class Http extends PendingRequest
     /**
      * Filter query parameters to remove sensitive and oversized values.
      *
-     * @param  array|null  $params
+     * @param array|null $params
      * @return array
      */
     private function filterQueryParams(?array $params): array
@@ -400,8 +403,8 @@ class Http extends PendingRequest
     /**
      * Build the final request URL and return URL parts used for signing.
      *
-     * @param  string  $apiEndPoint
-     * @param  array|string|null  $query
+     * @param string            $apiEndPoint
+     * @param array|string|null $query
      * @return array{0:string,1:string,2:string}
      */
     private function buildRequestUrl(string $apiEndPoint, array|string|null $query = null): array
@@ -414,8 +417,8 @@ class Http extends PendingRequest
         }
 
         $parsedEndpoint = parse_url($apiEndPoint);
-        $apiPath = $parsedEndpoint['path'] ?? $apiEndPoint;
-        $endpointQuery = [];
+        $apiPath        = $parsedEndpoint['path'] ?? $apiEndPoint;
+        $endpointQuery  = [];
 
         if (! empty($parsedEndpoint['query'])) {
             parse_str($parsedEndpoint['query'], $endpointQuery);
@@ -425,7 +428,7 @@ class Http extends PendingRequest
             'locale' => $locale,
         ];
 
-        $requestQuery = $this->filterQueryParams(request()->query());
+        $requestQuery  = $this->filterQueryParams(request()->query());
         $endpointQuery = $this->filterQueryParams($endpointQuery);
         $explicitQuery = $this->filterQueryParams($this->parseQueryParams($query));
 
@@ -442,13 +445,13 @@ class Http extends PendingRequest
         }
 
         $queryString = http_build_query($queryArr);
-        $baseUrl = trim(config('beike.api_url'), '/') . '/api/' . trim($apiPath, '/');
-        $url = $queryString ? $baseUrl . '?' . $queryString : $baseUrl;
-        $parsedUrl = parse_url($url);
+        $baseUrl     = trim(config('beike.api_url'), '/') . '/api/' . trim($apiPath, '/');
+        $url         = $queryString ? $baseUrl . '?' . $queryString : $baseUrl;
+        $parsedUrl   = parse_url($url);
 
         return [
             $url,
-            $parsedUrl['path'] ?? '',
+            $parsedUrl['path']  ?? '',
             $parsedUrl['query'] ?? '',
         ];
     }
@@ -475,7 +478,7 @@ class Http extends PendingRequest
     /**
      * Fetch a new API token.
      *
-     * @param  string|null  $domain
+     * @param string|null $domain
      * @return array
      * @throws Exception
      */
@@ -531,9 +534,9 @@ class Http extends PendingRequest
         string $bearerToken = '',
         mixed $timeout = null
     ): void {
-        $this->pendingBody = null;
+        $this->pendingBody  = null;
         $this->pendingFiles = [];
-        $this->bodyFormat = null;
+        $this->bodyFormat   = null;
 
         unset(
             $this->options['body'],
@@ -641,7 +644,7 @@ class Http extends PendingRequest
         }
 
         try {
-            $domain = clean_domain(get_safe_host());
+            $domain    = clean_domain(get_safe_host());
             $tokenData = $this->tokenService->fetchToken($domain);
             if (is_array($tokenData) && ! empty($tokenData['access_token'])) {
                 return (string) $tokenData['access_token'];
@@ -665,7 +668,7 @@ class Http extends PendingRequest
      */
     private function getDeveloperTokenHeaderValue(): string
     {
-        $token = (string) (system_setting('base.developer_token') ?? '');
+        $token      = (string) (system_setting('base.developer_token') ?? '');
         $normalized = preg_replace('/\s+/u', '', trim($token));
 
         return is_string($normalized) ? $normalized : '';

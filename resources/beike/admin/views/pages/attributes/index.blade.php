@@ -12,8 +12,10 @@
         <button type="button" class="btn btn-primary" @click="checkedCreate">{{ __('admin/attribute.create_at') }}</button>
         @hook('admin.attribute.index.content.top_buttons.after')
       </div>
+
+      @if ($attribute_list->count())
       <div class="table-push h-min-500">
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>{{ __('common.id') }}</th>
@@ -25,32 +27,33 @@
               <th width="150px">{{ __('common.action') }}</th>
             </tr>
           </thead>
-          <tbody v-if="attributes.data.length">
-            <tr v-for="item, index in attributes.data" :key="index">
-              <td>@{{ item.id }}</td>
-              <td>@{{ item.name }}</td>
-              <td>@{{ item.attribute_group_name }}</td>
-              <td>@{{ item.sort_order }}</td>
-              <td>@{{ item.created_at }}</td>
-              @hook('admin.attribute.index.table.body')
+          <tbody>
+            @foreach ($attribute_list as $item)
+            <tr class="cursor-pointer row-link" data-to-url="{{ admin_route('attributes.show', [$item->id, http_build_query(request()->query())]) }}">
+              <td>{{ $item->id }}</td>
+              <td>{{ $item->description->name ?? '' }}</td>
+              <td>{{ $item->attributeGroup->description->name ?? '' }}</td>
+              <td>{{ $item->sort_order }}</td>
+              <td>{{ $item->created_at }}</td>
+              @hook('admin.attribute.index.table.body', $item)
               <td>
-                @hook('admin.attribute.index.table.body.actions.before')
-                <a class="btn btn-outline-secondary btn-sm" :href="linkEdit(item.id)">{{ __('common.edit') }}</a>
-                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(item.id)">{{ __('common.delete') }}</button>
-                @hook('admin.attribute.index.table.body.actions.after')
+                @hook('admin.attribute.index.table.body.actions.before', $item)
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click.stop="deleteItem({{ $item->id }})">{{ __('common.delete') }}</button>
+                @hook('admin.attribute.index.table.body.actions.after', $item)
               </td>
             </tr>
+            @endforeach
           </tbody>
-          <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
         </table>
       </div>
 
-      <el-pagination v-if="attributes.data.length" layout="prev, pager, next" background :page-size="attributes.per_page" :current-page.sync="page"
-        :total="attributes.total"></el-pagination>
+      {{ $attribute_list->links('admin::vendor/pagination/bootstrap-4') }}
+      @else
+      <x-admin-no-data />
+      @endif
 
       @hook('admin.attribute.index.content.after')
     </div>
-
     <el-dialog title="{{ __('admin/attribute.index') }}" :visible.sync="dialog.show" width="670px"
       @close="closeDialog('form')" :close-on-click-modal="false">
 
@@ -155,7 +158,7 @@
         },
 
         linkEdit(id) {
-          return '{{ admin_route('attributes.index') }}' + `/${id}`
+          location.href = '{{ admin_route('attributes.index') }}' + `/${id}`
         },
 
         checkedCreate() {
@@ -178,9 +181,12 @@
                 distinguishCancelAndClose: true,
                 confirmButtonText: '{{ __('admin/attribute.btn_at') }}',
                 cancelButtonText: '{{ __('admin/attribute.btn_later') }}',
+                center: true,
               }).then(() => {
-                location = this.linkEdit(res.data.id);
-              }).catch(()=>{})
+                this.linkEdit(res.data.id);
+              }).catch(()=>{
+                window.location.reload();
+              })
             })
           });
         },

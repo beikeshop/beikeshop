@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Manager.php
  *
@@ -11,15 +12,13 @@
 
 namespace Beike\Plugin;
 
+use Beike\Facades\BeikeHttp\Facade\Http;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use ZanySoft\Zip\Zip;
-use Beike\Facades\BeikeHttp\Facade\Http;
-use Beike\Admin\Services\MarketingService;
 
 class Manager
 {
@@ -29,7 +28,7 @@ class Manager
 
     public function __construct()
     {
-        $this->filesystem = new Filesystem();
+        $this->filesystem = new Filesystem;
     }
 
     /**
@@ -41,18 +40,19 @@ class Manager
     public function getPlugins(): Collection
     {
         if ($this->plugins) {
-            if (!app()->runningInConsole())
-            {
+            if (! app()->runningInConsole()) {
                 return $this->plugins;
             }
         }
 
         $existed = $this->getPluginsConfig();
-        $plugins = new Collection();
+        $plugins = new Collection;
         foreach ($existed as $dirname => $package) {
-            $pluginPath = $this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname;
-            $plugin     = new Plugin($pluginPath, $package);
-            $status     = $plugin->getStatus();
+            $pluginPath   = $this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname;
+            $lastModified = filemtime($pluginPath);
+            $lastModified = date('Y-m-d H:i:s', $lastModified);
+            $plugin       = new Plugin($pluginPath, $package);
+            $status       = $plugin->getStatus();
             $plugin->setType(Arr::get($package, 'type'));
             $plugin->setDirname($dirname);
             $plugin->setName(Arr::get($package, 'name'));
@@ -60,6 +60,7 @@ class Manager
             $plugin->setInstalled(true);
             $plugin->setEnabled($status);
             $plugin->setVersion(Arr::get($package, 'version'));
+            $plugin->setLastModified($lastModified);
             $plugin->setColumns();
 
             if ($plugins->has($plugin->code)) {
@@ -73,8 +74,8 @@ class Manager
             $plugins->put($plugin->code, $plugin);
         }
 
-        $this->plugins = $plugins->sortBy(function ($plugin) {
-            return $plugin->code;
+        $this->plugins = $plugins->sortByDesc(function ($plugin) {
+            return $plugin->getLastModified();
         });
 
         return $this->plugins;
@@ -144,15 +145,15 @@ class Manager
 
         $freePluginCodes = config('app.free_plugin_codes') ?? [];
 
-        if (!in_array($code, $freePluginCodes)) {
+        if (! in_array($code, $freePluginCodes)) {
             try {
                 $apiEndPoint = "/v1/plugins/{$code}";
-                $content = Http::sendGet($apiEndPoint);
+                $content     = Http::sendGet($apiEndPoint);
                 if (($content['data']['price'] ?? 0) > 0) {
                     $plugin->checkLicenseValid();
                 }
             } catch (\Exception $e) {
-                if($e->getMessage() !== 'plugin404'){
+                if ($e->getMessage() !== 'plugin404') {
                     throw new \Exception($e->getMessage());
                 }
             }
@@ -232,7 +233,7 @@ class Manager
         $newFilePath  = $destPath . '/' . $safeFileName;
 
         // 确保目录存在
-        if (!is_dir($destPath)) {
+        if (! is_dir($destPath)) {
             mkdir($destPath, 0755, true);
         }
 
@@ -266,9 +267,9 @@ class Manager
         }
 
         // 检查MIME类型
-        $mimeType = $file->getMimeType();
+        $mimeType         = $file->getMimeType();
         $allowedMimeTypes = ['application/zip', 'application/x-zip-compressed'];
-        if (!in_array($mimeType, $allowedMimeTypes)) {
+        if (! in_array($mimeType, $allowedMimeTypes)) {
             throw new \Exception('Invalid file type. Only ZIP files are allowed.');
         }
     }
@@ -278,8 +279,8 @@ class Manager
      */
     private function generateSafeFileName(string $originalName): string
     {
-        $pathInfo = pathinfo($originalName);
-        $baseName = preg_replace('/[^a-zA-Z0-9_-]/', '', $pathInfo['filename']);
+        $pathInfo  = pathinfo($originalName);
+        $baseName  = preg_replace('/[^a-zA-Z0-9_-]/', '', $pathInfo['filename']);
         $extension = strtolower($pathInfo['extension']);
 
         return $baseName . '_' . time() . '.' . $extension;
@@ -290,10 +291,10 @@ class Manager
      */
     private function safeExtractZip(string $zipPath, string $extractPath): void
     {
-        $zip = new \ZipArchive();
+        $zip    = new \ZipArchive;
         $result = $zip->open($zipPath);
 
-        if ($result !== TRUE) {
+        if ($result !== true) {
             throw new \Exception('Cannot open ZIP file: ' . $result);
         }
 
@@ -305,8 +306,9 @@ class Manager
             $filename = $zip->getNameIndex($i);
 
             // 验证文件路径
-            if (!$this->isValidZipPath($filename, $extractPath)) {
+            if (! $this->isValidZipPath($filename, $extractPath)) {
                 $zip->close();
+
                 throw new \Exception('Invalid file path in ZIP: ' . $filename);
             }
 
@@ -326,7 +328,7 @@ class Manager
         $fileCount = 0;
 
         for ($i = 0; $i < $zip->numFiles; $i++) {
-            $stat = $zip->statIndex($i);
+            $stat     = $zip->statIndex($i);
             $filename = $stat['name'];
 
             // 检查文件数量限制
@@ -367,7 +369,7 @@ class Manager
         }
 
         // 检查解析后的路径是否在允许的目录内
-        $fullPath = realpath($extractPath) . '/' . $filename;
+        $fullPath        = realpath($extractPath) . '/' . $filename;
         $realExtractPath = realpath($extractPath);
 
         return str_starts_with($fullPath, $realExtractPath);
@@ -380,11 +382,10 @@ class Manager
         }
 
         $plugin = \Beike\Models\Plugin::query()->where('code', $code)->count();
-        if (!$plugin) {
+        if (! $plugin) {
             return false;
         }
 
         return true;
     }
-
 }

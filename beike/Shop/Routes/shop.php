@@ -18,6 +18,7 @@ use Beike\Shop\Http\Controllers\CategoryController;
 use Beike\Shop\Http\Controllers\CheckoutController;
 use Beike\Shop\Http\Controllers\CurrencyController;
 use Beike\Shop\Http\Controllers\FileController;
+use Beike\Shop\Http\Controllers\GeoIpController;
 use Beike\Shop\Http\Controllers\HomeController;
 use Beike\Shop\Http\Controllers\LanguageController;
 use Beike\Shop\Http\Controllers\PageCategoryController;
@@ -35,6 +36,8 @@ Route::prefix('/')
 
         Route::get('brands', [BrandController::class, 'index'])->name('brands.index');
         Route::get('brands/autocomplete', [BrandController::class, 'autocomplete'])->name('brands.autocomplete');
+        Route::get('products/autocomplete', [ProductController::class, 'autocomplete'])->name('products.autocomplete');
+        Route::get('products/hot-products', [ProductController::class, 'hotProducts'])->name('products.hot-products');
         Route::get('brands/{id}', [BrandController::class, 'show'])->name('brands.show');
 
         Route::get('carts/mini', [CartController::class, 'miniCart'])->name('carts.mini');
@@ -70,6 +73,7 @@ Route::prefix('/')
         Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 
         Route::get('plugin/{code}/{path}', [PluginController::class, 'asset'])->where('path', '(.*)')->name('plugin.asset');
+        Route::get('user_country', [GeoIpController::class, 'getUserCountry'])->name('user-country');
 
         Route::middleware('checkout_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
@@ -104,11 +108,13 @@ Route::prefix('/')
                 Route::get('rmas/{id}', [RmaController::class, 'show'])->name('rma.show');
                 Route::get('rmas/create/{order_product_id}', [RmaController::class, 'create'])->name('rma.create');
                 Route::post('rmas/store', [RmaController::class, 'store'])->name('rma.store');
+                Route::post('rmas/{id}/mark_as_shipped', [RmaController::class, 'markAsShipped'])->name('rma.mark_as_shipped');
 
                 Route::put('edit', [EditController::class, 'update'])->name('edit.update');
                 Route::get('orders', [OrderController::class, 'index'])->name('order.index');
                 Route::get('orders/{number}', [OrderController::class, 'show'])->name('order.show');
                 Route::get('update_password', [AccountController::class, 'updatePassword'])->name('update_password');
+                Route::delete('destroy', [AccountController::class, 'destroy'])->name('destroy');
                 Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
                 Route::post('wishlist', [WishlistController::class, 'add'])->name('wishlist.add');
                 Route::delete('wishlist/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');

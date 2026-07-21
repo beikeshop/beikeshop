@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Registry.php
  *
@@ -23,7 +24,7 @@ class Registry
             return self::$registry;
         }
 
-        return self::$registry = new self();
+        return self::$registry = new self;
     }
 
     /**

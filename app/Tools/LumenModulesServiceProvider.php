@@ -2,7 +2,6 @@
 
 namespace App\Tools;
 
-use App\Tools\ModulesServiceProvider;
 use App\Tools\Support\Stub;
 
 class LumenModulesServiceProvider extends ModulesServiceProvider
@@ -50,7 +49,7 @@ class LumenModulesServiceProvider extends ModulesServiceProvider
         });
         $this->app->singleton(\App\Tools\Contracts\ActivatorInterface::class, function ($app) {
             $activator = $app['config']->get('plugins.activator');
-            $class = $app['config']->get('plugins.activators.' . $activator)['class'];
+            $class     = $app['config']->get('plugins.activators.' . $activator)['class'];
 
             return new $class($app);
         });

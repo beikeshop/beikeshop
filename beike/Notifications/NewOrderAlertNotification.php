@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NewOrderAlertNotification.php
  *
@@ -11,6 +12,7 @@
 
 namespace Beike\Notifications;
 
+use Beike\Channels\BkMailChannel;
 use Beike\Mail\AdminUserNewOrder;
 use Beike\Models\Order;
 use Illuminate\Bus\Queueable;
@@ -43,10 +45,10 @@ class NewOrderAlertNotification extends Notification implements ShouldQueue
     {
         $drivers[]  = 'database';
         $mailEngine = system_setting('base.mail_engine');
-        $mailAlert = system_setting('base.mail_alert') ?? [];
+        $mailAlert  = system_setting('base.mail_alert') ?? [];
 
         if ($mailEngine && in_array('order', $mailAlert)) {
-            $drivers[] = 'mail';
+            $drivers[] = BkMailChannel::class;
         }
 
         return $drivers;

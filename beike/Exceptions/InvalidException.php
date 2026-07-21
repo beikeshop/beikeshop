@@ -1,4 +1,5 @@
 <?php
+
 /**
  * InvalidException.php
  *
@@ -11,6 +12,4 @@
 
 namespace Beike\Exceptions;
 
-class InvalidException extends \Exception
-{
-}
+class InvalidException extends \Exception {}

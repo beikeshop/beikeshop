@@ -6,9 +6,9 @@
           <tr style="font-weight:300">
             <td style="width:3%;max-width:30px;"></td>
             <td style="max-width:600px;">
-              <div style="height: 35px;display: block;max-width: 200px;">
-                <a href="{{ shop_route('home.index') }}" style="display: block;height: 35px;display: block;max-width: 200px;">
-                  <img border="0" src="{{ image_origin(system_setting('base.logo')) }}" style="max-width:100%; max-height: 100%;display">
+              <div style="display: block;max-width: 200px;">
+                <a href="{{ shop_route('home.index') }}" style="display: block;max-width: 200px;">
+                  <img border="0" width="200" src="{{ image_origin(system_setting('base.logo')) }}" style="max-width:100%; max-height: 100%;">
                 </a>
               </div>
 
@@ -26,7 +26,7 @@
                       <td style="width:3.2%;max-width:30px;"></td>
                       <td style="max-width:540px;">
                         <p style="max-width: 100%; margin:auto;font-size:12px;color:#999;text-align:center;line-height:22px;">
-                          {{ config('app.name') }} &copy; {{ date('Y') }} All Rights Reserved
+                          {{ system_setting('base.store_name', config('app.name')) }} &copy; {{ date('Y') }} All Rights Reserved
                         </p>
                       </td>
                       <td style="width:3.2%;max-width:30px;"></td>

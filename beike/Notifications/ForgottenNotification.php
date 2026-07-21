@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ForgottenNotification.php
  *
@@ -11,6 +12,7 @@
 
 namespace Beike\Notifications;
 
+use Beike\Channels\BkMailChannel;
 use Beike\Mail\CustomerForgotten;
 use Beike\Models\Customer;
 use Illuminate\Bus\Queueable;
@@ -47,7 +49,7 @@ class ForgottenNotification extends Notification implements ShouldQueue
         $drivers[]  = 'database';
         $mailEngine = system_setting('base.mail_engine');
         if ($mailEngine) {
-            $drivers[] = 'mail';
+            $drivers[] = BkMailChannel::class;
         }
 
         return $drivers;

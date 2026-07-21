@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CategoryRepo.php
  *
@@ -96,15 +97,15 @@ class CategoryRepo
                     'categories.id',
                     DB::raw("TRIM(LOWER({$aggregateFunc})) as name"),
                     'categories.parent_id',
-                    'categories.position'
+                    'categories.position',
                 ])
                 ->from('category_paths as cp')
                 ->join('categories', 'cp.category_id', '=', 'categories.id')
-                ->join('category_descriptions as cd', function($join) use ($locale) {
+                ->join('category_descriptions as cd', function ($join) use ($locale) {
                     $join->on('cp.path_id', '=', 'cd.category_id')
                         ->where('cd.locale', $locale);
                 })
-                ->when(!$includeInactive, function ($query) {
+                ->when(! $includeInactive, function ($query) {
                     $query->where('categories.active', true);
                 })
                 ->groupBy('categories.id', 'categories.parent_id', 'categories.position')
@@ -200,7 +201,8 @@ class CategoryRepo
                     });
                 });
             })
-            ->limit(10)->get();
+            ->orderBy('updated_at', 'desc')
+            ->limit(50)->get();
         $results = [];
         foreach ($categories as $category) {
             $pathName = '';

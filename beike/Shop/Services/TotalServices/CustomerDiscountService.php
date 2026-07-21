@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CustomerDiscountService.php
  *
@@ -30,6 +31,7 @@ class CustomerDiscountService
         $discountFactor = $customer->customerGroup->discount_factor;
 
         $discountFactor = hook_filter('service.total_service.discount_factor', $discountFactor);
+
         if ($discountFactor <= 0) {
             return null;
         }

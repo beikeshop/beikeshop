@@ -2,6 +2,4 @@
 
 namespace App\Tools\Exceptions;
 
-class FileAlreadyExistException extends \Exception
-{
-}
+class FileAlreadyExistException extends \Exception {}

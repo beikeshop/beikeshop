@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zone.php
  *
@@ -18,7 +19,7 @@ class Zone extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['country_id', 'name', 'code', 'sort_order', 'status'];
+    protected $fillable = ['country_id', 'name', 'code', 'sort_order', 'active'];
 
     public function country(): BelongsTo
     {

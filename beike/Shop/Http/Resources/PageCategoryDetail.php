@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageCategoryDetail.php
  *

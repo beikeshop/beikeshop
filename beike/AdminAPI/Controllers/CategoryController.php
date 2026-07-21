@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CategoryController.php
  *
@@ -63,7 +64,7 @@ class CategoryController
     public function store(CategoryRequest $request)
     {
         $requestData = $request->all();
-        $category    = (new CategoryService())->createOrUpdate($requestData, null);
+        $category    = (new CategoryService)->createOrUpdate($requestData, null);
         $data        = [
             'category'     => $category,
             'request_data' => $requestData,
@@ -85,7 +86,7 @@ class CategoryController
     public function update(CategoryRequest $request, Category $category)
     {
         $requestData = $request->all();
-        $category    = (new CategoryService())->createOrUpdate($requestData, $category);
+        $category    = (new CategoryService)->createOrUpdate($requestData, $category);
         $data        = [
             'category'     => $category,
             'request_data' => $requestData,

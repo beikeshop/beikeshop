@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AddressController.php
  *
@@ -35,7 +36,7 @@ class AddressController extends Controller
     public function show(Request $request, $id)
     {
         $address = AddressRepo::find($id);
-        if (!$address || $address->customer_id != current_customer()->id) {
+        if (! $address || $address->customer_id != current_customer()->id) {
             abort(404);
         }
 
@@ -45,7 +46,7 @@ class AddressController extends Controller
     public function store(AddressRequest $request)
     {
         $data    = $request->only(['name', 'phone', 'country_id', 'zone_id', 'city_id', 'city', 'zipcode', 'address_1', 'address_2', 'default']);
-        $data = hook_filter('account.address.store.create.before', $data);
+        $data    = hook_filter('account.address.store.create.before', $data);
         $address = AddressService::create($data);
 
         $address = hook_filter('account.address.store.after', $address);
@@ -56,7 +57,7 @@ class AddressController extends Controller
     public function update(AddressRequest $request, int $id)
     {
         $data    = $request->only(['name', 'phone', 'country_id', 'zone_id', 'city_id', 'city', 'zipcode', 'address_1', 'address_2', 'default']);
-        $data = hook_filter('account.address.update.update.before', $data);
+        $data    = hook_filter('account.address.update.update.before', $data);
         $address = AddressService::update($id, $data);
         $address = hook_filter('account.address.update.after', $address);
 
@@ -66,7 +67,7 @@ class AddressController extends Controller
     public function destroy(Request $request, int $id)
     {
         $address = AddressRepo::find($id);
-        if (!$address || $address->customer_id != current_customer()->id) {
+        if (! $address || $address->customer_id != current_customer()->id) {
             abort(404);
         }
 

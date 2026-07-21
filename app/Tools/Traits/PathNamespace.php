@@ -36,7 +36,7 @@ trait PathNamespace
     /**
      * Get a well-formatted StudlyCase namespace for a module, with an optional additional path.
      */
-    public function module_namespace(string $module, string $path = null): string
+    public function module_namespace(string $module, ?string $path = null): string
     {
         $module_namespace = config('plugins.namespace', $this->path_namespace(config('plugins.paths.plugins'))) . '\\' . ($module);
         $module_namespace .= strlen($path) ? '\\' . $this->path_namespace($path) : '';

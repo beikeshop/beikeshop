@@ -4,7 +4,6 @@ namespace Beike\Shop\Http\Requests;
 
 use Beike\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class RegisterRequest extends FormRequest
 {
@@ -30,9 +29,13 @@ class RegisterRequest extends FormRequest
                 'required',
                 'email:rfc',
                 function ($attribute, $value, $fail) {
-                    if (Customer::where('email', $value)->exists()) {
-                        // 验证失败，返回错误信息
+                    // 检查 email 是否已被注册（未被软删除）
+                    if (Customer::where('email', $value)->withoutTrashed()->exists()) {
                         $fail(trans('shop/login.email_address_error', ['email' => $this->attributes()['email']]));
+                    }
+                    // 检查 email 是否在回收站中（已被软删除）
+                    elseif (Customer::withTrashed()->where('email', $value)->onlyTrashed()->exists()) {
+                        $fail(trans('shop/login.email_address_deleted'));
                     }
                 },
             ],

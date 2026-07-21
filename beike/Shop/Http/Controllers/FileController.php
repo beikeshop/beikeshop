@@ -19,6 +19,9 @@ class FileController extends Controller
         // 清理类型参数，防止路径遍历
         $type = $this->sanitizeType($type);
 
+        // 清理类型参数，防止路径遍历
+        $type = $this->sanitizeType($type);
+
         $path = $file->store($type, 'upload');
 
         $data = [
@@ -31,10 +34,10 @@ class FileController extends Controller
         // 记录上传日志
         \Log::info('Shop file uploaded', [
             'original_name' => $file->getClientOriginalName(),
-            'path' => $path,
-            'type' => $type,
-            'customer_id' => current_customer()->id ?? null,
-            'ip' => $request->ip()
+            'path'          => $path,
+            'type'          => $type,
+            'customer_id'   => current_customer()->id ?? null,
+            'ip'            => $request->ip(),
         ]);
 
         return json_success(trans('shop/file.uploaded_success'), $data);

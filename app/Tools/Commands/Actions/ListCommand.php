@@ -2,8 +2,8 @@
 
 namespace App\Tools\Commands\Actions;
 
-use Illuminate\Console\Command;
 use App\Tools\Module;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
 class ListCommand extends Command

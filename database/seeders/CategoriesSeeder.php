@@ -58,22 +58,22 @@ class CategoriesSeeder extends Seeder
     public function getCategories()
     {
         return [
-            ["id" => 100002, "parent_id" => 100007, "position" => 0, "active" => 1],
-            ["id" => 100003, "parent_id" => 0, "position" => 1, "active" => 1],
-            ["id" => 100004, "parent_id" => 100007, "position" => 0, "active" => 1],
-            ["id" => 100005, "parent_id" => 0, "position" => 0, "active" => 1],
-            ["id" => 100006, "parent_id" => 0, "position" => 0, "active" => 1],
-            ["id" => 100007, "parent_id" => 0, "position" => 9, "active" => 1],
-            ["id" => 100008, "parent_id" => 100006, "position" => 0, "active" => 1],
-            ["id" => 100010, "parent_id" => 0, "position" => 0, "active" => 1],
-            ["id" => 100011, "parent_id" => 100010, "position" => 0, "active" => 1],
-            ["id" => 100012, "parent_id" => 0, "position" => 0, "active" => 1],
-            ["id" => 100013, "parent_id" => 100010, "position" => 0, "active" => 1],
-            ["id" => 100014, "parent_id" => 100010, "position" => 0, "active" => 1],
-            ["id" => 100015, "parent_id" => 100013, "position" => 0, "active" => 1],
-            ["id" => 100016, "parent_id" => 100014, "position" => 0, "active" => 1],
-            ["id" => 100017, "parent_id" => 100018, "position" => 0, "active" => 1],
-            ["id" => 100018, "parent_id" => 0, "position" => 0, "active" => 1]
+            ["id" => 100002, "parent_id" => 100007, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/1.webp"],
+            ["id" => 100003, "parent_id" => 0, "position" => 1, "active" => 1, "image" => "image/catalog/demo/product/2.webp"],
+            ["id" => 100004, "parent_id" => 100007, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/3.webp"],
+            ["id" => 100005, "parent_id" => 0, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/4.webp"],
+            ["id" => 100006, "parent_id" => 0, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/5.webp"],
+            ["id" => 100007, "parent_id" => 0, "position" => 9, "active" => 1, "image" => "image/catalog/demo/product/6.webp"],
+            ["id" => 100008, "parent_id" => 100006, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/7.webp"],
+            ["id" => 100010, "parent_id" => 0, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/17.webp"],
+            ["id" => 100011, "parent_id" => 100010, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/9.webp"],
+            ["id" => 100012, "parent_id" => 0, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/10.webp"],
+            ["id" => 100013, "parent_id" => 100010, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/11.webp"],
+            ["id" => 100014, "parent_id" => 100010, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/12.webp"],
+            ["id" => 100015, "parent_id" => 100013, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/13.webp"],
+            ["id" => 100016, "parent_id" => 100014, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/14.webp"],
+            ["id" => 100017, "parent_id" => 100018, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/15.webp"],
+            ["id" => 100018, "parent_id" => 0, "position" => 0, "active" => 1, "image" => "image/catalog/demo/product/16.webp"]
         ];
     }
 
@@ -84,8 +84,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 1,
                 "category_id" => 100002,
                 "locale" => "zh_cn",
-                "name" => "平板耳机",
-                "content" => "",
+                "name" => "长裤",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -94,8 +94,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 2,
                 "category_id" => 100002,
                 "locale" => "en",
-                "name" => "Pad",
-                "content" => "Pad",
+                "name" => "Trousers",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -105,7 +105,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100003,
                 "locale" => "zh_cn",
                 "name" => "时尚潮流",
-                "content" => "时尚潮流",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -115,7 +115,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100003,
                 "locale" => "en",
                 "name" => "Fashion",
-                "content" => "Fashion",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -124,8 +124,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 5,
                 "category_id" => 100004,
                 "locale" => "zh_cn",
-                "name" => "相机",
-                "content" => "相机",
+                "name" => "衬衫",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -134,8 +134,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 6,
                 "category_id" => 100004,
                 "locale" => "en",
-                "name" => "Camera",
-                "content" => "Camera",
+                "name" => "Shirts",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -145,7 +145,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100005,
                 "locale" => "zh_cn",
                 "name" => "特价购买",
-                "content" => "",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -155,7 +155,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100005,
                 "locale" => "en",
                 "name" => "Special",
-                "content" => "",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -165,7 +165,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100006,
                 "locale" => "zh_cn",
                 "name" => "运动户外",
-                "content" => "运动户外",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -175,7 +175,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100006,
                 "locale" => "en",
                 "name" => "Sports",
-                "content" => "Sports",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -184,8 +184,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 11,
                 "category_id" => 100007,
                 "locale" => "zh_cn",
-                "name" => "电子数码",
-                "content" => "电子数码",
+                "name" => "冬季特惠",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -194,8 +194,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 12,
                 "category_id" => 100007,
                 "locale" => "en",
-                "name" => "Electron",
-                "content" => "Electron",
+                "name" => "Winter Special Offer",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -204,8 +204,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 13,
                 "category_id" => 100008,
                 "locale" => "zh_cn",
-                "name" => "帐篷",
-                "content" => "帐篷",
+                "name" => "潮流装扮",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -214,8 +214,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 14,
                 "category_id" => 100008,
                 "locale" => "en",
-                "name" => "Tent",
-                "content" => "Tent",
+                "name" => "Trendy Outfits",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -225,7 +225,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100010,
                 "locale" => "zh_cn",
                 "name" => "男装女装",
-                "content" => "男装女装",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -235,7 +235,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100010,
                 "locale" => "en",
                 "name" => "Clothes",
-                "content" => "Fashion",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -245,7 +245,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100011,
                 "locale" => "zh_cn",
                 "name" => "男装",
-                "content" => "男装",
+                "content" => '',
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -255,7 +255,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100011,
                 "locale" => "en",
                 "name" => "Men",
-                "content" => "Men",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -265,7 +265,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100012,
                 "locale" => "zh_cn",
                 "name" => "夏季促销",
-                "content" => "夏季促销",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -275,7 +275,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100012,
                 "locale" => "en",
                 "name" => "Summer Promotion",
-                "content" => "Summer promotion",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -285,7 +285,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100013,
                 "locale" => "zh_cn",
                 "name" => "上装",
-                "content" => "",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -295,7 +295,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100013,
                 "locale" => "en",
                 "name" => "Top",
-                "content" => "",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -305,7 +305,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100014,
                 "locale" => "zh_cn",
                 "name" => "下装",
-                "content" => "",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -315,7 +315,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100014,
                 "locale" => "en",
                 "name" => "Bottom",
-                "content" => "",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -325,7 +325,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100015,
                 "locale" => "zh_cn",
                 "name" => "棉衣",
-                "content" => "",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -335,7 +335,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100015,
                 "locale" => "en",
                 "name" => "Cotton",
-                "content" => "",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -345,7 +345,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100016,
                 "locale" => "zh_cn",
                 "name" => "棉毛裤",
-                "content" => "",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -355,7 +355,7 @@ class CategoriesSeeder extends Seeder
                 "category_id" => 100016,
                 "locale" => "en",
                 "name" => "Cotton Pants",
-                "content" => "",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -364,8 +364,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 29,
                 "category_id" => 100017,
                 "locale" => "zh_cn",
-                "name" => "智能冰箱",
-                "content" => "智能冰箱",
+                "name" => "运动服",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -374,8 +374,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 30,
                 "category_id" => 100017,
                 "locale" => "en",
-                "name" => "IceBox",
-                "content" => "",
+                "name" => "Sportswear",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -384,8 +384,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 31,
                 "category_id" => 100018,
                 "locale" => "zh_cn",
-                "name" => "家用电器",
-                "content" => "",
+                "name" => "家居服",
+                "content" => "在快节奏的都市生活中，时尚不仅是一种穿搭，更是一种态度。我们精心甄选全球潮流单品，从经典简约到前卫设计，让每一位追求个性的你都能找到专属风格。无论是日常通勤、休闲出街，还是特别场合，我们都为你准备了多样化的选择。让时尚融入生活，每一次穿搭都成为自我表达的舞台。",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""
@@ -394,8 +394,8 @@ class CategoriesSeeder extends Seeder
                 "id" => 32,
                 "category_id" => 100018,
                 "locale" => "en",
-                "name" => "Electric",
-                "content" => "",
+                "name" => "Loungewear",
+                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy text ever sinces the typesetting remaining essentially unchanged.",
                 "meta_title" => "",
                 "meta_description" => "",
                 "meta_keywords" => ""

@@ -33,6 +33,10 @@
                 <x-shop-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
               @endif
 
+              @if (session('error'))
+                <x-shop-alert type="danger" msg="{{ session('error') }}" class="mt-4" />
+              @endif
+
               <input type="hidden" name="order_product_id" value="{{ $orderProduct->id }}">
 
               <div class="row">
@@ -46,8 +50,13 @@
                 </div>
 
                 <div class="col-6 mb-4">
-                  <label class="col-form-label required">{{ __('shop/account/rma_form.return_quantity') }}</label>
-                  <input class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" type="text" name="quantity" required value="{{ old('quantity', $orderProduct->quantity ?? '1') }}" placeholder="{{ __('shop/account/rma_form.return_quantity') }}">
+                  <label class="col-form-label required">
+                    {{ __('shop/account/rma_form.return_quantity') }}
+                    @if ($rmaQuantity > 0)
+                      <span class="text-danger fw-bold">({{ __('rma.rma_quantity', ['value' => $rmaQuantity]) }})</span>
+                    @endif
+                  </label>
+                  <input class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" data-max-quantity="{{ $orderProduct->quantity - $rmaQuantity }}" type="number" name="quantity" required value="{{ old('quantity', $orderProduct->quantity - $rmaQuantity ?? '1') }}" placeholder="{{ __('shop/account/rma_form.return_quantity') }}">
                   <span class="invalid-feedback {{ $errors->has('quantity') ? 'd-block' : '' }}" role="alert">{{ __('common.error_required', ['name' => __('shop/account/rma_form.return_quantity')]) }}</span>
                 </div>
 
@@ -77,7 +86,7 @@
                   <div class="p-2 bg-light h-min-100">
                     <div class="image-wrap d-flex flex-wrap">
                       <div class="up-img d-flex align-items-center flex-wrap"></div>
-                      <label class="btn wh-60 btn-light d-flex align-items-center justify-content-center shadow-sm bg-body">
+                      <label class="btn wh-60 btn-light d-flex align-items-center rounded-2 justify-content-center shadow-sm bg-body">
                         <i class="bi bi-plus-lg fs-3"></i>
                         <input type="file" class="d-none" id="update-btn" name="" accept="image/*" multiple>
                       </label>
@@ -124,6 +133,18 @@
 
   $(document).on('click', '.image-wrap .up-img .img-item i', function() {
     $(this).parent().remove();
+  });
+
+  $('input[name="quantity"]').on('input', function() {
+    var maxQuantity = $(this).data('max-quantity');
+    if (parseInt($(this).val()) > maxQuantity) {
+      $(this).val(maxQuantity);
+      layer.msg('{{ __('rma.quantity_error') }}');
+    }
+
+    if (parseInt($(this).val()) < 1) {
+      $(this).val(1);
+    }
   });
 </script>
 @endpush

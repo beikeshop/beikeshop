@@ -2,6 +2,8 @@
 
 @section('title', __('admin/common.country'))
 
+@section('page-title-back', true)
+
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
@@ -22,7 +24,7 @@
 
           <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
             <label class="filter-title">{{ __('common.status') }}</label>
-            <select v-model="filter.status" class="form-select">
+            <select v-model="filter.active" class="form-select">
               <option value="">{{ __('common.all') }}</option>
               <option value="1">{{ __('common.enable') }}</option>
               <option value="0">{{ __('common.disable') }}</option>
@@ -58,8 +60,8 @@
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
         @hook('admin.country.index.top_buttons.after')
       </div>
-      <div class="table-push">
-        <table class="table">
+      <div class="table-push" v-if="country.data.length">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
@@ -74,8 +76,8 @@
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
-          <tbody v-if="country.data.length">
-            <tr v-for="country, index in country.data" :key="index">
+          <tbody>
+            <tr v-for="country, index in country.data" :key="index" class="cursor-pointer" @click="checkedCreate('edit', index)">
               <td>@{{ country.id }}</td>
               <td>@{{ country.name }}</td>
               <td>@{{ country.code }}</td>
@@ -84,21 +86,20 @@
               <td>@{{ country.updated_at }}</td>
               <td>@{{ country.sort_order }}</td>
               <td>
-                <span v-if="country.status" class="text-success">{{ __('common.enable') }}</span>
+                <span v-if="country.active" class="text-success">{{ __('common.enable') }}</span>
                 <span v-else class="text-secondary">{{ __('common.disable') }}</span>
               </td>
               @hook('admin.country.index.table.body')
               <td class="text-end">
                 @hook('admin.country.index.table.body.actions.before')
-                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(country.id, index)">{{ __('common.delete') }}</button>
                 @hook('admin.country.index.table.body.actions.after')
               </td>
             </tr>
           </tbody>
-          <tbody v-else><tr><td colspan="8" class="border-0"><x-admin-no-data /></td></tr></tbody>
         </table>
       </div>
+      <div v-else><x-admin-no-data /></div>
 
       <el-pagination v-if="country.data.length" layout="total, prev, pager, next" background :page-size="country.per_page" :current-page.sync="page"
         :total="country.total"></el-pagination>
@@ -131,7 +132,8 @@
         </el-form-item>
 
         <el-form-item label="{{ __('common.status') }}">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
+          <el-switch v-model="dialog.form.active" :disabled="dialog.form.id == defaultCountry" :active-value="1" :inactive-value="0"></el-switch>
+          <span v-if="dialog.form.id == defaultCountry" class="text-muted ms-3">{{ __('admin/country.countries_default_disabled') }} <a href="{{ admin_route('settings.store_settings') }}" target="_blank">{{ __('admin/country.To_modify') }}</a></span
         </el-form-item>
 
         @hook('admin.country.index.dialog.after')
@@ -160,6 +162,8 @@
         country: @json($countries ?? []),
         page: 1,
 
+        defaultCountry: @json(system_setting('base.country_id')),
+
         dialog: {
           show: false,
           index: null,
@@ -170,14 +174,14 @@
             continent: '',
             code: '',
             sort_order: '',
-            status: 1,
+            active: 1,
           },
         },
 
         filter: {
           name: bk.getQueryString('name'),
           code: bk.getQueryString('code'),
-          status: bk.getQueryString('status'),
+          active: bk.getQueryString('active'),
           continent: bk.getQueryString('continent'),
         },
 
@@ -260,6 +264,7 @@
         },
 
         deleteCustomer(id, index) {
+          event.stopPropagation();
           const self = this;
           this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',

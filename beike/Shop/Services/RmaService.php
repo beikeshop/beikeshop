@@ -1,4 +1,5 @@
 <?php
+
 /**
  * RmaService.php
  *
@@ -27,7 +28,7 @@ class RmaService
     public static function createFromShop($data): Model|Builder
     {
         $orderProduct = self::findCustomerOrderProduct($data['order_product_id']);
-        if (!$orderProduct) {
+        if (! $orderProduct) {
             abort(404);
         }
 
@@ -63,7 +64,7 @@ class RmaService
         $orderProduct = OrderProductRepo::find($orderProductId);
         $customer     = current_customer();
 
-        if (!$orderProduct || !$customer || $orderProduct->order->customer_id != $customer->id) {
+        if (! $orderProduct || ! $customer || $orderProduct->order->customer_id != $customer->id) {
             return null;
         }
 

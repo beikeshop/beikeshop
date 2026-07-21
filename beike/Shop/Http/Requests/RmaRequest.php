@@ -1,4 +1,5 @@
 <?php
+
 /**
  * RmaRequest.php
  *
@@ -34,7 +35,7 @@ class RmaRequest extends FormRequest
     {
         $rules = [
             'order_product_id' => 'required|exists:order_products,id',
-            'quantity'         => 'required',
+            'quantity'         => 'required|integer|min:1',
             'opened'           => 'required',
             'rma_reason_id'    => 'required|exists:rma_reasons,id',
             'type'             => 'required',

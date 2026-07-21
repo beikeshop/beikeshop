@@ -2,8 +2,8 @@
 
 namespace App\Tools\Commands\Actions;
 
-use Illuminate\Support\Collection;
 use App\Tools\Commands\BaseCommand;
+use Illuminate\Support\Collection;
 
 class CheckLangCommand extends BaseCommand
 {
@@ -46,7 +46,7 @@ class CheckLangCommand extends BaseCommand
 
     }
 
-    public function getInfo(): string|null
+    public function getInfo(): ?string
     {
         return 'Checking languages ...';
     }
@@ -64,8 +64,8 @@ class CheckLangCommand extends BaseCommand
 
     private function getDirectories($module)
     {
-        $moduleName = $module->getStudlyName();
-        $path       = $module->getPath() . $this->langPath;
+        $moduleName  = $module->getStudlyName();
+        $path        = $module->getPath() . $this->langPath;
         $directories = [];
         if (is_dir($path)) {
             $directories = $this->laravel['files']->directories($path);
@@ -76,7 +76,7 @@ class CheckLangCommand extends BaseCommand
                     'path'   => $directory,
                     'files'  => array_map(function ($file) {
                         return basename($file);
-                    }, \File::glob($directory . DIRECTORY_SEPARATOR . "*")),
+                    }, \File::glob($directory . DIRECTORY_SEPARATOR . '*')),
                 ];
             }, $directories);
         }
@@ -98,7 +98,7 @@ class CheckLangCommand extends BaseCommand
 
     private function checkMissingFiles(Collection $directories)
     {
-        //show missing files
+        // show missing files
         $missingFilesMessage = [];
 
         $uniqeLangFiles = $directories->pluck('files')->flatten()->unique()->values();
@@ -135,7 +135,7 @@ class CheckLangCommand extends BaseCommand
 
     private function checkMissingKeys(Collection $directories)
     {
-        //show missing keys
+        // show missing keys
         $uniqeLangFiles  = $directories->pluck('files')->flatten()->unique();
         $langDirectories = $directories->pluck('name');
 
@@ -195,8 +195,9 @@ class CheckLangCommand extends BaseCommand
             $lang = \File::getRequire($file);
 
             return collect(\Arr::dot($lang))->keys();
-        } else {
-            return false;
         }
+
+        return false;
+
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OrderHistoryRepo.php
  *
@@ -11,6 +12,4 @@
 
 namespace Beike\Repositories;
 
-class OrderHistoryRepo
-{
-}
+class OrderHistoryRepo {}

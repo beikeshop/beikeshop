@@ -2,11 +2,10 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -15,7 +14,9 @@ class ServiceMakeCommand extends GeneratorCommand
     use ModuleCommandTrait;
 
     protected $argumentName = 'name';
+
     protected $name = 'plugin:make-service';
+
     protected $description = 'Create a new service class for the specified plugin.';
 
     public function getDestinationFilePath(): string

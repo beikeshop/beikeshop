@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -21,9 +22,7 @@ class Image301 extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -33,10 +32,11 @@ class Image301 extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'image301',
-            'sort' => 0,
-            'name' => trans('admin/builder.modules_image_301'),
-            'icon' => asset('image/module/image_301.png'),
+            'code'  => 'image301',
+            'sort'  => 0,
+            'name'  => trans('admin/builder.modules_image_301'),
+            'image' => asset('image/module/image301_preview.webp'),
+            'icon'  => asset('image/module/image_301.png'),
         ];
 
         return view('admin::pages.design.module.image301', $data);

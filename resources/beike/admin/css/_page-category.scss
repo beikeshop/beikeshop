@@ -3,15 +3,34 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-12 15:27:15
  * @LastEditTime  2022-09-16 19:05:37
  */
 
 body.page-categories {
+  .el-tree {
+    html[data-bs-theme="dark"] & {
+      background: transparent;
+      color: #fff;
+    }
+  }
+
   .el-tree-node__content {
     height: 42px;
     border-bottom: 1px solid #f5f5f5;
+    html[data-bs-theme="dark"] & {
+      border-bottom: 1px solid #3e3e3e;
+      &:hover {
+        background-color: #3e3e3e;
+      }
+    }
+  }
+
+  .el-tree-node:focus>.el-tree-node__content {
+    html[data-bs-theme="dark"] & {
+      background-color: #3e3e3e;
+    }
   }
 
   .el-tree-node__expand-icon {

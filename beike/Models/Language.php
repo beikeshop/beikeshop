@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Language.php
  *
@@ -17,5 +18,5 @@ class Language extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'code', 'locale', 'image', 'sort_order', 'status'];
+    protected $fillable = ['name', 'code', 'locale', 'image', 'sort_order', 'active'];
 }

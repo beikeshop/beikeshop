@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-04 15:52:42
  * @LastEditTime  2022-09-16 19:05:15
  */
@@ -15,8 +15,12 @@
   position: relative;
   display: flex;
   align-items: center;
-  z-index: 9;
+  z-index: 999;
   box-shadow: 0 2px 14px 0 rgba(0, 0, 0, .05);
+  html[data-bs-theme="dark"] & {
+    background-color: #0c1117;
+    box-shadow: 0 4px 18px 0 #000;
+  }
 
   .header-left {
     width: 190px;
@@ -46,6 +50,10 @@
     .warning-copyright {
       margin-right: 20px;
 
+      a {
+        color: #1890ff;
+      }
+
       @media (max-width: 1500px) {
         max-width: 380px;
         html:not([lang="zh_cn"], [lang="zh_hk"]) & {
@@ -72,6 +80,10 @@
           background-color: #f1f3f8;
           .search-icon {
             color: #2a343f;
+
+            // html[data-bs-theme="dark"] & {
+            //   color: #666;
+            // }
           }
         }
 
@@ -93,12 +105,19 @@
         font-size: 16px;
         background-color: #f2f4f7;
 
+        html[data-bs-theme="dark"] & {
+          background-color: #3e3e3e;
+        }
+
         html:not([lang="en"], [lang="zh_cn"], [lang="zh_hk"]) & {
           width: 280px;
         }
 
         .search-icon {
           color: #52606f;
+          html[data-bs-theme="dark"] & {
+            color: #dee2e6;
+          }
         }
 
         &.active {
@@ -150,6 +169,9 @@
           font-size: 14px;
           background-color: transparent;
           height: 40px;
+          html[data-bs-theme="dark"] & {
+            color: #dee2e6;
+          }
           // 设置 placeholder 颜色
           &::-webkit-input-placeholder {
             color: #7b8996;
@@ -170,6 +192,13 @@
         border-radius: 0.5rem;
         // box-shadow: 0 0.6125rem 2.5rem 0.6125rem rgba(140,152,164,.175);
         box-shadow: 0 0.8rem 2.5rem 0.6125rem rgba(140, 152, 164, 0.286);
+        // html[data-bs-theme="dark"] & {
+        //   background-color: #212529;
+        // }
+
+        html[data-bs-theme="dark"] & {
+          box-shadow: none;
+        }
 
         .search-ing {
           height: 80px;
@@ -228,6 +257,9 @@
 
           a {
             color: #333;
+            html[data-bs-theme="dark"] & {
+              color: #eee;
+            }
           }
         }
 
@@ -310,6 +342,10 @@
             .nav-link {
               background-color: #eee;
               color: #333 !important;
+              html[data-bs-theme="dark"] & {
+                background-color: #333;
+                color: #fff !important;
+              }
             }
 
             .dropdown-menu {
@@ -323,7 +359,6 @@
         }
 
         a.nav-link {
-          color: #333;
           padding: 0 6px;
           height: 54px;
           display: flex;
@@ -366,7 +401,7 @@
           }
 
           a.nav-link {
-            padding: 0 16px;
+            padding: 0 14px;
 
             html:not([lang="zh_cn"], [lang="zh_hk"]) & {
               padding: 0 8px;
@@ -424,6 +459,9 @@
   justify-content: space-between;
   z-index: 9;
   box-shadow: 0 2px 14px 0 rgba(0, 0, 0, .05);
+  html[data-bs-theme="dark"] & {
+    background-color: #0b1117;
+  }
 
   > .logo {
     a {

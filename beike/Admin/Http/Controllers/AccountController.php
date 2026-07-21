@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BrandController.php
  *
@@ -33,7 +34,7 @@ class AccountController extends Controller
         $user = current_user();
 
         $adminUserData = $request->all();
-        AdminUserRepo::updateAdminUser($user->id, $adminUserData);
+        AdminUserRepo::updateAdminTokens($user->id, $adminUserData);
 
         return json_success(trans('common.updated_success'));
     }

@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-09-26 16:39:21
  * @LastEditTime  2022-09-26 16:39:34
  */
@@ -350,6 +350,18 @@ body.page-marketing-info {
     #calling-code-search {
       background-image: none;
       border-color: #ced4da;
+    }
+  }
+}
+
+body.page-plugins {
+  .plugins-wrap {
+    .plugin-description {
+      height: 40px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
 }

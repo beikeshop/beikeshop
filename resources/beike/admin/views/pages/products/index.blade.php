@@ -1,6 +1,8 @@
 @extends('admin::layouts.master')
 
-@section('title', __('admin/common.product'))
+@section('title', $type != 'trashed' ? __('admin/common.product') : __('admin/common.products_trashed'))
+
+@section('body-class', 'page-product-list')
 
 @section('content')
   @if ($errors->has('error'))
@@ -11,10 +13,10 @@
     <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
   @endif
 
-  <div id="product-app">
+  <div id="product-app" v-cloak>
     <div class="card h-min-600">
       <div class="card-body">
-        <div class="bg-light p-4">
+        <div class="bg-light rounded-3 p-4">
           <div class="row">
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.name') }}</label>
@@ -61,31 +63,39 @@
               <button type="button" @click="search"
                       class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
               <button type="button" @click="resetSearch"
-                      class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
+                      class="btn btn-default btn-sm">{{ __('common.reset') }}</button>
             </div>
           </div>
         </div>
 
         <div class="d-flex justify-content-between my-4">
-          @if ($type != 'trashed')
-            <a href="{{ admin_route('products.create') }}" class="me-1 nowrap">
-              <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
-            </a>
-          @else
-            @if ($products->total())
-              <button class="btn btn-primary" @click="clearRestore">{{ __('admin/product.clear_restore') }}</button>
+          <div>
+            @if ($type != 'trashed')
+              <a href="{{ admin_route('products.create') }}" class="me-1 nowrap">
+                <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
+              </a>
+            @else
+              @if ($products->total())
+                <button class="btn btn-primary" @click="clearRestore">{{ __('admin/product.clear_restore') }}</button>
+              @endif
             @endif
-          @endif
+
+            @if ($type != 'trashed' && $products->total())
+              @hook('admin.product.batch_btns.before')
+              <button class="btn btn-outline-danger ms-3" :disabled="!selectedIds.length"
+                      @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
+              <button class="btn btn-default ms-1" :disabled="!selectedIds.length"
+                      @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
+              <button class="btn btn-default ms-1" :disabled="!selectedIds.length"
+                      @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
+              @hook('admin.product.batch_btns.after')
+            @endif
+          </div>
 
           @if ($type != 'trashed' && $products->total())
             <div class="right nowrap">
               @hook('admin.product.batch_btns.before')
-              <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
-                      @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
-              <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
-                      @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
-              <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
-                      @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
+
               @hook('admin.product.batch_btns.after')
             </div>
           @endif
@@ -96,7 +106,7 @@
             <table class="table table-hover">
               <thead>
               <tr>
-                <th><input type="checkbox" v-model="allSelected"/></th>
+                <th><input type="checkbox" class="form-check-input" v-model="allSelected"/></th>
                 <th>{{ __('common.id') }}</th>
                 <th>{{ __('product.image') }}</th>
                 <th>{{ __('product.name') }}</th>
@@ -112,41 +122,39 @@
                   </div>
                 </th>
 
-                <th class="d-flex align-items-center">
-                  <div class="d-flex align-items-center">
-                    {{ __('common.sort_order') }}
-                    <div class="d-flex flex-column ml-1 order-by-wrap">
-                      <i class="el-icon-caret-top" @click="checkedOrderBy('position:asc')"></i>
-                      <i class="el-icon-caret-bottom" @click="checkedOrderBy('position:desc')"></i>
-                    </div>
-                  </div>
-                </th>
                 @if ($type != 'trashed')
                   <th>{{ __('common.status') }}</th>
                 @endif
                 @hook('admin.product.list.column')
-                <th class="text-end">{{ __('common.action') }}</th>
+                <th class="text-center">{{ __('common.action') }}</th>
               </tr>
               </thead>
               <tbody>
               @foreach ($products_format as $product)
-                <tr>
-                  <td><input type="checkbox" :value="{{ $product['id'] }}" v-model="selectedIds"/></td>
+                <tr class="{{ $type != 'trashed' ? 'cursor-pointer row-link' : '' }}" data-to-url="{{ admin_route('products.edit', [$product['id'], http_build_query(request()->query())]) }}">
+                  <td @click.stop><input type="checkbox" class="form-check-input" :value="{{ $product['id'] }}" v-model="selectedIds"/></td>
                   <td>{{ $product['id'] }}</td>
                   <td>
-                    <div class="wh-60 border d-flex rounded-2 justify-content-center align-items-center"><img
-                        src="{{ $product['images'][0] ?? 'image/placeholder.png' }}" class="img-fluid max-h-100"></div>
+                    <el-tooltip class="item" effect="light" placement="right" popper-class="product-image-tooltip">
+                      <div slot="content" class="w-max-300">
+                        <a href="{{ admin_route('products.edit', [$product['id'], http_build_query(request()->query())]) }}">
+                          <img src="{{ $product['images'][0] ?? system_setting('base.placeholder') ?? 'image/placeholder.png' }}" class="img-fluid max-h-100">
+                        </a>
+                      </div>
+                      <div class="wh-60 border overflow-hidden d-flex rounded-2 justify-content-center align-items-center cursor-pointer image-wrap"><img
+                          src="{{ $product['images'][0] ?? (system_setting('base.placeholder') ?? 'image/placeholder.png') }}" class="img-fluid max-h-100"></div>
+                    </el-tooltip>
                   </td>
                   <td>
-                    <a href="{{ $product['url'] }}" target="_blank" title="{{ $product['name'] }}"
-                       class="text-dark">{{ $product['name'] }}</a>
+                    <div class="text-break">
+                      <p title="{{ $product['name'] }}" class="mb-1">{{ $product['name'] }}</p>
+                    </div>
                   </td>
                   <td>{{ $product['price_formatted'] }}</td>
                   <td>{{ $product['quantity'] }}</td>
                   <td>{{ $product['created_at'] }}</td>
-                  <td>{{ $product['position'] }}</td>
                   @if ($type != 'trashed')
-                    <td>
+                    <td @click.stop>
                       <div class="form-check form-switch">
                         @php
                           $checked = $product['active'] ? 'checked' : '';
@@ -159,15 +167,12 @@
                     </td>
                   @endif
                   @hook('admin.product.list.column_value', $product)
-                  <td class="text-end text-nowrap">
+                  <td class="text-center text-nowrap">
                     @if ($product['deleted_at'] == '')
-                      <a href="{{ admin_route('products.edit', [$product['id']]) }}"
-                         class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
-                      <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
-                         @click.prevent="deleteProduct({{ $loop->index }})">{{ __('common.delete') }}</a>
+                      <a class="btn btn-default btn-sm" @click.stop data-bs-toggle="tooltip" href="{{ $product['url'] }}" target="_blank" title="{{ __('admin/product.view_more') }}" class="viewProduct"><i class="bi bi-eye"></i></a>
                       @hook('admin.product.list.action', $product)
                     @else
-                      <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
+                      <a href="javascript:void(0)" @click.stop class="btn btn-default btn-sm"
                          @click.prevent="restoreProduct({{ $loop->index }})">{{ __('common.restore') }}</a>
                       @hook('admin.products.trashed.action', $product)
                     @endif
@@ -196,6 +201,7 @@
       el: '#product-app',
       data: {
         url: '{{ $type == 'trashed' ? admin_route("products.trashed") : admin_route("products.index") }}',
+        type: @json($type),
         filter: {
           name: bk.getQueryString('name'),
           page: bk.getQueryString('page'),
@@ -229,6 +235,12 @@
       },
 
       methods: {
+        toProductEdit(url) {
+          if (this.type != 'trashed') {
+            window.location.href = url;
+          }
+        },
+
         turnOnOff(event) {
           let id = event.currentTarget.getAttribute("data-id");
           let checked = event.currentTarget.getAttribute("data-active");

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -21,9 +22,7 @@ class Brand extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -33,10 +32,11 @@ class Brand extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'brand',
-            'sort' => 0,
-            'name' => trans('admin/design_builder.module_brand'),
-            'icon' => '&#xe602;',
+            'code'  => 'brand',
+            'sort'  => 0,
+            'name'  => trans('admin/design_builder.module_brand'),
+            'image' => asset('image/module/brand_preview.webp'),
+            'icon'  => '&#xe602;',
         ];
 
         return view('admin::pages.design.module.brand', $data);

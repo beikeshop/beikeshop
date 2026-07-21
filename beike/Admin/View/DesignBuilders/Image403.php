@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -21,9 +22,7 @@ class Image403 extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -33,10 +32,11 @@ class Image403 extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'image403',
-            'sort' => 0,
-            'name' => trans('admin/design_builder.module_image_403'),
-            'icon' => '&#xe663;',
+            'code'  => 'image403',
+            'sort'  => 0,
+            'name'  => trans('admin/design_builder.module_image_403'),
+            'image' => asset('image/module/image403_preview.webp'),
+            'icon'  => '&#xe663;',
         ];
 
         return view('admin::pages.design.module.image403', $data);

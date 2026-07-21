@@ -98,7 +98,7 @@ return [
         'error_email'                          => '请填写正确的邮箱地址',
         'table_already_exists'                 => '发现数据库中存在数据表，请先清空或者备份再安装!',
         'php_extension'                        => '请安装相应的PHP扩展',
-        'down_phpversion'                      => '请将php版本降到php8.1或者8.2'
+        'down_phpversion'                      => '请将php版本降到php8.1或者8.2',
     ],
 
     /*
@@ -107,11 +107,11 @@ return [
      *
      */
     'final'        => [
-        'template_title' => '安装完成',
-        'title'          => '获取安装结果',
-        'finished'       => '恭喜您，系统安装成功，赶快体验吧',
-        'to_front'       => '访问前台',
-        'to_admin'       => '访问后台',
+        'template_title'    => '安装完成',
+        'title'             => '获取安装结果',
+        'finished'          => '恭喜您，系统安装成功，赶快体验吧',
+        'to_front'          => '访问前台',
+        'to_admin'          => '访问后台',
         'nginx_alert'       => 'Nginx 服务器需要配置伪静态规则，点击 <a href="https://docs.beikeshop.com/install/source.html#nginx" target="_blank">查看配置方法</a>',
     ],
 ];

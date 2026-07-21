@@ -12,7 +12,7 @@
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
         @hook('admin.rma_reasons.index.content.top_buttons.after')
       </div>
-      <table class="table">
+      <table class="table table-hover" v-if="rmaReasons.length">
         <thead>
           <tr>
             <th>ID</th>
@@ -21,19 +21,18 @@
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody v-if="rmaReasons.length">
-          <tr v-for="language, index in rmaReasons" :key="index">
+        <tbody>
+          <tr v-for="language, index in rmaReasons" :key="index" class="cursor-pointer" @click="checkedCreate('edit', index)">
             <td>@{{ language.id }}</td>
             <td><span class="text-hidden">@{{ language.name }}</span></td>
             @hook('admin.rma_reasons.index.table.body')
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm mb-1 mb-sm-0" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click.stop="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>
-        <tbody v-else><tr><td colspan="3" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
+      <div v-else><x-admin-no-data /></div>
     </div>
 
     <el-dialog title="{{ __('admin/common.rma_reasons_index') }}" :visible.sync="dialog.show" width="500px"

@@ -3,20 +3,208 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-09 14:12:25
  * @LastEditTime  2022-09-16 19:05:44
  */
 
 body.page-product-form {
-  .product-item {
-    .position-absolute {
+  .product-item-video {
+    cursor: pointer;
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    &:before {
+      content: '\F4F3';
+      position: absolute;
+      font-size: 32px;
+      color: #fff;
+      font-family: 'bootstrap-icons';
+      border-radius: 999px;
+      z-index: 2;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    &:hover {
+      &:before {
+        font-size: 40px;
+      }
+    }
+  }
+
+  .product-video-preview-layer .layui-layer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-video-preview-dialog {
+    padding: 12px;
+  }
+
+  .product-video-preview-player {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: calc(100vh - 160px);
+    border-radius: 14px;
+    background: #000;
+  }
+
+  .variable-card-full-edit {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    overflow-y: auto;
+    margin-bottom: 0;
+  }
+
+  .product-images-box {
+    // max-width: 600px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    overflow: hidden;
+    border-radius: 6px;
+
+    .drag-drop-upload-text {
       display: none;
     }
 
-    &:hover {
-      .position-absolute {
+    &.drag-over {
+      outline: 1px dashed $primary;
+      background-color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .drag-drop-upload-text {
         display: block;
+      }
+
+      .product-images {
+        opacity: 0;
+      }
+
+      .product-images-bans {
+        display: none;
+      }
+    }
+
+    .drag-drop-upload-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #333;
+      font-size: 15px;
+    }
+
+    &.no-images {
+      outline: 1px dashed #ccc;
+      min-height: 100px;
+      cursor: pointer;
+      html[data-bs-theme="dark"] & {
+        outline: 1px dashed #888;
+      }
+
+      &:hover {
+        background-color: #f6f6f6;
+        html[data-bs-theme="dark"] & {
+          background-color: #2e2e2e;
+        }
+      }
+    }
+
+    .product-images-bans {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .upload-new {
+        border-color: #ccc;
+        html[data-bs-theme="dark"] & {
+          background-color: #2e2e2e;
+          border-color: #444;
+          color: #ccc;
+        }
+        &:hover {
+          border-color: transparent;
+        }
+      }
+
+      .upload-file-manager {
+        html[data-bs-theme="dark"] & {
+          background-color: #1e1e1e;
+          border-color: #444;
+          color: #ccc;
+        }
+      }
+    }
+  }
+
+  .product-images {
+    display: grid;
+    grid-template-columns: repeat(6, 92px);
+    grid-auto-rows: 92px;
+    gap: 9.4px;
+    transition: all 0.2s ease-in-out;
+
+    .set-product-img {
+      border-radius: 8px;
+    }
+
+    .product-item {
+      position: relative;
+      width: 92px;
+      height: 92px;
+      border-radius: 8px;
+
+      &:first-of-type {
+        grid-column: span 2;
+        grid-row: span 2;
+        width: auto;
+        height: auto;
+      }
+
+      .position-absolute {
+        display: none;
+      }
+
+      .product-item-omit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        font-size: 15px;
+        left: 0;
+        backdrop-filter: blur(3px);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        cursor: pointer;
+      }
+
+      &:hover {
+        .position-absolute {
+          display: block;
+        }
       }
     }
   }
@@ -44,6 +232,9 @@ body.page-product-form {
 
       &:hover {
         background-color: #eee;
+        html[data-bs-theme="dark"] & {
+          background-color: #111;
+        }
       }
 
       .category-name {
@@ -101,6 +292,9 @@ body.page-product-form {
       // padding: 10px;
       border-radius: 4px;
       margin-bottom: 10px;
+      html[data-bs-theme="dark"] & {
+        border: 1px solid #55585b;
+      }
     }
 
     .table-skus {
@@ -117,6 +311,9 @@ body.page-product-form {
       padding: 4px 10px;
       background: #f5f5f5;
       justify-content: space-between;
+      html[data-bs-theme="dark"] & {
+        background: #2e2e2e;
+      }
       &:hover {
         .btn-link {
           display: block;
@@ -129,7 +326,7 @@ body.page-product-form {
       }
 
       b {
-        border-right: 1px solid #f4f4f4;
+        // border-right: 1px solid #f4f4f4;
         padding-right: 10px;
       }
 
@@ -158,6 +355,9 @@ body.page-product-form {
         cursor: pointer;
         border-radius: 2px;
         align-items: center;
+        html[data-bs-theme="dark"] & {
+          border-color: #4e4e4e;
+        }
         &:active {
           background-color: #f5f5f5;
         }
@@ -176,7 +376,7 @@ body.page-product-form {
         }
 
         &:hover {
-          border-color: $primary;
+          border-color: $primary !important;
 
           .tools {
             // display: block;
@@ -195,6 +395,10 @@ body.page-product-form {
           display: none;
           background: #fff;
           line-height: 1;
+          border-radius: 50%;
+          html[data-bs-theme="dark"] & {
+            background: #4e4e4e;
+          }
           &:hover {
             color: #d80000;
           }
@@ -243,5 +447,21 @@ body.page-product-form {
         }
       }
     }
+  }
+}
+
+body.page-product-list {
+  .product-image-tooltip {
+    border-color: #ddd;
+
+    .popper__arrow, .popper__arrow {
+      border-right-color: #bbb !important;
+    }
+  }
+}
+
+.name-wrap {
+  &:hover {
+    text-decoration: underline;
   }
 }

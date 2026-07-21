@@ -1,10 +1,11 @@
 <?php
+
 /**
  * bootstrap.php
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-20 15:35:59
  * @modified   2022-07-20 15:35:59
  */
@@ -33,14 +34,18 @@ class Bootstrap
      */
     private function addLatestProducts()
     {
-        add_hook_filter('menu.content', function ($data) {
-            $data[] = [
-                'name' => trans('LatestProducts::header.latest_products'),
-                'link' => shop_route('latest_products'),
-            ];
+        // add_hook_filter('menu.content', function ($data) {
+        //     $data[] = [
+        //         'name' => trans('LatestProducts::header.latest_products'),
+        //         'link' => shop_route('latest_products'),
+        //     ];
 
-            return $data;
-        }, 0);
+        //     return $data;
+        // }, 0);
+
+        add_hook_blade('admin.design.builder.link.static.after', function ($callback, $output, $data) {
+            return "{name: '" . trans('LatestProducts::header.latest_products') . "', value: 'latest_products'},";
+        });
     }
 
     /**

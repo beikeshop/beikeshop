@@ -7,6 +7,7 @@ use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Resources\ProductDetail;
 use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Http\Request;
+use Plugin\Bestseller\Repositories\ProductRepo as BestsellerProductRepo;
 
 class ProductController extends Controller
 {
@@ -22,17 +23,11 @@ class ProductController extends Controller
         $product     = ProductRepo::getProductDetail($product);
         ProductRepo::viewAdd($product);
 
-        $has_video = false;
-
-        if (data_get($product, 'video') && !str_contains($product['video'], '<iframe'))
-        {
-            $has_video = true;
-        }
         $data        = [
             'product'   => (new ProductDetail($product))->jsonSerialize(),
             'relations' => ProductRepo::getProductsByIds($relationIds)->jsonSerialize(),
-            'has_video' => $has_video,
-            'iconfont' => '<i class="iconfont">&#xe628;</i>'
+            'has_video' => data_get($product, 'video'),
+            'iconfont'  => '<i class="iconfont">&#xe628;</i>',
         ];
 
         $data = hook_filter('product.show.data', $data);
@@ -64,5 +59,34 @@ class ProductController extends Controller
         $data = hook_filter('product.search.data', $data);
 
         return view('search', $data);
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $isHtml   = $request->get('html')  ?? false;
+        $class    = $request->get('class') ?? '';
+        $limit    = $request->get('limit');
+        $products = ProductRepo::autocomplete($request->get('name') ?? '', $limit);
+
+        if ($isHtml) {
+            $data = [
+                'products' => $products,
+                'class'    => $class,
+            ];
+
+            return view('product.search-product', $data);
+        }
+
+        return json_success(trans('common.get_success'), $products);
+    }
+
+    /**
+     * 获取热销商品（用于搜索弹窗 AJAX 懒加载）
+     */
+    public function hotProducts()
+    {
+        $products = BestsellerProductRepo::getBestSellerProducts(5);
+
+        return view('product.search-product', ['products' => $products, 'class' => '', 'showAll' => false]);
     }
 }

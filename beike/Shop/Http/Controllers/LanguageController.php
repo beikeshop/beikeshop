@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LanguageController.php
  *
@@ -49,17 +50,19 @@ class LanguageController extends Controller
 
                 if (count($uriArr) && in_array($item, $uriArr)) {
                     // 使用正则表达式替换完整的语言部分
-                    $uri = preg_replace('/\/(' . preg_quote($item) . ')(\/|$)/', '/'.$lang.'$2', $uri);
+                    $uri = preg_replace('/\/(' . preg_quote($item) . ')(\/|$)/', '/' . $lang . '$2', $uri);
 
                     if (locale() === system_setting('base.locale')) {
                         $uri = str_replace('/' . locale(), '', $uri);
                     }
+
                     break;
                 }
 
                 if (count($uriArr) && (isset($uriArr[1]) && ! in_array($uriArr[1], config('app.langs')))) {
                     if (locale() !== system_setting('base.locale')) {
                         $uri = '/' . $lang . $uri;
+
                         break;
                     }
                 }

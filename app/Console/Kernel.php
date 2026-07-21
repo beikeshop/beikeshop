@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Beike\Console\Commands\BeikeShopInstall;
 use Beike\Console\Commands\Sequence;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -9,7 +10,8 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
-        Sequence::class
+        BeikeShopInstall::class,
+        Sequence::class,
     ];
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * StateMachineService.php
  *
@@ -11,14 +12,13 @@
 
 namespace Beike\Services;
 
+use Beike\Admin\Services\UniPushService;
+use beike\Models\Customer;
 use Beike\Models\Order;
 use Beike\Models\OrderHistory;
-use Beike\Models\OrderShipment;
 use Beike\Models\Product;
 use Beike\Repositories\OrderPaymentRepo;
 use Throwable;
-use beike\Models\Customer;
-use Beike\Admin\Services\UniPushService;
 
 class StateMachineService
 {
@@ -46,6 +46,8 @@ class StateMachineService
 
     public const CANCELLED = 'cancelled';              // 已取消
 
+    public const REFUNDING = 'refunding';              // 已取消
+
     public const ORDER_STATUS = [
         self::CREATED,
         self::UNPAID,
@@ -53,6 +55,7 @@ class StateMachineService
         self::SHIPPED,
         self::COMPLETED,
         self::CANCELLED,
+        self::REFUNDING,
     ];
 
     public const MACHINES = [
@@ -64,9 +67,12 @@ class StateMachineService
             self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
         ],
         self::PAID    => [
-            self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder', 'uniPushMessage'],
+            self::REFUNDING => ['updateStatus', 'addHistory', 'notifyUpdateOrder', 'revertStock', 'uniPushMessage'],
             self::SHIPPED   => ['updateStatus', 'addHistory', 'addShipment', 'notifyUpdateOrder', 'uniPushMessage'],
             self::COMPLETED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
+        ],
+        self::REFUNDING    => [
+            self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder', 'uniPushMessage'],
         ],
         self::SHIPPED => [
             self::COMPLETED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
@@ -401,32 +407,43 @@ class StateMachineService
      */
     private function revertStock($oldCode, $newCode)
     {
-
+        $this->order->loadMissing([
+            'orderProducts.productSku',
+        ]);
+        $orderProducts = $this->order->orderProducts;
+        foreach ($orderProducts as $orderProduct) {
+            $productSku = $orderProduct->productSku;
+            if (empty($productSku)) {
+                continue;
+            }
+            $productSku->increment('quantity', $orderProduct->quantity);
+            hook_action('service.state_machine.revert_stock.after', ['order_product' => $orderProduct, 'order_number' => $this->order->number]);
+        }
     }
 
     /**
      * 采用UniPush 推送消息到手机APP
      *
-     * @param $oldCode
-     * @param $newCode
+     * @param            $oldCode
+     * @param            $newCode
      * @throws Exception
      */
     private function uniPushMessage($oldCode, $newCode)
     {
         if (system_setting('base.unipush_api_url') && system_setting('base.order_auto_app_push')) {
             $customer = Customer::find($this->order->customer_id);
-            $cid = $customer->cid ?? 0;
+            $cid      = $customer->cid ?? 0;
 
             if ($cid) {
                 $message = [
                     'push_clientid' => $cid,
-                    'customer_id' => $this->order->customer_id,
-                    'title' => trans('admin/app_push.order_status_update_title'),
-                    'content' => trans('admin/app_push.order_status_update_info') . trans('order.' . $newCode),
-                    'link' => [
-                        'type' => 'order',
+                    'customer_id'   => $this->order->customer_id,
+                    'title'         => trans('admin/app_push.order_status_update_title'),
+                    'content'       => trans('admin/app_push.order_status_update_info') . trans('order.' . $newCode),
+                    'link'          => [
+                        'type'  => 'order',
                         'value' => $this->orderId,
-                    ]
+                    ],
                 ];
 
                 UniPushService::getInstance()->pushOrderStatus($message);

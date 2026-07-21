@@ -1,10 +1,11 @@
 <?php
+
 /**
  * PaypalController.php
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-10 18:57:56
  * @modified   2022-08-10 18:57:56
  *
@@ -185,7 +186,7 @@ class PaypalController
     {
         $data = \json_decode($request->getContent(), true);
 
-        return is_array($data) ? $data : $request->all();
+        return is_array($data) ? $request->all() + $data : $request->all();
     }
 
     private function getNvpCheckoutUrls(Request $request, string $orderNumber, array $data): array

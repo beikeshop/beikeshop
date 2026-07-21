@@ -4,18 +4,15 @@
 
 @section('body-class', 'page-product-form')
 
+@section('page-title-back', admin_route('products.index', http_build_query(request()->query())))
+
 @push('header')
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
 @endpush
 
-@section('page-bottom-btns')
-  <button type="button"
-          class="btn w-min-100 btn-lg btn-primary submit-form-edit">{{ $product->id ? __('common.save') : __('common.save_new') }}</button>
-  <button type="button"
-          class="btn w-min-100 btn-lg btn-default submit-form ms-2">{{ __('common.save_return') }}</button>
-@endsection
+@section('head-form-btns', true)
 
 @section('content')
   @if (session()->has('success'))
@@ -28,216 +25,224 @@
       @endforeach
     </div>
   @endif
+  <form novalidate class="needs-validation"
+        action="{{ $product->id ? admin_route('products.update', $product) : admin_route('products.store') }}"
+        method="POST" id="app" v-cloak>
+    @csrf
+    @method($product->id ? 'PUT' : 'POST')
+    <input type="hidden" name="_redirect" value="{{ $_redirect }}"/>
 
-  <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
-    @hook('admin.product.form.top.tabs.before')
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-basic"
-              type="button">{{ __('admin/product.basic_information') }}</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-descriptions"
-              type="button">{{ __('admin/product.product_details') }}</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-attribute"
-              type="button">{{ __('admin/attribute.index') }}</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-seo" type="button">SEO</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-relations"
-              type="button">{{ __('admin/product.product_relations') }}</button>
-    </li>
-    @hook('admin.product.form.li.after')
-  </ul>
+    @hook('admin.product.form.content.before')
+    <div class="row g-3">
+      <div class="col-lg-9">
+        @hook('admin.product.form.main.before')
 
-  <div class="card">
-    <div class="card-body h-min-600">
-      <form novalidate class="needs-validation"
-            action="{{ $product->id ? admin_route('products.update', $product) : admin_route('products.store') }}"
-            method="POST" id="app" v-cloak>
-        @csrf
-        @method($product->id ? 'PUT' : 'POST')
-        <input type="hidden" name="_redirect" value="{{ $_redirect }}"/>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="mb-3">{{ __('common.data') }}</h5>
 
-        <div class="tab-content">
-          @hook('admin.product.form.tab_content.before')
-          <div class="tab-pane fade show active" id="tab-basic">
-            <h6 class="border-bottom pb-3 mb-4">{{ __('common.data') }}</h6>
+            @hook('admin.product.form.main.card.data.before')
+
             @hook('admin.product.name.before')
-            <x-admin-form-input-locale
-              :width="600" name="descriptions.*.name" title="{{ __('common.name') }}"
-              :value="$descriptions" :required="true"/>
+            <x-admin-form-input-locale name="descriptions.*.name" title="{{ __('common.name') }}" :value="$descriptions" :required="true"/>
             @hook('admin.product.name.after')
-            <x-admin::form.row title="{{ __('common.image') }}">
-              <draggable
-                element="div"
-                ghost-class="dragabble-ghost"
-                class="product-images d-flex flex-wrap"
-                :list="form.images"
-                :options="{animation: 200, handle: '.product-item'}"
-              >
-                <div v-for="image, index in form.images" :key="index"
-                     class="wh-80 rounded-2 product-item position-relative me-2 mb-2 border d-flex justify-content-center align-items-center max-h-100 overflow-hidden">
-                  <div class="position-absolute top-0 end-0">
-                    <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeImages(index)" type="button"><i
-                        class="bi bi-trash"></i></button>
-                  </div>
-                  <img :src="thumbnail(image)" class="img-fluid rounded-2">
-                  <input type="hidden" name="images[]" :value="image">
+            <x-admin::form.row title="">
+              <div class="col-form-label d-flex align-items-center">
+                <div>{{ __('admin/product.images_video') }}</div>
+                <div class="btn btn-default btn-sm ms-3" @click="addProductImageUrl">{{ __('admin/product.add_url') }}</div>
+              </div>
+              <div
+                :class="{
+                  'product-images-box': true,
+                  'drag-over': imagesHandle.isDragOver,
+                  'no-images': !form.images.length,
+                }"
+                @dragover.prevent="handleDragOver"
+                @dragleave="handleDragLeave"
+                @drop.prevent="onDrop"
+                >
+                <span class="drag-drop-upload-text"><i class="bi bi-layers-half"></i> {{ __('admin/product.drag_drop_upload') }}</span>
+                <div class="product-images-bans" v-if="!form.images.length" @click="productsUploadNew">
+                  <label class="btn btn-light btn-sm upload-new" @click.stop>
+                    <i class="bi bi-cloud-upload"></i> {{ __('admin/product.products_upload_new') }}
+                    <input type="file" class="d-none" @change="newFileChange" multiple id="new-file-input" name="" accept="image/*">
+                  </label>
+                  <a class="btn btn-light btn-sm ms-2 upload-file-manager" href="javascript:void(0);" @click.stop="addProductImages('all')"><i class="bi bi-images"></i> {{ __('admin/product.file_manager_select') }}</a>
                 </div>
-                <div v-if="!form.images.length" class="d-none"><input type="hidden" name="images[]" value=""></div>
-                <div class="set-product-img wh-80 rounded-2" @click="addProductImages"><i
-                    class="bi bi-plus fs-1 text-muted"></i></div>
-              </draggable>
-              <div class="help-text mb-1 mt-1">{{ __('admin/product.image_help') }}</div>
-            </x-admin::form.row>
-
-            <x-admin::form.row title="{{ __('product.video') }}">
-              <div class="wp-400 border">
-                <div class="nav nav-tabs video-nav-tabs" role="tablist">
-                  <button :class="['nav-link rounded-0', form.video.videoType == 'local' ? 'active' : '']"
-                          @click="videoTypeChange('local')" data-bs-toggle="tab" data-bs-target="#nav-v-local"
-                          type="button">{{ __('admin/product.video_local') }}</button>
-                  <button :class="['nav-link rounded-0', form.video.videoType == 'iframe' ? 'active' : '']"
-                          @click="videoTypeChange('iframe')" data-bs-toggle="tab" data-bs-target="#nav-v-iframe"
-                          type="button">{{ __('admin/product.iframe_code') }}</button>
-                  <button :class="['nav-link rounded-0', form.video.videoType == 'custom' ? 'active' : '']"
-                          @click="videoTypeChange('custom')" data-bs-toggle="tab" data-bs-target="#nav-v-custom"
-                          type="button">{{ __('admin/builder.text_custom') }}</button>
-                </div>
-
-                <div class="tab-content p-3" id="nav-tabContent">
-                  <div :class="['tab-pane fade ', form.video.videoType == 'local' ? 'show active' : '']"
-                       id="nav-v-local">
-                    <div class="d-flex align-items-end">
-                      <div class="set-product-img wh-80 rounded-2 me-2" @click="addProductVideo">
-                        <i v-if="form.video.url" class="bi bi-play-circle fs-1"></i>
-                        <i v-else class="bi bi-plus fs-1 text-muted"></i>
-                      </div>
-                      <a v-if="form.video.url" target="_blank" :href="form.video.url">{{ __('common.view') }}</a>
-                      <span v-if="form.video.url" @click="deleteVideo"
-                            class="text-danger cursor-pointer ms-2">{{ __('common.delete') }}</span>
+                <draggable
+                  element="div"
+                  ghost-class="dragabble-ghost"
+                  class="product-images"
+                  :list="form.images"
+                  :move="draggableCheckMove"
+                  :animation="200"
+                  :handle="'.product-item'"
+                  :filter="'.no-drag'"
+                >
+                  <div
+                    v-for="image, index in form.images"
+                    :key="index"
+                    :class="{
+                      'product-item': true,
+                      'product-item-video': isVideo(image),
+                      'position-relative': true,
+                      'border': true,
+                      'd-flex': true,
+                      'justify-content-center': true,
+                      'align-items-center': true,
+                      'max-h-100': true,
+                      'overflow-hidden': true,
+                      'd-none': !imagesHandle.showAll && index > 7,
+                      'no-drag': !imagesHandle.showAll && index == 7
+                    }"
+                    @click="isVideo(image) ? showVideo(image) : ''"
+                  >
+                    <div class="position-absolute top-0 end-0 z-3" v-if="imagesHandle.showAll || index != 7">
+                      <a v-if="isVideo(image)" class="btn btn-info btn-sm wh-20 p-0 text-white" :href="form.video.path" target="_blank" type="button"><i class="bi bi-play-fill"></i></a>
+                      <button class="btn btn-danger btn-sm wh-20 p-0" @click.stop="removeImages(index)" type="button"><i class="bi bi-trash"></i></button>
                     </div>
-                    <div class="help-text mt-1">{{ __('admin/product.video_help') }}</div>
+                    <div v-if="!imagesHandle.showAll && index == 7" class="product-item-omit" @click="imagesHandle.showAll = true">
+                      +@{{ form.images.length - (productImages.length - 1) }}
+                    </div>
+                    <div v-if="isVideo(image)">
+                      <video :src="image" v-if="!isYouTubeVideoUrl(image)" class="img-fluid" preload="metadata"></video>
+                      <img v-else :src="'https://i.ytimg.com/vi/' + getYouTubeVideoId(image) + '/maxresdefault.jpg'" class="img-fluid">
+                      <input type="hidden" name="video" :value="form.video.path">
+                    </div>
+                    <div v-else>
+                      <img :src="thumbnail(image) + (thumbnail(image).indexOf('?') === -1 ? '?' : '&') + 't=' + Date.now()" class="img-fluid">
+                    </div>
+                    <input type="hidden" name="images[]" :value="image">
                   </div>
-                  <div :class="['tab-pane fade', form.video.videoType == 'iframe' ? 'show active' : '']"
-                       id="nav-v-iframe">
-                    <textarea class="form-control" rows="3" placeholder="{{ __('admin/product.iframe_code') }}"
-                              v-model="form.video.iframe"></textarea>
-                    <div class="help-text mt-1">{{ __('admin/product.iframe_code_hint') }}</div>
-                  </div>
-                  <div :class="['tab-pane fade', form.video.videoType == 'custom' ? 'show active' : '']"
-                       id="nav-v-custom">
-                    <input class="form-control" placeholder="{{ __('admin/product.video_path') }}"
-                           v-model="form.video.custom">
-                    <div class="help-text mt-1">{{ __('admin/product.video_path_hint') }}</div>
-                  </div>
-                </div>
-
-                <input type="hidden" name="video" :value="form.video.path">
+                  <div class="set-product-img" v-if="form.images.length" @click="addProductImages('all')"><i
+                      class="bi bi-plus fs-1 text-muted"></i></div>
+                </draggable>
               </div>
+              <div class="help-text mb-1 mt-1 w-max-600">{{ __('admin/product.image_help') }}</div>
             </x-admin::form.row>
-
-            <x-admin-form-input name="position" :title="__('common.sort_order')"
-                                :value="old('position', $product->position ?? '0')"/>
-
-            <x-admin::form.row :title="__('admin/product.weight_text')">
-              <div class="d-flex wp-400">
-                <input type="text" name="weight" placeholder="{{ __('admin/product.weight_text') }}"
-                       value="{{ old('weight', $product->weight ?? '') }}" class="form-control"
-                       style="flex: 0 0 260px"/>
-                <x-admin-form-select
-                  name="weight_class"
-                  class="form-select ms-4 bg-white"
-                  :options="$weight_classes"
-                  :value="$product->weight_class ?? $system_weight"
-                  label="echo __('product.' . $option);"
-                  format="0"
-                />
-              </div>
-            </x-admin::form.row>
-
-            @hookwrapper('admin.product.edit.brand')
-            <x-admin::form.row :title="__('admin/brand.index')">
-              <input type="text" name="brand_name" value="{{ old('brand_name', $product->brand->name ?? '') }}"
-                     placeholder="{{ __('admin/builder.modules_keywords_search') }}" id="brand-autocomplete"
-                     class="form-control wp-400 "/>
-              <input type="hidden" name="brand_id" value="{{ old('brand_id', $product->brand_id ?? '') }}"/>
-            </x-admin::form.row>
-            @endhookwrapper
-
-            <x-admin-form-select :title="__('admin/tax_class.index')" name="tax_class_id"
-                                 :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes"
-                                 key="id" label="title"/>
-
-            <x-admin-form-select name="shipping" :title="__('admin/common.shipping')"
-                                 :value="old('shipping', $product->shipping ?? 1)"
-                                 :options="[['title' => __('common.yes'), 'id' => 1], ['title' => __('common.no'),'id' => 0]]"
-                                 key="id" label="title"/>
-
-            @hookwrapper('admin.product.edit.category')
-            <x-admin::form.row :title="__('admin/category.index')">
-              <el-cascader
-                :options="source.flattenCategories"
-                size="small"
-                ref="refCascader"
-                placeholder="{{ __('admin/product.category_placeholder') }}"
-                :class="['wp-400 category-cascader', !form.categories.length ? 'no-data' : '']"
-                :props="{ label: 'name', value: 'id', children: 'children', checkStrictly: true}"
-                @change="categoriesChange" filterable></el-cascader>
-              <div class="wp-400 form-control category-data" v-if="categoryFormat.length">
-                <div v-for="item, index in categoryFormat" :key="index" class="d-flex align-items-center">
-                  <div class="me-2 cursor-pointer delete-icon" @click="form.categories.splice(index, 1)"><i
-                      class="bi bi-dash-circle"></i></div>
-                  <div class="category-name">@{{ item.name }}</div>
-                  <input type="hidden" name="categories[]" :value="item.id">
-                </div>
-              </div>
-            </x-admin::form.row>
-            @endhookwrapper
-
-            <x-admin-form-switch name="active" :title="__('common.status')"
-                                 :value="old('active', $product->active ?? 1)"/>
-
-            @hook('admin.product.edit.extra')
 
             <div>
-              <h5 class="border-bottom pb-3 mb-4">{{ __('admin/product.stocks') }}</h5>
+              @hookwrapper('admin.product.edit.variable')
+              <div v-if="!editing.isVariable">
+                <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}"
+                        name="skus[0][image]">
+                <div class="row">
+                  <div class="col-12 col-xl-4">
+                    <x-admin-form-input name="skus[0][price]" type="number" :title="__('admin/product.price')"
+                    :group-right="$system_currency" :value="old('skus.0.price', $product->skus[0]->price ?? '')" step="any" required/>
+                  </div>
+                  <div class="col-12 col-xl-4">
+                    <x-admin-form-input name="skus[0][origin_price]" type="number" :title="__('admin/product.origin_price')"
+                    :group-right="$system_currency" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" step="any"/>
+                  </div>
+                  <div class="col-12 col-xl-4">
+                    <x-admin-form-input name="skus[0][cost_price]" type="number" :title="__('admin/product.cost_price')"
+                    :group-right="$system_currency" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" step="any"/>
+                  </div>
+                </div>
 
+                <div class="row">
+                  <div class="col-12 col-xl-4">
+                    @php
+                      $defaul_sku = 'bksku-' . substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 4). '-' . substr(str_shuffle('0123456789'), 0, 3);
+                    @endphp
+                    <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? $defaul_sku)" required/>
+                  </div>
+                  <div class="col-12 col-xl-4">
+                    <x-admin-form-input name="skus[0][quantity]" type="number" :title="__('admin/product.quantity')" :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')"/>
+                  </div>
+                  <div class="col-12 col-xl-4">
+                    <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')" :value="old('skus.0.model', $product->skus[0]->model ?? '')"/>
+                  </div>
+                </div>
+
+                <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
+                <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
+                <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
+                @hook('admin.product.edit.sku.price.single.tiered')
+              </div>
+              @endhookwrapper
+            </div>
+
+            @hook('admin.product.form.main.card.data.after')
+          </div>
+        </div>
+
+        <div class="card mb-3 description-wrap">
+          <div class="card-body">
+            <h5 class="mb-3">{{ __('admin/product.product_details') }}</h5>
+
+            @hook('admin.product.form.main.card.description.before')
+
+            <ul class="nav nav-tabs mb-3" role="tablist">
+              @foreach ($languages as $language)
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
+                          data-bs-target="#tab-descriptions-{{ $language->code }}"
+                          type="button">{{ $language->name }}</button>
+                </li>
+              @endforeach
+              @hook('admin.product.content.li.after')
+            </ul>
+
+            <div class="tab-content">
+              @foreach ($languages as $language)
+                <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+                      id="tab-descriptions-{{ $language->code }}">
+                  <textarea name="descriptions[{{ $language->code }}][content]" class="form-control tinymce">
+                    {{ old('content', $product->descriptions->keyBy('locale')[$language->code]->content ?? '') }}
+                  </textarea>
+                </div>
+              @endforeach
+              @hook('admin.product.content.after')
+            </div>
+
+            @hook('admin.product.form.main.card.description.after')
+          </div>
+        </div>
+
+        <div :class="'card mb-3' + (isVariableFullEdit ? ' variable-card-full-edit' : '')">
+          <div class="card-body pb-0">
+            <div class="mb-2 d-flex justify-content-between">
+              <h5 >{{ __('admin/product.enable_multi_spec') }}</h5>
+              <button class="btn btn-default btn-sm" type="button" @click="isVariableFullEdit = !isVariableFullEdit" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('admin/product.full_edit') }}">
+                <i :class="isVariableFullEdit ? 'bi bi-arrows-angle-contract' : 'bi bi-arrows-angle-expand'"></i>
+              </button>
+            </div>
+
+            @hook('admin.product.form.main.card.variable.before')
+
+            <div>
               @hookwrapper('admin.product.edit.switch')
-              <x-admin::form.row :title="__('admin/product.enable_multi_spec')">
+              <x-admin::form.row title="">
                 <el-switch v-model="editing.isVariable" @change="isVariableChange" class="mt-2"></el-switch>
               </x-admin::form.row>
               @endhookwrapper
 
               <input type="hidden" name="variables" :value="JSON.stringify(form.variables)">
 
-              <div class="row g-3 mb-3" v-if="editing.isVariable">
-                <label class="wp-200 col-form-label text-end"></label>
-                <div class="col-auto wp-200-">
+              <div class="mb-3" v-if="editing.isVariable">
+                <div class="">
                   <div class="selectable-variants">
                     <div>
-                      <draggable :list="source.variables" :options="{animation: 100}">
+                      <draggable :list="source.variables" :animation="100">
                         <div v-for="(variant, variantIndex) in source.variables"
-                             :id="'selectable-variant-' + variantIndex">
+                              :id="'selectable-variant-' + variantIndex">
                           <div class="title">
                             <div>
                               <b>@{{ variant.name[current_language_code] }}</b>
                               <el-link type="primary"
-                                       @click="modalVariantOpenButtonClicked(variantIndex, null)">{{ __('common.edit') }}</el-link>
+                                        @click="modalVariantOpenButtonClicked(variantIndex, null)">{{ __('common.edit') }}</el-link>
                               <el-link type="danger" class="ms-2"
-                                       @click="removeSourceVariant(variantIndex)">{{ __('common.delete') }}</el-link>
+                                        @click="removeSourceVariant(variantIndex)">{{ __('common.delete') }}</el-link>
                               @hook('admin.product.edit.source.variables.actions')
                             </div>
                             <div>
                               <el-checkbox v-model="variant.isImage" @change="(e) => {variantIsImage(e, variantIndex)}"
-                                           border size="mini"
-                                           class="me-2 bg-white">{{ __('admin/product.add_variable_image') }}</el-checkbox>
+                                            border size="mini"
+                                            class="me-2 bg-white">{{ __('admin/product.add_variable_image') }}</el-checkbox>
                               <el-button type="primary" plain size="mini"
-                                         @click="modalVariantOpenButtonClicked(variantIndex, -1)">{{ __('admin/product.add_variable_value') }}</el-button>
+                                          @click="modalVariantOpenButtonClicked(variantIndex, -1)">{{ __('admin/product.add_variable_value') }}</el-button>
                             </div>
                           </div>
                           <template v-if="variant.values.length">
@@ -249,11 +254,11 @@
                               @end="isMove = false"
                               ghost-class="dragabble-ghost"
                               :list="variant.values"
-                              :options="{animation: 100}"
+                              :animation="100"
                             >
                               <div v-for="(value, value_index) in variant.values" :key="value_index"
-                                   class="variants-item"
-                                   @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
+                                    class="variants-item"
+                                    @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
                                 <div class="open-file-manager variant-value-img" v-if="variant.isImage">
                                   <div>
                                     <img :src="thumbnail(value.image)" class="img-fluid">
@@ -280,13 +285,13 @@
                       </draggable>
 
                       <el-button type="primary" plain size="small" @click="modalVariantOpenButtonClicked(-1, null)"
-                                 class="btn btn-xs mr-1 mb-1">{{ __('admin/product.add_variable') }}</el-button>
+                                  class="btn btn-xs mr-1 mb-1">{{ __('admin/product.add_variable') }}</el-button>
                     </div>
                     @hookwrapper('admin.product.edit.variables')
                     <div v-if="form.skus.length && form.variables.length" class="mt-3 table-push table-responsive">
                       <div class="batch-setting d-flex align-items-center mb-3 p-2 bg-body">
                         <div v-for="(variant, index) in form.variables" :key="index" class="me-2">
-                          <select class="form-select me-2 bg-white" aria-label="Default select example"
+                          <select class="form-select me-2" aria-label="Default select example"
                                   v-model="variablesBatch.variables[index]">
                             <option selected value="">@{{ variant.name[current_language_code] || 'No name' }}</option>
                             <option :value="value_index" v-for="value, value_index in variant.values"
@@ -296,26 +301,31 @@
                           </select>
                         </div>
                         <div role="button"
-                             class="border d-flex justify-content-center align-items-center border-dashed bg-light wh-40 me-2 bg-white"
-                             @click="batchSettingVariantImage">
+                              class="border d-flex justify-content-center align-items-center border-dashed bg-light wh-40 me-2 bg-white"
+                              @click="batchSettingVariantImage">
                           <img :src="thumbnail(variablesBatch.image)" class="img-fluid" v-if="variablesBatch.image"
-                               style="max-height: 40px;">
+                                style="max-height: 40px;">
                           <i class="bi bi-plus fs-3 text-muted" v-else></i>
                         </div>
-                        <input type="text" class="form-control me-2 bg-white" v-model="variablesBatch.model"
-                               placeholder="{{ __('admin/product.model') }}">
-                        <input type="text" class="form-control me-2 bg-white" v-model="variablesBatch.sku"
-                               placeholder="sku">
-                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.price"
-                               placeholder="{{ __('admin/product.price') }}">
-                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.origin_price"
-                               placeholder="{{ __('admin/product.origin_price') }}">
-                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.cost_price"
-                               placeholder="{{ __('admin/product.cost_price') }}">
-                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.quantity"
+                        <input type="text" class="form-control me-2" v-model="variablesBatch.model"
+                                placeholder="{{ __('admin/product.model') }}">
+                        <input type="text" class="form-control me-2" v-model="variablesBatch.sku"
+                                placeholder="sku">
+                        <input type="number" class="form-control me-2" v-model="variablesBatch.price"
+                                placeholder="{{ __('admin/product.price') }}">
+                        <input type="number" class="form-control me-2" v-model="variablesBatch.origin_price"
+                                placeholder="{{ __('admin/product.origin_price') }}">
+                        <input type="number" class="form-control me-2" v-model="variablesBatch.cost_price"
+                                placeholder="{{ __('admin/product.cost_price') }}">
+                        <input type="number" class="form-control me-2" v-model="variablesBatch.quantity"
                               placeholder="{{ __('admin/product.quantity') }}">
-                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.weight"
-                               placeholder="{{ __('admin/product.weight_text') }}">
+                        <input type="number" class="form-control me-2" v-model="variablesBatch.weight"
+                                placeholder="{{ __('admin/product.weight_text') }}">
+                        <select class="form-select me-2" v-model="variablesBatch.active">
+                          <option value="">{{ __('admin/builder.text_no') }}</option>
+                          <option value="1">{{ __('common.enable') }}</option>
+                          <option value="0">{{ __('common.disable') }}</option>
+                        </select>
                         @hook('admin.product.edit.variables.batch.input.after')
                         <button type="button" class="btn btn-primary text-nowrap"
                                 @click="batchSettingVariant">{{ __('common.batch_setting') }}</button>
@@ -327,14 +337,15 @@
                         <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
                           @{{ variant.name[current_language_code] || 'No name' }}
                         </th>
-                        <th width="106px">{{ __('common.image') }}</th>
+                        <th>{{ __('common.image') }}</th>
                         <th class="w-min-100">{{ __('admin/product.model') }}</th>
                         <th class="w-min-100">sku</th>
-                        <th class="w-min-100">{{ __('admin/product.price') }}<span class="font-size-12 fw-normal text-secondary">({{$system_currency}})</span></th>
-                        <th class="w-min-100">{{ __('admin/product.origin_price') }}<span class="font-size-12 fw-normal text-secondary">({{$system_currency}})</span></th>
-                        <th class="w-min-100">{{ __('admin/product.cost_price') }}<span class="font-size-12 fw-normal text-secondary">({{$system_currency}})</span></th>
+                        <th class="w-min-70">{{ __('admin/product.price') }}<span class="font-size-12 fw-normal text-secondary">({{$system_currency}})</span></th>
+                        <th class="w-min-70">{{ __('admin/product.origin_price') }}<span class="font-size-12 fw-normal text-secondary">({{$system_currency}})</span></th>
+                        <th class="w-min-70">{{ __('admin/product.cost_price') }}<span class="font-size-12 fw-normal text-secondary">({{$system_currency}})</span></th>
                         <th style="width: 70px">{{ __('admin/product.quantity') }}</th>
                         <th style="width: 70px">{{ __('admin/product.weight_text') }}<span class="font-size-12 fw-normal text-secondary variant-weight"></span></th>
+                        <th class="w-min-100">{{ __('common.status') }}</th>
                         @hook('admin.product.edit.sku.variants.title.after')
                         </thead>
                         <tbody>
@@ -348,7 +359,7 @@
                           <td>
                             <div class="product-images d-flex flex-wrap" style="margin-right: -8px">
                               <div v-for="image, index in sku.images" :key="index"
-                                   class="product-item wh-40 border d-flex justify-content-center align-items-center me-2 mb-2 position-relative">
+                                    class="product-item wh-40 border d-flex justify-content-center align-items-center me-2 mb-2 position-relative">
                                 <div class="position-absolute top-0 end-0">
                                   <button class="btn btn-danger btn-sm wh-20 p-0"
                                           @click="removeSkuImages(skuIndex, index)" type="button"><i
@@ -356,25 +367,25 @@
                                 </div>
                                 <img :src="thumbnail(image)" class="img-fluid" style="max-height: 40px;">
                                 <input type="hidden" class="form-control" v-model="sku.images[index]"
-                                       :name="'skus[' + skuIndex + '][images][]'" placeholder="image">
+                                        :name="'skus[' + skuIndex + '][images][]'" placeholder="image">
                               </div>
                               <div
                                 class="border d-flex justify-content-center align-items-center border-dashed bg-light wh-40"
-                                role="button" @click="addProductImages(skuIndex)"><i
+                                role="button" @click="addProductImages('image', skuIndex)"><i
                                   class="bi bi-plus fs-3 text-muted"></i></div>
                             </div>
                             <input type="hidden" class="form-control" :name="'skus[' + skuIndex + '][is_default]'"
-                                   :value="skuIndex == 0 ? 1 : 0">
+                                    :value="skuIndex == 0 ? 1 : 0">
                             <input v-for="(variantValueIndex, j) in sku.variants" type="hidden"
-                                   :name="'skus[' + skuIndex + '][variants][' + j + ']'" :value="variantValueIndex">
+                                    :name="'skus[' + skuIndex + '][variants][' + j + ']'" :value="variantValueIndex">
                           </td>
                           <td><input type="text" class="form-control" v-model="sku.model"
-                                     :name="'skus[' + skuIndex + '][model]'"
-                                     placeholder="{{ __('admin/product.model') }}"></td>
+                                      :name="'skus[' + skuIndex + '][model]'"
+                                      placeholder="{{ __('admin/product.model') }}"></td>
                           <td>
                             <input type="text" :class="['form-control', sku.sku_error ? 'is-invalid' : '']"
-                                   v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku"
-                                   :style="sku.is_default ? 'margin-top: 19px;' : ''" required>
+                                    v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku"
+                                    :style="sku.is_default ? 'margin-top: 19px;' : ''" required>
                             <span role="alert" class="invalid-feedback"
                                   v-if="sku.sku_error">{{ __('admin/product.sku_error_repeat', ['name' => 'sku']) }}</span>
                             <span role="alert" class="invalid-feedback"
@@ -384,26 +395,32 @@
                           </td>
                           <td>
                             <input type="number" class="form-control" v-model="sku.price"
-                                   :name="'skus[' + skuIndex + '][price]'" step="any"
-                                   placeholder="{{ __('admin/product.price') }}" required>
+                                    :name="'skus[' + skuIndex + '][price]'" step="any"
+                                    placeholder="{{ __('admin/product.price') }}" required>
                             <span role="alert"
                                   class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/product.price')]) }}</span>
                             @hook('admin.product.edit.sku.price.tiered')
                           </td>
                           <td><input type="number" class="form-control" v-model="sku.origin_price"
-                                     :name="'skus[' + skuIndex + '][origin_price]'" step="any"
-                                     placeholder="{{ __('admin/product.origin_price') }}">
+                                      :name="'skus[' + skuIndex + '][origin_price]'" step="any"
+                                      placeholder="{{ __('admin/product.origin_price') }}">
                             <span role="alert"
                                   class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/product.origin_price')]) }}</span>
                           </td>
                           <td><input type="number" class="form-control" v-model="sku.cost_price"
-                                     :name="'skus[' + skuIndex + '][cost_price]'" step="any"
-                                     placeholder="{{ __('admin/product.cost_price') }}">
+                                      :name="'skus[' + skuIndex + '][cost_price]'" step="any"
+                                      placeholder="{{ __('admin/product.cost_price') }}">
                           </td>
                           <td><input type="number" class="form-control" v-model="sku.quantity"
-                                     :name="'skus[' + skuIndex + '][quantity]'"
-                                     placeholder="{{ __('admin/product.quantity') }}"></td>
+                                      :name="'skus[' + skuIndex + '][quantity]'"
+                                      placeholder="{{ __('admin/product.quantity') }}"></td>
                           <td><input type="number" class="form-control" v-model="sku.weight" step="any" :name="'skus[' + skuIndex + '][weight]'" placeholder="{{ __('admin/product.weight_text') }}"></td>
+                          <td>
+                            <select class="form-select" :disabled="sku.is_default" v-model="sku.active" :name="'skus[' + skuIndex + '][active]'">
+                              <option value="1">{{ __('common.enable') }}</option>
+                              <option value="0">{{ __('common.disable') }}</option>
+                            </select>
+                          </td>
                           @hook('admin.product.edit.sku.variants.after')
                         </tr>
                         </tbody>
@@ -417,137 +434,25 @@
                       class="bi bi-exclamation-circle-fill"></i> {{ __('admin/product.add_variable') }}</div>
                 </div>
               </div>
-
-              @hookwrapper('admin.product.edit.variable')
-              <div v-if="!editing.isVariable">
-                <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}"
-                       name="skus[0][image]">
-                <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')"
-                                    :value="old('skus.0.model', $product->skus[0]->model ?? '')"/>
-                @php
-                  $defaul_sku = 'BKSKU-' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 4). '-' . substr(str_shuffle('0123456789'), 0, 3);
-                @endphp
-                <x-admin-form-input name="skus[0][sku]" title="sku"
-                                    :value="old('skus.0.sku', $product->skus[0]->sku ?? $defaul_sku)" required/>
-                <x-admin-form-input name="skus[0][price]" type="number" :title="__('admin/product.price')"
-                :group-right="$system_currency" :value="old('skus.0.price', $product->skus[0]->price ?? '')" step="any" required/>
-                <x-admin-form-input name="skus[0][origin_price]" type="number" :title="__('admin/product.origin_price')"
-                :group-right="$system_currency" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" step="any"/>
-                <x-admin-form-input name="skus[0][cost_price]" type="number" :title="__('admin/product.cost_price')"
-                :group-right="$system_currency" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" step="any"/>
-                <x-admin-form-input name="skus[0][quantity]" type="number" :title="__('admin/product.quantity')"
-                                    :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')"/>
-                <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
-                <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
-                <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
-                @hook('admin.product.edit.sku.price.single.tiered')
-              </div>
-              @endhookwrapper
             </div>
+
+            @hook('admin.product.form.main.card.variable.after')
           </div>
-          <div class="tab-pane fade" id="tab-descriptions">
-            <h6 class="border-bottom pb-3 mb-4">{{ __('admin/product.product_details') }}</h6>
-            <x-admin::form.row :title="__('admin/product.product_details')">
+        </div>
 
-              <ul class="nav nav-tabs mb-3" role="tablist">
-                @foreach ($languages as $language)
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab"
-                            data-bs-target="#tab-descriptions-{{ $language->code }}"
-                            type="button">{{ $language->name }}</button>
-                  </li>
-                @endforeach
-                @hook('admin.product.content.li.after')
-              </ul>
-
-              <div class="tab-content">
-                @foreach ($languages as $language)
-                  <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-                       id="tab-descriptions-{{ $language->code }}">
-                    <textarea name="descriptions[{{ $language->code }}][content]" class="form-control tinymce">
-                      {{ old('content', $product->descriptions->keyBy('locale')[$language->code]->content ?? '') }}
-                    </textarea>
-                  </div>
-                @endforeach
-                @hook('admin.product.content.after')
-              </div>
-            </x-admin::form.row>
-          </div>
-          <div class="tab-pane fade" id="tab-attribute">
-            <h6 class="border-bottom pb-3 mb-4">{{ __('admin/attribute.index') }}</h6>
-            @hookwrapper('admin.product.edit.attribute')
-            <x-admin::form.row title="{{ __('admin/attribute.set_attribute') }}">
-              <div class="pdf-table">
-                <table class="table table-bordered w-max-600">
-                  <thead>
-                  <th>{{ __('admin/attribute.index') }}</th>
-                  <th>{{ __('admin/attribute.attribute_value') }}</th>
-                  <th width="50px"></th>
-                  </thead>
-                  <tbody>
-                  <tr v-for="item, index in form.attributes" :key="index">
-                    <td>
-                      <el-autocomplete
-                        v-model="item.attribute.name"
-                        :fetch-suggestions="attributeQuerySearch"
-                        placeholder="{{ __('admin/builder.modules_keywords_search') }}"
-                        value-key="name"
-                        class="w-100"
-                        size="small"
-                        @select="(e) => {attributeHandleSelect(e, index, 'attribute')}"
-                      ></el-autocomplete>
-                      <input type="text" required :name="'attributes['+ index +'][attribute_id]'"
-                             v-model="item.attribute.id" class="form-control d-none">
-                      <div
-                        class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/attribute.index')]) }}</div>
-                    </td>
-                    <td>
-                      <el-autocomplete
-                        v-model="item.attribute_value.name"
-                        :fetch-suggestions="((query, cb) => {attributeValueQuerySearch(query, cb, index)})"
-                        size="small"
-                        :disabled="item.attribute.id == ''"
-                        value-key="name"
-                        class="w-100"
-                        :placeholder="item.attribute.id == '' ? '{{ __('admin/attribute.before_attribute') }}' : '{{ __('admin/builder.modules_keywords_search') }}'"
-                        @select="(e) => {attributeHandleSelect(e, index, 'attribute_value')}"
-                      ></el-autocomplete>
-                      <input type="text" required :name="'attributes['+ index +'][attribute_value_id]'"
-                             v-model="item.attribute_value.id" class="form-control d-none">
-                      <div
-                        class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/attribute.attribute_value')]) }}</div>
-                    </td>
-                    <td class="text-end">
-                      <i @click="form.attributes.splice(index, 1)"
-                         class="bi bi-x-circle fs-4 text-danger cursor-pointer"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2"></td>
-                    <td class="text-end"><i class="bi bi-plus-circle cursor-pointer fs-4" @click="addAttribute"></i>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </x-admin::form.row>
-            @endhookwrapper
-          </div>
-
-          <div class="tab-pane fade" id="tab-seo">
-            <h6 class="border-bottom pb-3 mb-4">SEO</h6>
-
+        <div class="card mb-3 seo-wrap">
+          <div class="card-body">
+            <h5 class="mb-3">SEO</h5>
             @hook('admin.product.seo.before')
 
-            <x-admin-form-input-locale :width="600" name="descriptions.*.meta_title" title="Meta title"
-                                       :value="$descriptions"/>
+            <x-admin-form-input-locale name="descriptions.*.meta_title" title="Meta title" :value="$descriptions"/>
             <x-admin::form.row title="Meta keywords">
               <div class="input-locale-wrap">
                 @foreach ($languages as $language)
-                  <div class="input-group w-max-600">
-                    <span class="input-group-text wp-100">{{ $language['name'] }}</span>
+                  <div class="input-group">
+                    <span class="input-group-text">{{ $language['name'] }}</span>
                     <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]"
-                              class="form-control input-{{ $language['code'] }} wp-400"
+                              class="form-control input-{{ $language['code'] }} "
                               placeholder="Meta keywords">{{ old('descriptions.' . $language['code'] . '.meta_keywords', $product->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
                   </div>
                 @endforeach
@@ -557,10 +462,10 @@
             <x-admin::form.row title="Meta description">
               <div class="input-locale-wrap">
                 @foreach ($languages as $language)
-                  <div class="input-group w-max-600">
+                  <div class="input-group">
                     <span class="input-group-text wp-100">{{ $language['name'] }}</span>
                     <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]"
-                              class="form-control input-{{ $language['code'] }} wp-400"
+                              class="form-control input-{{ $language['code'] }} "
                               placeholder="Meta description">{{ old('descriptions.' . $language['code'] . '.meta_description', $product->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
                   </div>
                 @endforeach
@@ -570,126 +475,288 @@
 
             @hook('admin.product.seo.after')
           </div>
-
-          <div class="tab-pane fade" id="tab-relations">
-            <h6 class="border-bottom pb-3 mb-4">{{ __('admin/product.product_relations') }}</h6>
-            @hook('admin.product.edit.product_relations.before')
-            <x-admin::form.row title="{{ __('admin/product.product_relations') }}">
-              <div class="module-edit-group wp-600">
-                <div class="autocomplete-group-wrapper">
-                  <el-autocomplete
-                    class="inline-input"
-                    v-model="relations.keyword"
-                    popper-class="product-autocomplete-list"
-                    value-key="name"
-                    size="small"
-                    :fetch-suggestions="relationsQuerySearch"
-                    placeholder="{{ __('admin/builder.modules_keywords_search') }}"
-                    @select="relationsHandleSelect"
-                  >
-                  <template slot-scope="{ item }">
-                    <div class="product-item">
-                      <div class="image"><img :src="item.image_format" class="img-fluid"></div>
-                      <div class="name" v-text="item.name"></div>
-                    </div>
-                  </template>
-                  </el-autocomplete>
-
-                  <div class="item-group-wrapper" v-loading="relations.loading">
-                    <template v-if="relations.products.length">
-                      <draggable
-                        ghost-class="dragabble-ghost"
-                        :list="relations.products"
-                        :options="{animation: 330}"
-                      >
-                        <div v-for="(item, index) in relations.products" :key="index" class="item">
-                          {{-- <div>
-                            <i class="el-icon-s-unfold"></i>
-                            <span>@{{ item.name }}</span>
-                          </div> --}}
-                          <div class="product-item">
-                            <div class="image"><img :src="item.image_format || (item.images && item.images[0]) || ''" class="img-fluid"></div>
-                            <span>@{{ item.name }}</span>
-                          </div>
-                          <i class="el-icon-delete right" @click="relationsRemoveProduct(index)"></i>
-                          <input type="text" :name="'relations['+ index +']'" v-model="item.id"
-                                 class="form-control d-none">
-                        </div>
-                      </draggable>
-                    </template>
-                    <template v-else>{{ __('admin/builder.modules_please_products') }}</template>
-                  </div>
-                </div>
-              </div>
-            </x-admin::form.row>
-          </div>
-          @hook('admin.product.form.tab_content.after')
         </div>
 
-        <x-admin::form.row title="">
-          <button type="submit" class="btn d-none btn-primary btn-submit mt-3 btn-lg">{{ __('common.save') }}</button>
-        </x-admin::form.row>
+        @hook('admin.product.form.main.after')
+      </div>
+      <div class="col-lg-3">
+        @hook('admin.product.form.sidebar.before')
 
-        <el-dialog
-          title="{{ __('common.edit') }}"
-          :visible.sync="dialogVariables.show"
-          width="400"
-          @close="closedialogVariablesFormDialog('form')"
-          :close-on-click-modal="false"
-        >
-          <el-form ref="form" :rules="rules" :model="dialogVariables.form" label-width="100px">
-            <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
-              <el-form-item :prop="'name.' + lang.code" :inline-message="true" v-for="lang, lang_i in source.languages"
-                            :key="lang_i"
-                            :rules="[
-                  { required: true, message: '{{ __('common.error_input_required') }}', trigger: 'blur' },
-                ]"
-              >
-                <el-input size="mini" v-model="dialogVariables.form.name[lang.code]"
-                          placeholder="{{ __('common.name') }}">
-                  <template slot="prepend">@{{lang.name}}</template>
-                </el-input>
-              </el-form-item>
-              @hook('admin.product.sku.edit.item.after')
-            </el-form-item>
-            @hook('admin.product.sku.edit.item.btn.before')
-            <el-form-item>
-              <el-button type="primary" @click="dialogVariablesFormSubmit('form')">{{ __('common.save') }}</el-button>
-              <el-button @click="closedialogVariablesFormDialog('form')">{{ __('common.cancel') }}</el-button>
-            </el-form-item>
-          </el-form>
-        </el-dialog>
+        <div class="card mb-3">
+          <div class="card-body pb-0">
+            <h5 class="mb-3">{{ __('common.status') }}</h5>
 
-        <el-dialog title="{{ __('admin/attribute.attribute_value') }}" :visible.sync="attributeDialog.show"
-                   width="670px"
-                   @close="attributeCloseDialog('attribute_form')" :close-on-click-modal="false">
+            @hook('admin.product.form.sidebar.card.status.before')
 
-          <el-form ref="attribute_form" :model="attributeDialog.form" label-width="155px">
-            <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
-              <el-form-item :prop="'name.' + lang.code" :inline-message="true" v-for="lang, lang_i in source.languages"
-                            :key="lang_i"
-                            :rules="[
-                  { required: true, message: '{{ __('common.error_required', ['name' => __('common.name')]) }}', trigger: 'blur' },
-                ]"
-              >
-                <el-input size="mini" v-model="attributeDialog.form.name[lang.code]"
-                          placeholder="{{ __('common.name') }}">
-                  <template slot="prepend">@{{lang.name}}</template>
-                </el-input>
-              </el-form-item>
-            </el-form-item>
+            <x-admin-form-switch name="active" title="" :value="old('active', $product->active ?? 1)"/>
 
-            <el-form-item>
-              <div class="d-flex d-lg-block mt-4">
-                <el-button type="primary" @click="attributeSubmit('attribute_form')">{{ __('common.save') }}</el-button>
-                <el-button @click="attributeCloseDialog('attribute_form')">{{ __('common.cancel') }}</el-button>
+            @hook('admin.product.form.sidebar.card.status.after')
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="mb-3">{{ __('admin/category.index') }}</h5>
+
+            @hook('admin.product.form.sidebar.card.category.before')
+
+            @hookwrapper('admin.product.edit.category')
+              <el-cascader
+                :options="source.flattenCategories"
+                size="small"
+                class="w-100"
+                ref="refCascader"
+                placeholder="{{ __('admin/product.category_placeholder') }}"
+                :class="['category-cascader', !form.categories.length ? 'no-data' : '']"
+                :props="{ label: 'name', value: 'id', children: 'children', checkStrictly: true}"
+                @change="categoriesChange" filterable></el-cascader>
+              <div class=" form-control category-data" v-if="categoryFormat.length">
+                <div v-for="item, index in categoryFormat" :key="index" class="d-flex align-items-center">
+                  <div class="me-2 cursor-pointer delete-icon" @click="form.categories.splice(index, 1)"><i
+                      class="bi bi-dash-circle"></i></div>
+                  <div class="category-name">@{{ item.name }}</div>
+                  <input type="hidden" name="categories[]" :value="item.id">
+                </div>
               </div>
-            </el-form-item>
-          </el-form>
-        </el-dialog>
-      </form>
+            @endhookwrapper
+
+            @hook('admin.product.form.sidebar.card.category.after')
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="mb-3">{{ __('common.data') }}</h5>
+
+            @hook('admin.product.form.sidebar.card.data.before')
+
+            <x-admin::form.row :title="__('admin/product.weight_text')">
+              <div class="d-flex">
+                <input type="text" name="weight" placeholder="{{ __('admin/product.weight_text') }}"
+                        value="{{ old('weight', $product->weight ?? '') }}" class="form-control flex-1" />
+                <x-admin-form-select
+                  name="weight_class"
+                  class="form-select ms-3"
+                  style="flex: 0 0 100px"
+                  :options="$weight_classes"
+                  :value="$product->weight_class ?? $system_weight"
+                  label="echo __('product.' . $option);"
+                  format="0"
+                />
+              </div>
+            </x-admin::form.row>
+
+            @hookwrapper('admin.product.edit.brand')
+            <x-admin::form.row :title="__('admin/brand.index')">
+              <input type="text" name="brand_name" value="{{ old('brand_name', $product->brand->name ?? '') }}"
+                      placeholder="{{ __('admin/builder.modules_keywords_search') }}" id="brand-autocomplete"
+                      class="form-control  "/>
+              <input type="hidden" name="brand_id" value="{{ old('brand_id', $product->brand_id ?? '') }}"/>
+            </x-admin::form.row>
+            @endhookwrapper
+            <x-admin-form-select :title="__('admin/tax_class.index')" name="tax_class_id" :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes" key="id" label="title"/>
+            <x-admin-form-select name="shipping" :title="__('admin/common.shipping')" :value="old('shipping', $product->shipping ?? 1)" :options="[['title' => __('common.yes'), 'id' => 1], ['title' => __('common.no'),'id' => 0]]" key="id" label="title"/>
+
+            @hook('admin.product.edit.extra')
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="mb-3">{{ __('admin/attribute.index') }}</h5>
+
+            @hook('admin.product.form.sidebar.card.attribute.before')
+
+            @hookwrapper('admin.product.edit.attribute')
+              <table class="table table-bordered">
+                <thead>
+                <th>{{ __('admin/attribute.index') }}</th>
+                <th>{{ __('admin/attribute.attribute_value') }}</th>
+                <th width="50px"></th>
+                </thead>
+                <tbody>
+                <tr v-for="item, index in form.attributes" :key="index">
+                  <td>
+                    <el-autocomplete
+                      v-model="item.attribute.name"
+                      :fetch-suggestions="attributeQuerySearch"
+                      placeholder="{{ __('admin/builder.modules_keywords_search') }}"
+                      value-key="name"
+                      class="w-100"
+                      size="small"
+                      @select="(e) => {attributeHandleSelect(e, index, 'attribute')}"
+                    ></el-autocomplete>
+                    <input type="text" required :name="'attributes['+ index +'][attribute_id]'"
+                            v-model="item.attribute.id" class="form-control d-none">
+                    <div
+                      class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/attribute.index')]) }}</div>
+                  </td>
+                  <td>
+                    <el-autocomplete
+                      v-model="item.attribute_value.name"
+                      :fetch-suggestions="((query, cb) => {attributeValueQuerySearch(query, cb, index)})"
+                      size="small"
+                      :disabled="item.attribute.id == ''"
+                      value-key="name"
+                      class="w-100"
+                      :placeholder="item.attribute.id == '' ? '{{ __('admin/attribute.before_attribute') }}' : '{{ __('admin/builder.modules_keywords_search') }}'"
+                      @select="(e) => {attributeHandleSelect(e, index, 'attribute_value')}"
+                    ></el-autocomplete>
+                    <input type="text" required :name="'attributes['+ index +'][attribute_value_id]'"
+                            v-model="item.attribute_value.id" class="form-control d-none">
+                    <div
+                      class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/attribute.attribute_value')]) }}</div>
+                  </td>
+                  <td class="text-end">
+                    <i @click="form.attributes.splice(index, 1)"
+                        class="bi bi-x-circle fs-4 text-danger cursor-pointer"></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2"></td>
+                  <td class="text-end"><i class="bi bi-plus-circle cursor-pointer fs-4" @click="addAttribute"></i>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            @endhookwrapper
+
+            @hook('admin.product.form.sidebar.card.attribute.after')
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="mb-3">{{ __('admin/product.product_relations') }}</h5>
+
+            @hook('admin.product.form.sidebar.card.relations.before')
+
+            <div class="module-edit-group">
+              <div class="autocomplete-group-wrapper">
+                <el-autocomplete
+                  class="inline-input"
+                  v-model="relations.keyword"
+                  popper-class="product-autocomplete-list"
+                  value-key="name"
+                  size="small"
+                  :fetch-suggestions="relationsQuerySearch"
+                  placeholder="{{ __('admin/builder.modules_keywords_search') }}"
+                  @select="relationsHandleSelect"
+                >
+                <template slot-scope="{ item }">
+                  <div class="product-item">
+                    <div class="image"><img :src="item.image_format" class="img-fluid"></div>
+                    <div class="name" v-text="item.name"></div>
+                  </div>
+                </template>
+                </el-autocomplete>
+
+                <div class="item-group-wrapper" v-loading="relations.loading" v-if="relations.products.length">
+                  <draggable
+                    ghost-class="dragabble-ghost"
+                    :list="relations.products"
+                    :animation="330"
+                  >
+                    <div v-for="(item, index) in relations.products" :key="index" class="item">
+                      <div class="product-item">
+                        <div class="image"><img :src="item.image_format || (item.images && item.images[0]) || ''" class="img-fluid"></div>
+                        <span>@{{ item.name }}</span>
+                      </div>
+                      <i class="el-icon-delete right" @click="relationsRemoveProduct(index)"></i>
+                      <input type="text" :name="'relations['+ index +']'" v-model="item.id"
+                              class="form-control d-none">
+                    </div>
+                  </draggable>
+                </div>
+              </div>
+            </div>
+
+            @hook('admin.product.form.sidebar.card.relations.after')
+          </div>
+        </div>
+
+        @hook('admin.product.form.sidebar.after')
+      </div>
     </div>
-  </div>
+
+    @hook('admin.product.form.content.after')
+
+    <x-admin::form.row title="">
+      <button type="submit" class="btn btn-primary btn-submit mt-3 btn-lg">{{ __('common.save') }}</button>
+    </x-admin::form.row>
+
+    <el-dialog
+      title="{{ __('common.edit') }}"
+      :visible.sync="dialogVariables.show"
+      width="400"
+      @close="closedialogVariablesFormDialog('form')"
+      :close-on-click-modal="false">
+      <el-form ref="form" :rules="rules" :model="dialogVariables.form" label-width="100px">
+        <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
+          <el-form-item :prop="'name.' + lang.code" :inline-message="true" v-for="lang, lang_i in source.languages" :key="lang_i" :rules="[
+              { required: true, message: '{{ __('common.error_input_required') }}', trigger: 'blur' },
+            ]">
+            <el-input size="mini" v-model="dialogVariables.form.name[lang.code]"
+                      placeholder="{{ __('common.name') }}">
+              <template slot="prepend">@{{lang.name}}</template>
+            </el-input>
+          </el-form-item>
+          @hook('admin.product.sku.edit.item.after')
+        </el-form-item>
+        @hook('admin.product.sku.edit.item.btn.before')
+        <el-form-item>
+          <el-button type="primary" @click="dialogVariablesFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="closedialogVariablesFormDialog('form')">{{ __('common.cancel') }}</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+
+    <el-dialog title="{{ __('admin/attribute.attribute_value') }}" :visible.sync="attributeDialog.show"
+                width="670px"
+                @close="attributeCloseDialog('attribute_form')" :close-on-click-modal="false">
+
+      <el-form ref="attribute_form" :model="attributeDialog.form" label-width="155px">
+        <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
+          <el-form-item :prop="'name.' + lang.code" :inline-message="true" v-for="lang, lang_i in source.languages"
+                        :key="lang_i"
+                        :rules="[
+              { required: true, message: '{{ __('common.error_required', ['name' => __('common.name')]) }}', trigger: 'blur' },
+            ]"
+          >
+            <el-input size="mini" v-model="attributeDialog.form.name[lang.code]"
+                      placeholder="{{ __('common.name') }}">
+              <template slot="prepend">@{{lang.name}}</template>
+            </el-input>
+          </el-form-item>
+        </el-form-item>
+
+        <el-form-item>
+          <div class="d-flex d-lg-block mt-4">
+            <el-button type="primary" @click="attributeSubmit('attribute_form')">{{ __('common.save') }}</el-button>
+            <el-button @click="attributeCloseDialog('attribute_form')">{{ __('common.cancel') }}</el-button>
+          </div>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+
+    <el-dialog
+      title="{{ __('admin/product.add_url') }}"
+      :visible.sync="addUrlDialog.show"
+      width="400">
+      <el-form ref="addUrlForm" :model="addUrlDialog" :rules="addUrlDialog.rules" label-width="100px">
+        <el-form-item label="{{ __('admin/product.add_url') }}" required prop="url">
+          <el-input v-model="addUrlDialog.url" placeholder="{{ __('admin/product.add_url') }}"></el-input>
+          <p class="text-muted mb-0">{{ __('admin/product.add_url_help') }}</p>
+        </el-form-item>
+        <el-form-item>
+          <div class="d-flex d-lg-block">
+            <el-button type="primary" @click="addUrlSubmit('addUrlForm')">{{ __('common.save') }}</el-button>
+            <el-button @click="addUrlDialog.show = false">{{ __('common.cancel') }}</el-button>
+          </div>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+  </form>
 
   @hook('admin.product.form.footer')
 @endsection
@@ -721,7 +788,7 @@
         app.source.variables = [];
       }
 
-      app.videoSubmitFormat()
+      // app.videoSubmitFormat()
     }
 
     var app = new Vue({
@@ -729,16 +796,18 @@
       data: {
         current_language_code: '{{ locale() }}',
         isMove: false,
+        isVariableFullEdit: false,
+        imagesHandle: {
+          isDragOver: false,
+          showAll: false,
+        },
         form: {
           categories: @json(old('categories', $category_ids) ?? []),
           attributes: @json(old('pickups', $product_attributes) ?? []),
           images: @json(old('images', $product->images) ?? []),
           video: {
             path: @json(old('video', $product->video ?? '')),
-            url: '',
-            iframe: '',
-            custom: '',
-            videoType: 'local',
+            url: @json(image_origin(old('video', $product->video ?? ''))),
           },
           model: @json($product->skus[0]['model'] ?? ''),
           price: @json($product->skus[0]['price'] ?? ''),
@@ -758,7 +827,7 @@
           cost_price: '',
           quantity: '',
           image: '',
-          status: false,
+          active: '',
         },
 
         relations: {
@@ -795,11 +864,28 @@
           }
         },
 
+        addUrlDialog: {
+          show: false,
+          url: '',
+          rules: {
+            url: [
+              { required: true, message: '{{ __('common.error_input_required') }}', trigger: 'blur' },
+            ],
+          },
+        },
+
         rules: {},
         @stack('admin.product.edit.vue.data')
       },
 
       computed: {
+        productImages() {
+          if (this.imagesHandle.showAll) {
+            return this.form.images;
+          }
+          return this.form.images.slice(0, 8);
+        },
+
         // variant value 重复次数
         variantValueRepetitions() {
           var repeats = [];
@@ -849,7 +935,6 @@
           this.variablesBatch.variables = this.form.variables.map((v, i) => '');
         }
 
-        this.videoDataFormat();
         @hook('admin.product.edit.vue.beforeMount')
       },
 
@@ -882,6 +967,166 @@
       },
 
       methods: {
+        showVideo(src) {
+          if (this.isYouTubeVideoUrl(src)) {
+            window.open(src, '_blank');
+            return;
+          }
+
+          layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            shadeClose: true,
+            area: ['500px', '500px'],
+            skin: 'product-video-preview-layer',
+            content: `
+              <div class="product-video-preview-dialog">
+                <video src="${src}" controls autoplay playsinline class="product-video-preview-player"></video>
+              </div>
+            `,
+          });
+        },
+
+        draggableCheckMove(e) {
+          const toIndex = e.relatedContext.index;
+          const fromIndex = e.draggedContext.index;
+
+          // 禁止任何操作发生在第7个位置（index == 7）
+          if (!this.imagesHandle.showAll && (toIndex >= 7 || fromIndex >= 7)) {
+            return false;
+          }
+
+          return true;
+        },
+
+        isVideo(src) {
+          if (!src) return false;
+
+          const lowerSrc = src.toLowerCase();
+
+          return (
+            /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/.test(lowerSrc) ||
+            lowerSrc.includes('youtube.com/watch?v=') ||
+            lowerSrc.includes('youtu.be/') ||
+            lowerSrc.includes('youtube.com/embed/') ||
+            lowerSrc.includes('youtube.com/shorts/')
+          );
+        },
+
+        isYouTubeVideoUrl(url) {
+          try {
+            const parsed = new URL(url);
+            const hostname = parsed.hostname.replace(/^www\./, '');
+
+            // 标准 YouTube 视频链接
+            if (hostname === 'youtube.com' && parsed.pathname === '/watch' && parsed.searchParams.has('v')) {
+              return true;
+            }
+
+            if (hostname === 'youtube.com' && parsed.pathname.startsWith('/embed/')) {
+              return true;
+            }
+
+            if (hostname === 'youtube.com' && parsed.pathname.startsWith('/shorts/')) {
+              return true;
+            }
+
+            // 短链接 youtu.be
+            if (hostname === 'youtu.be' && parsed.pathname.length > 1) {
+              return true;
+            }
+
+
+            return false;
+          } catch (e) {
+            return false; // 非法 URL
+          }
+        },
+
+        getYouTubeVideoId(url) {
+          try {
+            const parsed = new URL(url);
+            const hostname = parsed.hostname.replace(/^www\./, '');
+
+            if (hostname === 'youtu.be') {
+              return parsed.pathname.slice(1);
+            }
+
+            if (hostname === 'youtube.com' && parsed.pathname === '/watch') {
+              return parsed.searchParams.get('v');
+            }
+
+            if (hostname === 'youtube.com' && parsed.pathname.startsWith('/embed/')) {
+              return parsed.pathname.split('/embed/')[1]?.split('/')[0] || null;
+            }
+
+            if (hostname === 'youtube.com' && parsed.pathname.startsWith('/shorts/')) {
+              return parsed.pathname.split('/shorts/')[1]?.split('/')[0] || null;
+            }
+          } catch (e) {
+            return null;
+          }
+          return null;
+        },
+
+        productsUploadNew() {
+          $('#new-file-input').click();
+        },
+
+        newFileChange(e) {
+          const files = Array.from(e.target.files);
+          this.newProductUploadFilesApi(files);
+        },
+
+        handleDragOver(e) {
+          const hasFiles = e.dataTransfer?.types?.includes?.("Files");
+          if (hasFiles) {
+            this.imagesHandle.isDragOver = true;
+          }
+        },
+
+        handleDragLeave(e) {
+          // 检查是否离开了整个容器，而不是进入子元素
+          if (!e.currentTarget.contains(e.relatedTarget)) {
+            this.imagesHandle.isDragOver = false
+          }
+        },
+
+        onDrop(e) {
+          this.imagesHandle.isDragOver = false;
+          const files = Array.from(e.dataTransfer.files);
+          this.newProductUploadFilesApi(files);
+        },
+
+        newProductUploadFilesApi(files) {
+          const validFiles = files.filter(file =>
+            file.type.startsWith('image/') || file.type.startsWith('video/')
+          );
+
+          if (validFiles.length > 0) {
+            validFiles.forEach(file => {
+              var formData = new FormData();
+              formData.append("file", file, file.name);
+              formData.append("path", '/products');
+
+              $http.post('{{ admin_route('file_manager.upload') }}', formData, {hmsg: true}).then((res) => {
+                if (this.isVideo(file.name)) {
+                  this.form.video.path = res.path;
+                  this.form.video.url = res.url;
+                }
+
+                const videoIndex = this.form.images.findIndex(e => this.isVideo(e));
+                if (videoIndex > -1 && this.isVideo(res.path)) {
+                  this.form.images[videoIndex] = res.path;
+                } else {
+                  this.form.images.push(res.path);
+                }
+              })
+            })
+          }
+        },
+
         categoriesChange(e) {
           const last = e[e.length - 1];
           this.$nextTick(() => {
@@ -899,29 +1144,6 @@
             } else {
               layer.msg('{{ __('admin/product.category_disabled') }}');
             }
-          }
-        },
-
-        // 视频数据格式化 type
-        videoDataFormat() {
-          const videoPath = @json(old('video', $product->video ?? ''));
-
-          if (videoPath.indexOf('<iframe') > -1) {
-            this.form.video.videoType = 'iframe';
-            this.form.video.iframe = videoPath;
-            return
-          }
-
-          if (videoPath.indexOf('http') > -1) {
-            this.form.video.videoType = 'custom';
-            this.form.video.custom = videoPath;
-            return
-          }
-
-          this.form.video.path = videoPath;
-
-          if (videoPath) {
-            this.form.video.url = @json(image_origin(old('video', $product->video ?? '')));
           }
         },
 
@@ -994,7 +1216,34 @@
           })
         },
 
-        addProductImages(skuIndex) {
+        addProductImageUrl() {
+          this.addUrlDialog.show = true;
+        },
+
+        addUrlSubmit(formName) {
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              this.form.video.path = this.addUrlDialog.url;
+              this.form.video.url = this.addUrlDialog.url;
+              const videoIndex = this.form.images.findIndex(e => this.isVideo(e));
+              if (videoIndex > -1 && this.isVideo(this.addUrlDialog.url)) {
+                this.form.images[videoIndex] = this.addUrlDialog.url;
+              } else {
+                this.form.images.push(this.addUrlDialog.url);
+              }
+
+              this.addUrlDialog.show = false;
+            }
+          })
+        },
+
+        // 根据 youtube url 获取视频封面
+        getVideoCover(url) {
+          const videoId = url.split('v=')[1];
+          return 'https://img.youtube.com/vi/' + videoId + '/0.jpg';
+        },
+
+        addProductImages(type, skuIndex) {
           bk.fileManagerIframe(images => {
             if (!isNaN(skuIndex)) {
               if (this.form.skus[skuIndex].images === null) {
@@ -1004,8 +1253,21 @@
               }
               return;
             }
-            this.form.images.push(...images.map(e => e.path))
-          }, {mime: 'image'})
+
+            images.forEach(image => {
+              if (this.isVideo(image.path)) {
+                this.form.video.path = image.path;
+                this.form.video.url = image.url;
+              }
+
+              const videoIndex = this.form.images.findIndex(e => this.isVideo(e));
+              if (videoIndex > -1 && this.isVideo(image.path)) {
+                this.form.images[videoIndex] = image.path;
+              } else {
+                this.form.images.push(image.path);
+              }
+            })
+          }, {mime: type})
         },
 
         addProductVideo() {
@@ -1066,6 +1328,9 @@
             }
             if (this.variablesBatch.quantity) {
               this.form.skus[index].quantity = this.variablesBatch.quantity;
+            }
+            if (this.variablesBatch.active && !this.form.skus[index].is_default) {
+              this.form.skus[index].active = this.variablesBatch.active;
             }
             @stack('admin.product.edit.vue.method.batchSettingVariant')
           })
@@ -1183,7 +1448,8 @@
                 sku: '',
                 price: null,
                 quantity: null,
-                is_default: 1
+                is_default: 1,
+                active: '',
               }];
               this.editing.isVariable = false;
             }, 0);
@@ -1224,7 +1490,7 @@
               break;
             case 'string':
             default:
-              chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+              chars = 'abcdefghijklmnopqrstuvwxyz';
               break;
           }
 
@@ -1301,11 +1567,12 @@
                 variants: combo,
                 images: [],
                 model: '',
-                sku: 'BKSKU-' + this.randomValue(4, 'string') + '-' + this.randomValue(3, 'number'),
+                sku: 'bksku-' + this.randomValue(4, 'string') + '-' + this.randomValue(3, 'number'),
                 price: null,
                 weight: $('input[name="weight"]').val(),
                 quantity: null,
                 is_default: i == 0,
+                active: 1,
               });
             }
           }
@@ -1419,7 +1686,6 @@
         return false;
       }
     });
-
     @hook('admin.product.edit.script.after')
   </script>
 @endpush

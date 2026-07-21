@@ -2,12 +2,11 @@
 
 namespace App\Tools\Commands\Make;
 
+use App\Tools\Contracts\ActivatorInterface;
+use App\Tools\Generators\ModuleGenerator;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Process;
-use App\Tools\Contracts\ActivatorInterface;
-use App\Tools\Generators\ModuleGenerator;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -33,14 +32,14 @@ class ModuleMakeCommand extends Command
      */
     public function handle(): int
     {
-        $names = $this->argument('name');
+        $names   = $this->argument('name');
         $success = true;
 
         foreach ($names as $name) {
             $code = Str::snake($name);
-            if (PluginRepo::installed($code))
-            {
+            if (PluginRepo::installed($code)) {
                 $this->components->error("Plugin $code is already installed.");
+
                 return 0;
             }
         }
@@ -55,7 +54,7 @@ class ModuleMakeCommand extends Command
                 ->setComponent($this->components)
                 ->setForce($this->option('force'))
                 ->setType($this->getModuleType())
-                ->setActive(!$this->option('disabled'))
+                ->setActive(! $this->option('disabled'))
                 ->setVendor($this->option('author-vendor'))
                 ->setAuthor($this->option('author-name'), $this->option('author-email'))
                 ->generate();
@@ -65,11 +64,10 @@ class ModuleMakeCommand extends Command
             }
         }
 
-        if ($success)
-        {
-           foreach ($names as $name) {
-               $this->install($name);
-           }
+        if ($success) {
+            foreach ($names as $name) {
+                $this->install($name);
+            }
         }
 
         return $success ? 0 : E_ERROR;
@@ -89,7 +87,7 @@ class ModuleMakeCommand extends Command
                 'plugin' => $code,
             ]);
 
-            $code = Str::snake($code);
+            $code   = Str::snake($code);
             $plugin = app('plugin')->getPluginOrFail($code);
             PluginRepo::installPlugin($plugin);
 
@@ -97,7 +95,7 @@ class ModuleMakeCommand extends Command
             SettingRepo::update('plugin', $code, ['status' => 1]);
 
         } catch (\Exception $e) {
-           dd("Plugin [{$code}] install fail: {$e->getMessage()}");
+            dd("Plugin [{$code}] install fail: {$e->getMessage()}");
         }
     }
 
@@ -128,14 +126,14 @@ class ModuleMakeCommand extends Command
     }
 
     /**
-    * Get module type .
-    *
-    * @return string
-    */
+     * Get module type .
+     *
+     * @return string
+     */
     private function getModuleType()
     {
         $isPlain = $this->option('plain');
-        $isApi = $this->option('api');
+        $isApi   = $this->option('api');
 
         if ($isPlain && $isApi) {
             return 'web';
@@ -144,8 +142,9 @@ class ModuleMakeCommand extends Command
             return 'plain';
         } elseif ($isApi) {
             return 'api';
-        } else {
-            return 'web';
         }
+
+        return 'web';
+
     }
 }

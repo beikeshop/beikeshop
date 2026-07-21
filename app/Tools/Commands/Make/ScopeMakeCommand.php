@@ -2,11 +2,10 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -15,7 +14,9 @@ class ScopeMakeCommand extends GeneratorCommand
     use ModuleCommandTrait;
 
     protected $argumentName = 'name';
+
     protected $name = 'plugin:make-scope';
+
     protected $description = 'Create a new scope class for the specified plugin.';
 
     public function getDestinationFilePath(): string
@@ -69,10 +70,10 @@ class ScopeMakeCommand extends GeneratorCommand
     {
         $namespace = config('plugins.paths.generator.model.path');
 
-        $parts = explode("/", $namespace);
+        $parts  = explode('/', $namespace);
         $models = end($parts);
 
-        return $models.'\Scopes';
+        return $models . '\Scopes';
     }
 
     protected function getStubName(): string

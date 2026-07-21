@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-15 17:35:29
  * @LastEditTime  2022-09-16 20:47:16
  */
@@ -125,40 +125,40 @@ body.page-cart {
       padding: 10px;
       display: flex;
 
-      .quantity-wrap-line {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        input {
-          width: 38px;
-          border-radius: 0;
-        }
+      // .quantity-wrap-line {
+      //   display: flex;
+      //   align-items: center;
+      //   justify-content: space-between;
+      //   input {
+      //     width: 38px;
+      //     border-radius: 0;
+      //   }
 
-        input, i {
-          height: 24px;
-          line-height: 24px;
-          padding: 0;
-          text-align: center;
-          display: block;
-        }
+      //   input, i {
+      //     height: 24px;
+      //     line-height: 24px;
+      //     padding: 0;
+      //     text-align: center;
+      //     display: block;
+      //   }
 
-        i {
-          width: 24px;
-          border: 1px solid #dee2e6;
-          display: inline-block;
-          cursor: pointer;
-        }
+      //   i {
+      //     width: 24px;
+      //     border: 1px solid #dee2e6;
+      //     display: inline-block;
+      //     cursor: pointer;
+      //   }
 
-        .bi-chevron-up {
-          transform: rotate(-270deg);
-          margin-left: -1px;
-        }
+      //   .bi-chevron-up {
+      //     transform: rotate(-270deg);
+      //     margin-left: -1px;
+      //   }
 
-        .bi-chevron-down {
-          transform: rotate(90deg);
-          margin-right: -1px;
-        }
-      }
+      //   .bi-chevron-down {
+      //     transform: rotate(90deg);
+      //     margin-right: -1px;
+      //   }
+      // }
     }
   }
 

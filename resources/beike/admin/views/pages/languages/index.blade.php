@@ -1,5 +1,7 @@
 @extends('admin::layouts.master')
 
+@section('page-title-back', true)
+
 @section('title', __('admin/common.language'))
 
 @section('content')
@@ -7,7 +9,7 @@
     <div class="card-body h-min-600">
       @hook('admin.languages.index.before')
       <div class="mb-3 alert alert-info">{{ __('admin/language.help_install') }}</div>
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>{{ __('common.name') }}</th>
@@ -18,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="language, index in languages" :key="index">
+          <tr v-for="language, index in languages" :key="index" class="cursor-pointer" @click="language.id && checkedCreate('edit', index)">
             <td>
               @{{ language.name }}
               <span class="badge bg-success" v-if="settingLocale == language.code">{{ __('common.default') }}</span>
@@ -29,7 +31,6 @@
             <td class="text-end">
               @hook('admin.languages.index.tbody.actions.before')
               <div v-if="language.id">
-                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button :disabled="settingLocale == language.code" class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(language.id, index)">{{ __('admin/common.uninstall') }}</button>
               </div>
               <div v-else>
@@ -147,6 +148,7 @@
         },
 
         deleteItem(id, index) {
+          event.stopPropagation();
           $http.delete('languages/' + id).then((res) => {
             this.$message.success(res.message);
             this.languages[index].id = 0;

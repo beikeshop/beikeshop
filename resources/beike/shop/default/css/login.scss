@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-09-09 19:16:39
  * @LastEditTime  2022-09-16 20:55:37
  */
@@ -38,9 +38,10 @@ body.page-login, body.page-forgotten {
   }
 
   .login-item-header {
-    background: #f8f9fa;
+    background: #f3f4f6;
     border-bottom: none;
     padding: 1.2rem 1.5rem;
+    border-radius: 100px;
     h6 {
       font-weight: bold;
       font-size: 1rem;

@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->useLangPath(base_path('lang'));
     }
 
     /**
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         // Define CURL_SSLVERSION_TLSv1_2 constant if not exists to prevent errors in older cURL versions
-        if (!defined('CURL_SSLVERSION_TLSv1_2')) {
+        if (! defined('CURL_SSLVERSION_TLSv1_2')) {
             define('CURL_SSLVERSION_TLSv1_2', 6);
         }
     }

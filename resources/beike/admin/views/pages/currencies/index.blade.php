@@ -2,16 +2,18 @@
 
 @section('title', __('admin/common.currency'))
 
+@section('page-title-back', true)
+
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       @hook('admin.currency.index.content.before')
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
-        <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=rate_api_key" class="btn w-min-100 btn-outline-info" target="_blank">{{ __('admin/setting.rate_api_key') }}</a>
+        <a href="{{ admin_route('settings.checkout') }}" class="btn w-min-100 btn-outline-primary" target="_blank">{{ __('admin/setting.rate_api_key') }}</a>
       </div>
-      <div class="table-push">
-        <table class="table">
+      <div class="table-push" v-if="currencies.length">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
@@ -27,8 +29,8 @@
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
-          <tbody v-if="currencies.length">
-            <tr v-for="item, index in currencies" :key="index">
+          <tbody>
+            <tr v-for="item, index in currencies" :key="index" class="cursor-pointer" @click="checkedCreate('edit', index)">
               <td>@{{ item.id }}</td>
               <td>
                 <div>@{{ item.name }}</div>
@@ -41,21 +43,20 @@
               <td>@{{ item.value }}</td>
               <td>@{{ item.latest_value }}</td>
               <td>
-                <span v-if="item.status" class="text-success">{{ __('common.enable') }}</span>
+                <span v-if="item.active" class="text-success">{{ __('common.enable') }}</span>
                 <span v-else class="text-secondary">{{ __('common.disable') }}</span>
               </td>
               @hook('admin.currency.index.table.body')
               <td class="text-end">
                 @hook('admin.currency.index.table.body.actions.before')
-                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" :disabled="item.code == defaultCurrency" type="button" @click="deleteCustomer(item.id, index)">{{ __('common.delete') }}</button>
                 @hook('admin.currency.index.table.body.actions.after')
               </td>
             </tr>
           </tbody>
-          <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
         </table>
       </div>
+      <tbody v-else><x-admin-no-data /></tbody>
 
     </div>
 
@@ -94,7 +95,7 @@
         </el-form-item>
 
         <el-form-item label="{{ __('common.status') }}">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" :disabled="defaultCurrencyDisabled"></el-switch>
+          <el-switch v-model="dialog.form.active" :active-value="1" :inactive-value="0" :disabled="defaultCurrencyDisabled"></el-switch>
         </el-form-item>
 
         @hook('admin.currency.index.dialog.form.after')
@@ -137,7 +138,7 @@
             decimal_place: '',
             default_currency: false,
             value: '',
-            status: 1,
+            active: 1,
           },
         },
 
@@ -168,6 +169,7 @@
           if (type == 'edit') {
             this.dialog.index = index
             let form = JSON.parse(JSON.stringify(this.currencies[index]));
+            form.active = Number(this.currencies[index].active)
             form.default_currency = Number(this.currencies[index].code == this.defaultCurrency)
             this.dialog.form = form
           }
@@ -202,6 +204,7 @@
         },
 
         deleteCustomer(id, index) {
+          event.stopPropagation();
           const self = this;
           this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',

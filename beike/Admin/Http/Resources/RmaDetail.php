@@ -1,4 +1,5 @@
 <?php
+
 /**
  * RmaDetail.php
  *
@@ -22,25 +23,29 @@ class RmaDetail extends JsonResource
         $statuses = RmaRepo::getStatuses();
 
         return [
-            'id'               => $this->id,
-            'order_id'         => $this->order_id,
-            'order_number'     => $this->order->number ?? '--',
-            'order_product_id' => $this->order_product_id,
-            'quantity'         => $this->quantity,
-            'opened'           => $this->opened,
-            'type'             => $this->type,
-            'comment'          => $this->comment,
-            'status'           => $statuses[$this->status],
-            'created_at'       => time_format($this->created_at),
-            'email'            => $this->email,
-            'telephone'        => $this->telephone,
-            'product_name'     => $this->product_name,
-            'name'             => $this->name,
-            'sku'              => $this->sku,
-            'price'            => isset($this->orderProduct->price) ? currency_format($this->orderProduct->price) : '-',
-            'images'           => $this->images,
-            'reason'           => $this->reason ? (json_decode($this->reason->name, true)[locale()] ?? '') : '',
-            'type_text'        => $types[$this->type],
+            'id'                 => $this->id,
+            'order_id'           => $this->order_id,
+            'order_number'       => $this->order->number ?? '--',
+            'order_product_id'   => $this->order_product_id,
+            'quantity'           => $this->quantity,
+            'opened'             => $this->opened,
+            'type'               => $this->type,
+            'comment'            => $this->comment,
+            'status'             => $statuses[$this->status],
+            'created_at'         => time_format($this->created_at),
+            'express_com'        => $this->express_com,
+            'express_no'         => $this->express_no,
+            'express_com_format' => $this->express_com_format,
+            'express_no_format'  => $this->express_no_format,
+            'email'              => $this->email,
+            'telephone'          => $this->telephone,
+            'product_name'       => $this->product_name,
+            'name'               => $this->name,
+            'sku'                => $this->sku,
+            'price'              => isset($this->orderProduct->price) ? currency_format($this->orderProduct->price) : '-',
+            'images'             => $this->images,
+            'reason'             => $this->reason ? (json_decode($this->reason->name, true)[locale()] ?? '') : '',
+            'type_text'          => $types[$this->type],
         ];
     }
 }

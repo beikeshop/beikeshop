@@ -9,7 +9,7 @@ class BeikeHttpServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton('beike_http', function () {
-            return new Http();
+            return new Http;
         });
     }
 }

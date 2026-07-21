@@ -25,7 +25,7 @@
           @foreach ($brand as $item)
             <div class="text-center col-6 col-md-4 col-lg-2 mt-2">
               <a href="{{ type_route('brand', $item['id']) }}">
-                <div class="brand-item">
+                <div class="brand-item rounded-2">
                   <img src="{{ $item['logo'] }}" class="img-fluid" alt="{{ $item['name'] }}">
                 </div>
                 <p class="mb-0 mt-1 ">{{ $item['name'] }}</p>

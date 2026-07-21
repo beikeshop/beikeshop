@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SettingController.php
  *
@@ -13,12 +14,14 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\PluginResource;
 use Beike\Admin\Services\MarketingService;
+use Beike\Plugin\Plugin;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use League\CommonMark\GithubFlavoredMarkdownConverter;
 
 class PluginController extends Controller
 {
@@ -48,6 +51,7 @@ class PluginController extends Controller
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
         $this->updateVersion($data['plugins']);
+
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -65,7 +69,6 @@ class PluginController extends Controller
 
         $this->updateVersion($data['plugins']);
 
-
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -81,6 +84,7 @@ class PluginController extends Controller
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
         $this->updateVersion($data['plugins']);
+
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -96,6 +100,7 @@ class PluginController extends Controller
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
         $this->updateVersion($data['plugins']);
+
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -111,6 +116,7 @@ class PluginController extends Controller
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
         $this->updateVersion($data['plugins']);
+
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -126,6 +132,7 @@ class PluginController extends Controller
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
         $this->updateVersion($data['plugins']);
+
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -141,6 +148,7 @@ class PluginController extends Controller
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
         $this->updateVersion($data['plugins']);
+
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -153,6 +161,7 @@ class PluginController extends Controller
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
         $this->updateVersion($data['plugins']);
+
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -212,8 +221,9 @@ class PluginController extends Controller
             $view       = $columnView ?: 'admin::pages.plugins.form';
 
             $data = [
-                'view'   => $view,
-                'plugin' => $plugin,
+                'view'             => $view,
+                'plugin'           => $plugin,
+                'pluginReadmeHtml' => $this->getPluginReadmeHtml($plugin),
             ];
             $data = hook_filter('admin.plugin.edit.data', $data);
 
@@ -228,6 +238,26 @@ class PluginController extends Controller
 
             return view('admin::pages.plugins.error', $data);
         }
+    }
+
+    private function getPluginReadmeHtml(Plugin $plugin): ?string
+    {
+        $readmePath = rtrim($plugin->getPath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'README.md';
+        if (! is_file($readmePath)) {
+            return null;
+        }
+
+        $markdown = file_get_contents($readmePath);
+        if (! is_string($markdown) || trim($markdown) === '') {
+            return null;
+        }
+
+        $converter = new GithubFlavoredMarkdownConverter([
+            'html_input'         => 'allow',
+            'allow_unsafe_links' => false,
+        ]);
+
+        return (string) $converter->convert($markdown);
     }
 
     /**
@@ -268,6 +298,7 @@ class PluginController extends Controller
             app('plugin')->getPluginOrFail($code);
             $status = $request->get('status');
             SettingRepo::update('plugin', $code, ['status' => $status]);
+
             return json_success($status ? trans('admin/common.text_enabled') : trans('admin/common.text_closed'));
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
@@ -276,23 +307,23 @@ class PluginController extends Controller
 
     private function updateVersion(&$plugins): void
     {
-        //判断版本是否可以更新
+        // 判断版本是否可以更新
         $freePluginCodes = config('app.free_plugin_codes');
-        $pluginCodes = \Beike\Models\Plugin::pluck('code')->toArray();
-        $pluginCodes = array_diff($pluginCodes, $freePluginCodes);
-        $pluginCodes = implode('|', $pluginCodes);
-        $pluginVersion = MarketingService::getInstance()->checkPluginVersion($pluginCodes);
-        $pluginData = data_get($pluginVersion,'data');
+        $pluginCodes     = \Beike\Models\Plugin::pluck('code')->toArray();
+        $pluginCodes     = array_diff($pluginCodes, $freePluginCodes);
+        $pluginCodes     = implode('|', $pluginCodes);
+        $pluginVersion   = MarketingService::getInstance()->checkPluginVersion($pluginCodes);
+        $pluginData      = data_get($pluginVersion, 'data');
 
         if ($pluginData) {
-            $pluginData = array_filter($pluginData, function($value) {
+            $pluginData = array_filter($pluginData, function ($value) {
                 return $value !== false;
             });
         }
 
         foreach ($plugins as &$item) {
             if ($item['can_update'] && isset($pluginData[$item['code']])) {
-                $newVersion = str_replace('v', '', $pluginData[$item['code']]);
+                $newVersion     = str_replace('v', '', $pluginData[$item['code']]);
                 $currentVersion = str_replace('v', '', $item['version']);
 
                 if (version_compare($newVersion, $currentVersion) > 0) {
@@ -310,6 +341,7 @@ class PluginController extends Controller
     {
         try {
             $pluginCode = $request->get('plugin_code');
+
             return MarketingService::getInstance()->checkPluginTicketExpired($pluginCode);
         } catch (\Exception $e) {
             return json_fail($e->getMessage());

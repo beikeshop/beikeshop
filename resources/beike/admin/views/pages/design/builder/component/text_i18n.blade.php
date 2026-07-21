@@ -57,7 +57,7 @@
 
       initData() {
         this.languages.forEach(e => {
-          Vue.set(this.internalValues, e.code, this.value[e.code] || '');
+          Vue.set(this.internalValues, e.code, this.value?.[e.code] || '');
         })
         this.$emit('input', JSON.parse(JSON.stringify(this.internalValues)));
       }
@@ -95,5 +95,20 @@
 
   .text-i18n-template .el-tabs__header {
     margin-bottom: 0;
+  }
+
+  html[data-bs-theme="dark"] .text-i18n-template .el-tabs__nav>div {
+    background: #3f3f3f;
+    border-left: 1px solid #444 !important;
+    color: #aaa;
+  }
+
+  html[data-bs-theme="dark"] .el-tabs--card>.el-tabs__header, html[data-bs-theme="dark"] .text-i18n-template .el-tabs__nav {
+    border-color: #3f3f3f;
+  }
+
+  html[data-bs-theme="dark"] .text-i18n-template .el-tabs__nav>div.is-active {
+    background-color: var(--bs-body-bg) !important;
+    border-bottom-color: var(--bs-body-bg) !important;
   }
 </style>

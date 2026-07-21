@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
     gnupg \
+    libcurl4-openssl-dev \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
@@ -23,11 +24,13 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
         pdo_mysql \
+        curl \
         mbstring \
         exif \
         pcntl \
         bcmath \
         gd \
+        simplexml \
         zip \
         opcache \
     && apt-get clean \

@@ -10,6 +10,8 @@
     <div>
       @if ($order->status == 'unpaid')
         <a href="{{ shop_route('orders.pay', ['number' => $order->number, 'email' => request('email')]) }}" class="btn btn-primary btn-sm nowrap">{{ __('shop/account/order_info.to_pay') }}</a>
+      @endif
+      @if ($order->status == 'unpaid' || $order->status == 'paid')
         <button class="btn btn-outline-secondary btn-sm cancel-order" type="button">{{ __('shop/account/order_info.cancel') }}</button>
       @endif
       @if ($order->status == 'shipped')
@@ -20,7 +22,7 @@
   </div>
   <div class="card-body">
     @hookwrapper('account.order_info.order_details.before')
-    <div class="bg-light p-2 table-responsive">
+    <div class="bg-light p-2 table-responsive rounded-2">
       @if (!is_mobile())
         <table class="table table-borderless mb-0">
           <thead>
@@ -40,7 +42,15 @@
               @hook('account.order_info.order_details.table.body.before')
               <td>{{ $order->number }}</td>
               <td class="nowrap">{{ $order->created_at }}</td>
-              <td class="nowrap">{{$order->status_format}}</td>
+              <td class="nowrap">
+                @if ($order->status == 'unpaid')
+                <span class="text-danger">{{ $order->status_format }}</span>
+                @elseif ($order->status == 'cancelled')
+                <span class="text-secondary">{{ $order->status_format }}</span>
+                @else
+                <span class="text-success">{{ $order->status_format }}</span>
+                @endif
+              </td>
               <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
               <td>{{ $order->payment_method_name }}</td>
               <td>{{ $order->shipping_method_name }}</td>
@@ -60,7 +70,15 @@
           </div>
           <div class="d-flex justify-content-between mb-2">
             <div>{{ __('shop/account/order_info.state') }}</div>
-            <div class="fw-bold">{{ $order->status_format }}</div>
+            <div class="fw-bold">
+              @if ($order->status == 'unpaid')
+              <span class="text-danger">{{ $order->status_format }}</span>
+              @elseif ($order->status == 'cancelled')
+              <span class="text-secondary">{{ $order->status_format }}</span>
+              @else
+              <span class="text-success">{{ $order->status_format }}</span>
+              @endif
+            </div>
           </div>
           <div class="d-flex justify-content-between mb-2">
             <div>{{ __('shop/account/order_info.order_amount') }}</div>
@@ -148,10 +166,10 @@
     @foreach ($order->orderProducts as $product)
       <div class="product-list">
         <div class="d-flex">
-          <div class="left border d-flex justify-content-center align-items-center wh-80"><img src="{{ image_resize($product->image) }}" alt="{{ $product->name }}" class="img-fluid"></div>
+          <div class="left border d-flex rounded-2 overflow-hidden justify-content-center align-items-center wh-80"><img src="{{ image_resize($product->image) }}" alt="{{ $product->name }}" class="img-fluid"></div>
           <div class="right">
             <div class="name">
-              <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>
+              <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id, 'variant' => $product->product_sku]) }}">{{ $product->name }}</a>
               @hook('order_info.product_name.after', $product)
             </div>
             <div class="price">

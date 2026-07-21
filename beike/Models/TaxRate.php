@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TaxRate.php
  *

@@ -5,7 +5,6 @@ namespace Beike\Shop\Http\Controllers;
 use Beike\Services\DesignService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -30,7 +29,10 @@ class HomeController extends Controller
 
         $moduleItems = [];
         foreach ($modules as $module) {
-            $code       = $module['code'];
+            $code       = $module['code'] ?? null;
+            if (! $code) {
+                continue;
+            }
             $moduleId   = $module['module_id'] ?? '';
             $content    = $module['content'];
             $viewPath   = $module['view_path'] ?? '';
@@ -76,6 +78,7 @@ class HomeController extends Controller
     {
         $lang = session()->get('locale');
         $host = request()->getSchemeAndHttpHost();
-        return redirect()->to($host. '/'.$lang);
+
+        return redirect()->to($host . '/' . $lang);
     }
 }

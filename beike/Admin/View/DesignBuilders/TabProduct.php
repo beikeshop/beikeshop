@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -21,9 +22,7 @@ class TabProduct extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -33,10 +32,11 @@ class TabProduct extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'tab_product',
-            'sort' => 0,
-            'name' => trans('admin/design_builder.module_tab_products'),
-            'icon' => '&#xe688;',
+            'code'  => 'tab_product',
+            'sort'  => 0,
+            'name'  => trans('admin/design_builder.module_tab_products'),
+            'image' => asset('image/module/tab_product_preview.webp'),
+            'icon'  => '&#xe688;',
         ];
 
         return view('admin::pages.design.module.tab_product', $data);

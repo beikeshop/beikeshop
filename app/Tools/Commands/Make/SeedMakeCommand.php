@@ -2,12 +2,11 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\CanClearModulesCache;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -59,8 +58,8 @@ class SeedMakeCommand extends GeneratorCommand
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 
         return (new Stub('/seeder.stub', [
-            'NAME' => $this->getSeederName(),
-            'MODULE' => $this->getModuleName(),
+            'NAME'      => $this->getSeederName(),
+            'MODULE'    => $this->getModuleName(),
             'NAMESPACE' => $this->getClassNamespace($module),
 
         ]))->render();

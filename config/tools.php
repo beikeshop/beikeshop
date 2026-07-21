@@ -27,19 +27,19 @@ return [
         'enabled' => false,
         'path'    => base_path('beike/Tools/Commands/stubs'),
         'files'   => [
-            //'routes/api'   => 'routes/api.php',
-            //'routes/admin' => 'routes/admin.php',
-            //'views/index' => 'resources/views/index.blade.php',
-            //'views/master' => 'resources/views/layouts/master.blade.php',
-            //'vite' => 'vite.config.js',
-            //'package' => 'package.json',
+            // 'routes/api'   => 'routes/api.php',
+            // 'routes/admin' => 'routes/admin.php',
+            // 'views/index' => 'resources/views/index.blade.php',
+            // 'views/master' => 'resources/views/layouts/master.blade.php',
+            // 'vite' => 'vite.config.js',
+            // 'package' => 'package.json',
 
-            //'routes/web'   => 'routes/web.php',
-            //'scaffold/config' => 'config/config.php',
-            //'assets/js/app'   => 'resources/assets/js/app.js',
-            //'assets/sass/app' => 'resources/assets/sass/app.scss',
+            // 'routes/web'   => 'routes/web.php',
+            // 'scaffold/config' => 'config/config.php',
+            // 'assets/js/app'   => 'resources/assets/js/app.js',
+            // 'assets/sass/app' => 'resources/assets/sass/app.scss',
 
-            //custom
+            // custom
 
             'custom/lang' => [
                 'Lang/zh_cn/common.php',
@@ -49,7 +49,7 @@ return [
             //   'custom/lang'      => 'Lang/zh_cn/common.php',
             // 'custom/lang'      => 'Lang/zh_cn/common.php',
             'custom/view'      => 'Views/shop/index.blade.php',
-            //'custom/form'      => 'resources/views/form/form.blade.php',
+            // 'custom/form'      => 'resources/views/form/form.blade.php',
             'custom/bootstrap'    => 'Bootstrap.php',
             'custom/config'       => 'config.json',
             'custom/shop'         => 'Routes/shop.php',
@@ -75,7 +75,7 @@ return [
                 'APP_FOLDER_NAME',
             ],
 
-            //custom
+            // custom
             'custom/lang'       => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'CONTROLLER_NAMESPACE'],
             'custom/view'       => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'CONTROLLER_NAMESPACE'],
             'custom/bootstrap'  => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'CONTROLLER_NAMESPACE', 'AUTHOR_NAME', 'AUTHOR_EMAIL'],
@@ -192,7 +192,7 @@ return [
             'test-feature'    => ['path' => 'tests/Feature', 'generate' => false],
             'test-unit'       => ['path' => 'tests/Unit', 'generate' => false],
 
-            //custom
+            // custom
             'test-unit'               => ['path' => 'tests/Unit', 'generate' => false],
             'plugin-view'             => ['path' => 'Views/shop', 'generate' => true],
             'plugin-routes'           => ['path' => 'Routes',     'generate' => true],

@@ -104,21 +104,21 @@
 
         $http.post('{{ admin_route('settings.store_token') }}', {developer_token: this.setTokenDialog.token}).then((res) => {
           if (res?.data?.developer_token_saved === false) {
-            layer.msg(res.message || '开发者令牌校验失败，未保存');
+            layer.msg(res.message || '{{ trans('admin/marketing.token_verify_failed') }}');
             return;
           }
 
-          layer.msg(res.message || '保存成功');
+          layer.msg(res.message || '{{ trans('admin/marketing.save_success') }}');
           window.location.reload();
         }).catch((err) => {
-          const message = err?.response?.data?.message || err?.message || '保存失败';
+          const message = err?.response?.data?.message || err?.message || '{{ trans('admin/marketing.save_failed') }}';
           layer.msg(message, () => {});
         });
       },
 
       getNewToken() {
         window.open('{{ beike_url() }}/account/websites?domain={{ request()->getHost() }}', '_blank');
-        layer.msg('请在官网个人中心复制开发者令牌后粘贴到此处');
+        layer.msg('{{ trans('admin/marketing.copy_token_hint') }}');
       }
     }
   })

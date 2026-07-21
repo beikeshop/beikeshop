@@ -1,5 +1,5 @@
 @hook('admin.dashboard.guide.before')
-<div class="card mb-4 dashboard-guide-section">
+<div class="card my-4 dashboard-guide-section">
   <div class="card-header d-flex justify-content-between align-items-start">
     <h5 class="card-title">{{ __('admin/guide.heading_title') }}</h5>
     <div class="cursor-pointer guide-close"><i class="bi bi-x-lg"></i></div>
@@ -38,22 +38,22 @@
             <p>{{ __('admin/guide.text_basic_1') }}</p>
             <ol class="mb-3">
               <li>
-                <a href="{{ admin_route('settings.index', ['tab' => 'tab-general']) }}">
+                <a href="{{ admin_route('settings.basic') }}">
                   {{ __('admin/guide.button_setting_general') }}
                 </a>
               </li>
               <li>
-                <a href="{{ admin_route('settings.index', ['tab' => 'tab-store']) }}">
+                <a href="{{ admin_route('settings.store_settings') }}">
                   {{ __('admin/setting.store_settings') }}
                 </a>
               </li>
               <li>
-                <a href="{{ admin_route('settings.index', ['tab' => 'tab-image']) }}">
+                <a href="{{ admin_route('settings.picture') }}">
                   {{ __('admin/guide.button_setting_logo') }}
                 </a>
               </li>
               <li>
-                <a href="{{ admin_route('settings.index', ['tab' => 'tab-checkout']) }}">
+                <a href="{{ admin_route('settings.checkout') }}">
                   {{ __('admin/setting.checkout_settings') }}
                 </a>
               </li>
@@ -121,7 +121,7 @@
           <div class="right">
             <p>{{ __('admin/guide.text_mail_1') }}</p>
             <p class="mb-3">{{ __('admin/guide.text_mail_2') }}</p>
-            <a href="{{ admin_route('settings.index', ['tab' => 'tab-mail']) }}" class="btn btn-outline-primary">{{ __('admin/guide.button_mail') }}</a>
+            <a href="{{ admin_route('settings.mail') }}" class="btn btn-outline-primary">{{ __('admin/guide.button_mail') }}</a>
           </div>
         </div>
       </div>

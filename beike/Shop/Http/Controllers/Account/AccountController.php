@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AccountController.php
  *
@@ -11,6 +12,11 @@
 
 namespace Beike\Shop\Http\Controllers\Account;
 
+use Beike\Models\Address;
+use Beike\Models\Cart;
+use Beike\Models\CartProduct;
+use Beike\Models\Customer;
+use Beike\Models\CustomerWishlist;
 use Beike\Repositories\CustomerRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Shop\Http\Controllers\Controller;
@@ -18,6 +24,8 @@ use Beike\Shop\Http\Requests\ForgottenRequest;
 use Beike\Shop\Http\Resources\Account\OrderSimpleList;
 use Beike\Shop\Http\Resources\CustomerResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
@@ -52,5 +60,24 @@ class AccountController extends Controller
         CustomerRepo::update(current_customer(), ['password' => $request->get('password')]);
 
         return json_success(trans('shop/account/edit.password_edit_success'));
+    }
+
+    public function destroy(Request $request)
+    {
+        $customer = current_customer();
+        hook_action('shop.account.destroy.before', $customer);
+
+        Cart::query()->where('customer_id', $customer->id)->delete();
+        CartProduct::query()->where('customer_id', $customer->id)->delete();
+        Address::query()->where('customer_id', $customer->id)->delete();
+        CustomerWishlist::query()->where('customer_id', $customer->id)->delete();
+        $customer->forceDelete();
+
+        Auth::guard(Customer::AUTH_GUARD)->logout();
+
+        $request->session()->regenerate();
+        $request->session()->regenerateToken();
+
+        return redirect(shop_route('login.index'));
     }
 }

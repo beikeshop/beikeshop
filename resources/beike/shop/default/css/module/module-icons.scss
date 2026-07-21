@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @author        guangda <service@guangda.work>
+ * @Date          2022-08-04 17:52:22
+ * @LastEditTime  2022-09-16 20:57:25
+ */
+
+.module-icons {
+  .image-item {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .title {
+    @media (min-width: 768px) {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+  }
+}

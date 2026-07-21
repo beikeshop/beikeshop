@@ -11,13 +11,13 @@
  */
 
 return [
-    'publishable_key' => 'Publishable Key',
-    'webhook_secret'  => 'Webhook Secret',
-    'webhook_secret_desc' => <<<HTML
+    'publishable_key'     => 'Publishable Key',
+    'webhook_secret'      => 'Webhook Secret',
+    'webhook_secret_desc' => <<<'HTML'
 <div class="mt-2 rounded-3 border border-warning-subtle bg-light p-3">
   <div class="fw-bold mb-2">How to get this value</div>
-  <div class="text-muted mb-2">This field must use the Stripe webhook signing secret that starts with <code>whsec_</code>. Do not use the API Secret Key such as <code>sk_test_...</code> or <code>sk_live_...</code>.</div>
-  <div class="text-muted mb-2">Why this is required: BeikeShop uses this secret to verify that webhook requests really come from Stripe, preventing forged callback requests from marking unpaid orders as paid.</div>
+  <div class="text-muted mb-2">To verify Stripe webhook signatures, enter the webhook signing secret that starts with <code>whsec_</code>. Do not use the API Secret Key such as <code>sk_test_...</code> or <code>sk_live_...</code>.</div>
+  <div class="text-muted mb-2">When configured, BeikeShop uses this secret to verify that webhook requests really come from Stripe. If left empty, webhook signature verification is skipped.</div>
   <div class="mb-1">Steps:</div>
   <ol class="mb-2 ps-3">
     <li>Log in to Stripe Dashboard.</li>

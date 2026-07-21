@@ -1,7 +1,7 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @Date          2022-09-09 19:16:39
  * @LastEditTime: 2025-01-03 21:58:50
  */
@@ -231,4 +231,12 @@ export default {
       });
     });
   },
+
+  debounce(fn, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
 }

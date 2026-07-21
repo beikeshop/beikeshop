@@ -2,12 +2,11 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ComponentViewMakeCommand extends GeneratorCommand
@@ -61,7 +60,7 @@ class ComponentViewMakeCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath()
     {
-        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
+        $path        = $this->laravel['plugins']->getModulePath($this->getModuleName());
         $factoryPath = GenerateConfigReader::read('component-view');
 
         return $path . $factoryPath->getPath() . '/' . $this->getFileName();

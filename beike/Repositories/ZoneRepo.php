@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ZoneRepo.php
  *
@@ -26,7 +27,7 @@ class ZoneRepo
             'name'       => $data['name']             ?? '',
             'code'       => $data['code']             ?? '',
             'sort_order' => (int) ($data['sort_order'] ?? 0),
-            'status'     => (bool) ($data['status']    ?? 0),
+            'active'     => (bool) ($data['active']    ?? true),
         ];
     }
 
@@ -95,8 +96,8 @@ class ZoneRepo
         if (isset($data['code'])) {
             $builder->where('zones.code', 'like', "%{$data['code']}%");
         }
-        if (isset($data['status'])) {
-            $builder->where('zones.status', $data['status']);
+        if (isset($data['active'])) {
+            $builder->where('zones.active', $data['active']);
         }
         if (isset($data['country_id'])) {
             $builder->where('zones.country_id', $data['country_id']);
@@ -107,15 +108,20 @@ class ZoneRepo
 
     /**
      * 根据国家获取国家的省份
-     * @param $country
+     * @param      $country
+     * @param bool $onlyActive 是否只获取激活的省份
      * @return \Illuminate\Database\Eloquent\HigherOrderBuilderProxy|\Illuminate\Support\HigherOrderCollectionProxy|mixed|void
      */
-    public static function listByCountry($country)
+    public static function listByCountry($country, $onlyActive = true)
     {
         if (gettype($country) != 'object') {
             $country = CountryRepo::find($country);
         }
         if ($country) {
+            if ($onlyActive) {
+                return $country->activeZones;
+            }
+
             return $country->zones;
         }
     }
@@ -123,12 +129,13 @@ class ZoneRepo
     /**
      * 通过国家ID获取省份拉下选项
      *
-     * @param $countryId
+     * @param      $countryId
+     * @param bool $onlyActive 是否只获取激活的省份
      * @return array
      */
-    public static function getZoneOptions($countryId): array
+    public static function getZoneOptions($countryId, $onlyActive = true): array
     {
-        $zones = self::listByCountry($countryId);
+        $zones = self::listByCountry($countryId, $onlyActive);
         $items = [];
         foreach ($zones as $zone) {
             $items[] = [

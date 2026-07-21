@@ -2,31 +2,23 @@
 
 @section('title', __('admin/tax_rate.index'))
 
-@section('page-bottom-btns')
-  <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=tax_address" class="btn w-min-100 btn-outline-info" target="_blank">{{ __('admin/setting.tax_address') }}</a>
+@section('page-title-back', true)
+
+@section('page-title-right')
+<a class="btn btn-primary" href="{{ admin_route('tax_classes.index') }}"><i class="bi bi-box-arrow-up-right"></i> {{ __('admin/tax_rate.tax_classes_index') }}</a>
 @endsection
 
 @section('content')
   @hook('admin.tax_rates.index.content.before')
 
-  <ul class="nav-bordered nav nav-tabs mb-3">
-    @hook('admin.tax_rates.index.tabs.before')
-    <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="{{ admin_route('tax_classes.index') }}">{{ __('admin/tax_rate.tax_classes_index') }}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" href="{{ admin_route('tax_rates.index') }}">{{ __('admin/tax_rate.index') }}</a>
-    </li>
-    @hook('admin.tax_rates.index.tabs.after')
-  </ul>
-
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
+        <a href="{{ admin_route('settings.checkout') }}?tab=tab-checkout&line=tax_address" class="btn w-min-100 btn-default" target="_blank">{{ __('admin/setting.tax_address') }}</a>
       </div>
       <div class="table-push">
-        <table class="table">
+        <table class="table table-hover"  v-if="tax_rates.length">
           <thead>
             <tr>
               <th>ID</th>
@@ -40,8 +32,8 @@
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
-          <tbody v-if="tax_rates.length">
-            <tr v-for="tax, index in tax_rates" :key="index">
+          <tbody>
+            <tr v-for="tax, index in tax_rates" :key="index" class="cursor-pointer" @click="checkedCreate('edit', index)">
               <td>@{{ tax.id }}</td>
               <td>@{{ tax.name }}</td>
               <td>@{{ tax.rate }}</td>
@@ -52,14 +44,13 @@
               @hook('admin.tax_rates.index.table.body')
               <td class="text-end">
                 @hook('admin.tax_rates.index.table.action.before')
-                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
                 @hook('admin.tax_rates.index.table.action.after')
               </td>
             </tr>
           </tbody>
-          <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
         </table>
+        <div v-else><x-admin-no-data /></div>
       </div>
 
       {{-- {{ $tax_rates->links('admin::vendor/pagination/bootstrap-4') }} --}}
@@ -90,6 +81,7 @@
           <el-select v-model="dialog.form.region_id" size="small" placeholder="{{ __('common.please_choose') }}">
             <el-option v-for="region in source.regions" :key="region.value" :label="region.name" :value="region.id"></el-option>
           </el-select>
+          <a class="btn btn-primary btn-sm" href="{{ admin_route('regions.index') }}"><i class="bi bi-box-arrow-up-right"></i> {{ __('admin/common.regions_index') }}</a>
         </el-form-item>
         @hook('admin.tax_rates.index.dialog.form.after')
 
@@ -190,6 +182,7 @@
         },
 
         deleteCustomer(id, index) {
+          event.stopPropagation();
           const self = this;
           this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',

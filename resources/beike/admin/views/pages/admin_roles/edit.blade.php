@@ -2,6 +2,10 @@
 
 @section('title', __('admin/admin_roles.role_management'))
 
+@section('content-area-class', 'w-max-1200')
+
+@section('head-form-btns', true)
+
 @section('content')
   <div id="app" class="card" v-cloak>
     <div class="card-body h-min-600">
@@ -61,7 +65,6 @@
 
         <el-form-item class="mt-5">
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
-          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
         @hook('admin.admin_roles.edit.after')
       </el-form>
@@ -72,6 +75,10 @@
 @push('footer')
   <script>
     @hook('admin.admin_roles.edit.script.before')
+
+    const submitFormBefore = () => {
+      app.addFormSubmit('form');
+    }
 
     var app = new Vue({
       el: '#app',
@@ -111,19 +118,26 @@
           const url = this.form.id == null ? 'admin_roles' : 'admin_roles/' + this.form.id;
 
           this.$refs[form].validate((valid) => {
-            // this.form.permissions.forEach(e => {
-            //   e.permissions = e.permissions.filter(x => x.selected).map(j => j.code)
-            // });
-
             if (!valid) {
               this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
             $http[type](url, this.form).then((res) => {
-              layer.msg(res.message);
-              location = '{{ admin_route('admin_roles.index') }}'
-            })
+              const alertDiv = document.createElement('div');
+              alertDiv.innerHTML = `<x-admin-alert type="success" msg="${res.message}" class="mt-4"/>`;
+              document.querySelector('.container-fluid').insertBefore(alertDiv, document.querySelector('.container-fluid').firstChild);
+
+            }).catch(error => {
+              const errorDiv = document.createElement('div');
+              if (error.response && error.response.data) {
+                errorDiv.innerHTML = `<div class="alert alert-danger">${error.response.data.message || '{{__('common.error_form')}}'}</div>`;
+              } else {
+                errorDiv.innerHTML = '<div class="alert alert-danger">{{__('common.error_form')}}</div>';
+              }
+              document.querySelector('.container-fluid').insertBefore(errorDiv, document.querySelector('.container-fluid').firstChild);
+
+            });
           });
         },
 

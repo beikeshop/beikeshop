@@ -2,26 +2,22 @@
 
 namespace App\Tools;
 
-use Illuminate\Support\ServiceProvider;
 use App\Tools\Providers\BootstrapServiceProvider;
 use App\Tools\Providers\ConsoleServiceProvider;
 use App\Tools\Providers\ContractsServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 abstract class ModulesServiceProvider extends ServiceProvider
 {
     /**
      * Booting the package.
      */
-    public function boot()
-    {
-    }
+    public function boot() {}
 
     /**
      * Register all plugins.
      */
-    public function register()
-    {
-    }
+    public function register() {}
 
     /**
      * Register all plugins.
@@ -37,7 +33,7 @@ abstract class ModulesServiceProvider extends ServiceProvider
     protected function registerNamespaces()
     {
         $configPath = __DIR__ . '/../config/config.php';
-        $stubsPath = dirname(__DIR__) . '/src/Commands/stubs';
+        $stubsPath  = dirname(__DIR__) . '/src/Commands/stubs';
 
         $this->publishes([
             $configPath => config_path('plugins.php'),

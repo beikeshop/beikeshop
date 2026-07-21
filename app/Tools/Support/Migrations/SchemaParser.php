@@ -15,7 +15,7 @@ class SchemaParser implements Arrayable
      */
     protected $customAttributes = [
         'remember_token' => 'rememberToken()',
-        'soft_delete' => 'softDeletes()',
+        'soft_delete'    => 'softDeletes()',
     ];
 
     /**

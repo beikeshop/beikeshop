@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SkuDetail.php
  *
@@ -22,6 +23,7 @@ class SkuDetail extends JsonResource
             'product_id'          => $this->product_id,
             'variants'            => $this->variants ?: [],
             'position'            => $this->position,
+            'active'              => $this->active,
             'images'              => array_map(function ($image) {
                 return [
                     'preview' => image_resize($image, 500, 500),

@@ -44,18 +44,18 @@ class LanguagesSeeder extends Seeder
                 "name" => "中文",
                 "code" => "zh_cn",
                 "locale" => "",
-                "image" => "catalog/favicon.png",
+                "image" => "image/favicon.png",
                 "sort_order" => 1,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 2,
                 "name" => "English",
                 "code" => "en",
                 "locale" => "",
-                "image" => "catalog/demo/services-icon/3.png",
+                "image" => "image/catalog/demo/services-icon/3.png",
                 "sort_order" => 1,
-                "status" => 1,
+                "active" => 1,
             ]
         ];
     }

@@ -72,7 +72,7 @@ class ZipCommand extends Command
                 $this->components->info('Zip file generated fail.');
             }
 
-            //$this->zip($plugin,$directory);
+            // $this->zip($plugin,$directory);
         } catch (\Throwable $e) {
             $this->components->error('Zip file generated fail: ' . $e->getMessage());
         }
@@ -96,7 +96,7 @@ class ZipCommand extends Command
     {
         $name = $plugin;
         // 创建一个新的 ZIP 实例
-        $zip      = new ZipArchive();
+        $zip      = new ZipArchive;
         $filename = $name . '.zip';
         $zipPath  = storage_path('zip/');
 

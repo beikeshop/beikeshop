@@ -1,4 +1,5 @@
 <?php
+
 /**
  * FileManagerService.php
  *
@@ -11,7 +12,9 @@
 
 namespace Beike\Admin\Services;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileManagerService
@@ -20,11 +23,14 @@ class FileManagerService
 
     protected $basePath = '';
 
-    protected string $publicCatalogPath = 'catalog';
+    protected string $publicCatalogPath = 'image/catalog';
 
+    /**
+     * @throws BindingResolutionException
+     */
     public function __construct()
     {
-        $this->fileBasePath = rtrim(public_path('catalog') . $this->basePath, '/\\');
+        $this->fileBasePath = rtrim(catalog_path() . $this->basePath, '/\\');
         File::ensureDirectoryExists($this->fileBasePath);
     }
 
@@ -69,7 +75,7 @@ class FileManagerService
     public function getFiles($baseFolder, $keyword, $sort, $order, int $page = 1, int $perPage = 20): array
     {
         $currentBasePath = $this->catalogPath($baseFolder);
-        $files = array_filter(glob($currentBasePath . '/*'), function ($file) {
+        $files           = array_filter(glob($currentBasePath . '/*'), function ($file) {
             return is_file($file) && preg_match('/\.(jpg|jpeg|png|JPG|JPEG|mp4|MP4|gif|webp)$/', $file);
         });
 
@@ -83,9 +89,9 @@ class FileManagerService
         // 获取文件信息
         $fileData = array_map(function ($file) {
             return [
-                'path' => $file,
+                'path'     => $file,
                 'basename' => basename($file),
-                'mtime' => filemtime($file),
+                'mtime'    => filemtime($file),
             ];
         }, $files);
 
@@ -102,8 +108,8 @@ class FileManagerService
 
         // 分页
         $totalFiles = count($fileData);
-        $start = ($page - 1) * $perPage;
-        $fileData = array_slice($fileData, $start, $perPage);
+        $start      = ($page - 1) * $perPage;
+        $fileData   = array_slice($fileData, $start, $perPage);
 
         // 处理文件
         $images = array_map(function ($file) {
@@ -117,7 +123,6 @@ class FileManagerService
         ];
     }
 
-
     /**
      * 创建目录
      * @param             $folderName
@@ -129,6 +134,7 @@ class FileManagerService
         if (is_dir($folderPath)) {
             throw new \Exception(trans('admin/file_manager.directory_already_exist'));
         }
+
         File::ensureDirectoryExists($folderPath);
     }
 
@@ -202,9 +208,23 @@ class FileManagerService
      * @param $imagePath
      * @return string
      */
+    /**
+     * 验证路径，防止路径遍历攻击
+     *
+     * @param string $path 需要验证的路径
+     * @return string 安全的路径
+     * @throws \Exception 如果路径不安全则抛出异常
+     */
+    private function validatePath($path): string
+    {
+        return $this->normalizeCatalogPath($path);
+    }
+
     public function zipFolder($imagePath): string
     {
         $realPath = $this->catalogPath($imagePath, true);
+
+        // 检查目录是否存在
         if (! is_dir($realPath)) {
             throw new \Exception(trans('admin/file_manager.target_not_exist'));
         }
@@ -225,23 +245,25 @@ class FileManagerService
      */
     public function deleteDirectoryOrFile($filePath)
     {
-        $filePath = $this->catalogPath($filePath);
-        if (is_dir($filePath)) {
-            $files = glob($filePath . '/*');
+        $fullPath = $this->catalogPath($filePath);
+
+        if (is_dir($fullPath)) {
+            $files = glob($fullPath . '/*');
             if ($files) {
                 throw new \Exception(trans('admin/file_manager.directory_not_empty'));
             }
-            @rmdir($filePath);
-        } elseif (file_exists($filePath)) {
-            @unlink($filePath);
+            @rmdir($fullPath);
+        } elseif (file_exists($fullPath)) {
+            @unlink($fullPath);
         }
     }
 
     /**
      * 批量删除文件
      *
-     * @param $basePath
-     * @param $files
+     * @param             $basePath
+     * @param             $files
+     * @throws \Exception
      */
     public function deleteFiles($basePath, $files)
     {
@@ -252,12 +274,16 @@ class FileManagerService
         $basePath = $this->normalizeCatalogPath($basePath);
 
         foreach ($files as $file) {
+            // 验证文件名
             if (! $this->isValidFileName($file)) {
                 throw new \Exception(trans('admin/file_manager.invalid_filename'));
             }
 
             $filePath = $this->catalogPath($basePath . '/' . $file);
+
+            // 确保文件路径在允许的目录内
             if (file_exists($filePath)) {
+                // 只删除文件，不删除目录
                 if (is_file($filePath)) {
                     @unlink($filePath);
                 }
@@ -274,24 +300,36 @@ class FileManagerService
      */
     public function updateName($originPath, $newPath)
     {
+        // 验证新文件名的安全性
         if (! $this->isValidFileName($newPath)) {
             throw new \Exception(trans('admin/file_manager.invalid_filename'));
         }
 
-        $originPath = $this->catalogPath($originPath, true);
-        if (! is_dir($originPath) && ! file_exists($originPath)) {
+        // 验证新文件名（不允许路径分隔符）
+        if (str_contains($newPath, '/') || str_contains($newPath, '\\') || str_contains($newPath, '..')) {
+            throw new \Exception(trans('admin/file_manager.invalid_path'));
+        }
+
+        $fullOriginPath = $this->catalogPath($originPath, true);
+
+        if (! is_dir($fullOriginPath) && ! file_exists($fullOriginPath)) {
             throw new \Exception(trans('admin/file_manager.target_not_exist'));
         }
-        $originBase = dirname($originPath);
-        $newPath    = $originBase . '/' . $newPath;
-        $this->ensureCatalogPath($newPath);
-        if ($originPath == $newPath) {
+
+        $originBase  = dirname($fullOriginPath);
+        $newFullPath = $originBase . '/' . $newPath;
+
+        $this->ensureCatalogPath($newFullPath);
+
+        if ($fullOriginPath == $newFullPath) {
             return;
         }
-        if (file_exists($newPath)) {
+
+        if (file_exists($newFullPath)) {
             throw new \Exception(trans('admin/file_manager.rename_failed'));
         }
-        $result = @rename($originPath, $newPath);
+
+        $result = @rename($fullOriginPath, $newFullPath);
         if (! $result) {
             throw new \Exception(trans('admin/file_manager.rename_failed'));
         }
@@ -312,7 +350,7 @@ class FileManagerService
 
         // 校验类型
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4'];
-        $allowedMimeTypes = [
+        $allowedMimeTypes  = [
             'image/jpeg',
             'image/pjpeg',
             'image/png',
@@ -321,16 +359,19 @@ class FileManagerService
             'video/mp4',
         ];
         $extension = strtolower($file->getClientOriginalExtension());
-        $mimeType = $file->getMimeType();
+        $mimeType  = $file->getMimeType();
 
-        if (!in_array($extension, $allowedExtensions) || !in_array($mimeType, $allowedMimeTypes)) {
+        if (! in_array($extension, $allowedExtensions) || ! in_array($mimeType, $allowedMimeTypes)) {
             throw new \Exception(trans('admin/file_manager.upload_type_fail'));
         }
 
         $originName = $this->getUniqueFileName($savePath, $originName);
         $filePath   = $file->storeAs(trim($this->basePath . $savePath, '/'), $originName, 'catalog');
 
-        return asset('catalog/' . $filePath);
+        return [
+            'url'  => asset('image/catalog/' . $filePath),
+            'path' => 'image/catalog/' . $filePath,
+        ];
     }
 
     public function sanitizePath($path): string
@@ -454,26 +495,37 @@ class FileManagerService
         return rtrim(str_replace('\\', '/', $path), '/');
     }
 
+    /**
+     * 验证文件名是否安全
+     *
+     * @param string $fileName
+     * @return bool
+     */
     private function isValidFileName(string $fileName): bool
     {
+        // 检查文件名长度
         if (strlen($fileName) > 255 || empty(trim($fileName))) {
             return false;
         }
 
+        // 检查危险字符
         if (preg_match('#[<>:"|?*\x00-\x1f]#', $fileName)) {
             return false;
         }
 
+        // 检查路径遍历模式
         if (str_contains($fileName, '..') || str_contains($fileName, '/') || str_contains($fileName, '\\')) {
             return false;
         }
 
+        // 检查保留文件名 (Windows)
         $reservedNames  = ['CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9'];
         $nameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
         if (in_array(strtoupper($nameWithoutExt), $reservedNames)) {
             return false;
         }
 
+        // 如果是文件（有扩展名），验证扩展名
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
         if (! empty($extension)) {
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
@@ -485,6 +537,9 @@ class FileManagerService
         return true;
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     public function getUniqueFileName($savePath, $originName): string
     {
         if (is_file($this->catalogPath($savePath . '/' . $originName))) {
@@ -498,20 +553,9 @@ class FileManagerService
     public function getNewFileName($originName): string
     {
         $originNameInfo = pathinfo($originName);
+        $uuid = Str::uuid();
 
-        $fileName = $originNameInfo['filename'];
-        $index    = 1;
-
-        $hyphenPos    = mb_strrpos($fileName, '-');
-        $indexPending = mb_substr($fileName, $hyphenPos + 1);
-        if (is_numeric($indexPending)) {
-            $fileName = mb_substr($fileName, 0, $hyphenPos);
-            $index    = $indexPending + 1;
-        }
-
-        $originName     = $fileName . '-' . $index . '.' . $originNameInfo['extension'];
-
-        return $originName;
+        return $originNameInfo['filename'] . '_' . $uuid . '.' . $originNameInfo['extension'];
     }
 
     /**
@@ -534,6 +578,7 @@ class FileManagerService
      *
      * @param $folderPath
      * @return bool
+     * @throws BindingResolutionException
      */
     private function hasSubFolders($folderPath): bool
     {
@@ -558,7 +603,7 @@ class FileManagerService
      */
     private function handleImage($filePath, $baseName): array
     {
-        $path     = "catalog{$filePath}";
+        $path     = "image/catalog{$filePath}";
         $realPath = str_replace($this->fileBasePath . $this->basePath, $this->fileBasePath, $this->fileBasePath . $filePath);
 
         $mime = '';

@@ -2,7 +2,10 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileController extends Controller
@@ -12,7 +15,7 @@ class FileController extends Controller
         // 验证请求参数
         $request->validate([
             'file' => 'required|file',
-            'type' => 'required|string|alpha_dash|max:255'
+            'type' => 'required|string|alpha_dash|max:255',
         ]);
 
         $file = $request->file('file');
@@ -36,10 +39,10 @@ class FileController extends Controller
         // 记录上传日志
         \Log::info('File uploaded', [
             'original_name' => $file->getClientOriginalName(),
-            'path' => $path,
-            'type' => $type,
-            'user_id' => auth()->id(),
-            'ip' => $request->ip()
+            'path'          => $path,
+            'type'          => $type,
+            'user_id'       => auth()->id(),
+            'ip'            => $request->ip(),
         ]);
 
         return json_success(trans('shop/file.uploaded_success'), $data);
@@ -52,41 +55,41 @@ class FileController extends Controller
     {
         // 允许的文件扩展名
         $allowedExtensions = [
-            'image' => ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-            'document' => ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'],
-            'video' => ['mp4', 'avi', 'mov'],
-            'plugin_file' => ['zip']
+            'image'       => ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+            'document'    => ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'],
+            'video'       => ['mp4', 'avi', 'mov'],
+            'plugin_file' => ['zip'],
         ];
 
         // 允许的MIME类型
         $allowedMimeTypes = [
-            'image' => ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
-            'document' => ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
-            'video' => ['video/mp4', 'video/quicktime', 'video/x-msvideo'],
-            'plugin_file' => ['application/zip', 'application/x-zip-compressed']
+            'image'       => ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+            'document'    => ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+            'video'       => ['video/mp4', 'video/quicktime', 'video/x-msvideo'],
+            'plugin_file' => ['application/zip', 'application/x-zip-compressed'],
         ];
 
         $extension = strtolower($file->getClientOriginalExtension());
-        $mimeType = $file->getMimeType();
+        $mimeType  = $file->getMimeType();
 
         // 检查类型是否被允许
-        if (!isset($allowedExtensions[$type])) {
+        if (! isset($allowedExtensions[$type])) {
             throw new \Exception(trans('admin/file_manager.invalid_upload_type'));
         }
 
         // 检查文件扩展名
-        if (!in_array($extension, $allowedExtensions[$type])) {
+        if (! in_array($extension, $allowedExtensions[$type])) {
             throw new \Exception(trans('admin/file_manager.upload_type_fail'));
         }
 
         // 检查MIME类型
-        if (isset($allowedMimeTypes[$type]) && !in_array($mimeType, $allowedMimeTypes[$type])) {
+        if (isset($allowedMimeTypes[$type]) && ! in_array($mimeType, $allowedMimeTypes[$type])) {
             throw new \Exception(trans('admin/file_manager.upload_type_fail'));
         }
 
         // 检查文件名安全性
         $originalName = $file->getClientOriginalName();
-        if (!$this->isValidFileName($originalName)) {
+        if (! $this->isValidFileName($originalName)) {
             throw new \Exception(trans('admin/file_manager.invalid_filename'));
         }
     }
@@ -126,5 +129,67 @@ class FileController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function catchImages(Request $request)
+    {
+        $sources = $request->get('source');
+        $type    = $request->get('type');
+        $images  = [];
+
+        $dirname   = 'upload/' . $type;
+        $localPath = public_path($dirname . '/');
+        if (! is_dir($localPath)) {
+            mkdir($localPath, 0777, true);
+        }
+
+        $client = new Client([
+            'timeout' => 10,
+            'verify'  => false,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+                'Referer'    => env('APP_URL', ''),
+                'Accept'     => 'image/webp,image/apng,image/*,*/*;q=0.8',
+            ],
+        ]);
+
+        // 创建所有请求的 Promise
+        $promises = [];
+        foreach ($sources as $url) {
+            $promises[$url] = $client->getAsync($url)
+                ->then(
+                    function ($response) use ($url, $localPath, $dirname) {
+                        $ext      = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
+                        $filename = Str::random(40) . '.' . $ext;
+                        file_put_contents($localPath . '/' . $filename, $response->getBody());
+
+                        return [
+                            'url'    => asset($dirname . '/' . $filename),
+                            'path'   => $dirname . '/' . $filename,
+                            'origin' => $url,
+                        ];
+                    },
+                    function () use ($url) {
+                        // 下载失败直接返回原始 URL
+                        return [
+                            'url'    => $url,
+                            'path'   => $url,
+                            'origin' => $url,
+                        ];
+                    }
+                );
+        }
+
+        // 并发执行所有下载
+        $results = Promise\Utils::settle($promises)->wait();
+
+        foreach ($results as $result) {
+            $images[] = $result['value'];
+        }
+
+        return json_success('上传成功', $images);
     }
 }

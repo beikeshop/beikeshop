@@ -3,8 +3,6 @@
 namespace Beike\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Beike\Admin\Repositories\DashboardRepo;
-use Beike\Admin\Repositories\Report\OrderReportRepo;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -22,15 +20,6 @@ class HomeController extends Controller
         }
 
         $data = [
-            'products'     => DashboardRepo::getProductData(),
-            'orders'       => DashboardRepo::getOrderData(),
-            'customers'    => DashboardRepo::getCustomerData(),
-            'order_totals' => DashboardRepo::getTotalData(),
-            'order_trends' => [
-                'latest_month' => OrderReportRepo::getLatestMonth(),
-                'latest_week'  => OrderReportRepo::getLatestWeek(),
-                'latest_year'  => OrderReportRepo::getLatestYear(),
-            ],
             'firstLoginAction' => $firstLoginAction,
         ];
 

@@ -2,33 +2,25 @@
 
 @section('title', __('admin/tax_rate.tax_classes_index'))
 
-@section('page-bottom-btns')
-  <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=tax_address" class="btn w-min-100 btn-outline-info" target="_blank">{{ __('admin/setting.tax_address') }}</a>
+@section('page-title-back', true)
+
+@section('page-title-right')
+<a class="btn btn-primary" href="{{ admin_route('tax_rates.index') }}"><i class="bi bi-box-arrow-up-right"></i> {{ __('admin/tax_rate.index') }}</a>
 @endsection
 
 @section('content')
   @hook('admin.tax_classes.index.content.before')
-
-  <ul class="nav-bordered nav nav-tabs mb-3">
-    @hook('admin.tax_classes.index.tabs.before')
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{{ admin_route('tax_classes.index') }}">{{ __('admin/tax_rate.tax_classes_index') }}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{ admin_route('tax_rates.index') }}">{{ __('admin/tax_rate.index') }}</a>
-    </li>
-    @hook('admin.tax_classes.index.tabs.after')
-  </ul>
 
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
         @hook('admin.tax_classes.index.content.top_buttons.before')
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
+        <a href="{{ admin_route('settings.checkout') }}?tab=tab-checkout&line=tax_address" class="btn w-min-100 btn-default" target="_blank">{{ __('admin/setting.tax_address') }}</a>
         @hook('admin.tax_classes.index.content.top_buttons.after')
       </div>
-      <div class="table-push">
-        <table class="table">
+      <div class="table-push" v-if="tax_classes.length">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
@@ -40,8 +32,8 @@
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
-          <tbody v-if="tax_classes.length">
-            <tr v-for="tax, index in tax_classes" :key="index">
+          <tbody>
+            <tr v-for="tax, index in tax_classes" :key="index" class="cursor-pointer" @click="checkedCreate('edit', index)">
               <td>@{{ tax.id }}</td>
               <td>@{{ tax.title }}</td>
               <td :title="tax.description">@{{ stringLengthInte(tax.description) }}</td>
@@ -50,15 +42,14 @@
               @hook('admin.tax_classes.index.content.table.body')
               <td class="text-end">
                 @hook('admin.tax_classes.index.content.table.body.actions.before')
-                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
                 @hook('admin.tax_classes.index.content.table.body.actions.after')
               </td>
             </tr>
           </tbody>
-          <tbody v-else><tr><td colspan="5" class="border-0"><x-admin-no-data /></td></tr></tbody>
         </table>
       </div>
+      <div v-else><x-admin-no-data /></div>
     </div>
 
     <el-dialog title="{{ __('admin/tax_class.tax_classes_create') }}" :visible.sync="dialog.show" width="700px"
@@ -93,7 +84,7 @@
                   </td>
                   <td>
                     <el-select v-model="rule.based" size="mini" placeholder="{{ __('common.please_choose') }}">
-                      <el-option v-for="base in source.bases" :key="base" :label="base" :value="base"></el-option>
+                      <el-option v-for="base in source.bases" :key="base.value" :label="base.label" :value="base.value"></el-option>
                     </el-select>
                   </td>
                   <td width="80px"><el-input v-model="rule.priority" size="mini" placeholder="{{ __('admin/tax_class.priority') }}"></el-input></td>
@@ -182,7 +173,7 @@
 
         addRates() {
           const tax_rate_id = this.source.all_tax_rates[0]?.id || 0;
-          const based = this.source.bases[0] || '';
+          const based = this.source.bases[0].value || '';
 
           this.dialog.form.tax_rules.push({tax_rate_id, based, priority: ''})
         },
@@ -216,6 +207,7 @@
         },
 
         deleteCustomer(id, index) {
+          event.stopPropagation();
           const self = this;
           this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',

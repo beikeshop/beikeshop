@@ -1,4 +1,5 @@
 <?php
+
 /**
  * RegionRepo.php
  *
@@ -42,7 +43,7 @@ class RegionRepo
         if ($id) {
             $region = Region::query()->findOrFail($id);
         } else {
-            $region = new Region();
+            $region = new Region;
         }
         $region->fill([
             'name'        => $data['name'],

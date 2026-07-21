@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageDetail.php
  *
@@ -27,6 +28,7 @@ class PageDetail extends JsonResource
 
         return [
             'id'                   => $this->id,
+            'page_category_id'     => $this->page_category_id,
             'url'                  => $this->url,
             'parent_id'            => $this->parent_id,
             'active'               => $this->active,
@@ -38,9 +40,9 @@ class PageDetail extends JsonResource
             'content'              => $description->content ?? '',
             'summary'              => $description->summary ?? '',
             'summary_format'       => sub_string($description->summary ?? '', 100),
-            'meta_title'           => $description->meta_title ?? '',
+            'meta_title'           => $description->meta_title       ?? '',
             'meta_description'     => $description->meta_description ?? '',
-            'meta_keywords'        => $description->meta_keywords ?? '',
+            'meta_keywords'        => $description->meta_keywords    ?? '',
             'created_at'           => time_format($this->created_at),
             'updated_at'           => time_format($this->updated_at),
         ];

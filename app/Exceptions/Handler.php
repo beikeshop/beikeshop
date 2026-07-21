@@ -2,13 +2,14 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Exceptions\RegisterErrorViewPaths;
-use Illuminate\Support\Arr;
-use Throwable;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Auth\Access\AuthorizationException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -70,9 +71,9 @@ class Handler extends ExceptionHandler
     protected function registerErrorViewPaths()
     {
         if (is_admin()) {
-            (new RegisterAdminErrorViewPaths())();
+            (new RegisterAdminErrorViewPaths)();
         } else {
-            (new RegisterErrorViewPaths())();
+            (new RegisterErrorViewPaths)();
         }
     }
 
@@ -80,11 +81,44 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Throwable $exception
+     * @param \Throwable               $exception
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof AuthenticationException) {
+            if (is_admin()) {
+                $loginUrl = admin_route('login.show');
+
+                if ($request->expectsJson()) {
+                    return response()->json([
+                        'code'     => 401,
+                        'message'  => __('auth.token_expired'),
+                        'redirect' => $loginUrl,
+                    ], 401);
+                }
+
+                return redirect($loginUrl);
+            }
+        }
+
+        if ($exception instanceof TokenMismatchException) {
+            if (is_admin()) {
+                $loginUrl = admin_route('login.show');
+                $message  = __('auth.token_expired');
+
+                if ($request->expectsJson()) {
+                    return response()->json([
+                        'code'     => 419,
+                        'message'  => $message,
+                        'redirect' => $loginUrl,
+                    ], 419);
+                }
+
+                return redirect($loginUrl)->with('warning', $message);
+            }
+        }
+
         if ($request->expectsJson()) {
             // 处理权限验证异常
             if ($exception instanceof AuthorizationException) {
@@ -103,23 +137,16 @@ class Handler extends ExceptionHandler
                 ], 422);
             }
 
-            // CSRF Token 失效
-            if ($exception instanceof TokenMismatchException) {
-                return response()->json([
-                    'message' => __('auth.token_expired'),
-                ], 419);
-            }
-
             // 其他 Ajax 异常
             $statusCode = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500;
-            $message = $exception->getMessage();
+            $message    = $exception->getMessage();
 
             if (empty($message) || $message === 'Server Error') {
                 $message = '服务器错误，请联系管理员';
             }
 
             return response()->json([
-                'code' => $statusCode,
+                'code'    => $statusCode,
                 'message' => $message,
             ], $statusCode);
         }

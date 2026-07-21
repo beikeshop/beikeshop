@@ -54,26 +54,24 @@
                       </div>
                     </td>
                     <td>
-                      <a class="name text-truncate-2 mb-1 text-black fw-bold" :href="'products/' + product.product_id" v-text="product.name"></a>
+                      <a class="name text-truncate-2 mb-1 text-black fw-bold" :href="product.url" v-text="product.name"></a>
                       @hook('cart.product.name.after')
                       <div class="text-size-min text-muted mb-1">@{{ product.variant_labels }}</div>
                       <div class="price text-muted" v-html="product.price_format"></div>
                     </td>
                     <td>
-                      <div class="quantity-wrap">
+                      <div class="quantity-wrap input-group">
+                        <button class="btn quantity-reduce" :data-id="product.sku_id" type="button"><i class="bi bi-dash-lg"></i></button>
                         <input type="text" class="form-control" :data-id="product.sku_id" @input="quantityChange(product.quantity, product.cart_id, product.sku_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
-                        <div class="right">
-                          <i :data-id="product.sku_id" class="bi bi-chevron-up"></i>
-                          <i :data-id="product.sku_id" class="bi bi-chevron-down"></i>
-                        </div>
+                        <button class="btn quantity-increase" :data-id="product.sku_id" type="button"><i class="bi bi-plus-lg"></i></button>
                       </div>
                     </td>
                     <td><div class="sub-total" v-html="product.subtotal_format"></div></td>
                     @hook('shop.cart.index.table.body')
                     <td class="text-end">
                       @hook('shop.cart.index.table.action.before')
-                      <button :data-id="product.sku_id" type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
-                        <i :data-id="product.sku_id" class="bi bi-x-lg"></i> {{ __('common.delete') }}
+                      <button type="button" :data-id="product.sku_id" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
+                        <i class="bi bi-x-lg" :data-id="product.sku_id"></i> {{ __('common.delete') }}
                       </button>
                       @hook('shop.cart.index.table.action.after')
                     </td>
@@ -88,7 +86,7 @@
       <div class="col-12 col-md-3 right-column">
         <div class="card shadow-sm x-fixed-top">
           <div class="card-body p-lg-4">
-            <div class="card total-wrap">
+            <div class="total-wrap">
               <div class="p-lg-0"><h4 class="mb-3">{{ __('shop/carts.product_total') }}</h4></div>
               <div class="card-body p-lg-0">
                 <ul class="list-group list-group-flush">

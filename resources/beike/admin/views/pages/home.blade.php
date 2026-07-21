@@ -1,23 +1,19 @@
 @extends('admin::layouts.master')
 
-@section('title', __('admin/common.admin_panel'))
+@section('title', '')
 
 @section('body-class', 'admin-home')
 
 @section('content')
-  @if (system_setting('base.guide', '1'))
-    @include('admin::pages.dashboard.guide')
-  @endif
+  <div class="">
+    @hook('admin.home.index.content.header')
 
-  @hookwrapper('admin.home.dashboard.totals')
-  @include('admin::pages.dashboard.totals')
-  @endhookwrapper
+    @if (system_setting('base.guide', '1'))
+      @include('admin::pages.dashboard.guide')
+    @endif
 
-  @hookwrapper('admin.home.dashboard.orders_chart')
-  @include('admin::pages.dashboard.orders_chart')
-  @endhookwrapper
+    @include('admin::pages.dashboard.charts_data')
 
-  @hookwrapper('admin.home.index.content.footer')
-  @hook('admin.home.index.content.footer')
-  @endhookwrapper
+    @hook('admin.home.index.content.footer')
+  </div>
 @endsection

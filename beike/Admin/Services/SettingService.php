@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SettingService.php
  *
@@ -31,6 +32,15 @@ class SettingService
                 throw new Exception('默认货币汇率必须为1 <a href="' . admin_route('currencies.index') . '">前往设置</a>');
             }
         }
+
+        // 验证 admin_name 字段，仅支持小写字母和数字
+        if (isset($settings['admin_name'])) {
+            $adminName = $settings['admin_name'];
+            if (! preg_match('/^[a-z0-9]+$/', $adminName)) {
+                throw new Exception(trans('admin/setting.admin_name_error'));
+            }
+        }
+
         foreach ($settings as $key => $value) {
             SettingRepo::storeValue($key, $value);
         }

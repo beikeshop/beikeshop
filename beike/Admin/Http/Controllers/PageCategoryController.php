@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageCategoryController.php
  *
@@ -46,7 +47,7 @@ class PageCategoryController extends Controller
      */
     public function create(): mixed
     {
-        return view('admin::pages.page_categories.form', ['page_category' => new PageCategory()]);
+        return view('admin::pages.page_categories.form', ['page_category' => new PageCategory]);
     }
 
     /**
@@ -107,9 +108,9 @@ class PageCategoryController extends Controller
             $pageCategory = PageCategoryRepo::createOrUpdate($requestData);
             hook_action('admin.page_category.update.after', ['page_category' => $pageCategory, 'request_data' => $requestData]);
 
-            return redirect()->to(admin_route('page_categories.index'));
+            return redirect()->to(url()->previous())->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
-            return redirect(admin_route('page_categories.index'))->withErrors(['error' => $e->getMessage()]);
+            return redirect(url()->previous())->withErrors(['error' => $e->getMessage()]);
         }
     }
 

@@ -17,14 +17,19 @@ class CartDetail extends JsonResource
      */
     public function toArray($request)
     {
-        $sku         = $this->sku;
-        $product     = $sku->product;
-        $price       = $sku->price;
-        $skuCode     = $sku->sku;
-        $description = $product->description;
-        $productName = $description->name;
-        $subTotal    = $price * $this->quantity;
-        $image       = $sku->image ?: $product->image;
+        $sku            = $this->sku;
+        $product        = $sku->product;
+        $price          = $sku->price;
+        $skuCode        = $sku->sku;
+        $description    = $product->description;
+        $productName    = $description->name;
+        $subTotal       = $price * $this->quantity;
+        $image          = $sku->image ?: $product->image;
+        $variant_labels = trim($sku->getVariantLabel());
+        $url_params     = [$product->id];
+        if ($variant_labels) {
+            $url_params['variant'] = $skuCode;
+        }
 
         $result = [
             'cart_id'         => $this->id,
@@ -45,7 +50,8 @@ class CartDetail extends JsonResource
             'tax_class_id'    => $product->tax_class_id,
             'subtotal'        => $subTotal,
             'subtotal_format' => currency_format($subTotal),
-            'variant_labels'  => trim($sku->getVariantLabel()),
+            'variant_labels'  => $variant_labels,
+            'url'             => shop_route('products.show', $url_params),
         ];
 
         return hook_filter('resource.cart.detail', $result);

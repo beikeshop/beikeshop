@@ -1,5 +1,6 @@
 @hook('components.breadcrumbs.before')
 @unless ($breadcrumbs->isEmpty())
+@if (request('_from') != 'app')
 <div class="breadcrumb-wrap">
   <div class="container{{ $isFull ?? false ? '-fluid' : '' }}">
     <nav aria-label="breadcrumb">
@@ -15,5 +16,8 @@
     </nav>
   </div>
 </div>
+@else
+<br>
+@endif
 @endunless
 @hook('components.breadcrumbs.after')

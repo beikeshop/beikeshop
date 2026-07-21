@@ -1,10 +1,11 @@
 <?php
+
 /**
  * setting.php
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-11 15:26:18
  * @modified   2022-08-11 15:26:18
  */
@@ -14,7 +15,7 @@ return [
     'text_module'         => 'Modules',
     'text_success'        => 'Success: You have modified module OpenCart OmniAuth!',
     'text_copyright'      => 'OpenCart.cn <a href="http://www.opencart.cn" target="_blank">OmniAuth</a> &copy; %s',
-    'text_omni_explain'   => 'This plugin supports Facebook, Twitter, Google etc.',
+    'text_omni_explain'   => 'This plugin supports Facebook, X, Google etc.',
     'text_omni_explain_2' => 'To use a third-party login, you need to apply to the corresponding platform, and fill in the obtained ID and key to the corresponding input box.',
     'text_wechat_title'   => 'WeChat scan code login application address',
     'text_wechat_info'    => 'WeChat open platform',
@@ -24,7 +25,7 @@ return [
     'text_weibo_info'     => 'Weibo open platform',
     'text_facebook_title' => 'Facebook login application address',
     'text_google_title'   => 'Google login application address',
-    'text_twitter_title'  => 'Twitter login application address',
+    'text_twitter_title'  => 'X login application address',
     'text_help_msg'       => 'help information',
 
     'copy_success'             => 'Copy Success',
@@ -54,7 +55,7 @@ return [
     'weibo'               => 'Weibo',
     'facebook'            => 'Facebook',
     'google'              => 'Google',
-    'twitter'             => 'Twitter',
+    'twitter'             => 'X',
 
     'instagram'           => 'Instagram',
 ];

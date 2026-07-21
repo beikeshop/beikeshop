@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ProductSimple.php
  *
@@ -31,7 +32,11 @@ class ProductSimple extends JsonResource
         }
 
         $name   = $this->description->name ?? '';
-        $images = $this->images;
+        $images     = array_filter($this->images ?? [], function ($image) {
+            $isYouTube = str_contains($image, 'youtube.com/watch') || str_contains($image, 'youtu.be/');
+            return ! str_ends_with($image, '.mp4') && ! $isYouTube;
+        });
+        $firstImage = ! empty($images) ? reset($images) : '';
 
         $data = [
             'id'                  => $this->id,
@@ -45,8 +50,15 @@ class ProductSimple extends JsonResource
             'origin_price_format' => currency_format($masterSku->origin_price),
             'category_id'         => $this->category_id           ?? null,
             'in_wishlist'         => $this->inCurrentWishlist->id ?? 0,
+            'status'              => $this->active,
+            'image'               => $firstImage,
+            'image_format'        => $firstImage ? image_resize($firstImage) : '',
 
             'images'              => array_map(function ($item) {
+                if (str_ends_with($item, '.webp')) {
+                    return image_origin($item);
+                }
+
                 return image_resize($item, 560, calculate_height_by_ratio(560));
             }, $images),
         ];

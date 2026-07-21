@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-09-01 16:23:34
  * @LastEditTime  2022-09-16 20:56:12
  */
@@ -43,6 +43,7 @@ body.page-checkout {
       align-items: center;
       cursor: pointer;
       padding: 20px;
+      border-radius: 8px;
       border: 1px solid transparent;
 
       @media (max-width: 768px) {

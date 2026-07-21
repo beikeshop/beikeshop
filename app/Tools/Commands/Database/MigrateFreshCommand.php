@@ -2,8 +2,8 @@
 
 namespace App\Tools\Commands\Database;
 
-use Illuminate\Console\Command;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -32,17 +32,17 @@ class MigrateFreshCommand extends Command
     {
         $plugin = $this->argument('plugin');
 
-        if ($plugin && !$this->getModuleName()) {
+        if ($plugin && ! $this->getModuleName()) {
             $this->error("Plugin [$plugin] does not exists.");
 
             return E_ERROR;
         }
 
         $this->call('plugin:migrate-refresh', [
-            'plugin' => $this->getModuleName(),
+            'plugin'     => $this->getModuleName(),
             '--database' => $this->option('database'),
-            '--force' => $this->option('force'),
-            '--seed' => $this->option('seed'),
+            '--force'    => $this->option('force'),
+            '--seed'     => $this->option('seed'),
         ]);
 
         return 0;
@@ -78,7 +78,7 @@ class MigrateFreshCommand extends Command
     {
         $module = $this->argument('plugin');
 
-        if (!$module) {
+        if (! $module) {
             return null;
         }
 

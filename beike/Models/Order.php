@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Order.php
  *
@@ -11,10 +12,10 @@
 
 namespace Beike\Models;
 
-use Beike\Notifications\NewOrderNotification;
-use Beike\Notifications\UpdateOrderNotification;
-use Beike\Notifications\UpdateOrderAlertNotification;
 use Beike\Notifications\NewOrderAlertNotification;
+use Beike\Notifications\NewOrderNotification;
+use Beike\Notifications\UpdateOrderAlertNotification;
+use Beike\Notifications\UpdateOrderNotification;
 use Beike\Services\StateMachineService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -162,5 +163,4 @@ class Order extends Base
             $this->notifyNow(new UpdateOrderAlertNotification($this, $fromCode));
         }
     }
-
 }

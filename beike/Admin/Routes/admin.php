@@ -20,10 +20,24 @@ Route::prefix($adminName)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
                 Route::get('/menus', [Controllers\HomeController::class, 'menus'])->name('home.menus');
+
+                // Dashboard API routes
+                Route::prefix('dashboard')->group(function () {
+                    Route::get('stats', [Controllers\DashboardController::class, 'getStats'])->name('dashboard.stats');
+                    Route::get('trends', [Controllers\DashboardController::class, 'getTrends'])->name('dashboard.trends');
+                    Route::get('mini-charts', [Controllers\DashboardController::class, 'getMiniChartData'])->name('dashboard.mini-charts');
+                    Route::get('source', [Controllers\DashboardController::class, 'getSourceAnalysis'])->name('dashboard.source');
+                    Route::get('funnel', [Controllers\DashboardController::class, 'getFunnelData'])->name('dashboard.funnel');
+                    Route::get('products/{type}', [Controllers\DashboardController::class, 'getProductRanking'])->name('dashboard.products');
+                    Route::post('export', [Controllers\DashboardController::class, 'exportReport'])->name('dashboard.export');
+                    Route::get('cache/status', [Controllers\DashboardController::class, 'getCacheStatus'])->name('dashboard.cache.status');
+                    Route::post('cache/clear', [Controllers\DashboardController::class, 'clearCache'])->name('dashboard.cache.clear');
+                });
                 Route::post('files', [Controllers\FileController::class, 'store'])->name('file.store');
+                Route::post('catch_images', [Controllers\FileController::class, 'catchImages'])->name('file.catch_images');
                 Route::get('plugins/ticket_expired', [Controllers\PluginController::class, 'pluginTicketExpired'])->name('plugins.ticket_expired');
 
-                //个人中心
+                // 个人中心
                 Route::middleware('can:account_index')->get('account', [Controllers\AccountController::class, 'index'])->name('account.index');
                 Route::middleware('can:account_update')->put('account', [Controllers\AccountController::class, 'update'])->name('account.update');
 
@@ -141,9 +155,9 @@ Route::prefix($adminName)
                 Route::get('edit/locale', [Controllers\EditController::class, 'locale'])->name('edit.locale');
 
                 // 图片库
-                Route::middleware('can:file_manager_show')->get('file_manager', [Controllers\FileManagerController::class, 'index'])->name('file_manager.index');
-                Route::middleware('can:file_manager_show')->get('file_manager/files', [Controllers\FileManagerController::class, 'getFiles'])->name('file_manager.get_files');
-                Route::middleware('can:file_manager_show')->get('file_manager/directories', [Controllers\FileManagerController::class, 'getDirectories'])->name('file_manager.get_directories');
+                Route::middleware('can:file_manager_index')->get('file_manager', [Controllers\FileManagerController::class, 'index'])->name('file_manager.index');
+                Route::middleware('can:file_manager_index')->get('file_manager/files', [Controllers\FileManagerController::class, 'getFiles'])->name('file_manager.get_files');
+                Route::middleware('can:file_manager_index')->get('file_manager/directories', [Controllers\FileManagerController::class, 'getDirectories'])->name('file_manager.get_directories');
                 Route::middleware('can:file_manager_create')->post('file_manager/directories', [Controllers\FileManagerController::class, 'createDirectory'])->name('file_manager.create_directory');
                 Route::middleware('can:file_manager_create')->post('file_manager/upload', [Controllers\FileManagerController::class, 'uploadFiles'])->name('file_manager.upload');
                 Route::middleware('can:file_manager_update')->post('file_manager/rename', [Controllers\FileManagerController::class, 'rename'])->name('file_manager.rename');
@@ -151,7 +165,7 @@ Route::prefix($adminName)
                 Route::middleware('can:file_manager_delete')->delete('file_manager/directories', [Controllers\FileManagerController::class, 'destroyDirectories'])->name('file_manager.delete_directories');
                 Route::middleware('can:file_manager_update')->post('file_manager/move_directories', [Controllers\FileManagerController::class, 'moveDirectories'])->name('file_manager.move_directories');
                 Route::middleware('can:file_manager_update')->post('file_manager/move_files', [Controllers\FileManagerController::class, 'moveFiles'])->name('file_manager.move_files');
-                Route::middleware('can:file_manager_show')->get('file_manager/export', [Controllers\FileManagerController::class, 'exportZip'])->name('file_manager.export');
+                Route::middleware('can:file_manager_index')->get('file_manager/export', [Controllers\FileManagerController::class, 'exportZip'])->name('file_manager.export');
 
                 Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
 
@@ -210,7 +224,6 @@ Route::prefix($adminName)
                 Route::middleware('can:marketing_buy')->post('marketing/{id}/buy_service', [Controllers\MarketingController::class, 'buyService'])->name('marketing.buy_service');
                 Route::middleware('can:marketing_download')->post('marketing/{code}/download', [Controllers\MarketingController::class, 'download'])->name('marketing.download');
                 Route::middleware('can:marketing_show')->get('marketing/service_orders/{id}', [Controllers\MarketingController::class, 'serviceOrder'])->name('marketing.service_order');
-
 
                 // 文章
                 Route::middleware('can:pages_index')->get('pages', [Controllers\PagesController::class, 'index'])->name('pages.index');
@@ -272,6 +285,13 @@ Route::prefix($adminName)
                 Route::middleware('can:rma_reasons_delete')->delete('rma_reasons/{id}', [Controllers\RmaReasonController::class, 'destroy'])->name('rma_reasons.destroy');
 
                 Route::middleware('can:settings_index')->get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
+                Route::middleware('can:settings_index')->get('settings/basic', [Controllers\SettingController::class, 'basicSettings'])->name('settings.basic');
+                Route::middleware('can:settings_index')->get('settings/store', [Controllers\SettingController::class, 'storeSettings'])->name('settings.store_settings');
+                Route::middleware('can:settings_index')->get('settings/checkout', [Controllers\SettingController::class, 'checkoutSettings'])->name('settings.checkout');
+                Route::middleware('can:settings_index')->get('settings/picture', [Controllers\SettingController::class, 'pictureSettings'])->name('settings.picture');
+                Route::middleware('can:settings_index')->get('settings/express', [Controllers\SettingController::class, 'expressSettings'])->name('settings.express');
+                Route::middleware('can:settings_index')->get('settings/mail', [Controllers\SettingController::class, 'mailSettings'])->name('settings.mail');
+                Route::middleware('can:settings_index')->get('settings/system_authorization', [Controllers\SettingController::class, 'systemAuthorizationSettings'])->name('settings.system_authorization');
                 Route::middleware('can:settings_update')->post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
                 Route::middleware('can:settings_update')->put('settings/values', [Controllers\SettingController::class, 'updateValues'])->name('settings.update_values');
                 Route::middleware('can:settings_update')->post('settings/store_token', [Controllers\SettingController::class, 'storeDeveloperToken'])->name('settings.store_token');
@@ -299,8 +319,18 @@ Route::prefix($adminName)
                 // help
                 Route::middleware('can:help_index')->get('help', [Controllers\HelpController::class, 'index'])->name('help.index');
 
+                // 邮件发送记录
+                Route::middleware('can:mail_logs_index')->get('mail_logs', [Controllers\MailLogController::class, 'index'])->name('mail_logs.index');
+                Route::middleware('can:mail_logs_show')->get('mail_logs/{mailLog}', [Controllers\MailLogController::class, 'show'])->name('mail_logs.show');
+                Route::middleware('can:mail_logs_delete')->delete('mail_logs', [Controllers\MailLogController::class, 'destroy'])->name('mail_logs.destroy');
+                Route::middleware('can:mail_logs_delete')->post('mail_logs/batch', [Controllers\MailLogController::class, 'batchAction'])->name('mail_logs.batch');
+                Route::middleware('can:mail_logs_delete')->post('mail_logs/cleanup', [Controllers\MailLogController::class, 'cleanup'])->name('mail_logs.cleanup');
+                Route::middleware('can:mail_logs_index')->get('mail_logs/statistics', [Controllers\MailLogController::class, 'statistics'])->name('mail_logs.statistics');
+                Route::middleware('can:mail_logs_update')->post('mail_logs/{mailLog}/resend', [Controllers\MailLogController::class, 'resend'])->name('mail_logs.resend');
+
                 // 后台用户组
                 Route::middleware('can:admin_roles_index')->get('admin_roles', [Controllers\AdminRoleController::class, 'index'])->name('admin_roles.index');
+                Route::middleware('can:admin_roles_index')->get('admin_roles/list', [Controllers\AdminRoleController::class, 'ajaxList'])->name('admin_roles.list');
                 Route::middleware('can:admin_roles_create')->get('admin_roles/create', [Controllers\AdminRoleController::class, 'create'])->name('admin_roles.create');
                 Route::middleware('can:admin_roles_create')->post('admin_roles', [Controllers\AdminRoleController::class, 'store'])->name('admin_roles.store');
                 Route::middleware('can:admin_roles_show')->get('admin_roles/{role_id}/edit', [Controllers\AdminRoleController::class, 'edit'])->name('admin_roles.edit');

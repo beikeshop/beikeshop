@@ -7,6 +7,11 @@
       <text-i18n v-model="form.title"></text-i18n>
     </div>
 
+    <div class="module-edit-group">
+      <div class="module-edit-title">{{ __('admin/builder.sub_title') }}</div>
+      <text-i18n v-model="form.sub_title"></text-i18n>
+    </div>
+
     <div class="module-edit-group" style="margin-bottom: 200px;">
       <div class="module-edit-title">{{ __('admin/builder.text_add_pictures') }}</div>
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
@@ -107,6 +112,7 @@ Vue.component('module-editor-icons', {
       },
       module_size: 'container-fluid',// 窄屏、宽屏、全屏
       title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
+      sub_title: languagesFill('{{ __('admin/builder.sub_title') }}'),
       floor: languagesFill(''),
       images: []
     }

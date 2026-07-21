@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use Beike\Models\Customer;
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Beike\Models\Customer;
 use Illuminate\Support\Str;
 
 class CheckCustomerSessionValid
@@ -26,4 +26,3 @@ class CheckCustomerSessionValid
         return $next($request);
     }
 }
-

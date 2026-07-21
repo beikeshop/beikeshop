@@ -33,6 +33,7 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \App\Http\Middleware\SetAppTimezone::class,
             \App\Http\Middleware\SetLocaleFromSession::class,
             \App\Http\Middleware\ShareViewData::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
@@ -45,6 +46,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
+            \App\Http\Middleware\SetAppTimezone::class,
             \App\Http\Middleware\SetLocaleAdmin::class,
             \App\Http\Middleware\ShareViewData::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
@@ -70,12 +72,14 @@ class Kernel extends HttpKernel
         'api'       => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
+            \App\Http\Middleware\SetAppTimezone::class,
             \App\Http\Middleware\SetLocaleShopApi::class,
             \App\Http\Middleware\SetCurrencyShopApi::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
         'admin_api'       => [
+            \App\Http\Middleware\SetAppTimezone::class,
             \App\Http\Middleware\AdminApiAuthenticate::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,

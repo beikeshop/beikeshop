@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin.php
  *
@@ -53,6 +54,8 @@ class Plugin implements \ArrayAccess, Arrayable
     protected $columns;
 
     protected $canUpdate;
+
+    protected $lastModified;
 
     public function __construct(string $path, array $packageInfo)
     {
@@ -130,6 +133,18 @@ class Plugin implements \ArrayAccess, Arrayable
         $this->version = $version;
 
         return $this;
+    }
+
+    public function setLastModified(string $lastModified): self
+    {
+        $this->lastModified = $lastModified;
+
+        return $this;
+    }
+
+    public function getLastModified(): string
+    {
+        return $this->lastModified;
     }
 
     public function setColumns(): self
@@ -247,7 +262,7 @@ class Plugin implements \ArrayAccess, Arrayable
 
     public function getEditUrl(): string
     {
-        return admin_route('plugins.edit', ['code' => $this->code]);
+        return admin_route('plugins.edit', ['code' => $this->code, http_build_query(request()->query())]);
     }
 
     public function getStatus(): bool
@@ -357,7 +372,7 @@ class Plugin implements \ArrayAccess, Arrayable
         if ($status == 'fail') {
             SettingRepo::update('plugin', $this->code, ['status' => false]);
 
-            if (str_contains($license['message'], 'not authorized')) {
+            if (str_contains($license['message'] ?? false, 'not authorized')) {
                 throw new \Exception('此插件未经授权。请在插件市场购买。');
             }
 
@@ -416,14 +431,15 @@ class Plugin implements \ArrayAccess, Arrayable
         unset($this->packageInfo[$offset]);
     }
 
-    public function setCanUpdate($flag): Plugin
+    public function setCanUpdate($flag): self
     {
         $this->canUpdate = $flag;
 
         return $this;
     }
 
-    public function getCanUpdate(): bool{
+    public function getCanUpdate(): bool
+    {
         return $this->canUpdate;
     }
 }

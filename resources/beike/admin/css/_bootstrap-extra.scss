@@ -3,10 +3,34 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-02 19:19:52
  * @LastEditTime  2022-09-16 19:04:40
  */
+
+[data-bs-theme=dark] {
+  --bs-body-bg: #010409;
+  --bs-border-color: #1e2122;
+}
+
+.text-dark {
+  html[data-bs-theme="dark"] & {
+    color: #dee2e6 !important;
+  }
+}
+
+// [data-bs-theme=light] {
+  // --bs-link-color: #555;
+  // --bs-link-color-rgb: #555;
+// }
+
+.badge {
+  --bs-badge-border-radius: 20px;
+}
+
+body {
+  overflow-x: hidden;
+}
 
 hr.horizontal {
   background-color: transparent;
@@ -19,6 +43,22 @@ hr.horizontal {
 
 hr.horizontal.dark {
   background-image: linear-gradient(90deg,transparent,rgba(0,0,0,.4),transparent);
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+}
+
+.text-bg-success {
+  color: #fff !important;
+}
+
+// 新增一个 class，大于 1200 小于 1500 的时候  flex: 0 0 auto; width: 33.33333333%;
+@media (min-width: 1200px) and (max-width: 1700px) {
+  .col-xl-12-15-4 {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+  }
 }
 
 .nav-tabs {
@@ -38,6 +78,34 @@ hr.horizontal.dark {
           position: absolute;
         }
       }
+    }
+  }
+}
+
+.form-check-input {
+  html[data-bs-theme="dark"] & {
+    &:not(:checked) {
+      background-color: #38393b;
+      border-color: #737679;
+    }
+  }
+}
+
+.form-switch {
+  margin-bottom: 0;
+
+  .form-check-input {
+    width: 3em;
+    height: 1.6em;
+
+    &:checked {
+      background-color: var(--bs-success);
+      border-color: var(--bs-success);
+    }
+
+    &:focus {
+      box-shadow: none;
+      border-color: #e8e8e8;
     }
   }
 }
@@ -82,15 +150,31 @@ hr.horizontal.dark {
   }
 }
 
+.bg-light {
+  html[data-bs-theme="dark"] & {
+    background-color: #222222 !important;
+  }
+}
+
 .card {
-  // box-shadow: rgba(0, 0, 0, .1) 0px 1px 4px 0px;
   box-shadow: 0 0.375rem 0.75rem rgba(140,152,164,.075);
+
+  html[data-bs-theme="dark"] & {
+    // background-color: #131313;
+    background-color: #010409;
+    border-color: #3d444d;
+  }
+
+  html[data-bs-theme="light"] & {
+    background-color: #ffffff;
+    // border-color: #55585b;
+  }
 
   .card-header {
     // padding: 1rem 1rem .3rem;
     padding-top: 1.3rem;
     padding-bottom: 0;
-    background-color: #fff;
+    background-color: transparent;
     font-weight: bold;
     // font-size: .8rem;
     border-bottom: 0 solid rgba(0,0,0,.125);
@@ -124,6 +208,19 @@ table.table {
       border-top-width: 0;
       border-bottom: none;
       white-space:nowrap;
+      html[data-bs-theme="dark"] & {
+        background-color: #2e2e2e;
+      }
+
+      &:first-child {
+        border-top-left-radius: .5rem;
+        border-bottom-left-radius: .5rem;
+      }
+
+      &:last-child {
+        border-top-right-radius: .5rem;
+        border-bottom-right-radius: .5rem;
+      }
     }
   }
 
@@ -131,7 +228,9 @@ table.table {
     // border-bottom: 0;
     font-size: .8125rem;
     vertical-align: middle;
-    // border-top: 1px solid #edf2f9;
+    // html[data-bs-theme="dark"] & {
+    //   border-color: #55585b;
+    // }
   }
 
   &.table-striped>tbody>tr {
@@ -239,11 +338,11 @@ table.table {
 }
 
 .form-control {
-  // border-radius: 2px;
-  // font-size: 0.7rem;
-
   &:focus {
     box-shadow: none;
+  }
+  &[readonly] {
+    background-color: #f5f5f5;
   }
 }
 
@@ -260,6 +359,13 @@ table.table {
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 
+span.input-group-text {
+  html[data-bs-theme="dark"] & {
+    border-color: #55585b;
+    background-color: #2e2e2e;
+  }
+}
+
 .input-for-group {
   span.input-group-text {
     border-top-right-radius: 0 !important;
@@ -274,6 +380,24 @@ table.table {
 }
 
 .pagination {
+  html[data-bs-theme="light"] & {
+    --bs-pagination-color: #606266;
+  }
+
+  html[data-bs-theme="dark"] & {
+    --bs-pagination-color: #ccc;
+    --bs-pagination-bg: #3f3f3f;
+  }
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .page-item {
+      margin-bottom: 4px;
+    }
+  }
+
   > li {
     margin: 0 5px;
     font-weight: bold;
@@ -287,6 +411,15 @@ table.table {
 
 .dropdown-menu {
   box-shadow: 0 .5rem 2rem 0.125rem rgba(140, 152, 164, 0.286);
+  html[data-bs-theme="dark"] & {
+    background-color: #222222;
+    box-shadow: 0 .5rem 2rem 0.125rem rgba(39, 63, 87, 0.286);
+  }
+
+  html[data-bs-theme="light"] & {
+    background-color: #ffffff;
+    box-shadow: 0 .5rem 2rem 0.125rem rgba(140, 152, 164, 0.286);
+  }
 }
 
 .input-locale-wrap {

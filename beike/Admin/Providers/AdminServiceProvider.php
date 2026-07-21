@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AdminUserRepo.php
  *
@@ -13,6 +14,7 @@ namespace Beike\Admin\Providers;
 
 use Beike\Admin\View\Components\Alert;
 use Beike\Admin\View\Components\Filter;
+use Beike\Admin\View\Components\Form\Checkbox;
 use Beike\Admin\View\Components\Form\Image;
 use Beike\Admin\View\Components\Form\Input;
 use Beike\Admin\View\Components\Form\InputLocale;
@@ -24,7 +26,6 @@ use Beike\Admin\View\Components\Header;
 use Beike\Admin\View\Components\NoData;
 use Beike\Admin\View\Components\Sidebar;
 use Beike\Console\Commands\AddCountryContinent;
-use Beike\Console\Commands\BeikeShopInstall;
 use Beike\Console\Commands\ChangeRootPassword;
 use Beike\Console\Commands\FetchCurrencyRate;
 use Beike\Console\Commands\GenerateDatabaseDict;
@@ -38,7 +39,6 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\View\FileViewFinder;
-use Beike\Admin\View\Components\Form\Checkbox;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -59,8 +59,16 @@ class AdminServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
         $this->registerGuard();
 
-        $adminName = admin_name();
-        $inConsole = $this->app->runningInConsole();
+        // env没设置APP_DEBUG时，以后台设置开关为准
+        if (config('app.debug') === null) {
+            // 从数据库读取调试模式配置
+            $debugMode = system_setting('base.app_debug', false);
+            // 动态覆盖.env配置
+            config(['app.debug' => (bool) $debugMode]);
+        }
+
+        $adminName      = admin_name();
+        $inConsole      = $this->app->runningInConsole();
         $isAdminRequest = Str::startsWith($uri, "/{$adminName}");
 
         // 仅在控制台或后台请求时加载以下逻辑
@@ -80,7 +88,7 @@ class AdminServiceProvider extends ServiceProvider
 
             Config::set('filesystems.disks.catalog', [
                 'driver' => 'local',
-                'root'   => public_path('catalog'),
+                'root'   => catalog_path(),
             ]);
 
             Config::set('filesystems.disks.upload', [
@@ -92,7 +100,6 @@ class AdminServiceProvider extends ServiceProvider
         }
     }
 
-
     /**
      * 加载后台命令行脚本
      */
@@ -101,7 +108,6 @@ class AdminServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 AddCountryContinent::class,
-                BeikeShopInstall::class,
                 ChangeRootPassword::class,
                 FetchCurrencyRate::class,
                 GenerateDatabaseDict::class,
@@ -192,7 +198,7 @@ class AdminServiceProvider extends ServiceProvider
             $builderName   = basename($builder, '.php');
             $aliasName     = Str::snake($builderName);
             $componentName = Str::studly($builderName);
-            $classBaseName = "\\Beike\\Admin\\View\\DesignBuilders\\{$componentName}";
+            $classBaseName = "Beike\\Admin\\View\\DesignBuilders\\{$componentName}";
 
             if (! class_exists($classBaseName)) {
                 throw new \Exception("请先定义自定义模板类 {$classBaseName}");

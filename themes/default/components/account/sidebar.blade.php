@@ -7,8 +7,8 @@
       </div>
       @hook('account.sidebar.before.head')
       <div class="head">
-        <div class="portrait"><img src="{{ image_resize($customer->avatar, 200, 200) }}" alt="{{ $customer->name }}" class="img-fluid"></div>
-        <div class="text-md-center">
+        <div class="portrait"><a href="{{ shop_route('account.edit.index') }}"><img src="{{ image_resize($customer->avatar, 200, 200) }}" alt="{{ $customer->name }}" class="img-fluid"></a></div>
+        <div class="">
           <div class="account-name">{{ $customer->name }}</div>
           @hookwrapper('account.sidebar.email')
           <div class="account-email">{{ $customer->email }}</div>
@@ -19,33 +19,64 @@
 
       @hook('account.sidebar.before.nav')
       <nav class="list-group account-links">
-        <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.index') ? 'active' : '' }}"
+        <a class="list-group-item d-flex align-items-center {{ equal_route('shop.account.index') ? 'active' : '' }}"
           href="{{ shop_route('account.index') }}">
-          <span>{{ __('shop/account.index') }}</span></a>
-        <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.edit.index') ? 'active' : '' }}"
+          <span class="icon">
+            <svg t="1758527325016" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9053" width="16" height="16"><path d="M165.76 924.16c-8.32 0-16-3.84-21.12-9.6-35.2-39.68-63.36-84.48-84.48-133.76-25.6-60.8-38.4-124.8-38.4-190.72 0-67.2 12.8-130.56 38.4-191.36 24.96-58.88 60.16-110.72 104.96-156.16 45.44-44.8 97.28-80 156.16-104.96 60.8-25.6 124.16-38.4 191.36-38.4 66.56 0 129.92 12.8 190.72 38.4 58.88 24.96 110.72 60.16 156.16 104.96 44.8 45.44 80 97.28 104.96 156.16 25.6 60.8 38.4 124.16 38.4 191.36 0 65.92-12.8 129.92-38.4 190.72-21.12 49.28-49.28 94.08-84.48 133.76a28.544 28.544 0 0 1-42.24 0.64l-16.64-16.64a33.344 33.344 0 0 1-1.28-44.8c27.52-32 49.92-67.2 65.92-106.24 6.4-15.36 12.16-30.72 16.64-46.08l-40.96-9.6a45.184 45.184 0 0 1-26.88-19.2 43.136 43.136 0 0 1-5.12-32c2.56-10.88 9.6-20.48 19.2-26.88 9.6-5.76 21.12-7.68 32-5.12l36.48 8.32c0.64-8.96 0.64-17.92 0.64-26.88 0-55.68-10.88-108.16-32-158.08-10.88-26.24-24.96-51.2-40.96-74.24l-22.4 17.92c-18.56 14.72-44.8 11.52-59.52-6.4a45.824 45.824 0 0 1-9.6-31.36c1.28-11.52 7.04-21.76 16-28.8l19.84-16q-52.8-48.96-119.04-76.8a424.96 424.96 0 0 0-115.2-30.08v19.84a42.624 42.624 0 0 1-85.12 0v-19.84c-39.68 4.48-78.08 14.72-115.2 30.08q-66.24 27.84-119.04 76.8l20.48 16c8.96 7.04 14.72 17.28 16 28.8 0.64 11.52-2.56 22.4-9.6 31.36-7.04 8.96-17.28 14.72-28.8 16a45.824 45.824 0 0 1-31.36-9.6l-22.4-18.56c-16 23.68-30.08 48-40.96 74.88-21.12 49.92-32 102.4-32 158.08 0 8.96 0 17.92 0.64 27.52l35.84-8.32c10.88-2.56 22.4-0.64 32 5.12 9.6 6.4 16.64 16 19.2 26.88 2.56 10.88 0.64 22.4-5.12 32-6.4 9.6-16 16.64-26.88 19.2l-39.68 8.96a403.456 403.456 0 0 0 82.56 153.6c10.88 12.16 10.88 30.72-0.64 42.24l-17.92 17.92a30.08 30.08 0 0 1-21.12 8.96z m551.68-519.68l-31.36 88.32c-11.52 32.64-24.96 67.2-39.04 103.04-30.72 75.52-54.4 121.6-72.32 140.16a127.488 127.488 0 0 1-137.6 30.72c-16-6.4-30.08-15.36-42.88-26.88-12.16-12.16-21.76-26.24-28.8-42.24-6.4-15.36-9.6-31.36-10.24-48-0.64-16.64 2.56-32.64 8.32-48 6.4-16.64 15.36-30.72 27.52-42.88v-0.64c17.92-17.92 63.36-43.52 138.24-76.8 35.2-15.36 68.48-29.44 101.12-42.24l87.04-34.56z m-153.6 154.88c-30.08 13.44-54.4 24.96-73.6 34.56-21.12 11.52-33.92 19.2-38.4 23.68-7.68 8.32-11.52 18.56-11.52 30.08 0 12.16 4.48 22.4 13.44 30.72 8.32 7.68 18.56 12.16 30.08 11.52 11.52 0 21.76-4.48 30.08-12.8 3.84-5.12 11.52-17.92 21.76-39.04 9.6-19.84 20.48-44.16 32-74.24 1.28-2.56 2.56-5.12 3.2-7.68-2.56 1.28-4.48 1.92-7.04 3.2z" fill="#333333" p-id="9054"></path></svg>
+          </span>
+          <span>{{ __('shop/account.index') }}</span>
+        </a>
+        <a class="list-group-item d-flex align-items-center {{ equal_route('shop.account.edit.index') ? 'active' : '' }}"
           href="{{ shop_route('account.edit.index') }}">
-          <span>{{ __('shop/account/edit.index') }}</span></a>
-        <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.password.index') ? 'active' : '' }}"
-           href="{{ shop_route('account.password.index') }}">
-          <span>{{ __('shop/account/password.index') }}</span></a>
-        <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.order.index') || equal_route('shop.account.order.show') ? 'active' : '' }}"
+          <span class="icon">
+            <svg t="1758341095370" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7116" width="16" height="16"><path d="M511.3 615.2c-152 0-275.7-123.7-275.7-275.7S359.3 63.9 511.3 63.9 787 187.5 787 339.5 663.3 615.2 511.3 615.2z m0-454.8c-98.8 0-179.2 80.4-179.2 179.2s80.4 179.2 179.2 179.2 179.2-80.4 179.2-179.2-80.4-179.2-179.2-179.2z" fill="#333333" p-id="7117"></path><path d="M852.5 956.3c-26.6 0-48.2-21.6-48.2-48.2 0-161.5-131.4-292.9-292.9-292.9-161.5 0-292.9 131.4-292.9 292.9 0 26.6-21.6 48.2-48.2 48.2s-48.2-21.6-48.2-48.2c0-214.7 174.7-389.4 389.4-389.4s389.4 174.7 389.4 389.4c-0.2 26.6-21.8 48.2-48.4 48.2z" fill="#333333" p-id="7118"></path></svg>
+          </span>
+          <span>{{ __('shop/account/edit.index') }}</span>
+        </a>
+        <a class="list-group-item d-flex align-items-center {{ equal_route('shop.account.order.index') || equal_route('shop.account.order.show') ? 'active' : '' }}"
           href="{{ shop_route('account.order.index') }}">
-          <span>{{ __('shop/account/order.index') }}</span></a>
+          <span class="icon">
+            <svg t="1758341181219" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7449" width="16" height="16"><path d="M793.1 959.9H232.9C158.5 959.9 98 899.4 98 825V201.5c0-74.4 60.5-134.9 134.9-134.9H793c74.4 0 134.9 60.5 134.9 134.9V825c0.1 74.4-60.4 134.9-134.8 134.9z m-560.2-804c-25.1 0-45.6 20.5-45.6 45.6V825c0 25.1 20.5 45.6 45.6 45.6H793c25.1 0 45.6-20.5 45.6-45.6V201.5c0-25.1-20.5-45.6-45.6-45.6H232.9z" fill="#333333" p-id="7450"></path><path d="M707.9 365.7H322.1c-24.7 0-44.7-20-44.7-44.7 0-24.7 20-44.7 44.7-44.7h385.7c24.7 0 44.7 20 44.7 44.7 0 24.7-20 44.7-44.6 44.7zM707.9 557.1H322.1c-24.7 0-44.7-20-44.7-44.7s20-44.7 44.7-44.7h385.7c24.7 0 44.7 20 44.7 44.7s-20 44.7-44.6 44.7zM573.3 748.5H322.1c-24.7 0-44.7-20-44.7-44.7 0-24.7 20-44.7 44.7-44.7h251.2c24.7 0 44.7 20 44.7 44.7 0 24.7-20 44.7-44.7 44.7z" fill="#333333" p-id="7451"></path></svg>
+          </span>
+          <span>{{ __('shop/account/order.index') }}</span>
+        </a>
         @hookwrapper('account.sidebar.nav.addresses')
-        <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.addresses.index') ? 'active' : '' }}"
+        <a class="list-group-item d-flex align-items-center {{ equal_route('shop.account.addresses.index') ? 'active' : '' }}"
           href="{{ shop_route('account.addresses.index') }}">
-          <span>{{ __('shop/account/addresses.index') }}</span></a>
+          <span class="icon">
+            <svg t="1758341507229" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8796" width="16" height="16"><path d="M509.2 791.3c-8.7 0-17.3-2.7-24.6-8.1-10.8-7.9-265.3-196.9-265.3-397.8 0-159.9 130.1-290 290-290s290 130.1 290 290c0 200.9-254.5 389.9-265.3 397.8-7.5 5.5-16.1 8.1-24.8 8.1z m0-612.5c-113.9 0-206.6 92.7-206.6 206.6 0 117.5 132.1 250.2 206.6 311.3 74.5-61.2 206.6-194.1 206.6-311.3 0.1-113.9-92.6-206.6-206.6-206.6z" fill="#333333" p-id="8797"></path><path d="M509.2 526.5c-77.7 0-141-63.3-141-141s63.3-141 141-141 141 63.3 141 141-63.2 141-141 141z m0-198.7c-31.8 0-57.6 25.9-57.6 57.6s25.8 57.6 57.6 57.6 57.6-25.9 57.6-57.6-25.8-57.6-57.6-57.6zM511.3 929.2c-200.7 0-416.7-50.3-416.7-160.8 0-36.8 24.6-88.4 141.9-124.9 21.9-6.8 45.3 5.4 52.2 27.4 6.8 22-5.5 45.3-27.4 52.2-64.4 20-82.1 41.2-83.3 45.8 5.7 20.4 116.8 76.8 333.3 76.8 216.6 0 327.7-56.5 333.4-78-1.3-3.6-19.7-25.5-87.2-45.9-22-6.6-34.5-29.9-27.9-52 6.7-22 29.9-34.5 52-27.9 121 36.5 146.4 88.8 146.4 126.3 0 110.6-216 161-416.7 161z" fill="#333333" p-id="8798"></path></svg>
+          </span>
+          <span>{{ __('shop/account/addresses.index') }}</span>
+        </a>
         @endhookwrapper
-        <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.wishlist.index') ? 'active' : '' }}"
+        <a class="list-group-item d-flex align-items-center {{ equal_route('shop.account.wishlist.index') ? 'active' : '' }}"
           href="{{ shop_route('account.wishlist.index') }}">
-          <span>{{ __('shop/account/wishlist.index') }}</span></a>
-        <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.rma.index') || equal_route('shop.account.rma.show') ? 'active' : '' }}"
+          <span class="icon">
+            <svg t="1758341228154" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7785" width="16" height="16"><path d="M511.7 919.4c-4.6 0-9.8-0.7-14.1-2.1-9.8-3.1-241.3-78.2-366.7-295.8C62.4 502.6 23 321.3 137.3 201.8c53.2-55.6 112.9-84.1 177.7-84.8 64.9-1.5 132.4 27.4 196.3 81.9 64-54.4 131.1-82.4 196.3-81.9 64.7 0.7 124.5 29.2 177.7 84.8 114.4 119.5 74.9 300.8 6.4 419.7-125.3 217.7-356.8 292.8-366.6 295.9-4.3 1.3-8.9 2-13.4 2zM317.5 206.3H316c-39.8 0.4-78.3 19.7-114.2 57.3-75.1 78.5-50.9 214 6.4 313.5 92.3 160.3 255.8 232.4 303 250.5 47.2-18.2 211.3-91 303.2-250.5 57.3-99.5 81.5-235 6.4-313.5-35.9-37.6-74.4-56.8-114.2-57.3h-1.5c-63.8 0-122.8 45.5-161.2 83.9-1.6 1.6-3.3 3.1-5.2 4.4-7.6 6.4-17.1 9.8-27.4 10.1-11.7 0.6-24.5-5.6-33.2-15-37.8-37.9-96.8-83.4-160.6-83.4z" fill="#333333" p-id="7786"></path></svg>
+          </span>
+          <span>{{ __('shop/account/wishlist.index') }}</span>
+        </a>
+        <a class="list-group-item d-flex align-items-center {{ equal_route('shop.account.rma.index') || equal_route('shop.account.rma.show') ? 'active' : '' }}"
           href="{{ shop_route('account.rma.index') }}">
-          <span>{{ __('shop/account/rma.index') }}</span></a>
-
+          <span class="icon">
+            <svg t="1758341637140" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8965" width="16" height="16"><path d="M875.7 510.3c-24.7 0-44.7-20-44.7-44.7V341.8c0-19.7-16-35.7-35.6-35.7l-651.2-0.3c-24.7 0-44.7-20-44.7-44.7 0-24.7 20-44.7 44.7-44.7l651.2 0.3c68.9 0 125 56.1 125 125.1v123.7c0 24.7-20.1 44.8-44.7 44.8zM874 806c-0.1 0-0.1 0 0 0l-651.2-0.3c-68.9 0-125-56.1-125-125.1V561.2c0-24.7 20-44.7 44.7-44.7s44.7 20 44.7 44.7v119.5c0 19.7 16 35.7 35.6 35.7l651.2 0.3c24.7 0 44.7 20 44.7 44.7-0.1 24.7-20.1 44.6-44.7 44.6z" fill="#333333" p-id="8966"></path><path d="M188.6 385.3c-11.6 0-23.1-4.5-31.6-13.1l-79.5-79.4c-8.4-8.4-13.1-19.8-13.1-31.6s4.7-23.2 13.1-31.6l79.5-79.4c12.8-12.8 32-16.6 48.7-9.7 16.7 6.9 27.6 23.2 27.6 41.3v158.9c0 18.1-10.9 34.4-27.6 41.3-5.5 2.2-11.3 3.3-17.1 3.3zM834.2 885.5c-5.8 0-11.6-1.1-17.1-3.4-16.7-6.9-27.6-23.2-27.6-41.3V681.9c0-18.1 10.9-34.4 27.6-41.3 16.7-6.9 35.9-3.1 48.7 9.7l79.4 79.4c17.5 17.5 17.5 45.7 0 63.2l-79.4 79.5c-8.5 8.6-19.9 13.1-31.6 13.1z" fill="#333333" p-id="8967"></path></svg>
+          </span>
+          <span>{{ __('shop/account/rma.index') }}</span>
+        </a>
+        <a class="list-group-item d-flex align-items-center {{ equal_route('shop.account.password.index') ? 'active' : '' }}"
+          href="{{ shop_route('account.password.index') }}">
+          <span class="icon">
+            <svg t="1758341245445" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7953" width="16" height="16"><path d="M796.6 502.1H229.4v-155c0-156.4 127.2-283.6 283.6-283.6s283.6 127.2 283.6 283.6v155z m-477.4-89.7h387.6v-65.3c0-106.9-86.9-193.8-193.8-193.8s-193.8 86.9-193.8 193.8v65.3z" fill="#333333" p-id="7954"></path><path d="M774.1 961.1H251.9c-73.7 0-133.6-59.9-133.6-133.6V545.9c0-73.7 59.9-133.6 133.6-133.6H774c73.7 0 133.6 59.9 133.6 133.6v281.6c0.1 73.7-59.9 133.6-133.5 133.6z m-522.2-459c-24.2 0-43.8 19.7-43.8 43.8v281.6c0 24.2 19.7 43.8 43.8 43.8H774c24.2 0 43.8-19.7 43.8-43.8V545.9c0-24.2-19.7-43.8-43.8-43.8H251.9z" fill="#333333" p-id="7955"></path><path d="M513 777.5c-24.8 0-44.9-20.1-44.9-44.9v-73.4c0-24.8 20.1-44.9 44.9-44.9s44.9 20.1 44.9 44.9v73.4c0 24.8-20.1 44.9-44.9 44.9z" fill="#333333" p-id="7956"></path></svg>
+          </span>
+          <span>{{ __('shop/account/password.index') }}</span>
+        </a>
         @hook('account.sidebar.before.logout')
-        <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('logout') }}">
-          <span>{{ __('common.sign_out') }}</span></a>
+        <a class="list-group-item d-flex align-items-center" href="{{ shop_route('logout') }}">
+          <span class="icon">
+            <svg t="1758341462511" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8626" width="16" height="16"><path d="M639.6 685.9c-11.5 0-22.9-4.4-31.7-13.1L351.2 416c-17.5-17.5-17.5-45.9 0-63.4s45.9-17.5 63.4 0l256.7 256.7c17.5 17.5 17.5 45.9 0 63.4-8.8 8.8-20.3 13.2-31.7 13.2z" fill="#333333" p-id="8627"></path><path d="M382.8 685.9c-11.5 0-22.9-4.4-31.7-13.1-17.5-17.5-17.5-45.9 0-63.4l256.7-256.7c17.5-17.5 45.9-17.5 63.4 0s17.5 45.9 0 63.4L414.5 672.7c-8.7 8.8-20.2 13.2-31.7 13.2z" fill="#333333" p-id="8628"></path><path d="M511.2 960.7c-114.8 0-229.5-43.7-316.9-131.1-174.8-174.8-174.8-459.1 0-633.9C369 21 653.4 21 828.1 195.8c174.8 174.8 174.8 459.1 0 633.9-87.3 87.3-202.1 131-316.9 131z m0-806.4c-91.8 0-183.6 35-253.5 104.8-139.8 139.8-139.8 367.3 0 507.1s367.3 139.8 507.1 0 139.8-367.3 0-507.1C694.9 189.3 603 154.3 511.2 154.3z m285.3 643.6h0.2-0.2z" fill="#333333" p-id="8629"></path></svg>
+          </span>
+          <span>{{ __('common.sign_out') }}</span>
+        </a>
       </nav>
       @hook('account.sidebar.after.nav')
     </div>

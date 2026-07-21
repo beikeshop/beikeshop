@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Beike Config
  *
@@ -6,14 +7,14 @@
  * @link       https://beikeshop.com
  * @author     guangda <service@guangda.work>
  * @created    2022-06-06 09:09:09
- * @modified   2022-09-13 22:32:41
+ * @modified   2025-12-04 15:20:32
  */
 
 return [
     'api_url'          => env('BEIKE_API', 'https://api2.beikeshop.com'),
     'official_website' => env('BEIKE_OFFICIAL_WEBSITE', 'https://beikeshop.com'),
-    'version'          => '1.6.0.24',
-    'build'            => '20260225',
+    'version'          => '2.0.0.30',
+    'build'            => '20260519',
     'website_key'      => 'OR5DOG3vnhM5A9iFz4WePCyjiDmglEbeFK8xiypjxvM=',
 
     'admin_name'      => env('ADMIN_NAME'),

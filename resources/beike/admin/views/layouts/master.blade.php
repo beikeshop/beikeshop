@@ -22,12 +22,19 @@
   <link rel="shortcut icon" href="{{ image_origin(system_setting('base.favicon')) }}">
   <link href="{{ mix('build/beike/admin/css/app.css') }}" rel="stylesheet">
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
-  <title>BeikeShop - @yield('title')</title>
+  <title>{{ system_setting('base.store_name', 'BeikeShop') }} @hasSection('title') - @yield('title') @endif</title>
   @stack('header')
 
   <script>
     const $languages = @json(locales());
     const $locale = '{{ locale() }}';
+
+    const savedTheme = localStorage.getItem('ld_theme');
+    const ldTheme = savedTheme === 'auto'
+      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : (savedTheme || 'light');
+
+    $('html').attr('data-bs-theme', ldTheme);
   </script>
 
   @hook('admin.master.header.code')
@@ -35,37 +42,53 @@
 
 <body class="@yield('body-class') {{ admin_locale() }}">
   <x-admin-header />
+  @php
+    $backUrl = trim($__env->yieldContent('page-title-back'));
+  @endphp
 
   <div class="main-content">
     <x-admin-sidebar />
+
     <div id="content">
-      @hook('admin.master.content.before')
+      <div class="content-area mx-auto @yield('content-area-class')">
+        @hook('admin.master.content.before')
 
-      <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <h5 class="page-title">@yield('title')</h5>
-          <div class="ms-4">@yield('page-title-after')</div>
+        <x-admin::page-title-box :back-url="$backUrl" />
+
+        @hook('admin.master.content.before.container')
+
+        <div class="container-fluid p-0">
+          <div class="content-info">
+            @yield('content')
+          </div>
+
+          <div class="page-bottom-btns">
+            @yield('page-bottom-btns')
+          </div>
+
+          <div class="d-flex justify-content-center mt-5" id="copyright-text">
+            <div class="copyright-content text-secondary">
+              @if(!check_license())
+              <span class="me-1 fl">v{{ config('beike.version') }}({{ config('beike.build') }})</span>
+              <span class="me-1">{!! __('common.text_powered') !!}</span>
+              @endif
+              <div>
+                @php
+                  $footerContent = \Beike\Repositories\FooterRepo::handleFooterData();
+                  $copyright = $footerContent['bottom']['copyright'][locale()] ?? '';
+                  @endphp
+                {!! $copyright !!}
+                @if(check_license())
+                <div class="me-1 text-center">v{{ config('beike.version') }}({{ config('beike.build') }})</div>
+                @endif
+              </div>
+            </div>
+          </div>
+
         </div>
-        <div class="text-nowrap">@yield('page-title-right')</div>
+
+        @hook('admin.master.content.after')
       </div>
-      @hook('admin.master.content.before.container')
-      <div class="container-fluid p-0">
-        <div class="content-info">
-          @yield('content')
-        </div>
-
-        <div class="page-bottom-btns">
-          @yield('page-bottom-btns')
-        </div>
-
-        <p class="text-center text-secondary mt-5" id="copyright-text">
-            <a href="https://beikeshop.com/" class="ms-2" target="_blank">BeikeShop</a>
-            v{{ config('beike.version') }}({{ config('beike.build') }})
-            &copy; {{ date('Y') }} All Rights Reserved</p>
-
-      </div>
-
-      @hook('admin.master.content.after')
     </div>
   </div>
 
@@ -73,7 +96,7 @@
     @hook('admin.master.script.before')
 
     @if (locale() != 'zh_cn')
-      ELEMENT.locale(ELEMENT.lang['{{ locale() }}'])
+      ELEMENT.locale(ELEMENT.lang?.['{{ locale() }}'])
     @endif
     const lang = {
       file_manager: '{{ __('admin/file_manager.file_manager') }}',
@@ -128,11 +151,26 @@
       }, 1000);
     @endif
 
+    $('.exit-edit').on('click', function() {
+      layer.confirm('{{ __('common.exit_edit_tips') }}', {
+        icon: 0,
+        title: '{{__("common.text_hint")}}',
+        btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}']
+      }, function() {
+        layer.closeAll();
+      }, function() {
+        @if ($backUrl && $backUrl !== '1')
+        window.location.href = "{{ $backUrl }}";
+        @else
+        history.go(-1);
+        @endif
+      })
+    })
+
     @hook('admin.master.script.after')
   </script>
 
   @stack('footer')
-
   @hook('admin.master.footer')
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CountryResource.php
  *
@@ -24,7 +25,7 @@ class CountryResource extends JsonResource
             'continent'        => $this->continent,
             'continent_format' => trans('country.' . ($this->continent ?: 'null')),
             'sort_order'       => $this->sort_order,
-            'status'           => $this->status,
+            'active'           => $this->active,
             'created_at'       => time_format($this->created_at),
             'updated_at'       => time_format($this->updated_at),
         ];

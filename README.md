@@ -12,11 +12,11 @@
 
 <div align="center">
   <a href="https://beikeshop.com/" target="_blank"><img src="https://img.shields.io/badge/BeikeShop-%23FF6F30" alt="logo"></a>
-  <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.3%2B-%234F5B93?logoColor=%234F5B93&labelColor=%234F5B93" alt="logo"></a>
-  <a href="https://laravel.com/" target="_blank"><img src="https://img.shields.io/badge/-Laravel%2010-%23FF2D20?logo=laravel&logoColor=%23fff&labelColor=%23FF7467" alt="logo"></a>
+  <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.2%2B-%234F5B93?logoColor=%234F5B93&labelColor=%234F5B93" alt="logo"></a>
+  <a href="https://laravel.com/" target="_blank"><img src="https://img.shields.io/badge/-Laravel%2012-%23FF2D20?logo=laravel&logoColor=%23fff&labelColor=%23FF7467" alt="logo"></a>
 </div>
 <p align="center">
-  <a href="https://beikeshop.com/download" target="_blank"><img src="https://img.shields.io/badge/release-v1.5.6-%234B79B6?labelColor=%234B79B6" alt="logo"></a>
+  <a href="https://beikeshop.com/download" target="_blank"><img src="https://img.shields.io/badge/release-v2.0-%234B79B6?labelColor=%234B79B6" alt="logo"></a>
   <a href="https://beikeshop.com/demo" target="_blank"><img src="https://img.shields.io/badge/Demo-available-%2363B95C?labelColor=%23959494" alt="logo"></a>
   <a href="https://beikeshop.com/download" target="_blank"><img src="https://img.shields.io/badge/Downloads-163k-%23ED9017?logoColor=%23fff&labelColor=%23c57e37" alt="logo"></a>
 </p>
@@ -43,8 +43,8 @@ Engineered for seamless secondary development, BeikeShop follows a **modular, ev
 
 ## Tech Stack
 
-- **Language**: PHP 8.1+
-- **Framework**: Laravel 10
+- **Language**: PHP 8.2+
+- **Framework**: Laravel 12
 - **Frontend**: Blade Templates, Vue.js
 - **Architecture**: MVC, Modular, Event-driven
 - **Security & Logic**:Middleware, Webhook Engine
@@ -113,11 +113,13 @@ git clone https://github.com/beikeshop/beikeshop.git
 cd beikeshop
 composer install
 cp .env.example .env
+php artisan key:generate
 npm install
 npm run prod
+php artisan beikeshop:install
 ```
 
-Set the `public` directory as the web root and complete installation via browser.
+Set the `public` directory as the web root.
 
 For upgrades:
 
@@ -132,23 +134,28 @@ php artisan migrate
 1. Install Docker & Docker Compose
     [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
-2. Clone Docker environment:
+2. Clone this repository and enter the project directory:
 
    ```bash
-   git clone git@gitee.com:beikeshop/docker.git
+   git clone https://github.com/beikeshop/beikeshop.git
+   cd beikeshop
    ```
 
-3. Create website directory:
+3. Run the automatic installer:
 
    ```bash
-   mkdir www
+   chmod +x install.sh
+   ./install.sh
    ```
 
-4. Configure environment:
+   Or start the bundled Docker Compose profile manually:
 
    ```bash
-   cp env.example .env
-   docker compose up -d
+   cp .env.example .env
+   printf "\nAPP_CODE_PATH=.\nDB_HOST=mysql\n" >> .env
+   docker compose --profile nginx up -d --build
+   docker compose exec nginx composer install
+   docker compose exec nginx php artisan beikeshop:install --force
    ```
 
 Detailed guide: [https://docs.beikeshop.com/en/install/docker.html](https://docs.beikeshop.com/en/install/docker.html)
@@ -169,7 +176,7 @@ Detailed guide: [https://docs.beikeshop.com/en/install/docker.html](https://docs
 
 - **OS**: Ubuntu 22+ / CentOS 8.5
 
-- **PHP**: 8.2
+- **PHP**: 8.2+
 
 - **Database**: MySQL 5.7+
 
@@ -177,7 +184,7 @@ Detailed guide: [https://docs.beikeshop.com/en/install/docker.html](https://docs
 
 ### Required PHP Extensions
 
-BCMath, Ctype, cURL, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PCRE, PDO, Tokenizer, XML
+BCMath, Ctype, cURL, DOM, Fileinfo, GD, iconv, JSON, Mbstring, OpenSSL, PCRE, PDO, SimpleXML, Tokenizer, XML, ZIP
 
 ---
 
@@ -188,7 +195,7 @@ BCMath, Ctype, cURL, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PCRE, PDO, Tokenize
 
 - **Easy to Use:** Designed for rapid deployment, allowing you to go from installation to a live store in minutes.
 
-- **Laravel Framework:** Built on Laravel 10+, adhering to standard MVC architecture and industry best practices.
+- **Laravel Framework:** Built on Laravel 12, adhering to standard MVC architecture and industry best practices.
 
 - **Modern UI:** Clean, high-conversion storefront and an intuitive admin dashboard for a seamless user experience.
 

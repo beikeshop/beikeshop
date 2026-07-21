@@ -2,7 +2,6 @@
 
 namespace App\Tools;
 
-use App\Tools\Module;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection as BaseCollection;
 
@@ -27,8 +26,8 @@ class Collection extends BaseCollection
     {
         return array_map(function ($value) {
             if ($value instanceof Module) {
-                $attributes = $value->json()->getAttributes();
-                $attributes["path"] = $value->getPath();
+                $attributes         = $value->json()->getAttributes();
+                $attributes['path'] = $value->getPath();
 
                 return $attributes;
             }

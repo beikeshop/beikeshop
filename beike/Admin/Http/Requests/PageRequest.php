@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AdminUserRequest.php
  *
@@ -33,8 +34,8 @@ class PageRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'descriptions.*.title'   => 'required|string|min:3|max:128',
-            'descriptions.*.summary' => 'string|max:180',
+            'descriptions.*.title'   => 'required|string|min:1',
+            'descriptions.*.summary' => 'string',
             'descriptions.*.content' => 'required|string',
             'descriptions.*.locale'  => 'required|string',
         ];

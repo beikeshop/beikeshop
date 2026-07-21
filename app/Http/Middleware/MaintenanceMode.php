@@ -22,8 +22,8 @@ class MaintenanceMode
             'shop.lang.switch',
         ];
         $routeName = Route::current()->getName();
-        if (!in_array($routeName, $ignores)) {
-            if (system_setting('base.maintenance_mode') && !current_user()) {
+        if (! in_array($routeName, $ignores)) {
+            if (system_setting('base.maintenance_mode') && ! current_user()) {
                 return response()->view('maintenance', []);
             }
         }

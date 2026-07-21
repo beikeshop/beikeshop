@@ -15,7 +15,7 @@
         <template v-if="source.isLogin">
           <div class="col-lg-6 col-12" v-for="address, index in source.addresses" :key="index"
             v-if="source.addresses.length &&( address.id == form.shipping_address_id || isAllAddress)">
-            <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']"
+            <div :class="['item rounded-2 overflow-hidden', address.id == form.shipping_address_id ? 'active' : '']"
               @click="updateCheckout(address.id, 'shipping_address_id')">
               @hookwrapper('checkout.address.shipping.login.info')
               <div class="name-wrap">

@@ -11,8 +11,8 @@
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('admin/brand.brands_create') }}</button>
         @hook('admin.brand.index.content.top_buttons.after')
       </div>
-      <div class="table-push">
-        <table class="table">
+      <div class="table-push" v-if="brands.data.length">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>{{ __('common.id') }}</th>
@@ -25,29 +25,28 @@
               <th>{{ __('common.action') }}</th>
             </tr>
           </thead>
-          <tbody v-if="brands.data.length">
-            <tr v-for="brand, index in brands.data" :key="index">
+          <tbody>
+            <tr v-for="brand, index in brands.data" :key="index" class="cursor-pointer" @click="checkedCreate('edit', index)">
               <td>@{{ brand.id }}</td>
               <td>@{{ brand.name }}</td>
-              <td><div class="wh-50 border d-flex justify-content-center rounded-2 align-items-center"><img :src="thumbnail(brand.logo)" class="img-fluid rounded-2"></div></td>
+              <td><div class="wh-50 border bg-white d-flex justify-content-center rounded-2 align-items-center"><img :src="thumbnail(brand.logo)" class="img-fluid rounded-2"></div></td>
               <td>@{{ brand.sort_order }}</td>
               <td>@{{ brand.first }}</td>
               <td>
-                <span class="text-success" v-if="brand.status">{{ __('common.enabled') }}</span>
+                <span class="text-success" v-if="brand.active">{{ __('common.enabled') }}</span>
                 <span class="text-secondary" v-else>{{ __('common.disabled') }}</span>
               </td>
               @hook('admin.brand.index.table.body')
               <td>
                 @hook('admin.brand.index.table.body.actions.before')
-                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(brand.id, index)">{{ __('common.delete') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click.stop="deleteItem(brand.id, index)">{{ __('common.delete') }}</button>
                 @hook('admin.brand.index.table.body.actions.after')
               </td>
             </tr>
           </tbody>
-          <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
         </table>
       </div>
+      <div v-else><x-admin-no-data /></div>
 
       <el-pagination v-if="brands.data.length" layout="prev, pager, next" background :page-size="brands.per_page" :current-page.sync="page"
         :total="brands.total" :current-page.sync="page"></el-pagination>
@@ -80,7 +79,7 @@
         @hook('admin.brand.form.after')
 
         <el-form-item label="{{ __('common.status') }}">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
+          <el-switch v-model="dialog.form.active" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
 
         <el-form-item>
@@ -115,7 +114,7 @@
             logo: '',
             first: '',
             sort_order: '',
-            status: 1,
+            active: 1,
           },
         },
 
@@ -170,7 +169,7 @@
 
           if (type == 'edit') {
             let item = JSON.parse(JSON.stringify(this.brands.data[index]));
-            item.status = Number(item.status)
+            item.active = Number(item.active)
             this.dialog.form = item
           }
         },
@@ -217,7 +216,7 @@
         closeDialog(form) {
           this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
-          this.dialog.form.status = 1
+          this.dialog.form.active = 1
         },
 
         @hook('admin.brand.index.vue.methods')

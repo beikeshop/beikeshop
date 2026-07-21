@@ -1,10 +1,11 @@
 <?php
+
 /**
  * CustomerRepo.php
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-10-13 09:57:13
  * @modified   2022-10-13 09:57:13
  */
@@ -16,7 +17,6 @@ use Beike\Shop\Services\AccountService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Laravel\Socialite\Two\User;
 use Plugin\Social\Models\CustomerSocial;
 
 class CustomerRepo

@@ -63,6 +63,21 @@
     // 下载插件 逻辑
     if (event.data.type == 'download_plugin') {
       $http.post(`marketing/${event.data.data.code}/download`, null, {hmsg:true}).then((res) => {
+        // 弹窗提示插件下载成功，按钮：继续逛逛、前往插件列表
+        layer.open({
+          title: '{{ __("common.text_hint") }}',
+          content: res.message,
+          btn: ['{{ __("admin/marketing.keep_browsing") }}', '{{ __("admin/marketing.go_to_plugin_list") }}'],
+          yes: function(index) {
+            layer.close(index); // 继续逛逛，关闭弹窗
+          },
+          btn2: function(index) {
+            // 跳转到插件列表并定位具体插件
+            window.location.href = '{{ admin_route('plugins.index') }}?highlight=' + encodeURIComponent(event.data.data.code);
+            return false;
+          }
+        });
+        // 通知 iframe 下载完成（如有需要）
         marketingIframe.contentWindow.postMessage({ type: 'download_plugin_done', data: {message: res.message} }, '{{ beike_url() }}');
       }).catch((err) => {
         if (err.response.data.message == 'plugin_pending') {

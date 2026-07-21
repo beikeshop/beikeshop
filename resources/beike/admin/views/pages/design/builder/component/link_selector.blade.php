@@ -144,13 +144,15 @@
           {type: 'brand', label: '{{ __('admin/builder.text_manufacturer') }}'},
           {type: 'static',label: '{{ __('admin/builder.text_static') }}'},
           {type: 'custom',label: '{{ __('admin/builder.text_custom') }}'}
+          @hook('admin.design.builder.link.type.after')
         ],
         static: [
           {name: '{{ __('shop/account.index') }}', value: 'account.index'},
           {name: '{{ __('shop/account/wishlist.index') }}', value: 'account.wishlist.index'},
           {name: '{{ __('shop/account/order.index') }}', value: 'account.order.index'},
-          // {name: '最新商品', value: 'account.index'},
           {name: '{{ __('shop/brands.index') }}', value: 'brands.index'},
+          {name: '{{ __('page_category.index') }}', value: 'page_categories.home'},
+          @hook('admin.design.builder.link.static.after')
         ],
         link: null,
         keyword: '',
@@ -212,6 +214,7 @@
           case 'page_category':
             url = '{{ admin_route('page_categories.index') }}';
             break;
+          @hook('admin.design.builder.link.admin_route.after')
           default:
             null;
         }
@@ -306,6 +309,7 @@
           case 'page_category':
             url = 'page_categories/autocomplete?name=';
             break;
+          @hook('admin.design.builder.link.search_api.after')
           default:
             null;
         }
@@ -362,6 +366,7 @@
           case 'page_category':
             url = `page_categories/${this.link.value}/name`;
             break;
+          @hook('admin.design.builder.link.name_api.after')
           default:
             null;
         }

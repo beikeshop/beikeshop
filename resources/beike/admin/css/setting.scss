@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @author        guangda <service@guangda.work>
+ * @Date          2022-08-02 19:19:52
+ * @LastEditTime  2022-09-16 19:06:05
+ */
+
+.setting-card {
+  .item {
+    display: flex;
+    align-items: center;
+    // color: #222;
+    // margin-bottom: 20px;
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    html[data-bs-theme="dark"] & {
+      border: 1px solid #3e3e3e;
+    }
+
+    @media (min-width: 768px) {
+      padding: 30px 20px;
+    }
+
+    &:hover {
+      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+      border-color: rgba($primary, 0.3);
+      .left {
+        .icon {
+          &::after {
+            opacity: 1;
+            html[data-bs-theme="dark"] & {
+              opacity: .1;
+            }
+          }
+
+          i {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+    .left {
+      color: $primary;
+      margin-right: 20px;
+
+      .icon {
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 50%;
+        position: relative;
+        margin-top: -10px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        justify-content: center;
+
+        &:before {
+          position: absolute;
+          content: '';
+          inset: 0;
+          border-radius: 10px;
+          transform: rotate(45deg);
+          background: linear-gradient(-45deg, #ffe2d4 0, #fff 68%);
+          transition: all .3s ease-in-out;
+          z-index: 1;
+          html[data-bs-theme="dark"] & {
+            background: transparent;
+            background-image: linear-gradient(-45deg, #49413c 0, #000000 68%);
+          }
+        }
+
+
+        &:after {
+          position: absolute;
+          content: '';
+          inset: 0;
+          border-radius: 10px;
+          transform: rotate(45deg);
+          background: linear-gradient(-45deg, #ffe2d4 0, #fff 100%);
+          opacity: 0;
+          transition: all .3s ease-in-out;
+          z-index: 2;
+        }
+
+        i {
+          font-size: 24px;
+          position: relative;
+          margin-top: 7px;
+          font-weight: 500;
+          line-height: 1;
+          z-index: 9;
+          transition: all .3s ease-in-out;
+        }
+      }
+    }
+
+    .text {
+      .title {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+
+      .sub-title {
+        font-size: 12px;
+        color: #979797;
+        height: 36px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+}

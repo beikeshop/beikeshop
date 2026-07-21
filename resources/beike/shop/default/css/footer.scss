@@ -3,13 +3,13 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-09-03 22:32:29
  * @LastEditTime  2022-09-16 20:48:00
  */
 
 footer {
-  background: #f6f6f8;
+  background: #f4f4f4;
   margin-top: 1rem;
   position: relative;
   overflow: hidden;
@@ -42,11 +42,14 @@ footer {
     .service-item {
       display: flex;
       align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
 
       .icon {
-        width: 38px;
-        flex: 0 0 38px;
-        margin-right: 14px;
+        width: 40px;
+        flex: 0 0 40px;
+        margin-bottom: 16px;
 
         @media (max-width:768px) {
           display: none;
@@ -60,13 +63,13 @@ footer {
       .title {
         margin-bottom: 4px;
         font-weight: bold;
-        font-size: .9rem;
+        font-size: 1rem;
         color: #333;
       }
 
       .sub-title {
-        font-size: .7rem;
-        color: #8D94A0;
+        font-size: .8rem;
+        color: #75797f;
       }
     }
   }
@@ -92,7 +95,7 @@ footer {
     // }
 
     a {
-      color: #666;
+      color: #333;
 
       &:hover {
         color: $primary;
@@ -109,12 +112,12 @@ footer {
     }
 
     h6 {
-      font-size: 14px;
+      font-size: 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       @media (min-width: 768px) {
-        margin-bottom: 16px;
+        margin-bottom: 20px;
       }
 
       @media (max-width: 768px) {
@@ -178,6 +181,10 @@ footer {
 
       ul.list-unstyled, .intro-wrap {
         margin-bottom: 0;
+        li {
+          margin-bottom: 10px;
+          font-size: 14px;
+        }
 
         @media (max-width: 768px) {
           width: 100%;
@@ -192,7 +199,7 @@ footer {
   .footer-bottom {
     display: flex;
     align-items: center;
-    background: #EFEFF4;
+    border-top: 1px solid #e6e3dc;
     color: #666;
 
     @media (min-width:768px) {
@@ -203,6 +210,12 @@ footer {
       padding: 10px 0;
       .row.align-items-center, .d-flex {
         justify-content: center;
+      }
+    }
+
+    .copyright-content {
+      p {
+        margin-bottom: 0;
       }
     }
   }

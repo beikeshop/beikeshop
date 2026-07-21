@@ -2,6 +2,8 @@
 
 @section('title', __('admin/region.index'))
 
+@section('page-title-back', true)
+
 @section('content')
 <div id="tax-classes-app" class="card" v-cloak>
   <div class="card-body h-min-600">
@@ -11,8 +13,8 @@
       <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       @hook('admin.region.index.content.top_buttons.after')
     </div>
-    <div class="table-push">
-      <table class="table">
+    <div class="table-push" v-if="regions.length">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>ID</th>
@@ -24,8 +26,8 @@
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody v-if="regions.length">
-          <tr v-for="tax, index in regions" :key="index">
+        <tbody>
+          <tr v-for="tax, index in regions" :key="index" class="cursor-pointer" @click="checkedCreate('edit', index)">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.name }}</td>
             <td :title="tax.description">@{{ stringLengthInte(tax.description) }}</td>
@@ -34,22 +36,16 @@
             @hook('admin.region.index.table.body')
             <td class="text-end">
               @hook('admin.region.index.table.body.actions.before')
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{
-                __('common.edit') }}</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{
                 __('common.delete') }}</button>
               @hook('admin.region.index.table.body.actions.after')
             </td>
           </tr>
         </tbody>
-        <tbody v-else>
-          <tr>
-            <td colspan="6" class="border-0">
-              <x-admin-no-data />
-            </td>
-          </tr>
-        </tbody>
       </table>
+    </div>
+    <div v-else>
+      <x-admin-no-data />
     </div>
     @hook('admin.region.index.content.after')
   </div>
@@ -240,6 +236,7 @@
         },
 
         deleteCustomer(id, index) {
+          event.stopPropagation();
           const self = this;
           this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',

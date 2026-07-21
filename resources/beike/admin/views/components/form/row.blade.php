@@ -1,6 +1,8 @@
-<div class="row g-3 mb-3">
-  <label class="wp-200 col-form-label text-end {{ isset($required) && $required ? 'required' : '' }}">{{ $title ?? '' }}</label>
-  <div class="col-auto wp-200-">
+<div class="mb-3">
+  @if ($title ?? false)
+    <label class="col-form-label text-end {{ isset($required) && $required ? 'required' : '' }}">{{ $title ?? '' }}</label>
+  @endif
+  <div class="col-auto">
     {{ $slot }}
   </div>
 </div>

@@ -3,21 +3,26 @@
 /**
  * @copyright     2024 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2024-11-12 10:42:54
  * @LastEditTime  2024-11-12 10:43:15
  */
 
 .img-text-banner-wrap {
+  .img-wrap {
+    @media (max-width: 992px) {
+      margin: 10px 0;
+    }
+  }
+
   .text-wrap {
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     height: 100%;
     @media (min-width: 1200px) {
-      padding: 40px 70px;
+      padding: 0 50px;
     }
 
     @media (max-width: 992px) {

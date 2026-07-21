@@ -1,18 +1,14 @@
-@push('header')
-  <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
-@endpush
+@addStyle(asset('vendor/swiper/swiper-bundle.min.css'))
+@addScript(asset('vendor/swiper/swiper-bundle.min.js'))
 
 <section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-{{ $module_id }}">
-  @include('design._partial._module_tool')
-
-  <div class="module-info mb-3 mb-md-5">
+  <div class="module-info  ">
     <div class="{{ $content['module_size'] ?? 'w-100' }}">
       <div class="swiper module-swiper-img-text-{{ $module_id }} module-img-text-slideshow">
         <div class="swiper-wrapper">
           @foreach($content['images'] as $image)
             <div class="swiper-slide">
-              <div class="image-wrap" style="background-image: url({{ $image['image'] }})">
+              <div class="image-wrap" style="background-image: url('{{ $image['image'] }}')">
                 <div class="container content-wrap {{ $image['text_position'] }}">
                   <div class="text-wrap" data-swiper-parallax-y="-100" data-swiper-parallax-duration="1000" data-swiper-parallax-opacity="0.5" >
                     @if ($image['sub_title'])

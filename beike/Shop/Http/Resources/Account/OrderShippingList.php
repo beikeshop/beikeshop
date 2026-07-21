@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OrderShippingList.php
  *
@@ -19,7 +20,7 @@ class OrderShippingList extends JsonResource
     {
         $products = OrderProductSimple::collection($this->orderProducts)->jsonSerialize();
         $data     = [
-            'store_name'              => system_setting('base.meta_title'),
+            'store_name'              => system_setting('base.store_name', 'BeikeShop'),
             'id'                      => $this->id,
             'number'                  => $this->number,
             'customer_name'           => $this->customer_name,

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Rma.php
  *
@@ -11,11 +12,11 @@
 
 namespace Beike\Models;
 
+use Beike\Notifications\NewRmaAlertNotification;
+use Beike\Notifications\NewRmaNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Beike\Notifications\NewRmaNotification;
-use Beike\Notifications\NewRmaAlertNotification;
 use Illuminate\Notifications\Notifiable;
 
 class Rma extends Base
@@ -23,7 +24,7 @@ class Rma extends Base
     use HasFactory;
     use Notifiable;
 
-    protected $fillable = ['order_id', 'order_product_id', 'customer_id', 'name', 'email', 'telephone', 'product_name', 'sku', 'quantity', 'images', 'opened', 'rma_reason_id', 'type', 'status', 'comment'];
+    protected $fillable = ['order_id', 'order_product_id', 'customer_id', 'name', 'email', 'telephone', 'product_name', 'sku', 'quantity', 'images', 'opened', 'rma_reason_id', 'type', 'status', 'comment', 'express_com', 'express_no'];
 
     protected $casts = ['images' => 'json'];
 
@@ -83,5 +84,15 @@ class Rma extends Base
     public function getStatusFormatAttribute(): mixed
     {
         return trans("rma.status_{$this->status}");
+    }
+
+    public function getExpressComFormatAttribute(): mixed
+    {
+        return $this->express_com ?? __('shop/account/rma.not_shipped');
+    }
+
+    public function getExpressNoFormatAttribute(): mixed
+    {
+        return $this->express_no ?? __('shop/account/rma.not_shipped');
     }
 }

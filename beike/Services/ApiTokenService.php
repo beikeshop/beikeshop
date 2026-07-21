@@ -3,8 +3,8 @@
 namespace Beike\Services;
 
 use Beike\Facades\BeikeHttp\Http;
-use Beike\Repositories\SettingRepo;
 use Beike\Libraries\ToolCache as Cache;
+use Beike\Repositories\SettingRepo;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
@@ -29,8 +29,11 @@ class ApiTokenService
      * API 路径常量
      */
     private const API_PATH_TOKEN_BOOTSTRAP = '/api/v1/token/bootstrap';
+
     private const API_PATH_REFRESH_TOKEN = '/api/v1/token/refresh';
+
     private const API_PATH_GENERATE_SIGNATURE = '/api/v1/signature/generate';
+
     private const API_PATH_SIGNATURE_SECRET = '/api/v1/signature/secret';
 
     /**
@@ -51,7 +54,7 @@ class ApiTokenService
     public function getAccessToken(): ?string
     {
         $cacheKey = $this->getCacheKey('access_token');
-        $token = Cache::get($cacheKey);
+        $token    = Cache::get($cacheKey);
 
         if ($token) {
             // 检查是否即将过期（剩余时间少于 5 分钟）
@@ -68,10 +71,11 @@ class ApiTokenService
                     } catch (\Exception $e) {
                         Log::warning('Failed to auto-refresh token, clearing expired tokens', [
                             'domain' => get_safe_host(),
-                            'error' => $e->getMessage(),
+                            'error'  => $e->getMessage(),
                         ]);
                         // 清除过期 Token，下次请求会重新获取
                         $this->clearTokens();
+
                         return null;
                     }
                 }
@@ -91,22 +95,22 @@ class ApiTokenService
     public function fetchToken(string $domain): array
     {
         try {
-            $domain = clean_domain(get_safe_host());
+            $domain         = clean_domain(get_safe_host());
             $developerToken = $this->normalizeDeveloperToken((string) (system_setting('base.developer_token') ?? ''));
-            $tokenData = null;
-            $result = [];
+            $tokenData      = null;
+            $result         = [];
 
             try {
-                $result = $this->requestBootstrapToken($domain, $developerToken);
+                $result    = $this->requestBootstrapToken($domain, $developerToken);
                 $tokenData = $this->normalizeTokenPayload($result);
 
                 if ($tokenData === null && $this->shouldFallbackToLegacyWebsiteToken(new \Exception((string) ($result['message'] ?? '')))) {
                     $legacyToken = $this->requestLegacyWebsiteToken($domain);
                     if ($legacyToken !== null && $legacyToken !== '') {
                         $tokenData = [
-                            'access_token' => $legacyToken,
+                            'access_token'  => $legacyToken,
                             'refresh_token' => null,
-                            'expires_in' => 7200,
+                            'expires_in'    => 7200,
                         ];
 
                         Log::warning('Bootstrap token endpoint returned developer token error payload, fell back to legacy website token', [
@@ -122,9 +126,9 @@ class ApiTokenService
                 $legacyToken = $this->requestLegacyWebsiteToken($domain);
                 if ($legacyToken !== null && $legacyToken !== '') {
                     $tokenData = [
-                        'access_token' => $legacyToken,
+                        'access_token'  => $legacyToken,
                         'refresh_token' => null,
-                        'expires_in' => 7200,
+                        'expires_in'    => 7200,
                     ];
 
                     Log::warning('Bootstrap token endpoint rejected developer token, fell back to legacy website token', [
@@ -144,8 +148,8 @@ class ApiTokenService
                 );
 
                 Log::info('API token fetched successfully', [
-                    'domain' => get_safe_host(),
-                    'expires_in' => $expiresIn,
+                    'domain'            => get_safe_host(),
+                    'expires_in'        => $expiresIn,
                     'has_refresh_token' => isset($tokenData['refresh_token']) ? 'yes' : 'no',
                 ]);
 
@@ -155,6 +159,7 @@ class ApiTokenService
             throw new \Exception('Failed to fetch token from API: ' . ($result['message'] ?? 'Unknown error'));
         } catch (\Exception $e) {
             Log::error('Failed to fetch token: ' . $e->getMessage());
+
             throw $e;
         }
     }
@@ -168,19 +173,19 @@ class ApiTokenService
     {
         $data = $result['data'] ?? null;
 
-        if (is_array($data) && !empty($data['access_token'])) {
+        if (is_array($data) && ! empty($data['access_token'])) {
             return [
-                'access_token' => (string) $data['access_token'],
+                'access_token'  => (string) $data['access_token'],
                 'refresh_token' => isset($data['refresh_token']) ? (string) $data['refresh_token'] : null,
-                'expires_in' => (int) ($data['expires_in'] ?? 7200),
+                'expires_in'    => (int) ($data['expires_in'] ?? 7200),
             ];
         }
 
         if (is_string($data) && $data !== '') {
             return [
-                'access_token' => $data,
+                'access_token'  => $data,
                 'refresh_token' => null,
-                'expires_in' => 7200,
+                'expires_in'    => 7200,
             ];
         }
 
@@ -193,24 +198,24 @@ class ApiTokenService
     protected function requestBootstrapToken(string $domain, string $developerToken): array
     {
         $timestamp = time();
-        $nonce = \Illuminate\Support\Str::random(40);
-        $host = get_safe_host();
+        $nonce     = \Illuminate\Support\Str::random(40);
+        $host      = get_safe_host();
 
-        $http = new \Illuminate\Http\Client\Factory();
+        $http   = new \Illuminate\Http\Client\Factory;
         $client = $http->withOptions([
-            'verify' => config('beike.http_verify_ssl', true),
+            'verify'  => config('beike.http_verify_ssl', true),
             'timeout' => config('beike.http_timeout', 30),
         ]);
 
         $client->withHeaders([
             'developer-token' => $developerToken,
-            'Timestamp' => $timestamp,
-            'Nonce' => $nonce,
-            'Referer' => $host,
-            'Content-Type' => 'application/json',
+            'Timestamp'       => $timestamp,
+            'Nonce'           => $nonce,
+            'Referer'         => $host,
+            'Content-Type'    => 'application/json',
         ]);
 
-        $url = $this->apiUrl . self::API_PATH_TOKEN_BOOTSTRAP;
+        $url      = $this->apiUrl . self::API_PATH_TOKEN_BOOTSTRAP;
         $response = $client->post($url, ['domain' => $domain]);
 
         return is_array($response->json()) ? $response->json() : [];
@@ -221,7 +226,7 @@ class ApiTokenService
      */
     protected function requestLegacyWebsiteToken(string $domain): ?string
     {
-        $result = $this->sendUnsignedApiGet('/v1/website/get_token', ['domain' => $domain], false);
+        $result     = $this->sendUnsignedApiGet('/v1/website/get_token', ['domain' => $domain], false);
         $normalized = $this->normalizeTokenPayload(is_array($result) ? $result : []);
 
         return $normalized['access_token'] ?? null;
@@ -236,7 +241,7 @@ class ApiTokenService
             $query['throwException'] = false;
         }
 
-        return (new Http())->sendGet($apiEndPoint, $query, 'json');
+        return (new Http)->sendGet($apiEndPoint, $query, 'json');
     }
 
     /**
@@ -261,41 +266,42 @@ class ApiTokenService
      */
     public function refreshToken(): array
     {
-        $lockKey = $this->getCacheKey('refresh_lock');
+        $lockKey      = $this->getCacheKey('refresh_lock');
         $acquiredLock = false;
 
         // 尝试获取锁，避免并发刷新
-        if (!Cache::add($lockKey, 1, 10)) {
+        if (! Cache::add($lockKey, 1, 10)) {
             // 其他进程正在刷新，等待并返回当前 token
             sleep(1);
             $token = $this->getAccessToken();
             if ($token) {
                 return ['access_token' => $token];
             }
+
             throw new \Exception('Token refresh in progress, please retry');
         }
 
         $acquiredLock = true;
 
         $maxRetries = 2;
-        $retry = 0;
-        $domain = get_safe_host();
+        $retry      = 0;
+        $domain     = get_safe_host();
 
         try {
             while ($retry <= $maxRetries) {
                 try {
                     $refreshToken = Cache::get($this->getCacheKey('refresh_token'));
 
-                    if (!$refreshToken) {
+                    if (! $refreshToken) {
                         throw new \Exception('No refresh token available');
                     }
 
                     // 准备请求参数
                     $timestamp = time();
-                    $nonce = \Illuminate\Support\Str::random(40);
-                    $method = 'POST';
-                    $path = self::API_PATH_REFRESH_TOKEN;
-                    $body = json_encode(['refresh_token' => $refreshToken]);
+                    $nonce     = \Illuminate\Support\Str::random(40);
+                    $method    = 'POST';
+                    $path      = self::API_PATH_REFRESH_TOKEN;
+                    $body      = json_encode(['refresh_token' => $refreshToken]);
 
                     // 优先使用本地签名，失败时回退到服务端签名
                     $signatureSecret = system_setting('base.signature_secret');
@@ -321,9 +327,9 @@ class ApiTokenService
                     }
 
                     // 创建 HTTP 客户端
-                    $http = new \Illuminate\Http\Client\Factory();
+                    $http   = new \Illuminate\Http\Client\Factory;
                     $client = $http->withOptions([
-                        'verify' => config('beike.http_verify_ssl', true),
+                        'verify'  => config('beike.http_verify_ssl', true),
                         'timeout' => config('beike.http_timeout', 30),
                     ]);
 
@@ -331,30 +337,30 @@ class ApiTokenService
 
                     $client->withHeaders([
                         'developer-token' => $developerToken,
-                        'Timestamp' => $timestamp,
-                        'Nonce' => $nonce,
-                        'Signature' => $signature,
-                        'Referer' => get_safe_host(),
-                        'Content-Type' => 'application/json',
+                        'Timestamp'       => $timestamp,
+                        'Nonce'           => $nonce,
+                        'Signature'       => $signature,
+                        'Referer'         => get_safe_host(),
+                        'Content-Type'    => 'application/json',
                     ]);
 
-                    $url = $this->apiUrl . $path;
+                    $url      = $this->apiUrl . $path;
                     $response = $client->withBody($body, 'application/json')->post($url);
-                    $result = $response->json();
+                    $result   = $response->json();
 
                     if (isset($result['data'])) {
                         $tokenData = $result['data'];
                         $this->storeToken(
                             $tokenData['access_token'],
                             $tokenData['refresh_token'] ?? null,
-                            $tokenData['expires_in'] ?? 7200
+                            $tokenData['expires_in']    ?? 7200
                         );
 
                         Log::info('API token refreshed successfully', [
-                            'domain' => $domain,
-                            'expires_in' => $tokenData['expires_in'] ?? 7200,
+                            'domain'            => $domain,
+                            'expires_in'        => $tokenData['expires_in'] ?? 7200,
                             'has_refresh_token' => isset($tokenData['refresh_token']) ? 'yes' : 'no',
-                            'retry' => $retry,
+                            'retry'             => $retry,
                         ]);
 
                         // 刷新成功，清除失败计数
@@ -364,27 +370,26 @@ class ApiTokenService
                     }
 
                     throw new \Exception('Failed to refresh token');
-
                 } catch (\Exception $e) {
                     $retry++;
 
                     if ($retry > $maxRetries) {
                         // 记录失败次数
-                        $failKey = $this->getCacheKey('refresh_fail_count');
+                        $failKey   = $this->getCacheKey('refresh_fail_count');
                         $failCount = Cache::get($failKey, 0) + 1;
                         Cache::put($failKey, $failCount, 3600); // 1 小时内累计
 
                         Log::error('Failed to refresh token after retries', [
-                            'domain' => $domain,
-                            'error' => $e->getMessage(),
-                            'retries' => $maxRetries,
+                            'domain'     => $domain,
+                            'error'      => $e->getMessage(),
+                            'retries'    => $maxRetries,
                             'fail_count' => $failCount,
                         ]);
 
                         // 如果 1 小时内失败超过 3 次，记录告警
                         if ($failCount >= 3) {
                             Log::alert('Token refresh failed multiple times', [
-                                'domain' => $domain,
+                                'domain'     => $domain,
                                 'fail_count' => $failCount,
                                 'last_error' => $e->getMessage(),
                             ]);
@@ -392,6 +397,7 @@ class ApiTokenService
 
                         // 清除无效的 refresh token
                         $this->clearTokens();
+
                         throw $e;
                     }
 
@@ -413,13 +419,13 @@ class ApiTokenService
     /**
      * 从 API 服务端获取签名（公开方法，供 Http 类调用）
      *
-     * @param string $method HTTP 方法
-     * @param string $path 请求路径
-     * @param string $query 查询字符串
-     * @param string $content 请求体内容
-     * @param int $timestamp 时间戳
-     * @param string $nonce 随机字符串
-     * @param string $token Bearer Token（可选）
+     * @param string $method    HTTP 方法
+     * @param string $path      请求路径
+     * @param string $query     查询字符串
+     * @param string $content   请求体内容
+     * @param int    $timestamp 时间戳
+     * @param string $nonce     随机字符串
+     * @param string $token     Bearer Token（可选）
      * @return string 签名
      * @throws \Exception
      */
@@ -452,6 +458,7 @@ class ApiTokenService
 
         // 如果没有配置本地密钥，回退到服务端签名（兼容旧版本）
         Log::warning('Signature secret not configured, falling back to server-side signature generation');
+
         return $this->getSignatureFromServer($method, $path, $query, $content, $timestamp, $nonce, $token);
     }
 
@@ -471,14 +478,14 @@ class ApiTokenService
      * 2. 使用 '|' 分隔符拼接
      * 3. 使用 HMAC-SHA256 生成签名
      *
-     * @param string $secret 签名密钥
-     * @param string $method HTTP 方法
-     * @param string $path 请求路径
-     * @param string $query 查询字符串
-     * @param string $content 请求体内容
-     * @param int $timestamp 时间戳
-     * @param string $nonce 随机字符串
-     * @param string $token Bearer Token
+     * @param string $secret    签名密钥
+     * @param string $method    HTTP 方法
+     * @param string $path      请求路径
+     * @param string $query     查询字符串
+     * @param string $content   请求体内容
+     * @param int    $timestamp 时间戳
+     * @param string $nonce     随机字符串
+     * @param string $token     Bearer Token
      * @return string 64 位十六进制签名
      */
     private function createLocalSignature(
@@ -520,13 +527,13 @@ class ApiTokenService
     /**
      * 从 API 服务端获取签名
      *
-     * @param string $method HTTP 方法
-     * @param string $path 请求路径
-     * @param string $query 查询字符串
-     * @param string $content 请求体内容
-     * @param int $timestamp 时间戳
-     * @param string $nonce 随机字符串
-     * @param string $token Bearer Token（可选，获取 token 时为空）
+     * @param string $method    HTTP 方法
+     * @param string $path      请求路径
+     * @param string $query     查询字符串
+     * @param string $content   请求体内容
+     * @param int    $timestamp 时间戳
+     * @param string $nonce     随机字符串
+     * @param string $token     Bearer Token（可选，获取 token 时为空）
      * @return string 签名
      * @throws \Exception
      */
@@ -541,22 +548,22 @@ class ApiTokenService
     ): string {
         try {
             // 直接使用 Laravel HTTP Client，避免使用 Http 类（防止循环依赖）
-            $http = new \Illuminate\Http\Client\Factory();
+            $http   = new \Illuminate\Http\Client\Factory;
             $client = $http->withOptions([
-                'verify' => config('beike.http_verify_ssl', true),
+                'verify'  => config('beike.http_verify_ssl', true),
                 'timeout' => config('beike.http_timeout', 30),
             ]);
 
             $developerToken = $this->normalizeDeveloperToken((string) (system_setting('base.developer_token') ?? ''));
-            $host = get_safe_host();
+            $host           = get_safe_host();
 
             // 签名接口不需要 Signature 头（signature_generate_factors 中不包含 Signature 验证）
             $client->withHeaders([
                 'developer-token' => $developerToken,
-                'Timestamp' => $timestamp,
-                'Nonce' => $nonce,
-                'Referer' => $host,
-                'Content-Type' => 'application/json',
+                'Timestamp'       => $timestamp,
+                'Nonce'           => $nonce,
+                'Referer'         => $host,
+                'Content-Type'    => 'application/json',
             ]);
 
             // 如果有 Bearer Token，添加到请求头
@@ -564,15 +571,15 @@ class ApiTokenService
                 $client->withToken($token);
             }
 
-            $url = $this->apiUrl . self::API_PATH_GENERATE_SIGNATURE;
+            $url      = $this->apiUrl . self::API_PATH_GENERATE_SIGNATURE;
             $response = $client->post($url, [
-                'method' => $method,
-                'path' => $path,
-                'query' => $query,
-                'content' => $content,
+                'method'    => $method,
+                'path'      => $path,
+                'query'     => $query,
+                'content'   => $content,
                 'timestamp' => $timestamp,
-                'nonce' => $nonce,
-                'token' => $token, // 获取 token 时为空字符串
+                'nonce'     => $nonce,
+                'token'     => $token, // 获取 token 时为空字符串
             ]);
 
             $result = $response->json();
@@ -585,8 +592,9 @@ class ApiTokenService
         } catch (\Exception $e) {
             Log::error('Failed to get signature from server', [
                 'domain' => get_safe_host(),
-                'error' => $e->getMessage(),
+                'error'  => $e->getMessage(),
             ]);
+
             throw $e;
         }
     }
@@ -602,13 +610,13 @@ class ApiTokenService
         try {
             // 准备请求参数
             $timestamp = time();
-            $nonce = \Illuminate\Support\Str::random(40);
-            $host = get_safe_host();
+            $nonce     = \Illuminate\Support\Str::random(40);
+            $host      = get_safe_host();
 
             // 创建 HTTP 客户端
-            $http = new \Illuminate\Http\Client\Factory();
+            $http   = new \Illuminate\Http\Client\Factory;
             $client = $http->withOptions([
-                'verify' => config('beike.http_verify_ssl', true),
+                'verify'  => config('beike.http_verify_ssl', true),
                 'timeout' => config('beike.http_timeout', 30),
             ]);
 
@@ -617,14 +625,14 @@ class ApiTokenService
             // 获取签名密钥不需要签名（在 ignore_uri 中）
             $client->withHeaders([
                 'developer-token' => $developerToken,
-                'Timestamp' => $timestamp,
-                'Nonce' => $nonce,
-                'Referer' => $host,
+                'Timestamp'       => $timestamp,
+                'Nonce'           => $nonce,
+                'Referer'         => $host,
             ]);
 
-            $url = $this->apiUrl . self::API_PATH_SIGNATURE_SECRET;
+            $url      = $this->apiUrl . self::API_PATH_SIGNATURE_SECRET;
             $response = $client->get($url);
-            $result = $response->json();
+            $result   = $response->json();
 
             if (isset($result['data']['secret'])) {
                 $secret = $result['data']['secret'];
@@ -639,6 +647,7 @@ class ApiTokenService
             throw new \Exception('Failed to fetch signature secret from API');
         } catch (\Exception $e) {
             Log::error('Failed to fetch signature secret: ' . $e->getMessage());
+
             throw $e;
         }
     }
@@ -652,19 +661,21 @@ class ApiTokenService
     {
         $accessToken = $this->getAccessToken();
 
-        if (!$accessToken) {
+        if (! $accessToken) {
             return false;
         }
 
         try {
-            $http = new Http();
+            $http = new Http;
             $http->withToken($accessToken);
             $http->sendPost('token/revoke');
 
             $this->clearTokens();
+
             return true;
         } catch (\Exception $e) {
             Log::error('Failed to revoke token: ' . $e->getMessage());
+
             return false;
         }
     }
@@ -672,9 +683,9 @@ class ApiTokenService
     /**
      * 存储 Token 到缓存
      *
-     * @param string $accessToken
+     * @param string      $accessToken
      * @param string|null $refreshToken
-     * @param int $expiresIn 过期时间（秒）
+     * @param int         $expiresIn    过期时间（秒）
      */
     private function storeToken(string $accessToken, ?string $refreshToken, int $expiresIn): void
     {
@@ -708,6 +719,7 @@ class ApiTokenService
     private function getCacheKey(string $key): string
     {
         $domain = get_safe_host();
+
         return self::CACHE_PREFIX . $domain . ':' . $key;
     }
 
@@ -718,7 +730,7 @@ class ApiTokenService
      */
     public function hasValidToken(): bool
     {
-        $token = $this->getAccessToken();
+        $token     = $this->getAccessToken();
         $expiresAt = Cache::get($this->getCacheKey('expires_at'));
 
         return $token && $expiresAt && $expiresAt > time();
@@ -753,5 +765,4 @@ class ApiTokenService
 
         return is_string($normalized) ? $normalized : '';
     }
-
 }

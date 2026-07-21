@@ -1,4 +1,5 @@
 <?php
+
 /**
  * RegistrationNotification.php
  *
@@ -11,6 +12,7 @@
 
 namespace Beike\Notifications;
 
+use Beike\Channels\BkMailChannel;
 use Beike\Mail\CustomerRegistration;
 use Beike\Models\Customer;
 use Illuminate\Bus\Queueable;
@@ -43,10 +45,10 @@ class RegistrationNotification extends Notification implements ShouldQueue
     {
         $drivers[]  = 'database';
         $mailEngine = system_setting('base.mail_engine');
-        $mailAlert = system_setting('base.mail_customer') ?? [];
+        $mailAlert  = system_setting('base.mail_customer') ?? [];
 
         if ($mailEngine && in_array('register', $mailAlert)) {
-            $drivers[] = 'mail';
+            $drivers[] = BkMailChannel::class;
         }
 
         return $drivers;

@@ -9,7 +9,7 @@
       <div class="mb-2">{{ __('admin/rma.rma_list_title') }}</div>
       @if (count($rmas))
         <div class="table-push">
-          <table class="table">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th>{{ __('admin/rma.customers_name') }}</th>
@@ -22,13 +22,12 @@
                 <th>{{ __('common.status') }}</th>
                 <th>{{ __('common.created_at') }}</th>
                 @hook('admin.rmas.index.table.headers')
-                <th>{{ __('common.action') }}</th>
               </tr>
             </thead>
             <tbody>
               @if (count($rmas_format))
                 @foreach ($rmas_format as $rma)
-                  <tr>
+                  <tr class="cursor-pointer row-link" data-to-url="{{ admin_route('rmas.show', [$rma['id'], http_build_query(request()->query())]) }}">
                     <td>{{ $rma['name'] }}</td>
                     <td>{{ $rma['email'] }}</td>
                     <td>{{ $rma['telephone'] }}</td>
@@ -39,11 +38,6 @@
                     <td>{{ $rma['status'] }}</td>
                     <td>{{ $rma['created_at'] }}</td>
                     @hook('admin.rmas.index.table.body', $rma)
-                    <td>
-                      @hook('admin.rmas.index.table.body.action.before', $rma)
-                      <a href="{{ admin_route('rmas.show', [$rma['id']]) }}" class="btn btn-outline-secondary btn-sm text-nowrap">{{ __('common.view') }}</a>
-                      @hook('admin.rmas.index.table.body.action.after', $rma)
-                    </td>
                   </tr>
                 @endforeach
               @else

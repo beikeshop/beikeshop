@@ -2,12 +2,11 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Module;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -62,10 +61,10 @@ class ListenerMakeCommand extends GeneratorCommand
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 
         return (new Stub($this->getStubName(), [
-            'NAMESPACE' => $this->getClassNamespace($module),
-            'EVENTNAME' => $this->getEventName($module),
+            'NAMESPACE'      => $this->getClassNamespace($module),
+            'EVENTNAME'      => $this->getEventName($module),
             'SHORTEVENTNAME' => $this->getShortEventName(),
-            'CLASS' => $this->getClass(),
+            'CLASS'          => $this->getClass(),
         ]))->render();
     }
 
@@ -77,10 +76,10 @@ class ListenerMakeCommand extends GeneratorCommand
 
     protected function getEventName(Module $module)
     {
-        $namespace = $this->laravel['plugins']->config('namespace') . "\\" . $module->getStudlyName();
+        $namespace = $this->laravel['plugins']->config('namespace') . '\\' . $module->getStudlyName();
         $eventPath = GenerateConfigReader::read('event');
 
-        $eventName = $namespace . "\\" . $eventPath->getPath() . "\\" . $this->option('event');
+        $eventName = $namespace . '\\' . $eventPath->getPath() . '\\' . $this->option('event');
 
         return str_replace('/', '\\', $eventName);
     }

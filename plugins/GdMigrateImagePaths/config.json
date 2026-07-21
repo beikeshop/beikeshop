@@ -1,0 +1,18 @@
+{
+    "code": "gd_migrate_image_paths",
+    "name": {
+        "zh_cn": "BeikeShop 2.0 升级图片路径迁移工具",
+        "en": "BeikeShop 2.0 Image Path Migration Tool"
+    },
+    "description": {
+        "zh_cn": "迁移数据库中图片路径从 catalog/ 到 image/catalog/，用于 BeikeShop 1.x 升级到 2.0.x 版本",
+        "en": "Automatically migrate image paths from catalog/ to image/catalog/ for BeikeShop 1.x to 2.0.x upgrade"
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "/image/logo.png",
+    "author": {
+        "name": "成都光大网络科技有限公司",
+        "email": "service@guangda.work"
+    }
+}

@@ -31,8 +31,8 @@ return [
         'name'        => 'webhook_secret',
         'label_key'   => 'common.webhook_secret',
         'type'        => 'string',
-        'required'    => true,
-        'rules'       => 'required|min:32',
+        'required'    => false,
+        'rules'       => 'nullable|min:32',
         'description_key' => 'common.webhook_secret_desc',
     ],
     [

@@ -8,7 +8,7 @@ class Brand extends Field
 {
     protected array $scene = [
         'default' => [
-            'id', 'name', 'logo', 'sort_order', 'first', 'status',
+            'id', 'name', 'logo', 'sort_order', 'first', 'active',
         ],
     ];
 }

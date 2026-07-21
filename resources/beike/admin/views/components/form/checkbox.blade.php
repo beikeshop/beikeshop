@@ -1,1 +1,1 @@
-<input name="{{ $name }}" class="{{ $class }}" type="checkbox" {{ $value ? 'checked' : '' }} {{ $attributes  }}>
+<input name="{{ $name }}" class="{{ $class }}" onclick="event.stopPropagation();" type="checkbox" {{ $value ? 'checked' : '' }} {{ $attributes  }}>

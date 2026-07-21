@@ -2,14 +2,14 @@
 
 namespace App\Tools\Commands\Database;
 
-use ErrorException;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Support\Str;
 use App\Tools\Commands\BaseCommand;
 use App\Tools\Contracts\RepositoryInterface;
 use App\Tools\Module;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Traits\ModuleCommandTrait;
+use ErrorException;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -53,19 +53,19 @@ class SeedCommand extends BaseCommand
         });
     }
 
-    public function getInfo(): string|null
+    public function getInfo(): ?string
     {
         return 'Seeding plugin ...';
     }
 
     /**
-     * @throws RuntimeException
      * @return RepositoryInterface
+     * @throws RuntimeException
      */
     public function getModuleRepository(): RepositoryInterface
     {
         $modules = $this->laravel['plugins'];
-        if (!$modules instanceof RepositoryInterface) {
+        if (! $modules instanceof RepositoryInterface) {
             throw new RuntimeException('Plugin repository not found!');
         }
 
@@ -75,9 +75,9 @@ class SeedCommand extends BaseCommand
     /**
      * @param $name
      *
-     * @throws RuntimeException
      *
      * @return Module
+     * @throws RuntimeException
      */
     public function getModuleByName($name)
     {
@@ -97,24 +97,24 @@ class SeedCommand extends BaseCommand
     public function moduleSeed(Module $module)
     {
         $seeders = [];
-        $name = $module->getName();
-        $config = $module->get('migration');
+        $name    = $module->getName();
+        $config  = $module->get('migration');
 
         if (is_array($config) && array_key_exists('seeds', $config)) {
-            foreach ((array)$config['seeds'] as $class) {
+            foreach ((array) $config['seeds'] as $class) {
                 if (class_exists($class)) {
                     $seeders[] = $class;
                 }
             }
         } else {
-            $class = $this->getSeederName($name); //legacy support
+            $class = $this->getSeederName($name); // legacy support
 
             $class = implode('\\', array_map('ucwords', explode('\\', $class)));
 
             if (class_exists($class)) {
                 $seeders[] = $class;
             } else {
-                //look at other namespaces
+                // look at other namespaces
                 $classes = $this->getSeederNames($name);
                 foreach ($classes as $class) {
                     if (class_exists($class)) {
@@ -165,8 +165,8 @@ class SeedCommand extends BaseCommand
     {
         $name = Str::studly($name);
 
-        $namespace = $this->laravel['plugins']->config('namespace');
-        $config = GenerateConfigReader::read('seeder');
+        $namespace  = $this->laravel['plugins']->config('namespace');
+        $config     = GenerateConfigReader::read('seeder');
         $seederPath = str_replace('/', '\\', $config->getPath());
 
         return $namespace . '\\' . $name . '\\' . $seederPath . '\\' . $name . 'DatabaseSeeder';
@@ -188,7 +188,7 @@ class SeedCommand extends BaseCommand
 
         $foundModules = [];
         foreach ($this->laravel['plugins']->config('scan.paths') as $path) {
-            $namespace = array_slice(explode('/', $path), -1)[0];
+            $namespace      = array_slice(explode('/', $path), -1)[0];
             $foundModules[] = $namespace . '\\' . $name . '\\' . $seederPath . '\\' . $name . 'DatabaseSeeder';
         }
 
@@ -198,8 +198,8 @@ class SeedCommand extends BaseCommand
     /**
      * Report the exception to the exception handler.
      *
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
-     * @param  \Throwable  $e
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Throwable                                        $e
      * @return void
      */
     protected function renderException($output, \Exception $e)
@@ -210,7 +210,7 @@ class SeedCommand extends BaseCommand
     /**
      * Report the exception to the exception handler.
      *
-     * @param  \Throwable  $e
+     * @param \Throwable $e
      * @return void
      */
     protected function reportException(\Exception $e)

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OrderProductList.php
  *
@@ -11,6 +12,7 @@
 
 namespace Beike\Shop\Http\Resources\Account;
 
+use Beike\Repositories\RmaRepo;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderProductSimple extends JsonResource
@@ -23,6 +25,7 @@ class OrderProductSimple extends JsonResource
             'name'          => $this->name,
             'sku'           => $this->product_sku,
             'quantity'      => $this->quantity,
+            'rma_quantity'  => (int) RmaRepo::getRmaQuantity($this->id),
             'price'         => currency_format($this->price),
             'total'         => $this->price * $this->quantity,
             'total_format'  => currency_format($this->price * $this->quantity),

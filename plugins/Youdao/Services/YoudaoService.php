@@ -1,10 +1,11 @@
 <?php
+
 /**
  * Youdao.php
  *
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-04 15:31:23
  * @modified   2023-09-04 15:31:23
  */

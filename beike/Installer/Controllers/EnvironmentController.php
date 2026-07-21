@@ -3,13 +3,13 @@
 namespace Beike\Installer\Controllers;
 
 use Beike\Installer\Helpers\EnvironmentManager;
+use Beike\Installer\Helpers\RequirementsChecker;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Beike\Installer\Helpers\RequirementsChecker;
 
 class EnvironmentController extends BaseController
 {
@@ -24,13 +24,13 @@ class EnvironmentController extends BaseController
     protected RequirementsChecker $requirements;
 
     /**
-     * @param EnvironmentManager $environmentManager
+     * @param EnvironmentManager  $environmentManager
      * @param RequirementsChecker $checker
      */
     public function __construct(EnvironmentManager $environmentManager, RequirementsChecker $checker)
     {
         $this->EnvironmentManager = $environmentManager;
-        $this->requirements = $checker;
+        $this->requirements       = $checker;
     }
 
     /**
@@ -152,7 +152,8 @@ class EnvironmentController extends BaseController
             $serverVersion = $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
             if (version_compare($serverVersion, '5.7', '<')) {
                 $result['database_version'] = trans('installer::installer_messages.environment.db_connection_failed_invalid_version');
-                $this->checkDbConnection($request,$result);
+                $this->checkDbConnection($request, $result);
+
                 return $result;
             }
 
@@ -163,7 +164,7 @@ class EnvironmentController extends BaseController
                 case 7:
                     $result['database_username'] = trans('installer::installer_messages.environment.db_connection_failed_user_password');
                     $result['database_password'] = trans('installer::installer_messages.environment.db_connection_failed_user_password');
-                    $result['database_name'] = trans('installer::installer_messages.environment.db_connection_failed_database_name');
+                    $result['database_name']     = trans('installer::installer_messages.environment.db_connection_failed_database_name');
 
                     break;
                 case 1115:
@@ -189,7 +190,7 @@ class EnvironmentController extends BaseController
             }
         }
 
-        $this->checkDbConnection($request,$result);
+        $this->checkDbConnection($request, $result);
 
         return $result;
     }
@@ -197,29 +198,27 @@ class EnvironmentController extends BaseController
     private function checkDbConnection(Request $request, &$result): void
     {
         $dbType = $request->input('database_connection');
-        if (!$dbType)
-        {
+        if (! $dbType) {
             return;
         }
 
-        $dbType = $request->input('database_connection');
-        $config = config('installer.requirements.db');
+        $dbType       = $request->input('database_connection');
+        $config       = config('installer.requirements.db');
         $requirements = $this->requirements->checkDataBase(
             $config
         );
 
-        $hasError = data_get($requirements, $dbType);
-        $currentVersion = data_get($this->requirements->checkPHPversion(),'current');
+        $hasError       = data_get($requirements, $dbType);
+        $currentVersion = data_get($this->requirements->checkPHPversion(), 'current');
 
-        if (($dbType == 'pgsql') && version_compare($currentVersion, '8.3', '>='))
-        {
-            $result['database_connection'] = trans('installer::installer_messages.environment.down_phpversion');
-            return;
-        }
+        //        if (($dbType == 'pgsql') && version_compare($currentVersion, '8.3', '>='))
+        //        {
+        //            $result['database_connection'] = trans('installer::installer_messages.environment.down_phpversion');
+        //            return;
+        //        }
 
-        if (!$hasError)
-        {
-            $result['database_connection'] = trans('installer::installer_messages.environment.php_extension').'('.data_get($config, $dbType).')';
+        if (! $hasError) {
+            $result['database_connection'] = trans('installer::installer_messages.environment.php_extension') . '(' . data_get($config, $dbType) . ')';
         }
 
     }

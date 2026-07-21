@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasColumn('product_skus', 'weight')) {
+            return;
+        }
+
         Schema::table('product_skus', function (Blueprint $table) {
             $table->double('weight', 8, 2)->nullable()->after('cost_price')->comment('重量');
         });

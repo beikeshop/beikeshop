@@ -3,8 +3,8 @@
 namespace Beike\Models;
 
 use Beike\Notifications\ForgottenNotification;
-use Beike\Notifications\RegistrationNotification;
 use Beike\Notifications\RegistrationAlertNotification;
+use Beike\Notifications\RegistrationNotification;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TaxClassRepo.php
  *
@@ -34,7 +35,7 @@ class TaxClassRepo
         if ($id) {
             $taxClass = TaxClass::query()->findOrFail($id);
         } else {
-            $taxClass = new TaxClass();
+            $taxClass = new TaxClass;
         }
         $taxClass->fill([
             'title'       => $data['title'],

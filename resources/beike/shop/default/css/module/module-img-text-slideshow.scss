@@ -3,7 +3,7 @@
 /**
  * @copyright     2024 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2024-11-12 10:42:54
  * @LastEditTime  2024-11-12 10:43:15
  */
@@ -191,23 +191,24 @@
     font-size: 14px !important;
     padding: 16px 0 !important;
   }
-}
 
-.scroll-info {
-  white-space: nowrap;
-}
+  .scroll-info {
+    white-space: nowrap;
+  }
 
-.scroll-info {
-  .scroll-text {
-    padding: 0 15px;
-    font-weight: bold;
-    display: inline-block;
-    animation: marquee-animation 3s linear infinite;
+  .scroll-info {
+    .scroll-text {
+      padding: 0 15px;
+      font-weight: bold;
+      display: inline-block;
+      animation: marquee-animation2 3s linear infinite;
+    }
   }
 }
 
+
 // /* 滚动动画 */
-@keyframes marquee-animation {
+@keyframes marquee-animation2 {
   0% {
     transform: translate(0);
   }

@@ -1,6 +1,12 @@
 @if ($product['video'])
   <div class="video-wrap">
-    @if ($has_video)
+    @php
+      $isYouTube = str_contains($product['video'], 'youtube.com/watch') || str_contains($product['video'], 'youtu.be/');
+    @endphp
+
+    @if ($isYouTube)
+      <div id="product-video"></div>
+    @else
       <video
         id="product-video"
         class="video-js vjs-big-play-centered vjs-fluid vjs-16-9"
@@ -8,74 +14,77 @@
       >
         <source src="{{ image_origin($product['video']) }}" type="video/mp4"/>
       </video>
-    @else
-      <div id="product-video"></div>
     @endif
+
     <div class="close-video d-none"><i class="bi bi-x-circle"></i></div>
-    <div class="open-video d-none"><i class="bi bi-play-circle"></i></div>
+    <div class="open-video"><i class="bi bi-play-circle"></i></div>
   </div>
 @endif
 
+
 @push('add-scripts')
-  @if ($has_video)
-    <script>
-      let pVideo = null;
+  <script>
+    const videoUrl = '{!! $product['video'] !!}';
+    const videoId = (function(url) {
+      try {
+        const parsed = new URL(url);
+        if (parsed.hostname.includes('youtu.be')) return parsed.pathname.slice(1);
+        if (parsed.hostname.includes('youtube.com') && parsed.searchParams.has('v')) return parsed.searchParams.get('v');
+      } catch (e) { return null; }
+      return null;
+    })(videoUrl);
 
-      $(function () {
-        if ($('#product-video').length) {
-          pVideo = videojs("product-video");
+    const isYouTube = !!videoId;
+    let pVideo = null;
 
-          pVideo.on('loadedmetadata', function (e) {
-            $('.open-video').removeClass('d-none');
-          });
-
-          $(document).on('click', '.open-video', function () {
-            pVideo.play();
-            pVideo.currentTime(0);
-            $(this).addClass('d-none');
-            $('#product-video').fadeIn();
-            $('.close-video').removeClass('d-none');
-          });
-
-          $(document).on('click', '.close-video', function () {
-            closeVideo()
-          });
-        }
-      })
-
-      function closeVideo() {
-        if (pVideo) {
-          pVideo.pause();
-          $('#product-video').fadeOut();
-          $('.close-video').addClass('d-none');
-          $('.open-video').removeClass('d-none');
-        }
+    $(function () {
+      // 点击播放
+      if ($('#product-video').length && !isYouTube) {
+        pVideo = videojs("product-video");
       }
-    </script>
-  @else
-    <script>
-      const ytVideoIframe = @json($product['video']);
-      $('.open-video').removeClass('d-none');
-      $('#product-video').html(ytVideoIframe)
 
       $(document).on('click', '.open-video', function () {
-        $('#product-video iframe').attr({width: '100%', height: '100%'});
-        $('#product-video iframe').attr('src', $('#product-video iframe').attr('src') + '&autoplay=1&muted=1');
+        if (isYouTube) {
+          $('#product-video').html(`
+            <iframe width="100%" height="100%"
+              src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          `);
+        } else if ($('#product-video').length) {
+          pVideo.play();
+          pVideo.currentTime(0);
+        }
+
         $(this).addClass('d-none');
         $('#product-video').fadeIn();
         $('.close-video').removeClass('d-none');
       });
 
+      // 点击关闭
       $(document).on('click', '.close-video', function () {
-        closeVideo()
-      });
+        if (isYouTube) {
+          $('#product-video').fadeOut();
+        } else if (pVideo) {
+          pVideo.pause();
+          $('#product-video').fadeOut();
+        }
 
-      function closeVideo() {
-        $('#product-video').fadeOut();
-        $('#product-video').html()
         $('.close-video').addClass('d-none');
         $('.open-video').removeClass('d-none');
+      });
+    });
+
+    function closeVideo() {
+      if (pVideo) {
+        pVideo.pause();
       }
-    </script>
-  @endif
+
+      $('.close-video').addClass('d-none');
+      $('.open-video').removeClass('d-none');
+      $('#product-video').fadeOut();
+    }
+  </script>
 @endpush

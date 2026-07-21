@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DesignService.php
  *
@@ -54,7 +55,7 @@ class DesignService
         $content['module_code'] = $moduleCode;
         if ($moduleCode == 'slideshow') {
             return self::handleSlideShow($content);
-        } elseif ($moduleCode == 'img_text_slideshow') {
+        } elseif (in_array($moduleCode, ['img_text_slideshow', 'img_text_slideshow_2'])) {
             return self::handleImgTextSlideShow($content);
         } elseif ($moduleCode == 'img_text_banner') {
             return self::handleImgTextBanner($content);
@@ -66,7 +67,7 @@ class DesignService
             return self::handleTabProducts($content);
         } elseif (in_array($moduleCode, $productCodes)) {
             return self::handleProducts($content);
-        } elseif ($moduleCode == 'icons') {
+        } elseif (in_array($moduleCode, ['icons', 'img_text_banner_multiple'])) {
             return self::handleIcons($content);
         } elseif ($moduleCode == 'rich_text') {
             return self::handleRichText($content);
@@ -105,10 +106,14 @@ class DesignService
      */
     private static function handleImgTextSlideShow($content): array
     {
-        $images = $content['images'];
+        $images                          = $content['images'];
+        $content['scroll_text']['text']  = $content['scroll_text']['text'][locale()] ?? '';
+
+        if (empty($images)) {
+            return $content;
+        }
 
         $content['images'] = self::handleImages($images);
-        $content['scroll_text']['text']  = $content['scroll_text']['text'][locale()] ?? '';
 
         return $content;
     }
@@ -127,11 +132,14 @@ class DesignService
             return $content;
         }
 
-        $content['image']  = is_string($content['image']) ? $content['image'] : $content['image']['src'];
-        $content['image_alt']  = $image['alt'][locale()] ?? '';
-        $content['title']  = $content['title'][locale()] ?? '';
-        $content['description']  = $content['description'][locale()] ?? '';
-        $content['link'] = self::handleLink($content['link']['type'], $content['link']['value']);
+        $content['image']           = is_string($content['image']) ? $content['image'] : $content['image']['src'];
+        $content['image_alt']       = $image['alt'][locale()]           ?? '';
+        $content['title']           = $content['title'][locale()]       ?? '';
+        $content['image_position']  = $content['image_position']        ?? 'right';
+        $content['text_position']   = $content['text_position']         ?? 'left';
+        $content['sub_title']       = $content['sub_title'][locale()]   ?? '';
+        $content['description']     = $content['description'][locale()] ?? '';
+        $content['link']            = self::handleLink($content['link']['type'], $content['link']['value']);
 
         return $content;
     }
@@ -168,9 +176,9 @@ class DesignService
             return $content;
         }
 
-        $content['images'] = self::handleImages($images);
-        $content['full']   = $content['full'] ?? false;
-        $content['title']  = $content['title'][locale()] ?? '';
+        $content['images']     = self::handleImages($images);
+        $content['full']       = $content['full']                ?? false;
+        $content['title']      = $content['title'][locale()]     ?? '';
         $content['sub_title']  = $content['sub_title'][locale()] ?? '';
 
         return $content;
@@ -185,7 +193,8 @@ class DesignService
      */
     private static function handleIcons($content): array
     {
-        $content['title'] = $content['title'][locale()] ?? '';
+        $content['title']     = $content['title'][locale()]     ?? '';
+        $content['sub_title'] = $content['sub_title'][locale()] ?? '';
 
         if (empty($content['images'])) {
             return $content;
@@ -298,9 +307,10 @@ class DesignService
                 $imagePath = $image['image'][locale()] ?? '';
             }
 
-            $images[$index]['image'] = image_origin($imagePath ?? '');
-            $images[$index]['image_alt'] = $image['image']['alt'][locale()] ?? '';
-            $images[$index]['type'] = strpos($imagePath, '.mp4') !== false ? 'video' : 'image';
+            $images[$index]['image']          = image_origin($imagePath ?? '');
+            $images[$index]['image_path']     = $imagePath                       ?? '';
+            $images[$index]['image_alt']      = $image['image']['alt'][locale()] ?? '';
+            $images[$index]['type']           = strpos($imagePath, '.mp4') !== false ? 'video' : 'image';
             $images[$index]['sub_title']      = $image['sub_title'][locale()] ?? '';
             $images[$index]['title']          = $image['title'][locale()]     ?? '';
             $images[$index]['description']    = nl2br($image['description'][locale()] ?? '');
@@ -334,7 +344,7 @@ class DesignService
 
     private static function sanitizeModuleData(array $moduleData): array
     {
-        $code    = $moduleData['code'] ?? '';
+        $code    = $moduleData['code']    ?? '';
         $content = $moduleData['content'] ?? [];
 
         if (! is_array($content)) {

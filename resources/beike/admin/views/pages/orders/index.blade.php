@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', __('admin/order.list'))
+@section('title', $type != 'trashed' ? __('admin/order.list') : __('admin/common.orders_trashed'))
 
 @section('content')
   @if ($errors->has('error'))
@@ -18,7 +18,7 @@
   <div id="orders-app" class="card h-min-600">
     <div class="card-body">
       @hook('admin.order.index.content.before')
-      <div class="bg-light p-4 mb-3">
+      <div class="bg-light p-4 mb-3 rounded-3">
         <el-form :inline="true" ref="filterForm" :model="filter" class="demo-form-inline" label-width="100px">
           @hook('admin.order.index.content.filter.before')
           <div>
@@ -36,7 +36,7 @@
                         placeholder="{{ __('order.email') }}"></el-input>
             </el-form-item>
             <el-form-item label="{{ __('common.status') }}" class="el-input--small">
-              <select v-model="filter.status" class="form-select wp-100 bg-white bs-el-input-inner-sm">
+              <select v-model="filter.status" class="form-select wp-100 bs-el-input-inner-sm">
                 <option value="">{{ __('common.all') }}</option>
                 @foreach ($statuses as $item)
                   <option value="{{ $item['status'] }}">{{ $item['name'] }}</option>
@@ -79,10 +79,10 @@
 
       @if (count($orders))
         <div class="table-push">
-          <table class="table">
+          <table class="table table-hover">
             <thead>
             <tr>
-              <th><input type="checkbox" v-model="allSelected"/></th>
+              <th><input type="checkbox" class="form-check-input" v-model="allSelected"/></th>
               <th>{{ __('order.id') }}</th>
               <th>{{ __('order.number') }}</th>
               <th>{{ __('order.customer_name') }}</th>
@@ -96,43 +96,42 @@
             </tr>
             </thead>
             <tbody>
-            @if (count($orders))
               @foreach ($orders as $order)
-                <tr data-hook-id="{{ $order->id }}">
-                  <td><input type="checkbox" :value="{{ $order['id'] }}" v-model="selectedIds"/></td>
+                <tr data-hook-id="{{ $order->id }}" class="cursor-pointer row-link" @if (!$order->deleted_at) data-to-url="{{ admin_route('orders.show', [$order->id, http_build_query(request()->query())]) }}" @endif>
+                  <td @click.stop><input class="form-check-input" type="checkbox" :value="{{ $order['id'] }}" v-model="selectedIds"/></td>
                   <td>{{ $order->id }}</td>
                   <td>{{ $order->number }}</td>
                   <td>{{ sub_string($order->customer_name, 14) }}</td>
                   <td>{{ $order->payment_method_name }}</td>
-                  <td>{{ $order->status_format }}</td>
+                  <td>
+                    @if ($order->status == 'unpaid')
+                    <span class="badge text-bg-light-red">{{ $order->status_format }}</span>
+                    @elseif ($order->status == 'cancelled')
+                    <span class="badge text-bg-secondary">{{ $order->status_format }}</span>
+                    @elseif ($order->status == 'refunding')
+                    <span class="badge text-bg-yellow">{{ $order->status_format }}</span>
+                    @else
+                    <span class="badge text-bg-success">{{ $order->status_format }}</span>
+                    @endif
+                  </td>
                   <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
                   @hook('admin.order.list.item.td.total.after', $order)
                   <td>{{ $order->created_at }}</td>
                   <td>{{ $order->updated_at }}</td>
-                  <td>
+                  <td @click.stop>
                     @if (!$order->deleted_at)
-                      <a href="{{ admin_route('orders.show', [$order->id]) }}"
-                         class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}
-                      </a>
                       <button type="button" data-id="{{ $order->id }}"
                               class="btn btn-outline-danger btn-sm delete-btn">{{ __('common.delete') }}</button>
                     @else
                       <button type="button" data-id="{{ $order->id }}"
                               class="btn btn-outline-secondary btn-sm restore-btn">{{ __('common.restore') }}</button>
-                      @hook('admin.products.trashed.action', $order)
+                      @hook('admin.order.trashed.action', $order)
                     @endif
 
                     @hook('admin.order.list.action', $order)
                   </td>
                 </tr>
               @endforeach
-            @else
-              <tr>
-                <td colspan="9" class="border-0">
-                  <x-admin-no-data/>
-                </td>
-              </tr>
-            @endif
             </tbody>
           </table>
         </div>
@@ -235,6 +234,7 @@
         },
 
         search() {
+          this.filter.page = '';
           location = bk.objectToUrlParams(this.filter, this.url)
         },
 

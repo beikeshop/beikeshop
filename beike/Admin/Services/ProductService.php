@@ -42,6 +42,7 @@ class ProductService
             $data['weight']    = (float) ($data['weight'] ?? 0);
             $data['variables'] = json_decode($data['variables'] ?? '[]');
             $data['shipping']  = (bool) ($data['shipping'] ?? 1);
+            $data['video']     = $data['video'] ?? '';
             $product->fill($data);
             $product->updated_at = now();
             $product->save();
@@ -50,6 +51,10 @@ class ProductService
                 $product->skus()->delete();
                 $product->descriptions()->delete();
                 $product->attributes()->delete();
+            } else {
+                $data['images']  = static::moveImagesAndGetNewPaths('product-' . $product->id, $data['images'] ?? []);
+                $product->images = $data['images'];
+                $product->save();
             }
 
             $descriptions = [];
@@ -87,5 +92,51 @@ class ProductService
 
             throw $e;
         }
+    }
+
+    /**
+     * $images图片移动到子目录‘product-{$product->id}’并返回新的图片路径
+     * @param mixed $dirName
+     * @param mixed $images
+     */
+    public static function moveImagesAndGetNewPaths($dirName, $images)
+    {
+        // 定义原始路径前缀和目标子目录
+        $oldPrefix = 'image/catalog/products/';
+        $newSubDir = 'image/catalog/products/' . $dirName . '/';
+
+        // 获取存储路径
+        $publicPath = public_path();
+
+        // 遍历图片数组，移动符合条件的图片并更新路径
+        foreach ($images as &$image) {
+            // 条件为$image在$oldPrefix目录下，但不是在其子目录下
+            if (str_starts_with($image, $oldPrefix)) {
+                // 获取$oldPrefix之后的部分路径
+                $relativePath = substr($image, strlen($oldPrefix));
+                // 检查相对路径中是否包含斜杠（如果包含斜杠，表示在子目录中）
+                if (strpos($relativePath, '/') === false) {
+                    $oldImagePath = $publicPath . '/' . $image;
+                    $newImagePath = $publicPath . '/' . $newSubDir . $relativePath;
+
+                    // 确保目标目录存在
+                    $newDir = dirname($newImagePath);
+                    if (! is_dir($newDir)) {
+                        mkdir($newDir, 0755, true);
+                    }
+
+                    // 移动图片文件
+                    if (file_exists($oldImagePath)) {
+                        rename($oldImagePath, $newImagePath);
+                    }
+
+                    // 更新图片路径
+                    $image = $newSubDir . $relativePath;
+                }
+            }
+        }
+        unset($image); // 释放引用
+
+        return $images;
     }
 }

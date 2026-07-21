@@ -32,7 +32,9 @@ class Input extends Component
 
     public bool $disabled;
 
-    public function __construct(string $name, string $title, string $value, bool $required = false, string $error = '', string $width = '400', string $type = 'text', string $step = '', string $placeholder = '', string $description = '', string $groupLeft = '', string $groupRight = '', bool $disabled = false)
+    public bool $readonly;
+
+    public function __construct(string $name, string $title, string $value, bool $required = false, string $error = '', string $width = '', string $type = 'text', string $step = '', string $placeholder = '', string $description = '', string $groupLeft = '', string $groupRight = '', bool $disabled = false, bool $readonly = false)
     {
         $this->name        = $name;
         $this->title       = $title;
@@ -47,6 +49,7 @@ class Input extends Component
         $this->groupLeft   = $groupLeft;
         $this->groupRight  = $groupRight;
         $this->disabled    = $disabled;
+        $this->readonly    = $readonly;
     }
 
     public function render()

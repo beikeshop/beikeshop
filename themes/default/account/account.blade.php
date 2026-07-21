@@ -17,20 +17,20 @@
         <div class="card account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">{{ __('shop/account.my_order') }}</h5>
-            <a href="{{ shop_route('account.order.index') }}" class="text-muted">{{ __('shop/account.orders') }}</a>
+            <a href="{{ shop_route('account.order.index') }}" class="text-muted fw-bold">{{ __('shop/account.orders') }}</a>
           </div>
           <div class="card-body">
             <div class="d-flex flex-nowrap card-items mb-4 py-3">
               <a href="{{ shop_route('account.order.index', ['status' => 'unpaid']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf12f;</i><span
-                  class="text-muted text-center">{{ __('order.unpaid') }}</span></a>
+                  class="text-center">{{ __('order.unpaid') }}</span></a>
               <a href="{{ shop_route('account.order.index', ['status' => 'paid']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf130;</i><span
-                  class="text-muted text-center">{{ __('shop/account.pending_send') }}</span></a>
+                  class="text-center">{{ __('shop/account.pending_send') }}</span></a>
               <a href="{{ shop_route('account.order.index', ['status' => 'shipped']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf131;</i><span
-                  class="text-muted text-center">{{ __('shop/account.pending_receipt') }}</span></a>
+                  class="text-center">{{ __('shop/account.pending_receipt') }}</span></a>
               <a href="{{ shop_route('account.rma.index') }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf132;</i><span
-                  class="text-muted text-center">{{ __('shop/account.after_sales') }}</span></a>
+                  class="text-center">{{ __('shop/account.after_sales') }}</span></a>
             </div>
-            <div class="order-wrap">
+            <div class="order-wrap rounded-2">
               @if (!count($latest_orders))
                 <div class="no-order d-flex flex-column align-items-center">
                   <div class="icon mb-2"><i class="iconfont">&#xe60b;</i></div>
@@ -44,7 +44,7 @@
                       @foreach ($latest_orders as $order)
                       <tr class="align-middle">
                         <td style="width: 62px">
-                          <div class="img border wh-60 d-flex justify-content-center align-items-center">
+                          <div class="img border wh-60 d-flex justify-content-center align-items-center rounded-1 overflow-hidden">
                             <img src="{{ $order->orderProducts[0]->image ?? '' }}" alt="{{ $order->orderProducts[0]->name ?? '' }}" class="img-fluid">
                           </div>
                         </td>
@@ -53,7 +53,15 @@
                           <div class="text-muted">{{ __('shop/account.order_time') }}：{{ $order->created_at }}</div>
                         </td>
                         <td>
-                          <span class="ms-4 text-nowrap d-inline-block">{{ __('shop/account.state') }}：{{ $order->status_format }}</span>
+                          <span class="ms-4 text-nowrap d-inline-block">{{ __('shop/account.state') }}：
+                            @if ($order->status == 'unpaid')
+                            <span class="text-danger">{{ $order->status_format }}</span>
+                            @elseif ($order->status == 'cancelled')
+                            <span class="text-secondary">{{ $order->status_format }}</span>
+                            @else
+                            <span class="text-success">{{ $order->status_format }}</span>
+                            @endif
+                          </span>
                         </td>
                         <td>
                           <span class="ms-3 text-nowrap d-inline-block">{{ __('shop/account.amount') }}：{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</span>

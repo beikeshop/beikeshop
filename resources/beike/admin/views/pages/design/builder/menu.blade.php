@@ -76,8 +76,7 @@
             <div class="d-flex align-items-center mb-3">
               <span class="fw-bold">{{ __('admin/builder.submenu_group') }}</span>
               <div class="vr lh-1 mx-3 bg-secondary " style="height: 18px;"></div>
-              <button class="btn btn-sm btn-link p-0" @click="addChildrenGroup"
-                :disabled="currentMenu.childrenGroup.length >= 5">{{ __('admin/builder.add_menu_group') }}</button>
+              <button class="btn btn-sm btn-link p-0" @click="addChildrenGroup">{{ __('admin/builder.add_menu_group') }}</button>
               <div class="vr mx-3 lh-1 bg-secondary " style="height: 18px;"></div>
               <div>
                 <span class="me-2">{{ __('admin/builder.full_screen') }}</span>
@@ -87,7 +86,7 @@
             <draggable class="children-group d-lg-flex flex-wrap" style="margin: 0 -0.5rem" :list="currentMenu.childrenGroup"
               :options="{ animation: 330, handle: '.el-icon-rank' }">
               <div class="card border mx-2 mb-3 group-item" v-for="group, group_index in currentMenu.childrenGroup"
-                :key="group_index">
+                :key="group.id">
                 <div class="card-header d-flex align-items-center justify-content-between mb-2">
                   <div class="" style="font-weight: 400">
                     <i class="el-icon-rank cursor-scroll"></i> {{ __('admin/builder.menu') }} - @{{ group_index + 1 }}
@@ -190,17 +189,21 @@
         // 深度监听菜单数据变化
         currentMenu: {
           handler: function(val) {
-            // 强制刷新
             this.$forceUpdate();
-            // this.form.menus[this.currentMenuIndex] = this.currentMenu
           },
           deep: true,
           immediate: true,
         },
-        // currentMenu: function() {
-        //   console.log(222);
-        //   this.form.menus[this.currentMenuIndex] = this.currentMenu
-        // },
+      },
+
+      beforeMount() {
+        this.form.menus.forEach((menu, index) => {
+          menu.childrenGroup.forEach((group, groupIndex) => {
+            if (!group.id) {
+              group.id = bk.randomString(8);
+            }
+          })
+        })
       },
 
       methods: {
@@ -232,6 +235,7 @@
 
         addChildrenGroup() {
           this.currentMenu.childrenGroup.push({
+            id: bk.randomString(8),
             name: {},
             type: 'link',
             image: {

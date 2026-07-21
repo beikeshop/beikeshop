@@ -11,3 +11,13 @@
   </div>
 </div>
 @endsection
+
+@if (current_route() == 'admin.file_manager.index')
+@push('footer')
+  <style>
+    .header-content,.sidebar-box, #copyright-text {
+      display: none !important;
+    }
+  </style>
+@endpush
+@endif

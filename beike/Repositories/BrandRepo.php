@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BrandRepo.php
  *
@@ -40,7 +41,7 @@ class BrandRepo
             'first'      => $data['first'] ?? '',
             'logo'       => $data['logo']  ?? '',
             'sort_order' => (int) ($data['sort_order'] ?? 0),
-            'status'     => (bool) ($data['status'] ?? 1),
+            'active'     => (bool) ($data['active'] ?? true),
         ];
 
         $brand = Brand::query()->create($brandData);
@@ -69,7 +70,7 @@ class BrandRepo
             'first'      => $data['first'] ?? '',
             'logo'       => $data['logo']  ?? '',
             'sort_order' => (int) ($data['sort_order'] ?? 0),
-            'status'     => (bool) ($data['status'] ?? 1),
+            'active'     => (bool) ($data['active'] ?? true),
         ];
         $brand->update($brandData);
         self::clearCache();
@@ -127,8 +128,8 @@ class BrandRepo
         if (isset($filters['first'])) {
             $builder->where('first', $filters['first']);
         }
-        if (isset($filters['status'])) {
-            $builder->where('status', $filters['status']);
+        if (isset($filters['active'])) {
+            $builder->where('active', $filters['active']);
         }
         $builder->orderByDesc('created_at');
 
@@ -140,7 +141,7 @@ class BrandRepo
         $cacheKey = self::cacheKey('group_by_first', [locale()]);
 
         return Cache::remember($cacheKey, self::CACHE_TTL, function () {
-            $brands = Brand::query()->where('status', true)->get();
+            $brands = Brand::query()->where('active', true)->get();
 
             $results = [];
             foreach ($brands as $brand) {
@@ -156,12 +157,13 @@ class BrandRepo
     {
         $builder = Brand::query()
             ->where('name', 'like', "%$name%")
-            ->select('id', 'name', 'status', 'logo');
+            ->select('id', 'name', 'active', 'logo')
+            ->orderByDesc('created_at');
         if ($onlyActive) {
-            $builder->where('status', 1);
+            $builder->where('active', 1);
         }
 
-        return $builder->limit(30)->get();
+        return $builder->limit(50)->get();
     }
 
     /**
@@ -197,8 +199,7 @@ class BrandRepo
 
         $builder = Brand::query()->whereIn('id', $ids);
 
-        if (getDBDriver() == 'mysql')
-        {
+        if (getDBDriver() == 'mysql') {
             $ids     = implode(',', $ids);
             $builder->orderByRaw("FIELD(id, {$ids})");
         } else {

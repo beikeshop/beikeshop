@@ -75,7 +75,7 @@ Vue.component('module-editor-image401', {
       images: [
         {
           image: {
-            src: languagesFill('catalog/demo/image_plus_1-en.png'),
+            src: languagesFill('image/catalog/demo/image_plus_1-en.png'),
             alt: languagesFill(''),
           },
           show: true,
@@ -86,7 +86,7 @@ Vue.component('module-editor-image401', {
         },
         {
           image: {
-            src: languagesFill('catalog/demo/image_plus_2-en.png'),
+            src: languagesFill('image/catalog/demo/image_plus_2-en.png'),
             alt: languagesFill(''),
           },
           show: false,
@@ -97,7 +97,7 @@ Vue.component('module-editor-image401', {
         },
         {
           image: {
-            src: languagesFill('catalog/demo/image_plus_3-en.png'),
+            src: languagesFill('image/catalog/demo/image_plus_3-en.png'),
             alt: languagesFill(''),
           },
           show: false,
@@ -108,7 +108,7 @@ Vue.component('module-editor-image401', {
         },
         {
           image: {
-            src: languagesFill('catalog/demo/image_plus_4-en.png'),
+            src: languagesFill('image/catalog/demo/image_plus_4-en.png'),
             alt: languagesFill(''),
           },
           show: false,

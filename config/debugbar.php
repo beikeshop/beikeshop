@@ -204,7 +204,7 @@ return [
         ],
         'views' => [
             'timeline' => false,  // Add the views to the timeline (Experimental)
-            'data'     => env('DEBUGBAR_OPTIONS_VIEW_DATA', false),    //Note: Can slow down the application, because the data can be quite large..
+            'data'     => env('DEBUGBAR_OPTIONS_VIEW_DATA', false),    // Note: Can slow down the application, because the data can be quite large..
         ],
         'route' => [
             'label' => true,  // show complete route on bar

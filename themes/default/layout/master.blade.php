@@ -38,8 +38,8 @@
     <link rel="stylesheet" type="text/css" href="{{ mix('/build/beike/shop/'.system_setting('base.theme').'/css/bootstrap.css') }}">
     <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
-    <script src="{{ asset('vendor/lazysizes/lazysizes.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('vendor/lazysizes/lazysizes.min.js') }}" defer></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
     <script src="{{ mix('/build/beike/shop/'.system_setting('base.theme').'/js/app.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ mix('/build/beike/shop/'.system_setting('base.theme').'/css/app.css') }}">
 
@@ -49,8 +49,14 @@
 
     @hook('layout.header.code')
     @stack('header')
+
+    @renderStyles
+    @renderScripts
   </head>
 <body class="@yield('body-class') {{ request('_from') }}">
+  @if(trim($__env->yieldContent('bk-page-loading')))
+    @include('shared.bk-page-loading')
+  @endif
   @if (!request('iframe') && request('_from') != 'app')
     @hook('layout.master.header.before')
     @include('layout.header')

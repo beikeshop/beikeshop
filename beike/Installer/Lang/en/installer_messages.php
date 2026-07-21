@@ -112,7 +112,7 @@ return [
         'error_email'                          => 'Please fill in the correct email address',
         'table_already_exists'                 => 'Found data tables in the database, please clear or backup them before installing!',
         'php_extension'                        => 'Please install the PHP extension',
-        'down_phpversion'                      => 'Please downgrade the PHP version to PHP 8.1 or 8.2'
+        'down_phpversion'                      => 'Please downgrade the PHP version to PHP 8.1 or 8.2',
     ],
 
     /*
@@ -140,7 +140,7 @@ return [
         'finished'       => 'Congratulations, the system is successfully installed, let\'s experience it now',
         'to_front'       => 'Shop',
         'to_admin'       => 'Admin Panel',
-        'nginx_alert' => 'Nginx server needs to configure pseudo-static rules, click <a href="https://docs.beikeshop.com/install/source.html#nginx" target="_blank">View configuration method</a>',
+        'nginx_alert'    => 'Nginx server needs to configure pseudo-static rules, click <a href="https://docs.beikeshop.com/install/source.html#nginx" target="_blank">View configuration method</a>',
     ],
 
     /*

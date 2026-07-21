@@ -2,8 +2,8 @@
 
 namespace App\Tools\Lumen;
 
-use Illuminate\Support\Str;
 use App\Tools\Module as BaseModule;
+use Illuminate\Support\Str;
 
 class Module extends BaseModule
 {
@@ -28,7 +28,5 @@ class Module extends BaseModule
     /**
      * {@inheritdoc}
      */
-    public function registerAliases(): void
-    {
-    }
+    public function registerAliases(): void {}
 }

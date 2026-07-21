@@ -7,8 +7,8 @@ This file provides guidance to Claude Code when working with BeikeShop.
 BeikeShop - Open-source cross-border e-commerce system built on Laravel, supporting multi-language and multi-currency.
 
 **Tech Stack:**
-- PHP 8.0+
-- Laravel Framework
+- PHP 8.2+
+- Laravel 12
 - MySQL 5.7+ / 8.0
 - Nginx / Apache
 
@@ -24,8 +24,8 @@ php artisan beikeshop:install --force
 ./install.sh
 
 # Docker deployment
-docker-compose up -d
-docker-compose exec php php artisan beikeshop:install --force
+docker compose --profile nginx up -d --build
+docker compose exec nginx php artisan beikeshop:install --force
 ```
 
 ### Development
@@ -68,11 +68,13 @@ beikeshop/
 │   └── Models/            # Eloquent models
 ├── beike/                 # BeikeShop core modules
 │   ├── Admin/             # Admin panel module
+│   ├── AdminAPI/          # Admin API module
 │   ├── Shop/              # Frontend shop module
 │   └── Installer/         # Installation module
 ├── config/                # Configuration files
 ├── database/              # Migrations and seeders
-├── resources/             # Views, assets, lang files
+├── lang/                  # Language files
+├── resources/             # Views, frontend assets, data
 ├── routes/                # Route definitions
 ├── storage/               # Logs, cache, uploads
 └── public/                # Public assets, index.php
@@ -89,7 +91,7 @@ beikeshop/
 
 1. **Installation marker**: `storage/installed` file indicates installation status
 2. **Admin panel**: Accessible at `/admin` route
-3. **Multi-language**: Language files in `resources/lang/`
+3. **Multi-language**: Language files in top-level `lang/`
 4. **Cache**: Clear cache after config changes with `php artisan config:clear`
 
 ## Security

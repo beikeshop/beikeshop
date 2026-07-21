@@ -1,4 +1,5 @@
 <?php
+
 /**
  * UploadRequest.php
  *
@@ -33,7 +34,7 @@ class UploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|file|mimes:jpg,png,jpeg,gif,webp,mp4,pdf,doc,docx,xls,xlsx,ppt,pptx',
+            'file' => 'required|file|mimes:jpg,png,jpeg,gif,webp,mp4',
             'path' => 'nullable|string|max:255',
         ];
     }
@@ -50,18 +51,18 @@ class UploadRequest extends FormRequest
             if ($file) {
                 // 验证文件名安全性
                 $originalName = $file->getClientOriginalName();
-                if (!$this->isValidFileName($originalName)) {
+                if (! $this->isValidFileName($originalName)) {
                     $validator->errors()->add('file', trans('admin/file_manager.invalid_filename'));
                 }
 
                 // 验证MIME类型
-                if (!$this->isValidMimeType($file)) {
+                if (! $this->isValidMimeType($file)) {
                     $validator->errors()->add('file', trans('admin/file_manager.upload_type_fail'));
                 }
             }
 
             // 验证路径安全性
-            if ($path && !$this->isValidPath($path)) {
+            if ($path && ! $this->isValidPath($path)) {
                 $validator->errors()->add('path', trans('admin/file_manager.invalid_path'));
             }
         });
@@ -101,13 +102,6 @@ class UploadRequest extends FormRequest
             'image/gif',
             'image/webp',
             'video/mp4',
-            'application/pdf',
-            'application/msword',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'application/vnd.ms-excel',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'application/vnd.ms-powerpoint',
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
         ];
 
         return in_array($file->getMimeType(), $allowedMimeTypes);

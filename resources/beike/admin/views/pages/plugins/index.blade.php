@@ -2,13 +2,15 @@
 
 @section('title', __('admin/plugin.plugin_list'))
 
+@section('body-class', 'page-plugins')
+
 @section('page-title-right')
   <div class="d-flex align-items-center gap-2">
-    <!-- 签名密钥按钮 -->
+    <!-- Signature Secret Button -->
     <div id="signature-secret-app" v-cloak style="display: none;">
-      <el-button 
+      <el-button
         v-if="!signatureStatus.has_secret"
-        size="small" 
+        size="small"
         type="warning"
         :loading="fetchingSecret"
         @click="fetchSignatureSecret">
@@ -16,7 +18,7 @@
         @{{ getSecretRetryButtonText() }}
       </el-button>
     </div>
-    
+
     @hookwrapper('admin.plugin.marketing')
     <a href="{{ admin_route('marketing.index', isset($type) ? ['type' => $type]: '') }}"
        class="btn btn-outline-info">{{ __('common.get_more') }}</a>
@@ -34,65 +36,50 @@
 @section('content')
   <div id="plugins-app" class="card" v-cloak>
     <div class="card-body h-min-600">
-      <div class="mt-4 table-push" style="">
-        <table class="table" v-if="plugins.length">
-          <thead>
-          <tr>
-            <th>{{ __('admin/plugin.plugin_code') }}</th>
-            <th>{{ __('admin/plugin.plugin_version') }}</th>
-            <th>{{ __('admin/plugin.plugin_type') }}</th>
-            <th width="50%">{{ __('admin/plugin.plugin_description') }}</th>
-            <th>{{ __('admin/common.status') }}</th>
-            <th>{{ __('admin/common.action') }}</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="plugin, index in plugins" :key="index">
-            <td>@{{ plugin.code }}</td>
-            <td>@{{ plugin.version }}</td>
-            <td>@{{ plugin.type_format }}</td>
-            <td>
-              <div class="plugin-describe d-flex align-items-center">
-                <div class="me-2 cursor-pointer" style="flex: 0 0 50px;" @click.prevent="showPluginDetail(plugin.code)"><img :src="plugin.icon" class="img-fluid border"></div>
-                <div>
-                  <h6 class="plugin-name">@{{ plugin.name }}</h6>
-                  <div class="plugin-description" v-html="plugin.description"></div>
+      <div class="plugins-wrap">
+        <div v-if="plugins.length">
+          <div class="row g-4">
+            <div v-for="plugin, index in plugins" :key="index" class="col-6 col-xl-12-15-4 col-xxl-3">
+              <div class="card plugin-item overflow-hidden" :data-code="plugin.code">
+                <div class="card-body position-relative">
+                  <div class="type-format position-absolute font-size-12 text-secondary top-0 end-0 rounded-3 bg-light px-3 py-1">@{{ plugin.type_format }}</div>
+                  <div class="d-flex mb-3 align-items-center">
+                    <div class="me-2 wh-70 cursor-pointer" style="flex: 0 0 70px;" @click.prevent="showPluginDetail(plugin.code)">
+                      <img :src="plugin.icon" class="img-fluid rounded-3">
+                    </div>
+                    <div class="plugin-describe">
+                      <h6 class="plugin-name mb-1">@{{ plugin.name }}</h6>
+                      <div class="text-secondary">@{{ plugin.version }}</div>
+                    </div>
+                  </div>
+                  <div class="plugin-description text-secondary" :title="plugin.description" v-html="plugin.description"></div>
+
+                  <div class="d-flex align-items-center justify-content-between mt-4">
+                    <div>
+                      <div v-if="plugin.installed">
+                        <a v-if="plugin.type != 'theme'" class="btn btn-sm btn-outline-secondary" :href="plugin.edit_url">{{ __('admin/common.edit') }}</a>
+                        <a v-else :style="!plugin.status ? 'cursor: not-allowed' : ''" :class="['btn btn-sm btn-outline-secondary', !plugin.status ? 'disabled' : '' ]" href="{{ admin_route('theme.index') }}">{{ __('admin/plugin.to_enable') }}</a>
+                        <button type="button" v-if="!free_plugin_codes.includes(plugin.code)" class="btn btn-sm btn-outline-secondary" target="_blank" href="javascript:void(0)" @click="toBkTicket(plugin.code)">{{ __('admin/plugin.ticket') }}</button>
+                        <a v-if="plugin.can_update" class="btn btn-sm btn-outline-success" @click="updatePlugin(plugin.code, 'install', index)">{{ __('admin/plugin.update') }}</a>
+                        <a class="btn btn-outline-danger btn-sm" @click="installedPlugin(plugin.code, 'uninstall', index)">{{ __('admin/common.uninstall') }}</a>
+                      </div>
+                      <div v-else>
+                        <a class="btn btn-outline-success btn-sm" @click="installedPlugin(plugin.code, 'install', index)">{{ __('admin/common.install') }}</a>
+                      </div>
+                    </div>
+                    <div>
+                      <el-switch :disabled="!plugin.installed" v-model="plugin.status" @change="(e) => {pluginStatusChange(e, plugin.code, index)}"></el-switch>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </td>
-            <td>
-              <el-switch :disabled="!plugin.installed" v-model="plugin.status"
-                         @change="(e) => {pluginStatusChange(e, plugin.code, index)}"></el-switch>
-            </td>
-            <td>
-              <div v-if="plugin.installed">
-                <div class="btn-group btn-group-sm">
-                  <a v-if="plugin.type != 'theme'" class="btn btn-outline-secondary"
-                     :href="plugin.edit_url">{{ __('admin/common.edit') }}</a>
-                  <a v-else :style="!plugin.status ? 'cursor: not-allowed' : ''"
-                      :class="['btn btn-outline-secondary', !plugin.status ? 'disabled' : '' ]"
-                      href="{{ admin_route('theme.index') }}">{{ __('admin/plugin.to_enable') }}</a>
-                  <button type="button" v-if="!free_plugin_codes.includes(plugin.code)" class="btn btn-sm btn-outline-secondary" target="_blank" href="javascript:void(0)" @click="toBkTicket(plugin.code)">{{ __('admin/plugin.ticket') }}</button>
-                  <a v-if="plugin.can_update" class="btn btn-outline-success"
-                  @click="updatePlugin(plugin.code, 'install', index)">{{ __('admin/plugin.update') }}</a>
-                </div>
-                <a class="btn btn-outline-danger btn-sm"
-                    @click="installedPlugin(plugin.code, 'uninstall', index)">{{ __('admin/common.uninstall') }}</a>
-              </div>
-              <div v-else>
-                <a class="btn btn-outline-success btn-sm"
-                   @click="installedPlugin(plugin.code, 'install', index)">{{ __('admin/common.install') }}</a>
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+            </div>
+          </div>
+        </div>
         <div v-else>
           <x-admin-no-data>
             <x-slot:text>
-              {{ __('common.no_data') }} <a
-                href="{{ admin_route('marketing.index', isset($type) ? ['type' => $type]: '') }}"><i
-                  class="bi bi-link-45deg"></i> {{ __('common.get_more') }}</a>
+              {{ __('common.no_data') }} <a href="{{ admin_route('marketing.index', isset($type) ? ['type' => $type]: '') }}"><i class="bi bi-link-45deg"></i> {{ __('common.get_more') }}</a>
             </x-slot>
           </x-admin-no-data>
         </div>
@@ -121,12 +108,12 @@
       },
       methods: {
         loadSignatureSecretStatus() {
-          $http.get('{{ admin_route('settings.signature_secret_status') }}').then((res) => {
+          $http.get('{{ admin_route('settings.signature_secret_status') }}', null, {hload: true}).then((res) => {
             if (res.data) {
               this.signatureStatus = res.data;
             }
           }).catch((err) => {
-            console.error('加载签名密钥状态失败:', err);
+            console.error('{{ trans('admin/plugin.load_signature_secret_failed') }}:', err);
           });
         },
         fetchSignatureSecret() {
@@ -134,20 +121,20 @@
           $http.post('{{ admin_route('settings.fetch_signature_secret') }}').then((res) => {
             this.fetchingSecret = false;
             if (res.data) {
-              layer.msg(res.message || '签名密钥获取成功');
+              layer.msg(res.message || '{{ trans('admin/plugin.signature_secret_fetched') }}');
               this.loadSignatureSecretStatus();
             }
           }).catch((err) => {
             this.fetchingSecret = false;
-            const message = err.response?.data?.message || err.message || '获取签名密钥失败';
+            const message = err.response?.data?.message || err.message || '{{ trans('admin/plugin.signature_secret_fetch_failed') }}';
             layer.msg(message, () => {});
           });
         },
         getSecretRetryButtonText() {
           if (this.fetchingSecret) {
-            return '重试中...';
+            return '{{ trans('admin/plugin.fetching') }}';
           }
-          return '重试获取签名密钥（高级）';
+          return '{{ trans('admin/plugin.retry_fetch_signature_secret') }}';
         }
       }
     });
@@ -171,6 +158,12 @@
           this.pluginServiceExpired(code).then(() => {
             window.open(`{{ beike_url() }}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`);
           })
+        },
+
+        showPluginDetail(code) {
+          if (!this.free_plugin_codes.includes(code)) {
+            location.href = `{{ admin_route('marketing.index') }}/${code}`;
+          }
         },
 
         pluginStatusChange(e, code, index) {
@@ -202,13 +195,15 @@
 
         resolveApiErrorMessage(err, code) {
           const message = err?.response?.data?.message || err?.message || '';
+          const lowerMessage = message.toLowerCase();
 
-          if (!message || message.includes('系统开小差了')) {
-            return `插件“${code}”状态更新失败：插件市场服务异常，请稍后重试。`;
+          // Check for generic server error messages (either in Chinese or English)
+          if (!message || lowerMessage.includes('server') || lowerMessage.includes('系统开小差了') || lowerMessage.includes('temporarily unavailable')) {
+            return `{{ trans('admin/plugin.plugin_status_update_failed', ['code' => '${code}']) }}`;
           }
 
           if (message.includes('No query results for model')) {
-            return `插件“${code}”在插件市场不存在或未激活，请先在 API 端检查插件记录。`;
+            return `{{ trans('admin/plugin.plugin_not_found_or_inactive', ['code' => '${code}']) }}`;
           }
 
           return message;
@@ -265,12 +260,6 @@
           })
         },
 
-        showPluginDetail(code) {
-          if (!this.free_plugin_codes.includes(code)) {
-            location.href = `{{ admin_route('marketing.index') }}/${code}`;
-          }
-        },
-
         pluginServiceExpired(code) {
           return new Promise((resolve, reject) => {
             $http.get('{{ admin_route('plugins.ticket_expired') }}', { plugin_code: code }).then(res => {
@@ -285,6 +274,24 @@
                 resolve(res.data);
               }
             })
+          });
+        }
+      },
+
+      mounted() {
+        // 高亮并滚动到指定插件
+        const urlParams = new URLSearchParams(window.location.search);
+        const highlightCode = urlParams.get('highlight');
+        if (highlightCode) {
+          this.$nextTick(() => {
+            const targetRow = $('.plugin-item[data-code=' + highlightCode + ']');
+            if (targetRow.length) {
+              targetRow.addClass('border-primary overflow-hidden');
+              $('#content').animate({scrollTop: targetRow.offset().top - 30}, 500);
+              setTimeout(() => {
+                targetRow.removeClass('border-primary overflow-hidden');
+              }, 3000);
+            }
           });
         }
       }
@@ -313,5 +320,12 @@
     }, 300);
 
     $('.search-plugin-input').on('input', filterPlugins);
+
+    window.addEventListener('message', function (event) {
+      if (event.data.type == 'marketing_buy_services_close_pop') {
+        layer.closeAll();
+        location.reload();
+      }
+    });
   </script>
 @endpush

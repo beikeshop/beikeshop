@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ProductView.php
  *
@@ -18,7 +19,7 @@ class ProductView extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'customer_id', 'ip', 'session_id'];
+    protected $fillable = ['product_id', 'customer_id', 'ip', 'session_id', 'referer', 'user_agent'];
 
     public function product(): BelongsTo
     {

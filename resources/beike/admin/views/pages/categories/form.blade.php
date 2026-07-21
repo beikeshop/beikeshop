@@ -2,108 +2,164 @@
 
 @section('title', __('admin/common.category'))
 
+@section('content-area-class', 'w-max-1200')
+
+@section('page-title-back', admin_route('categories.index', http_build_query(request()->query())))
+
+@section('head-form-btns', true)
+
 @section('content')
-  <div id="category-app" class="card">
-    <div class="card-header">{{ __('admin/category.edit_category') }}</div>
-    <div class="card-body">
-      @hook('admin.categories.form.before')
+<div id="category-app">
+  @hook('admin.categories.form.before')
 
-      <form class="needs-validation" novalidate action="{{ admin_route($category->id ? 'categories.update' : 'categories.store', $category) }}"
-        method="POST">
-        @csrf
-        @method($category->id ? 'PUT' : 'POST')
-        <input type="hidden" name="_redirect" value="{{ $_redirect }}">
+  @if (session('success'))
+  <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4" />
+  @endif
 
-        @if (session('success'))
-          <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
-        @endif
+  <form class="needs-validation" id="form-app" novalidate
+    action="{{ admin_route($category->id ? 'categories.update' : 'categories.store', $category) }}" method="POST">
+    @csrf
+    @method($category->id ? 'PUT' : 'POST')
+    <input type="hidden" name="_redirect" value="{{ $_redirect }}">
+    <div class="row g-3">
+      <div class="col-lg-9">
+        @hook('admin.categories.form.main.before')
 
-        @hook('admin.category.form.before')
+        <div class="card">
+          <div class="card-body">
+            <h5 class="mb-3">{{ __('admin/category.edit_category') }}</h5>
+            @hook('admin.category.form.before')
 
-        <x-admin-form-input-locale name="descriptions.*.name" title="{{ __('common.name') }}" :value="$descriptions" :required="true" />
-        @hook('admin.product.categories.edit.name.after')
-        <x-admin-form-input-locale name="descriptions.*.content" title="{{ __('admin/builder.modules_content') }}" :value="$descriptions" />
-        @hook('admin.product.categories.edit.content.after')
-        <x-admin-form-input name="position" title="{{ __('common.sort_order') }}" :value="old('position', $category->position ?? 0)" />
+            <x-admin-form-input-locale name="descriptions.*.name" title="{{ __('common.name') }}" :value="$descriptions"
+              :required="true" />
+            @hook('admin.product.categories.edit.name.after')
 
-        @hook('admin.categories.form.name.after')
+            <x-admin::form.row title="{{ __('admin/builder.modules_content') }}">
+              @foreach ($languages as $language)
+              <div class="input-group">
+                <span class="input-group-text">{{ $language['name'] }}</span>
+                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][content]"
+                  class="{{ $errors->first(" descriptions.{$language['code']}.content") ? 'is-invalid' : '' }}
+                  form-control input-{{ $language['code'] }}"
+                  placeholder="{{ __('admin/builder.modules_content') }}">{{ old('descriptions.' . $language['code'] . '.content', $category->descriptions->keyBy('locale')[$language->code]->content ?? '') }}</textarea>
+                <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.content") }}</div>
+              </div>
+              @endforeach
+              @include('admin::shared.auto-translation')
+            </x-admin::form.row>
+            @hook('admin.product.categories.edit.content.after')
 
-        <x-admin-form-image :is-remove="true" name="image" title="{{ __('admin/category.category_image') }}" :value="old('image', $category->image ?? '')">
-          <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }} 300*300</div>
-        </x-admin-form-image>
+            <x-admin-form-input name="position" title="{{ __('common.sort_order') }}"
+              :value="old('position', $category->position ?? 0)" />
 
-        @hook('admin.categories.form.image.after')
+            @hook('admin.categories.form.name.after')
 
-        <x-admin::form.row title="{{ __('admin/category.parent_category') }}">
-          @php
-            $_parent_id = old('parent_id', $category->parent_id ?? 0);
-          @endphp
-          <select name="parent_id" id="" class="form-control short wp-400">
-            <option value="0">--{{ __('common.please_choose') }}--</option>
-            @foreach ($categories as $_category)
-              @if ($category->id)
-                @if ($_category->id != $category->id && $_category->parent_id != $category->id)
-                <option value="{{ $_category->id }}" {{ $_parent_id == $_category->id ? 'selected' : '' }}>{{ $_category->name }}</option>
-                @endif
-              @else
-              <option value="{{ $_category->id }}" {{ $_parent_id == $_category->id ? 'selected' : '' }}>{{ $_category->name }}</option>
-              @endif
-            @endforeach
-          </select>
-        </x-admin::form.row>
+            <x-admin::form.row title="Meta title">
+              @foreach ($languages as $language)
+              <div class="input-group">
+                <span class="input-group-text">{{ $language['name'] }}</span>
+                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_title]"
+                  class="{{ $errors->first(" descriptions.{$language['code']}.meta_title") ? 'is-invalid' : '' }}
+                  form-control input-{{ $language['code'] }} wp-400"
+                  placeholder="Meta title">{{ old('descriptions.' . $language['code'] . '.meta_title', $category->descriptions->keyBy('locale')[$language->code]->meta_title ?? '') }}</textarea>
+                <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.meta_title") }}</div>
+              </div>
+              @endforeach
+              @include('admin::shared.auto-translation')
+            </x-admin::form.row>
+            @hook('admin.product.categories.edit.meta_title.after')
+            <x-admin::form.row title="Meta keywords">
+              @foreach ($languages as $language)
+              <div class="input-group">
+                <span class="input-group-text">{{ $language['name'] }}</span>
+                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]"
+                  class="{{ $errors->first(" descriptions.{$language['code']}.meta_keywords") ? 'is-invalid' : '' }}
+                  form-control input-{{ $language['code'] }} wp-400"
+                  placeholder="Meta keywords">{{ old('descriptions.' . $language['code'] . '.meta_keywords', $category->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
+                <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.meta_keywords") }}
+                </div>
+              </div>
+              @endforeach
+              @include('admin::shared.auto-translation')
+            </x-admin::form.row>
+            @hook('admin.product.categories.edit.meta_keywords.after')
+            <x-admin::form.row title="Meta description">
+              @foreach ($languages as $language)
+              <div class="input-group">
+                <span class="input-group-text">{{ $language['name'] }}</span>
+                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]"
+                  class="{{ $errors->first(" descriptions.{$language['code']}.meta_description") ? 'is-invalid' : '' }}
+                  form-control input-{{ $language['code'] }} wp-400"
+                  placeholder="Meta description">{{ old('descriptions.' . $language['code'] . '.meta_description', $category->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
+                <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.meta_description") }}
+                </div>
+              </div>
+              @endforeach
+              @include('admin::shared.auto-translation')
+            </x-admin::form.row>
+            @hook('admin.product.categories.edit.meta_description.after')
 
-        @hook('admin.categories.form.parent.after')
-
-        <x-admin::form.row title="Meta title">
-          @foreach ($languages as $language)
-          <div class="input-group w-max-600">
-            <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_title]"
-              class="{{ $errors->first("descriptions.{$language['code']}.meta_title") ? 'is-invalid' : '' }} form-control input-{{ $language['code'] }} wp-400" placeholder="Meta title">{{ old('descriptions.' . $language['code'] . '.meta_title', $category->descriptions->keyBy('locale')[$language->code]->meta_title ?? '') }}</textarea>
-            <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.meta_title") }}</div>
+            @hook('admin.category.form.after')
           </div>
-          @endforeach
-          @include('admin::shared.auto-translation')
-        </x-admin::form.row>
-        @hook('admin.product.categories.edit.meta_title.after')
-        <x-admin::form.row title="Meta keywords">
-          @foreach ($languages as $language)
-          <div class="input-group w-max-600">
-            <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]"
-              class="{{ $errors->first("descriptions.{$language['code']}.meta_keywords") ? 'is-invalid' : '' }} form-control input-{{ $language['code'] }} wp-400" placeholder="Meta keywords">{{ old('descriptions.' . $language['code'] . '.meta_keywords', $category->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
-            <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.meta_keywords") }}</div>
+        </div>
+
+        @hook('admin.categories.form.main.after')
+      </div>
+      <div class="col-lg-3">
+        @hook('admin.categories.form.sidebar.before')
+
+        <div class="card mb-3">
+          <div class="card-body pb-0">
+            <h5 class="mb-3">{{ __('common.status') }}</h5>
+            <x-admin-form-switch title="" name="active"
+              :value="old('active', $category->active ?? 1)" />
+            @hook('admin.categories.form.switch.after')
           </div>
-          @endforeach
-          @include('admin::shared.auto-translation')
-        </x-admin::form.row>
-        @hook('admin.product.categories.edit.meta_keywords.after')
-        <x-admin::form.row title="Meta description">
-          @foreach ($languages as $language)
-          <div class="input-group w-max-600">
-            <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]"
-              class="{{ $errors->first("descriptions.{$language['code']}.meta_description") ? 'is-invalid' : '' }} form-control input-{{ $language['code'] }} wp-400" placeholder="Meta description">{{ old('descriptions.' . $language['code'] . '.meta_description', $category->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
-            <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.meta_description") }}</div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body pb-0">
+            <h5 class="mb-3">{{ __('admin/category.parent_category') }}</h5>
+
+            @hook('admin.categories.form.sidebar.card.parent_category.before')
+
+            <x-admin::form.row title="">
+              <select name="parent_id" id="" class="form-control short">
+                <option value="0">--{{ __('common.please_choose') }}--</option>
+                @foreach ($categories as $_category)
+                  <option value="{{ $_category->id }}" {{ old('parent_id', $category->parent_id) == $_category->id ? 'selected' : '' }}>{{ $_category->name }}</option>
+                @endforeach
+              </select>
+            </x-admin::form.row>
+
+            @hook('admin.categories.form.parent.after')
           </div>
-          @endforeach
-          @include('admin::shared.auto-translation')
-        </x-admin::form.row>
-        @hook('admin.product.categories.edit.meta_description.after')
+        </div>
 
-        @hook('admin.category.form.after')
+        <div class="card mb-3">
+          <div class="card-body pb-0">
+            <h5 class="mb-3">{{ __('admin/category.category_image') }}</h5>
 
-        <x-admin-form-switch title="{{ __('common.status') }}" name="active" :value="old('active', $category->active ?? 1)" />
+            @hook('admin.categories.form.sidebar.card.category_image.before')
 
-        @hook('admin.categories.form.switch.after')
+            <x-admin-form-image :is-remove="true" name="image" title=""
+              :value="old('image', $category->image ?? '')">
+              <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }} 300*300</div>
+            </x-admin-form-image>
 
-        <x-admin::form.row>
-          <button type="submit" class="btn btn-primary w-min-100 btn-lg mt-3">{{ __('common.save') }}</button>
-          @hook('admin.categories.form.submit.after')
-        </x-admin::form.row>
-      </form>
+            @hook('admin.categories.form.image.after')
+          </div>
+        </div>
 
-      @hook('admin.categories.form.after')
+        @hook('admin.categories.form.sidebar.after')
+      </div>
     </div>
-  </div>
+
+    <x-admin::form.row>
+      <button type="submit" class="btn btn-primary w-min-100 btn-lg mt-3">{{ __('common.save') }}</button>
+      @hook('admin.categories.form.submit.after')
+    </x-admin::form.row>
+  </form>
+  @hook('admin.categories.form.after')
+</div>
 @endsection

@@ -17,7 +17,7 @@
     </div>
     <div class="table-push">
       @if (count($page_categories_format))
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>ID</th>
@@ -31,12 +31,10 @@
         </thead>
         <tbody>
           @foreach ($page_categories_format as $item)
-          <tr>
+          <tr class="cursor-pointer row-link" data-to-url="{{ admin_route("page_categories.edit", [$item['id'], http_build_query(request()->query())]) }}">
             <td>{{ $item['id'] }}</td>
             <td>
-              <div title="{{ $item['title'] ?? '' }}"><a class="text-dark"
-                  href="{{ shop_route('page_categories.show', $item['id']) }}" target="_blank">{{ $item['title_format'] ?? ''
-                  }}</a></div>
+              <div title="{{ $item['title'] ?? '' }}">{{ $item['title_format'] ?? '' }}</div>
             </td>
             <td class="{{ $item['active'] ? 'text-success' : 'text-secondary' }}">
               {{ $item['active'] ? __('common.enable') : __('common.disable') }}
@@ -44,12 +42,11 @@
             <td>{{ $item['created_at'] }}</td>
             <td>{{ $item['updated_at'] }}</td>
             @hook('admin.page.list.column_value')
-            <td class="text-end">
+            <td class="text-end" onclick="event.stopPropagation();">
               @hook('admin.page_categories.list.action.before')
-              <a href="{{ admin_route('page_categories.edit',$item['id']) }}"
-                class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
               <button class="btn btn-outline-danger btn-sm delete-btn" type='button' data-id="{{ $item['id'] }}">{{
                 __('common.delete') }}</button>
+              <a class="btn btn-default btn-sm ms-2" data-bs-toggle="tooltip" href="{{ shop_route('page_categories.show', $item['id']) }}" target="_blank" title="{{ __('admin/product.view_more') }}" class="viewPage"><i class="bi bi-eye"></i></a>
               @hook('admin.page.list.action')
             </td>
           </tr>
@@ -74,6 +71,7 @@
   @hook('admin.page_categories.list.script.before')
 
   $('.delete-btn').click(function(event) {
+    event.stopPropagation();
     const id = $(this).data('id');
     const self = $(this);
 

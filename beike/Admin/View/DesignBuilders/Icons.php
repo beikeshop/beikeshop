@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -21,9 +22,7 @@ class Icons extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -33,10 +32,11 @@ class Icons extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'icons',
-            'sort' => 0,
-            'name' => trans('admin/design_builder.module_icons'),
-            'icon' => '&#xe60e;',
+            'code'  => 'icons',
+            'sort'  => 0,
+            'name'  => trans('admin/design_builder.module_icons'),
+            'image' => asset('image/module/icons_preview.webp'),
+            'icon'  => '&#xe60e;',
         ];
 
         return view('admin::pages.design.module.icons', $data);

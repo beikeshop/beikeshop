@@ -2,17 +2,49 @@
 
 @section('title', __('admin/plugin.plugins_show'))
 
+@section('content-area-class', 'w-max-1200')
+
+@section('page-title-back', admin_route('plugins.index', http_build_query(request()->query())))
+
+@section('head-form-btns', true)
+
 @section('content')
   <div class="card h-min-600">
     <div class="card-body">
-      <h6 class="border-bottom pb-3 mb-4">{{ $plugin->getLocaleName() }}</h6>
-
       @if (session('success'))
         <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
       @endif
 
+      <div class="mb-4">
+        <h4 class="mb-2">{{ $plugin->getLocaleName() }}</h4>
+        <p class="mb-0 text-secondary">{!! $plugin->getLocaleDescription() !!}</p>
+      </div>
+
+      @if (!empty($pluginReadmeHtml))
+        @push('header')
+          <link rel="stylesheet" href="{{ asset('vendor/github-markdown/github-markdown.min.css') }}">
+        @endpush
+        <ul class="mb-4 plugin-tab-nav" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#plugin-setting-pane" type="button" role="tab" aria-selected="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7 5C7 2.79086 8.79086 1 11 1C13.2091 1 15 2.79086 15 5H20C20.5523 5 21 5.44772 21 6V10.1707C21 10.4953 20.8424 10.7997 20.5774 10.9872C20.3123 11.1746 19.9728 11.2217 19.6668 11.1135C19.4595 11.0403 19.2355 11 19 11C17.8954 11 17 11.8954 17 13C17 14.1046 17.8954 15 19 15C19.2355 15 19.4595 14.9597 19.6668 14.8865C19.9728 14.7783 20.3123 14.8254 20.5774 15.0128C20.8424 15.2003 21 15.5047 21 15.8293V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V6C3 5.44772 3.44772 5 4 5H7ZM11 3C9.89543 3 9 3.89543 9 5C9 5.23554 9.0403 5.45952 9.11355 5.66675C9.22172 5.97282 9.17461 6.31235 8.98718 6.57739C8.79974 6.84243 8.49532 7 8.17071 7H5V19H19V17C16.7909 17 15 15.2091 15 13C15 10.7909 16.7909 9 19 9V7H13.8293C13.5047 7 13.2003 6.84243 13.0128 6.57739C12.8254 6.31235 12.7783 5.97282 12.8865 5.66675C12.9597 5.45952 13 5.23555 13 5C13 3.89543 12.1046 3 11 3Z"></path></svg>
+              <span class="ms-1 lh-text-base">{{ __('admin/common.edit') }}</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#plugin-readme-pane" type="button" role="tab" aria-selected="false">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M13 21V23H11V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H9C10.1947 3 11.2671 3.52375 12 4.35418C12.7329 3.52375 13.8053 3 15 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H13ZM20 19V5H15C13.8954 5 13 5.89543 13 7V19H20ZM11 19V7C11 5.89543 10.1046 5 9 5H4V19H11Z"></path></svg>
+              <span class="ms-1 lh-text-base">{{ __('admin/plugin.plugin_readme') }}</span>
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="plugin-setting-pane" role="tabpanel">
+      @endif
+
       @hookwrapper('admin.plugin.form')
-        <form class="needs-validation" novalidate action="{{ admin_route('plugins.update', [$plugin->code]) }}" method="POST">
+        <form class="needs-validation" novalidate action="{{ admin_route('plugins.update', [$plugin->code]) }}" method="POST" id="form-app">
           @csrf
           {{ method_field('put') }}
 
@@ -175,6 +207,14 @@
           </x-admin::form.row>
         </form>
       @endhookwrapper
+
+      @if (!empty($pluginReadmeHtml))
+          </div>
+          <div class="tab-pane fade" id="plugin-readme-pane" role="tabpanel">
+            <div class="markdown-body">{!! $pluginReadmeHtml !!}</div>
+          </div>
+        </div>
+      @endif
     </div>
   </div>
 

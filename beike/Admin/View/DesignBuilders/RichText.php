@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -21,9 +22,7 @@ class RichText extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -33,10 +32,11 @@ class RichText extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'rich_text',
-            'sort' => 0,
-            'name' => trans('admin/design_builder.module_rich_text'),
-            'icon' => '&#xe601;',
+            'code'  => 'rich_text',
+            'sort'  => 0,
+            'name'  => trans('admin/design_builder.module_rich_text'),
+            'image' => asset('image/module/rich_text_preview.webp'),
+            'icon'  => '&#xe601;',
         ];
 
         return view('admin::pages.design.module.rich_text', $data);

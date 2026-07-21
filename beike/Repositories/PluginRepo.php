@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PluginRepo.php
  *
@@ -16,7 +17,9 @@ use Beike\Plugin\Plugin as BPlugin;
 use Beike\Shop\Services\TotalServices\ShippingService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class PluginRepo
@@ -93,7 +96,7 @@ class PluginRepo
         if (is_dir($path . '/Static/public')) {
             $destination = public_path('plugin/' . $bPlugin->code);
 
-            if (!is_dir($destination)) {
+            if (! is_dir($destination)) {
                 File::makeDirectory($destination, 0755, true);
             }
 
@@ -137,7 +140,7 @@ class PluginRepo
 
         $langPath = $bPlugin->getPath() . '/Lang';
         if (is_dir($langPath)) {
-            File::copyDirectory($langPath, resource_path('lang'));
+            File::copyDirectory($langPath, base_path('lang'));
         }
     }
 
@@ -149,6 +152,14 @@ class PluginRepo
      */
     public static function runSeeder($bPlugin)
     {
+        // 在执行 seeder 之前，尝试加载插件的命名空间注册文件（如果存在）
+        // 优先加载 AutoloadNamespace.php，它只负责命名空间注册，无其他业务逻辑依赖
+        // 这样避免了加载 Bootstrap.php 可能导致的依赖问题
+        $autoloadFile = $bPlugin->getPath() . '/AutoloadNamespace.php';
+        if (file_exists($autoloadFile)) {
+            require_once $autoloadFile;
+        }
+
         $seederPath = $bPlugin->getPath() . '/Seeders/';
         if (is_dir($seederPath)) {
 
@@ -221,16 +232,52 @@ class PluginRepo
     {
         $migrationPath = "{$bPlugin->getPath()}/Migrations";
         if (is_dir($migrationPath)) {
-            $files = glob($migrationPath . '/*');
+            $files = glob($migrationPath . '/*.php');
             arsort($files);
 
             foreach ($files as $file) {
-                $file = str_replace(base_path(), '', $file);
-                Artisan::call('migrate:rollback', [
-                    '--force' => true,
-                    '--step'  => 1,
-                    '--path'  => $file,
-                ]);
+                try {
+                    // 获取迁移文件名（不含扩展名）
+                    $migrationName = basename($file, '.php');
+
+                    // 检查迁移记录是否存在
+                    $migrationRecord = DB::table('migrations')->where('migration', $migrationName)->first();
+
+                    if (! $migrationRecord) {
+                        Log::info("Plugin migration not found in database: {$migrationName}");
+
+                        continue;
+                    }
+
+                    // 直接包含迁移文件
+                    $migration = require $file;
+
+                    // 如果返回的是 1，说明是命名类迁移（旧版），需要根据文件名手动实例化类
+                    if ($migration === 1) {
+                        $class = Str::studly(implode('_', array_slice(explode('_', $migrationName), 4)));
+                        if (class_exists($class)) {
+                            $migration = new $class;
+                        }
+                    }
+
+                    if (! is_object($migration) || ! method_exists($migration, 'down')) {
+                        Log::error("Plugin migration invalid or missing down method: {$migrationName}");
+
+                        continue;
+                    }
+
+                    // 执行down方法
+                    $migration->down();
+
+                    // 从migrations表中删除记录
+                    DB::table('migrations')->where('migration', $migrationName)->delete();
+
+                    Log::info("Plugin migration rolled back successfully: {$migrationName}");
+
+                } catch (\Exception $e) {
+                    // 记录错误但继续执行
+                    Log::error('Plugin migration rollback failed: ' . basename($file) . ' - ' . $e->getMessage());
+                }
             }
         }
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TaxClassController.php
  *
@@ -19,10 +20,19 @@ class TaxClassController extends Controller
 {
     public function index()
     {
+        $bases          = TaxClassRepo::BASE_TYPES;
+        $basesForSelect = [];
+        foreach ($bases as $key => $value) {
+            $basesForSelect[] = [
+                'value' => $value,
+                'label' => trans('admin/tax_class.' . $value),
+            ];
+        }
+
         $data = [
             'tax_classes'   => TaxClassRepo::getList(),
             'all_tax_rates' => TaxRate::all(),
-            'bases'         => TaxClassRepo::BASE_TYPES,
+            'bases'         => $basesForSelect,
         ];
 
         $data = hook_filter('admin.tax_class.index.data', $data);

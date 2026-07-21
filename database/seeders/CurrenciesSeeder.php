@@ -46,7 +46,7 @@ class CurrenciesSeeder extends Seeder
                 "symbol_right" => "",
                 "decimal_place" => 2,
                 "value" => 7.1121,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 2,
@@ -56,7 +56,7 @@ class CurrenciesSeeder extends Seeder
                 "symbol_right" => "",
                 "decimal_place" => 2,
                 "value" => 1,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 3,
@@ -66,7 +66,7 @@ class CurrenciesSeeder extends Seeder
                 "symbol_right" => "",
                 "decimal_place" => 2,
                 "value" => 0.9790,
-                "status" => 1,
+                "active" => 1,
             ]
         ];
     }

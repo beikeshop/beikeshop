@@ -50,7 +50,7 @@ class View extends \Illuminate\View\View
     public function isSubdirectory($parentDir, $childDir): bool
     {
         $parentDir = str_replace('\\', '/', rtrim($parentDir, '/')) . '/';
-        $childDir = str_replace('\\', '/', rtrim($childDir, '/')) . '/';
+        $childDir  = str_replace('\\', '/', rtrim($childDir, '/')) . '/';
 
         // 使用 preg_quote() 转义路径中的特殊字符
         $escapedParentDir = preg_quote($parentDir, '#');

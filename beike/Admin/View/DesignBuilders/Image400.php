@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Render.php
  *
@@ -21,9 +22,7 @@ class Image400 extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
@@ -33,10 +32,11 @@ class Image400 extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'image400',
-            'sort' => 0,
-            'name' => trans('admin/builder.modules_image_400'),
-            'icon' => '&#xe663;',
+            'code'  => 'image400',
+            'sort'  => 0,
+            'name'  => trans('admin/builder.modules_image_400'),
+            'image' => asset('image/module/image400_preview.webp'),
+            'icon'  => '&#xe663;',
         ];
 
         return view('admin::pages.design.module.image400', $data);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Country.php
  *
@@ -20,13 +21,18 @@ class Country extends Base
 
     public const CONTINENTS = ['AF', 'AN', 'AS', 'EU', 'NA', 'OA', 'SA', 'null'];
 
-    protected $fillable = ['name', 'country_id', 'code', 'continent', 'sort_order', 'status'];
+    protected $fillable = ['name', 'country_id', 'code', 'continent', 'sort_order', 'active'];
 
     protected $appends = ['continent_format'];
 
     public function zones(): HasMany
     {
         return $this->hasMany(Zone::class);
+    }
+
+    public function activeZones(): HasMany
+    {
+        return $this->hasMany(Zone::class)->where('active', true);
     }
 
     public function getContinentFormatAttribute(): string

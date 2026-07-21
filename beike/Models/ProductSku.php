@@ -8,11 +8,11 @@ class ProductSku extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'variants', 'position', 'images', 'model', 'sku', 'price', 'origin_price', 'cost_price', 'weight', 'quantity', 'is_default'];
+    protected $fillable = ['product_id', 'variants', 'position', 'images', 'model', 'sku', 'price', 'origin_price', 'cost_price', 'weight', 'quantity', 'is_default', 'active'];
 
     protected $casts = [
-        'variants' => 'array',
-        'images'   => 'array',
+        'variants'      => 'array',
+        'images'        => 'array',
         'is_default'    => 'boolean',
     ];
 

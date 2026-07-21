@@ -1,4 +1,5 @@
 <?php
+
 /**
  * FlattenCategoryRepo.php
  *
@@ -11,9 +12,9 @@
 
 namespace Beike\Repositories;
 
+use Beike\Models\Category;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Beike\Models\Category;
 
 class FlattenCategoryRepo
 {
@@ -119,6 +120,11 @@ class FlattenCategoryRepo
         return $result;
     }
 
+    /**
+     * @param int $parentId
+     * @return array
+     * @throws \Exception
+     */
     private static function buildCategoryList(int $parentId = 0): array
     {
         $categoryIds = self::getFlattenChildren($parentId);
@@ -200,7 +206,8 @@ class FlattenCategoryRepo
             ->orderBy('categories.position')
             ->orderBy('categories.parent_id')
             ->get();
-        $result     = [];
+
+        $result = [];
         foreach ($categories as $category) {
             $result[$category->parent_id][] = $category->id;
         }

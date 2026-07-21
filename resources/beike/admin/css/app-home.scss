@@ -63,6 +63,9 @@
             margin-bottom: 10px;
             border-radius: 2px;
             position: relative;
+            html[data-bs-theme="dark"] & {
+              border: 1px solid #555;
+            }
 
             &:after {
               content: '\F3FE';
@@ -109,6 +112,10 @@
         align-items: center;
         border-left: 1px solid #eee;
         border-right: 1px solid #eee;
+        html[data-bs-theme="dark"] & {
+          border-left: 1px solid #333;
+          border-right: 1px solid #333;
+        }
 
         .perview-content {
           border: 2px solid #eee;
@@ -121,6 +128,10 @@
           // height: calc(100% - 525px);
           position: relative;
           box-shadow: 0 13px 21px rgba(0,0,0,.07);
+          html[data-bs-theme="dark"] & {
+            border: 2px solid #333;
+            background-color: #222;
+          }
           .head {
             overflow: hidden;
             border-radius: 20px 20px 0 0;
@@ -214,6 +225,9 @@
     display: flex;
     flex-flow: wrap;
     margin-bottom: 20rpx;
+    html[data-bs-theme="dark"] & {
+      background-color: #111;
+    }
 
     .link-item {
       margin-bottom: 10px;
@@ -265,7 +279,9 @@
       &:not(.video) {
         border-radius: 4px;
         background: #fff;
-        // box-shadow: 0px 7px 9px rgba(204, 204, 204, .15);
+        html[data-bs-theme="dark"] & {
+          background-color: #111;
+        }
       }
 
       // overflow: hidden;

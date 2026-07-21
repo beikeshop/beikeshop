@@ -2,8 +2,8 @@
 
 namespace App\Tools\Commands\Publish;
 
-use Illuminate\Support\Str;
 use App\Tools\Commands\BaseCommand;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class PublishConfigurationCommand extends BaseCommand
@@ -31,7 +31,7 @@ class PublishConfigurationCommand extends BaseCommand
         ]);
     }
 
-    public function getInfo(): string|null
+    public function getInfo(): ?string
     {
         return 'Publishing plugin config files ...';
     }

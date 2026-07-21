@@ -9,7 +9,9 @@ class GeneratorPath
     use PathNamespace;
 
     private $path;
+
     private $generate;
+
     private $namespace;
 
     public function __construct($config)

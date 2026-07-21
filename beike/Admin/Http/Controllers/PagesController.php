@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PagesController.php
  *
@@ -12,8 +13,10 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\PageRequest;
+use Beike\Admin\Http\Resources\PageCategoryResource;
 use Beike\Admin\Repositories\PageRepo;
 use Beike\Models\Page;
+use Beike\Repositories\PageCategoryRepo;
 use Beike\Shop\Http\Resources\PageDetail;
 use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Http\JsonResponse;
@@ -27,12 +30,40 @@ class PagesController extends Controller
      *
      * @return mixed
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pageList = PageRepo::getList();
-        $data     = [
+        // 获取筛选参数
+        $filters = [
+            'category_id' => $request->input('category_id'),
+            'title'       => $request->input('title'),
+            // 可根据实际需求添加更多筛选项
+        ];
+
+        // 过滤掉空值
+        $filters = array_filter($filters, function ($v) {
+            return $v !== null && $v !== '';
+        });
+
+        // 获取筛选后的列表
+        $pageList = PageRepo::getList($filters);
+
+        // 获取分类
+        $categories             = PageCategoryRepo::getBuilder()->get();
+        $page_categories_format = PageCategoryResource::collection($categories)->jsonSerialize();
+
+        // 生成 pages_format 并补充分类名称
+        $pages_format     = PageDetail::collection($pageList)->jsonSerialize();
+        $categoryTitleMap = collect($page_categories_format)->pluck('title', 'id')->all();
+        foreach ($pages_format as &$item) {
+            $categoryId            = $item['page_category_id'] ?? null;
+            $item['category_name'] = $categoryId ? ($categoryTitleMap[$categoryId] ?? '') : '';
+        }
+
+        $data = [
             'pages'        => $pageList,
-            'pages_format' => PageDetail::collection($pageList)->jsonSerialize(),
+            'pages_format' => $pages_format,
+            'categories'   => $page_categories_format,
+            'filter'       => $filters,
         ];
 
         return view('admin::pages.pages.index', $data);
@@ -45,7 +76,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        return view('admin::pages.pages.form', ['page' => new Page()]);
+        return view('admin::pages.pages.form', ['page' => new Page]);
     }
 
     /**
@@ -100,7 +131,7 @@ class PagesController extends Controller
             $page              = PageRepo::createOrUpdate($requestData);
             hook_action('admin.page.update.after', ['request_data' => $requestData, 'page' => $page]);
 
-            return redirect()->to(admin_route('pages.index'))->with('success', trans('common.updated_success'));
+            return redirect()->to(url()->previous())->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
             return $this->handleDatabaseException($e);
         }
@@ -164,18 +195,17 @@ class PagesController extends Controller
     // 文章提交异常处理，优化长度限制提示
     private function handleDatabaseException(\Exception $e)
     {
-        $errorMessage = $e->getMessage();
+        $errorMessage        = $e->getMessage();
         $userFriendlyMessage = $errorMessage;
 
         if (strpos($errorMessage, 'SQLSTATE[22001]') !== false) {
             preg_match("/Data too long for column '(\w+)'/", $errorMessage, $matches);
             if (isset($matches[1])) {
-                $columnName = $matches[1];
+                $columnName          = $matches[1];
                 $userFriendlyMessage = trans('admin/common.error_length_text', ['key' => $columnName]);
             }
         }
 
         return redirect()->back()->withInput()->withErrors(['error' => $userFriendlyMessage]);
     }
-
 }

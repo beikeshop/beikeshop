@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-09-03 22:32:29
  * @LastEditTime  2022-09-16 20:56:27
  */
@@ -16,12 +16,6 @@
       padding-bottom: 1.4rem;
 
       &:hover {
-        box-shadow: none;
-
-        .image {
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
         .button-wrap {
           bottom: 10px;
           opacity: 1;
@@ -50,9 +44,12 @@
     padding-bottom: 0;
 
     .image {
-      flex: 0 0 200px;
+      flex: 0 0 100px;
       margin-bottom: 0;
       transition: all 0.3s ease-in-out;
+      @media (min-width: 768px) {
+        flex: 0 0 200px;
+      }
 
       .image-old {
         height: auto !important;
@@ -60,18 +57,34 @@
     }
 
     .product-name {
-      height: auto;
-      margin-bottom: 20px;
+      height: 42px;
+      margin-bottom: 10px;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
 
     .product-bottom-info {
       padding-top: 10px;
-      padding-left: 20px;
+      padding-left: 10px;
       flex: 1;
       text-align: left;
 
+      @media (min-width: 768px) {
+        padding-left: 20px;
+      }
+
       .product-name {
         font-size: 14px;
+      }
+
+      .button-wrap, .quick-view-wish {
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
     }
   }
@@ -80,12 +93,24 @@
     margin-bottom: 10px;
     position: relative;
     overflow: hidden;
+    border-radius: 12px;
 
-    .image-old {
+    > a {
       opacity: 1;
-      display: flex;
+      display: block;
       justify-content: center;
       align-items: center;
+      position: relative;
+    }
+
+    .image-after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: scale(1);
       transition: all ease-out .4s;
     }
 
@@ -131,18 +156,21 @@
         i {
           line-height: 1;
         }
-
-        &:hover {
-          background-color: rgb(70, 70, 70);
-        }
       }
     }
   }
 
   @media (min-width: 768px) {
     &:hover {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-
+      .image {
+        > a {
+          .image-after {
+            opacity: 1;
+            z-index: 9;
+            transform: scale(1.1);
+          }
+        }
+      }
       .button-wrap {
         bottom: 0;
         opacity: 1;
@@ -151,11 +179,14 @@
   }
 
   .product-name {
+    height: 40px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    height: 22px;
-    font-size: .9rem;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 14px;
     font-weight: bold;
     margin-bottom: 6px;
   }

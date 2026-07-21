@@ -2,11 +2,10 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ComponentClassMakeCommand extends GeneratorCommand
@@ -43,6 +42,7 @@ class ComponentClassMakeCommand extends GeneratorCommand
 
         return 0;
     }
+
     /**
      * Write the view template for the component.
      *
@@ -50,7 +50,7 @@ class ComponentClassMakeCommand extends GeneratorCommand
      */
     protected function writeComponentViewTemplate()
     {
-        $this->call('plugin:make-component-view', ['name' => $this->argument('name') , 'plugin' => $this->argument('plugin')]);
+        $this->call('plugin:make-component-view', ['name' => $this->argument('name'), 'plugin' => $this->argument('plugin')]);
     }
 
     public function getDefaultNamespace(): string
@@ -71,6 +71,7 @@ class ComponentClassMakeCommand extends GeneratorCommand
             ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
+
     /**
      * @return mixed
      */
@@ -91,7 +92,7 @@ class ComponentClassMakeCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath()
     {
-        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
+        $path        = $this->laravel['plugins']->getModulePath($this->getModuleName());
         $factoryPath = GenerateConfigReader::read('component-class');
 
         return $path . $factoryPath->getPath() . '/' . $this->getFileName();

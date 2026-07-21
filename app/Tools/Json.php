@@ -2,9 +2,8 @@
 
 namespace App\Tools;
 
-use App\Tools\Collection;
-use Illuminate\Filesystem\Filesystem;
 use App\Tools\Exceptions\InvalidJsonException;
+use Illuminate\Filesystem\Filesystem;
 
 class Json
 {
@@ -35,10 +34,10 @@ class Json
      * @param mixed                             $path
      * @param \Illuminate\Filesystem\Filesystem $filesystem
      */
-    public function __construct($path, Filesystem $filesystem = null)
+    public function __construct($path, ?Filesystem $filesystem = null)
     {
-        $this->path = (string) $path;
-        $this->filesystem = $filesystem ?: new Filesystem();
+        $this->path       = (string) $path;
+        $this->filesystem = $filesystem ?: new Filesystem;
         $this->attributes = Collection::make($this->getAttributes());
     }
 
@@ -98,7 +97,7 @@ class Json
      *
      * @return static
      */
-    public static function make($path, Filesystem $filesystem = null)
+    public static function make($path, ?Filesystem $filesystem = null)
     {
         return new static($path, $filesystem);
     }
@@ -155,7 +154,7 @@ class Json
      *
      * @return string
      */
-    public function toJsonPretty(array $data = null)
+    public function toJsonPretty(?array $data = null)
     {
         return json_encode($data ?: $this->attributes, JSON_PRETTY_PRINT);
     }
@@ -214,7 +213,7 @@ class Json
     /**
      * Get the specified attribute from json file.
      *
-     * @param $key
+     * @param      $key
      * @param null $default
      *
      * @return mixed

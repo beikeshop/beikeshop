@@ -30,7 +30,7 @@ class MigrateCommand extends BaseCommand
             $path = str_replace(base_path(), '', (new Migrator($module, $this->getLaravel()))->getPath());
 
             if ($this->option('subpath')) {
-                $path = $path . "/" . $this->option("subpath");
+                $path = $path . '/' . $this->option('subpath');
             }
 
             $this->call('migrate', [

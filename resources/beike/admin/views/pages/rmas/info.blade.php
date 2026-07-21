@@ -2,6 +2,8 @@
 
 @section('title', __('admin/rma.index'))
 
+@section('page-title-back', admin_route('rmas.index', http_build_query(request()->query())))
+
 @section('content')
   @hook('admin.rmas.info.content.before')
   <div class="card mb-4">
@@ -31,6 +33,14 @@
               <tr>
                   <td>{{ __('admin/rma.order_number') }}：</td>
                   <td><a href="{{ admin_route('orders.show', ['order' => $rma['order_id']]) }}">{{ $rma['order_number'] }}</a></td>
+              </tr>
+              <tr>
+                <td>{{ __('shop/account/rma.express_company') }}：</td>
+                <td>{{ $rma['express_com_format'] }}</td>
+              </tr>
+              <tr>
+                <td>{{ __('shop/account/rma.express_number') }}：</td>
+                <td>{{ $rma['express_no_format'] }}</td>
               </tr>
               @hook('admin.rmas.info.top.table.after')
             </tbody>

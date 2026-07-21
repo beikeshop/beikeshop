@@ -25,8 +25,8 @@ class EditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required|string|min:2|max:16',
-            'email'    => ['required','email:rfc',
+            'name'     => 'required|string|min:2|max:16',
+            'email'    => ['required', 'email:rfc',
                 function ($attribute, $value, $fail) {
                     if (Customer::where('email', $value)->where('id', '<>', current_customer()->id)->exists()) {
                         $fail(trans('shop/login.email_address_error', ['email' => $this->attributes()['email']]));

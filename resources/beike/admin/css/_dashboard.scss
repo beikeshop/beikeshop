@@ -1,8 +1,197 @@
 @charset "UTF-8";
 
+// 增强数据看板样式
+.enhanced-dashboard {
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.bg-primary { background-color: rgba(0, 123, 255, 0.1) !important; }
+      &.bg-warning { background-color: rgba(255, 193, 7, 0.1) !important; }
+      &.bg-success { background-color: rgba(40, 167, 69, 0.1) !important; }
+      &.bg-info { background-color: rgba(23, 162, 184, 0.1) !important; }
+      &.bg-danger { background-color: rgba(220, 53, 69, 0.1) !important; }
+    }
+
+    .trend-indicator {
+      font-size: 12px;
+      font-weight: 500;
+
+      &.trend-up { color: #28a745; }
+      &.trend-down { color: #dc3545; }
+    }
+  }
+
+  .chart-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 100%;
+
+    .chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: between;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+      h5 {
+        margin: 0;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+    }
+  }
+
+  .progress-bar-custom {
+    width: 100%;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+    margin: 8px 0;
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.3s ease;
+
+      &.bg-success { background-color: #28a745; }
+      &.bg-danger { background-color: #dc3545; }
+      &.bg-warning { background-color: #ffc107; }
+      &.bg-primary { background-color: #007bff; }
+    }
+  }
+
+  .product-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .product-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+    }
+
+    .product-info {
+      flex: 1;
+
+      h6 {
+        margin: 0 0 8px 0;
+        font-weight: 500;
+        color: #2c3e50;
+        font-size: 14px;
+      }
+    }
+
+    .product-stats {
+      text-align: right;
+      min-width: 80px;
+
+      .price {
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0;
+      }
+
+      .sales {
+        font-size: 12px;
+        color: #6c757d;
+        margin: 0;
+      }
+    }
+  }
+
+  .time-filter-buttons {
+    .btn-group {
+      .btn {
+        font-size: 12px;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+
+        &.btn-primary {
+          background-color: #007bff;
+          border-color: #007bff;
+        }
+
+        &.btn-outline-secondary {
+          color: #6c757d;
+          border-color: #dee2e6;
+
+          &:hover {
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+            color: #495057;
+          }
+        }
+      }
+    }
+  }
+
+  .mini-chart {
+    height: 60px;
+    margin-top: 15px;
+  }
+
+
+
+  // 响应式调整
+  @media (max-width: 768px) {
+    .stat-card {
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .chart-container {
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .product-item {
+      .product-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
 .dashboard-guide-section {
   .nav.nav-tabs {
-    border-color: rgba(231,234,243,0.7);
     font-size: 14px;
   }
 
@@ -65,6 +254,10 @@
           -ms-transform: rotate(45deg);
           transform: rotate(45deg);
           background-image: linear-gradient(-45deg, #ffe2d4 0, #fff 68%);
+          html[data-bs-theme="dark"] & {
+            background: transparent;
+            background-image: linear-gradient(-45deg, #49413c 0, #000000 68%);
+          }
         }
       }
 
@@ -82,6 +275,10 @@
 
       @media (min-width: 768px) {
         border-left: 1px solid rgba(231,234,243,0.7);
+        html[data-bs-theme="dark"] & {
+          border-color: #333;
+        }
+
         padding-left: 40px;
       }
     }

@@ -10,6 +10,8 @@
   <a href="{{ admin_route('orders.shipping.get') }}?order_id={{ $order->id }}"target="_blank" class="btn btn-outline-secondary"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</a>
 @endsection
 
+@section('page-title-back', admin_route('orders.index', http_build_query(request()->query())))
+
 @section('content')
   @hook('admin.order.form.content.before')
 
@@ -165,7 +167,7 @@
                 :value="item.code">
               </el-option>
             </el-select>
-            <a href="{{ admin_route('settings.index') }}?tab=tab-express-company" target="_blank" class="ms-2">{{ __('common.to_setting') }}</a>
+            <a href="{{ admin_route('settings.express') }}" target="_blank" class="ms-2">{{ __('common.to_setting') }}</a>
           </el-form-item>
           <el-form-item label="{{ __('order.express_number') }}" v-if="form.status == 'shipped'" prop="express_number">
             <el-input class="w-max-500" v-model="form.express_number" size="small" v-if="form.status == 'shipped'" placeholder="{{ __('order.express_number') }}"></el-input>
@@ -208,8 +210,11 @@
               <td>{{ $product->product_id }}</td>
               <td>
                 <div class="d-flex align-items-center">
-                  <div class="border d-flex justify-content-center align-items-center wh-60 me-2"><img src="{{ image_resize($product->image) }}" class="img-fluid max-h-100"></div>{{ $product->name }}
-                  @hook('admin.order_form.product_name.after', $product)
+                  <div class="border d-flex justify-content-center align-items-center wh-60 me-2"><img src="{{ image_resize($product->image) }}" class="img-fluid max-h-100"></div>
+                  <div class="product-name">
+                    {{ $product->name }}
+                    @hook('admin.order_form.product_name.after', $product)
+                  </div>
                 </div>
               </td>
               <td class="">{{ $product->product_sku }}</td>
@@ -264,9 +269,9 @@
               <tr>
                 <td>{{ $payment->order_id }}</td>
                 <td>{{ $payment->transaction_id }}</td>
-                <td>{{ $payment->request }}</td>
-                <td>{{ $payment->response }}</td>
-                <td>{{ $payment->callback }}</td>
+                <td><textarea class="form-control" readonly>{{ $payment->request }}</textarea></td>
+                <td><textarea class="form-control" readonly>{{ $payment->response }}</textarea></td>
+                <td><textarea class="form-control" readonly>{{ $payment->callback }}</textarea></td>
                 <td>
                   @if ($payment->receipt)
                   <a href="{{ image_origin($payment->receipt) }}" target="_blank">{{ __('admin/order.text_click_view') }}</a>

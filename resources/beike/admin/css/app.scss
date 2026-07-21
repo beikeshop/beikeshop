@@ -3,13 +3,13 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-12 15:27:15
  * @LastEditTime  2022-09-16 19:06:12
  */
 
 
-$primary: #fd560f;
+$primary: #ff783f;
 
 @import 'global';
 @import 'vue';
@@ -30,3 +30,5 @@ $primary: #fd560f;
 @import './page-theme';
 @import './app-home';
 @import './page-help';
+@import './setting';
+@import './admin-dashboard';

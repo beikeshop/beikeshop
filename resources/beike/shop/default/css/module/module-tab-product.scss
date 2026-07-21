@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2022-08-02 19:19:52
  * @LastEditTime  2022-09-16 20:57:33
  */
@@ -18,12 +18,12 @@
     margin-top: -10px;
 
     .nav-link {
-      color: #6c757d;
-      font-size: .9rem;
-      border: 2px solid transparent;
-      border-radius: 50px;
-      margin: 0 5px;
-      padding: 0.3rem 1rem;
+      color: #969a9e;
+      font-size: 1.2rem;
+      border-bottom: 2px solid transparent;
+      margin: 0 17px;
+      font-weight: bold;
+      padding: 0.3rem .2rem;
 
       @media (max-width: 768px) {
         padding: 0.2rem .7rem;

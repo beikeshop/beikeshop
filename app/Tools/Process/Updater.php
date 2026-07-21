@@ -2,7 +2,6 @@
 
 namespace App\Tools\Process;
 
-use App\Tools\Process\Runner;
 use App\Tools\Module;
 
 class Updater extends Runner
@@ -45,7 +44,7 @@ class Updater extends Runner
             $concatenatedPackages .= "\"{$name}:{$version}\" ";
         }
 
-        if (!empty($concatenatedPackages)) {
+        if (! empty($concatenatedPackages)) {
             $this->run("composer require {$concatenatedPackages}{$this->isComposerSilenced()}");
         }
     }
@@ -62,7 +61,7 @@ class Updater extends Runner
             $concatenatedPackages .= "\"{$name}:{$version}\" ";
         }
 
-        if (!empty($concatenatedPackages)) {
+        if (! empty($concatenatedPackages)) {
             $this->run("composer require --dev {$concatenatedPackages}{$this->isComposerSilenced()}");
         }
     }

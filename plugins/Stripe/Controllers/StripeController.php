@@ -69,25 +69,31 @@ class StripeController extends Controller
 
         try {
             $webhookSecret = plugin_setting('stripe.webhook_secret');
-            if (empty($webhookSecret)) {
-                Log::warning('Stripe webhook secret is not configured');
+            $payload       = $request->getContent();
+            $requestData   = [];
 
-                return json_fail('Stripe webhook secret is not configured', [], 500);
+            if (! empty($webhookSecret)) {
+                $signature = $request->header('Stripe-Signature', '');
+                if (empty($signature)) {
+                    Log::warning('Stripe callback missing signature header');
+
+                    return json_fail('Invalid Stripe signature', [], 400);
+                }
+
+                $event       = Webhook::constructEvent($payload, $signature, $webhookSecret);
+                $requestData = $event->toArray();
+            } else {
+                Log::warning('Stripe webhook secret is not configured, skip signature verification');
+
+                $requestData = json_decode($payload, true);
+                if (! is_array($requestData)) {
+                    return json_fail('Invalid Stripe payload', [], 400);
+                }
             }
 
-            $payload   = $request->getContent();
-            $signature = $request->header('Stripe-Signature', '');
-            if (empty($signature)) {
-                Log::warning('Stripe callback missing signature header');
-
-                return json_fail('Invalid Stripe signature', [], 400);
-            }
-
-            $event       = Webhook::constructEvent($payload, $signature, $webhookSecret);
-            $requestData = $event->toArray();
             Log::info('Request data: ' . json_encode($requestData));
 
-            $type        = $requestData['type'] ?? '';
+            $type        = $requestData['type']                                       ?? '';
             $orderNumber = $requestData['data']['object']['metadata']['order_number'] ?? '';
             $order       = OrderRepo::getOrderByNumber($orderNumber);
 

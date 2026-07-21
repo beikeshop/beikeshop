@@ -20,6 +20,7 @@
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/index-blue.css') }}">
+  <link rel="shortcut icon" href="{{ image_origin(system_setting('base.favicon')) }}">
   @if (locale() != 'zh_cn')
     <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
   @endif
@@ -74,12 +75,12 @@
           ></component>
         </div>
 
-        <div class="modules-list">
+        <div class="modules-list" v-show="design.editType == 'add'">
           <div style="padding: 5px; color: #666;"><i class="el-icon-microphone"></i> {{ __('admin/builder.modules_instructions') }}</div>
 
-          <el-row v-show="design.editType == 'add'" id="module-list-wrap">
+          <el-row id="module-list-wrap">
             <el-col :span="12" v-for="(item, index) in source.modules" :key="index" class="iframe-modules-sortable-ghost">
-              <div @click="addModuleButtonClicked(item.code)" class="module-list" :data-code="item.code">
+              <div class="module-list" :data-code="item.code" :data-index="index">
                 <div class="module-info">
                   <div class="icon">
                     <i :style="item.style" class="iconfont" v-if="isIcon(item.icon)" v-html="item.icon"></i>
@@ -90,6 +91,46 @@
               </div>
             </el-col>
           </el-row>
+        </div>
+        <div class="layout-modules">
+          <div class="layout-module-header">
+            <div class="layout-module-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+              </svg>
+              {{ __('admin/builder.layout_modules') }}
+            </div>
+            <div class="layout-module-content">
+              <draggable class="menus-wrap d-block d-lg-flex mb-2 mb-lg-0" v-if="form.modules.length" :list="form.modules"
+                @end="endDrag"
+                :animation="330"
+                :handle="'.drag-icon'"
+              >
+                <div
+                  v-for="(item, index) in form.modules" :key="index"
+                  :class="{
+                    'item': true,
+                    'active': index == design.editingModuleIndex && design.editType == 'module'
+                  }"
+                  @click="editModuleButtonClicked(index)">
+                  <div class="drag-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#777" class="bi bi-grip-vertical" viewBox="0 0 16 16">
+                      <path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                    </svg>
+                  </div>
+                  <div>@{{ getModuleName(item.code) }}</div>
+                  <div class="delete" @click.stop="deleteModule(index)"><i class="el-icon-delete"></i></div>
+                </div>
+              </draggable>
+            </div>
+          </div>
+        </div>
+
+        <div class="effect-preview-wrap" v-if="design.modulePreviewImage">
+          <div class="title">{{ __('admin/builder.effect_preview') }}</div>
+          <div class="preview">
+            <img :src="design.modulePreviewImage" class="img-fluid">
+          </div>
         </div>
       </div>
       <div class="preview-iframe">
@@ -125,6 +166,7 @@
   <script>
     let register = null;
     var previewWindow = null;
+    let isDragging = false;
 
     let app = new Vue({
       el: '#app',
@@ -140,7 +182,9 @@
           sidebar: true,
           editingModuleIndex: null,
           ready: false,
+          showModuleList: false,
           moduleLoadCount: 0, // 第一次选择已配置模块时，不需要请求数据，
+          modulePreviewImage: '',
         },
 
         source: {
@@ -162,6 +206,38 @@
       },
 
       methods: {
+        getModuleName(code) {
+          const module = this.source.modules.find(e => e.code === code)
+          if (module) {
+            return module.name;
+          }
+          return '';
+        },
+
+        moduleHover(index) {
+          if (index === null) {
+            this.design.modulePreviewImage = '';
+            return;
+          }
+
+          this.design.modulePreviewImage = this.source.modules[index].image;
+        },
+
+        endDrag(e) {
+          const newIndex = e.newIndex;
+          const oldIndex = e.oldIndex;
+          const $container = $(previewWindow.document).find('#home-modules-box');
+          const $children = $container.children();
+          const $moved = $children.eq(oldIndex); // 被拖动的元素
+          if (newIndex > oldIndex) {
+            // 往后拖：插到 newIndex 后面
+            $moved.insertAfter($children.eq(newIndex));
+          } else {
+            // 往前拖：插到 newIndex 前面
+            $moved.insertBefore($children.eq(newIndex));
+          }
+        },
+
         moduleUpdated: bk.debounce(function(val) {
           if (!this.design.moduleLoadCount) return this.design.moduleLoadCount = 1;
           this.form.modules[this.design.editingModuleIndex].content = val;
@@ -169,6 +245,7 @@
 
           $http.post('design/builder/preview?design=1', data, {hload: true}).then((res) => {
             $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
+            $(previewWindow.document).find('#module-' + data.module_id).addClass('currently-editing');
             $(previewWindow.document).find('.tooltip').remove();
             const tooltipTriggerList = previewWindow.document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new previewWindow.bootstrap.Tooltip(tooltipTriggerEl))
@@ -187,6 +264,8 @@
           }
 
           $http.post('design/builder/preview?design=1', _data, {hload: true}).then((res) => {
+            $(previewWindow.document).find('.module-item').removeClass('currently-editing');
+
             if (moduleItemIndex === null) {
               $(previewWindow.document).find('.modules-box').append(res);
               this.form.modules.push(_data);
@@ -216,9 +295,30 @@
           if (this.design.editingModuleIndex == index) {
             return;
           }
+
+          $(previewWindow.document).find('.module-item').removeClass('currently-editing');
           this.design.moduleLoadCount = 0;
           this.design.editingModuleIndex = index;
           this.design.editType = 'module';
+
+          setTimeout(() => {
+            $(previewWindow.document).find('#module-' + this.form.modules[index].module_id).addClass('currently-editing');
+            $(previewWindow.document).find("html, body").animate({
+              scrollTop: $(previewWindow.document).find('#module-' + this.form.modules[index].module_id).offset().top - 96
+            }, 50);
+          }, 200)
+        },
+
+        deleteModule(index) {
+          this.$confirm('{{ __('common.confirm_delete') }}', {
+            title: "{{ __('common.text_hint') }}",
+            btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
+          }).then(_ => {
+            $(previewWindow.document).find('#module-' + this.form.modules[index].module_id).remove();
+            this.form.modules.splice(index, 1);
+            this.design.editType = 'add';
+            this.design.editingModuleIndex = null;
+          }).catch(_ => {});
         },
 
         saveButtonClicked() {
@@ -232,7 +332,12 @@
         },
 
         viewHome() {
-          location = '/';
+          this.$confirm('{{ __('common.exit_edit_tips') }}', {
+            title: "{{ __('common.text_hint') }}",
+            btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
+          }).then(_ => {
+            location = '/';
+          }).catch(_ => {});
         },
 
         isIcon(code) {
@@ -243,6 +348,7 @@
         showAllModuleButtonClicked() {
           this.design.editType = 'add';
           this.design.editingModuleIndex = 0;
+          $(previewWindow.document).find('.module-item').removeClass('currently-editing');
         },
 
         previewIframeInit() {
@@ -251,50 +357,11 @@
             app.design.ready = true;
 
             // 编辑模块
-            $(previewWindow.document).on('click', '.module-edit .edit', function(event) {
-              const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
+            $(previewWindow.document).on('click', '.modules-box > .module-item', function(event) {
+              const module_id = $(this).prop('id').replace('module-', '');
               const modules = app.form.modules;
               const editingModuleIndex = modules.findIndex(e => e.module_id == module_id);
               app.editModuleButtonClicked(editingModuleIndex);
-            });
-
-            // 删除模块
-            $(previewWindow.document).on('click', '.module-edit .delete', function(event) {
-              const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
-              const editingModuleIndex = app.form.modules.findIndex(e => e.module_id == module_id);
-              app.design.editType = 'add';
-              app.design.editingModuleIndex = 0;
-              $(previewWindow.document).find('.tooltip').remove();
-              $(this).parents('.module-item').remove();
-              app.form.modules.splice(editingModuleIndex, 1);
-            });
-
-            // 模块位置改变，点击.module-edit .up或者.down
-            $(previewWindow.document).on('click', '.module-edit .up, .module-edit .down', function(event) {
-              const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
-              const modules = app.form.modules;
-              const editingModuleIndex = modules.findIndex(e => e.module_id == module_id);
-              const up = $(this).hasClass('up');
-              app.design.editType = 'add';
-              app.design.editingModuleIndex = 0;
-              if (up) {
-                if (editingModuleIndex > 0) {
-                  const module = modules[editingModuleIndex];
-                  modules.splice(editingModuleIndex, 1);
-                  modules.splice(editingModuleIndex - 1, 0, module);
-                  // dom操作
-                  $(this).parents('.module-item').insertBefore($(this).parents('.module-item').prev());
-                }
-              } else {
-                if (editingModuleIndex < modules.length - 1) {
-                  const module = modules[editingModuleIndex];
-                  modules.splice(editingModuleIndex, 1);
-                  modules.splice(editingModuleIndex + 1, 0, module);
-                  // dom操作
-                  $(this).parents('.module-item').insertAfter($(this).parents('.module-item').next());
-                }
-              }
-              app.form.modules = modules;
             });
 
             new Sortable(document.getElementById('module-list-wrap'), {
@@ -306,7 +373,12 @@
               // ghostClass: 'iframe-modules-sortable-ghost',
               animation: 150,
               sort: false, // 设为false，禁止sort
+              onStart: function (evt) {
+                app.design.modulePreviewImage = ''
+                isDragging = true;
+              },
               onEnd: function (evt) {
+                isDragging = false;
                 if (evt.to.id != 'home-modules-box') {
                   return;
                 }
@@ -339,12 +411,27 @@
       },
 
       created () {
-        this.form = @json($design_settings ?: ['modules' => []])
+        this.form = @json($design_settings ?: ['modules' => []]);
       },
 
       mounted () {
         this.previewIframeInit();
       },
+    })
+
+    $(function () {
+      $(document).on('mouseenter', '.module-list', function() {
+        if (isDragging) return;
+        app.moduleHover($(this).data('index'));
+      });
+
+      $(document).on('mouseleave', '.module-list', function() {
+        app.moduleHover(null);
+      });
+
+      $(document).on('click', '.module-list', function() {
+        app.addModuleButtonClicked($(this).data('code'));
+      });
     })
   </script>
   @stack('footer-script')

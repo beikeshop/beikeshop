@@ -33,7 +33,7 @@ class Stub
      */
     public function __construct($path, array $replaces = [])
     {
-        $this->path = $path;
+        $this->path     = $path;
         $this->replaces = $replaces;
     }
 

@@ -3,6 +3,7 @@
 namespace Beike\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CategoryDescription extends Base
 {
@@ -17,4 +18,9 @@ class CategoryDescription extends Base
         'meta_description',
         'meta_keywords',
     ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

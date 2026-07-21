@@ -17,6 +17,11 @@
         <div class="card h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">{{ __('shop/account/rma_info.index') }}</h5>
+            @if($rma['status'] == 'approved' && !$rma['express_com'] && !$rma['express_no'])
+              <button id="mark-as-shipped-btn" class="btn btn-primary">
+                {{ __('shop/account/rma.mark_as_shipped') }}
+              </button>
+            @endif
           </div>
           <div class="card-body h-600">
             <div class="bg-light rounded-3 p-3 mb-4" style="background: #f6f9fc;">
@@ -88,8 +93,45 @@
                 <label class="form-label">{{ __('shop/account/rma_form.remark') }}</label>
                 <div>{{$rma['comment']}}</div>
               </div>
+
+              <div class="col-6 mb-4">
+                <label class="form-label">{{ __('shop/account/rma.express_company') }}</label>
+                <div>{{$rma['express_com_format']}}</div>
+              </div>
+
+              <div class="col-6 mb-4">
+                <label class="form-label">{{ __('shop/account/rma.express_number') }}</label>
+                <div>{{$rma['express_no_format']}}</div>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="shipping-modal" tabindex="-1" aria-labelledby="shipping-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="shipping-modal-label">{{ __('shop/account/rma.mark_as_shipped') }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="shipping-form">
+            <div class="form-group">
+              <label for="express_com">{{ __('shop/account/rma.express_company') }}</label>
+              <input type="text" class="form-control" id="express_com" name="express_com" required>
+            </div>
+            <div class="form-group">
+              <label for="express_no">{{ __('shop/account/rma.express_number') }}</label>
+              <input type="text" class="form-control" id="express_no" name="express_no" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('common.cancel') }}</button>
+          <button type="button" id="submit-shipping-btn" class="btn btn-primary">{{ __('common.confirm') }}</button>
         </div>
       </div>
     </div>
@@ -97,4 +139,32 @@
 @endsection
 
 @push('add-scripts')
+  <script>
+    $(document).ready(function() {
+      // 已发货按钮点击事件
+      $('#mark-as-shipped-btn').click(function() {
+        $('#shipping-modal').modal('show');
+
+        // 提交表单按钮点击事件
+        $('#submit-shipping-btn').click(function() {
+          const express_com = $('#express_com').val().trim();
+          const express_no = $('#express_no').val().trim();
+
+          if (!express_com || !express_no) {
+            layer.msg('{{ __('shop/account/rma.please_fill_required_fields') }}');
+            return;
+          }
+
+          $http.post('{{ shop_route('account.rma.mark_as_shipped', ['id' => $rma['id']]) }}', {express_com: express_com,express_no: express_no}).then(function(response) {
+            if (response.success) {
+              $('#shipping-modal').modal('hide');
+              location.reload();
+            } else {
+              layer.msg(response.message || '{{ __('shop/account/rma.update_failed') }}');
+            }
+          });
+        });
+      });
+    });
+  </script>
 @endpush

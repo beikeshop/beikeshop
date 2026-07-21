@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AttributeValueDescription.php
  *

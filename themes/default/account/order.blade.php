@@ -37,7 +37,7 @@
                             <div class="product-info">
                               <div class="img border d-flex justify-content-center align-items-center wh-60"><img src="{{ image_resize($product->image) }}" alt="{{ $product->name }}" class="img-fluid"></div>
                               <div class="name w-max-600">
-                                <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>
+                                <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id, 'variant' => $product->product_sku]) }}">{{ $product->name }}</a>
                                 <div class="quantity mt-1 text-secondary">x {{ $product->quantity }}</div>
                                 @hook('account.order.list.name.after', $product)
                               </div>
@@ -46,14 +46,25 @@
                           @if ($loop->first)
                             <td rowspan="{{ $loop->count }}">
                               {{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
-                            <td rowspan="{{ $loop->count }}">{{$order->status_format}}</td>
+                            <td rowspan="{{ $loop->count }}">
+                              @if ($order->status == 'unpaid')
+                              <span class="text-danger">{{ $order->status_format }}</span>
+                              @elseif ($order->status == 'cancelled')
+                              <span class="text-secondary">{{ $order->status_format }}</span>
+                              @else
+                              <span class="text-success">{{ $order->status_format }}</span>
+                              @endif
+                            </td>
                             <td rowspan="{{ $loop->count }}" class="text-end">
                               @hook('account.order.actions', $order)
 
                               <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}" class="btn btn-outline-secondary btn-sm mb-2 w-100">{{ __('shop/account/order.check') }}</a>
                               @if ($order->status == 'unpaid')
                                 <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn w-100 btn-primary btn-sm nowrap mb-2">{{ __('shop/account/order_info.to_pay') }}</a>
-                                <button class="btn btn-outline-danger btn-sm cancel-order w-100" data-number="{{ $order->number }}" type="button">{{ __('shop/account/order_info.cancel') }}</button>
+                              @endif
+
+                              @if ($order->status == 'unpaid' || $order->status == 'paid')
+                              <button class="btn btn-outline-danger btn-sm cancel-order w-100" data-number="{{ $order->number }}" type="button">{{ __('shop/account/order_info.cancel') }}</button>
                               @endif
 
                               @hook('account.order.actions_after', $order)
@@ -85,7 +96,15 @@
               <div class="card-body">
                 <div class="header-wrapper d-flex justify-content-between">
                   <div>{{ __('shop/account/order.order_number') }}：{{ $order->number }}</div>
-                  <div>{{ $order->status_format }}</div>
+                  <div>
+                    @if ($order->status == 'unpaid')
+                    <span class="text-danger">{{ $order->status_format }}</span>
+                    @elseif ($order->status == 'cancelled')
+                    <span class="text-secondary">{{ $order->status_format }}</span>
+                    @else
+                    <span class="text-success">{{ $order->status_format }}</span>
+                    @endif
+                  </div>
                 </div>
                 <div class="content-wrapper">
                   <div class="order-product-wrap mb-2" onclick="window.location.href='{{ shop_route('account.order.show', ['number' => $order->number]) }}'">

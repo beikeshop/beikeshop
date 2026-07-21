@@ -44,8 +44,7 @@ return [
             'mysql' => 'PDO_MYSQL',
             'pgsql' => 'PDO_PGSQL',
 
-
-        ]
+        ],
     ],
 
     /*

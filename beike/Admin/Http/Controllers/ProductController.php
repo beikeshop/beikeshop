@@ -77,7 +77,7 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
-        return $this->form($request, new Product());
+        return $this->form($request, new Product);
     }
 
     public function store(ProductRequest $request)
@@ -96,9 +96,11 @@ class ProductController extends Controller
             hook_action('admin.product.store.after', $data);
 
             DB::commit();
+
             return redirect()->to($actionType == 'stay' ? admin_route('products.create') : admin_route('products.index'))->with('success', trans('common.created_success'));
         } catch (\Exception $e) {
             DB::rollBack();
+
             return redirect(admin_route('products.create'))
                 ->withInput()
                 ->withErrors(['error' => $e->getMessage()]);
@@ -123,13 +125,13 @@ class ProductController extends Controller
                 'product'      => $product,
             ];
             hook_action('admin.product.update.after', $data);
-            $page = session('page', 1);
-
             DB::commit();
-            return redirect()->to($actionType == 'stay' ? admin_route('products.edit', [$product->id]) : admin_route('products.index', ['page' => $page]))->with('success', trans('common.updated_success'));
+
+            return redirect()->to(url()->previous())->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect(admin_route('products.edit', $product))->withErrors(['error' => $e->getMessage()]);
+
+            return redirect(url()->previous())->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -170,17 +172,17 @@ class ProductController extends Controller
         array_unshift($taxClasses, ['title' => trans('admin/builder.text_no'), 'id' => 0]);
 
         $data = [
-            'product'               => $product,
-            'descriptions'          => $descriptions ?? [],
-            'category_ids'          => $categoryIds  ?? [],
-            'product_attributes'    => ProductAttributeResource::collection($product->attributes),
-            'relations'             => ProductResource::collection($product->relations)->resource,
-            'languages'             => LanguageRepo::all(),
-            'tax_classes'           => $taxClasses,
+            'product'                   => $product,
+            'descriptions'              => $descriptions ?? [],
+            'category_ids'              => $categoryIds  ?? [],
+            'product_attributes'        => ProductAttributeResource::collection($product->attributes),
+            'relations'                 => ProductResource::collection($product->relations)->resource,
+            'languages'                 => LanguageRepo::all(),
+            'tax_classes'               => $taxClasses,
             'system_currency'           => system_setting('base.currency', 'USD'),
-            'system_weight'           => system_setting('base.weight', 'kg'),
-            'weight_classes'        => Weight::getWeightUnits(),
-            'source'                => [
+            'system_weight'             => system_setting('base.weight', 'kg'),
+            'weight_classes'            => Weight::getWeightUnits(),
+            'source'                    => [
                 'flatten_categories' => FlattenCategoryRepo::getCategoryList(),
                 'categories'         => CategoryRepo::flatten(locale(), false),
             ],

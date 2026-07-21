@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageRepo.php
  *
@@ -14,6 +15,7 @@ namespace Beike\Repositories;
 use Beike\Models\Page;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class PageRepo
 {
@@ -93,12 +95,23 @@ class PageRepo
         }
 
         $items = [];
-        $pages = self::getBuilder()->select('id')->get();
-        foreach ($pages as $brand) {
-            $items[$brand->id] = [
-                'id'   => $brand->id,
-                'name' => $brand->description->title ?? '',
-            ];
+        // 先获取筛选后的 page_id（复用 getBuilder 的过滤逻辑）
+        $pageIds = self::getBuilder()->select('pages.id')->pluck('id');
+
+        if ($pageIds->isNotEmpty()) {
+            // 只取 title 字段，避免 loading content 等大字段导致内存溢出
+            $titles = DB::table('page_descriptions')
+                ->whereIn('page_id', $pageIds)
+                ->where('locale', locale())
+                ->select(['page_id', 'title'])
+                ->get();
+
+            foreach ($titles as $row) {
+                $items[$row->page_id] = [
+                    'id'   => $row->page_id,
+                    'name' => $row->title ?? '',
+                ];
+            }
         }
 
         return self::$allPagesWithName = $items;

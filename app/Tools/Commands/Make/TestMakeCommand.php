@@ -2,11 +2,10 @@
 
 namespace App\Tools\Commands\Make;
 
-use App\Tools\Commands\Make\GeneratorCommand;
-use Illuminate\Support\Str;
 use App\Tools\Support\Config\GenerateConfigReader;
 use App\Tools\Support\Stub;
 use App\Tools\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -15,7 +14,9 @@ class TestMakeCommand extends GeneratorCommand
     use ModuleCommandTrait;
 
     protected $argumentName = 'name';
+
     protected $name = 'plugin:make-test';
+
     protected $description = 'Create a new test class for the specified plugin.';
 
     public function getDefaultNamespace(): string
@@ -60,7 +61,7 @@ class TestMakeCommand extends GeneratorCommand
     protected function getTemplateContents()
     {
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
-        $stub = '/unit-test.stub';
+        $stub   = '/unit-test.stub';
 
         if ($this->option('feature')) {
             $stub = '/feature-test.stub';

@@ -4,6 +4,7 @@ FROM php:8.2-apache
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    libcurl4-openssl-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
@@ -16,11 +17,13 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
         pdo_mysql \
+        curl \
         mbstring \
         exif \
         pcntl \
         bcmath \
         gd \
+        simplexml \
         zip \
         opcache \
     && apt-get clean && rm -rf /var/lib/apt/lists/*

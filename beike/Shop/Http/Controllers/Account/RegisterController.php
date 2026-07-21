@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LoginController.php
  *
@@ -21,7 +22,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('register');
+        return redirect(shop_route('login.index'));
     }
 
     public function store(RegisterRequest $request)

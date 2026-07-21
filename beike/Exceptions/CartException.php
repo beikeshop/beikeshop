@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CartException.php
  *
@@ -11,6 +12,4 @@
 
 namespace Beike\Exceptions;
 
-class CartException extends \Exception
-{
-}
+class CartException extends \Exception {}

@@ -18,12 +18,12 @@ class DesignHeaderController extends Controller
     public function index(Request $request): View
     {
         $headerSetting = system_setting('base.header_setting', []);
-        if (!isset($headerSetting['header_ads'])) {
+        if (! isset($headerSetting['header_ads'])) {
             $headerSetting['header_ads'] = [
-                'active' => 1,
+                'active'   => 1,
                 'bg_color' => '#333333',
-                'color' => '#ffffff',
-                'items' => [],
+                'color'    => '#ffffff',
+                'items'    => [],
             ];
         }
 

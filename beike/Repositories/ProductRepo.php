@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ProductRepo.php
  *
@@ -76,9 +77,9 @@ class ProductRepo
     public static function getProductsByIds($productIds): AnonymousResourceCollection
     {
         if (! $productIds) {
-            return ProductSimple::collection(new Collection());
+            return ProductSimple::collection(new Collection);
         }
-        $builder  = static::getBuilder(['product_ids' => $productIds])->whereHas('masterSku');
+        $builder  = static::getBuilder(['product_ids' => $productIds, 'active' => 1])->whereHas('masterSku');
         $products = $builder->with('inCurrentWishlist')->get();
 
         return ProductSimple::collection($products);
@@ -93,8 +94,8 @@ class ProductRepo
      */
     public static function getBuilder(array $filters = []): Builder
     {
-        $driver       = getDBDriver();
-        $likeOperator = self::getLikeOperator();
+        $driver = getDBDriver();
+        $likeOperator      = self::getLikeOperator();
 
         $builder = Product::query()->with(['description', 'skus', 'masterSku', 'attributes', 'brand']);
 
@@ -103,11 +104,11 @@ class ProductRepo
                 ->where('locale', locale());
         });
 
-        $builder->select(['products.*','pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
+        $builder->select(['products.*', 'pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
 
         if (isset($filters['category_id'])) {
             $builder->whereHas('categories', function ($query) use ($filters) {
-                if (!system_setting('category_products_with_subcategory', 1)) {
+                if (! system_setting('category_products_with_subcategory', 1)) {
                     if (is_array($filters['category_id'])) {
                         $query->whereIn('category_id', $filters['category_id']);
                     } else {
@@ -135,12 +136,10 @@ class ProductRepo
         $productIds = array_values(array_filter(array_map('intval', (array) ($filters['product_ids'] ?? [])), function ($id) {
             return $id > 0;
         }));
-
         if ($productIds) {
             $builder->whereIn('products.id', $productIds);
 
-            if ($driver == 'mysql')
-            {
+            if ($driver == 'mysql') {
                 $productIds = implode(',', $productIds);
                 $builder->orderByRaw("FIELD(products.id, {$productIds})");
             } else {
@@ -165,24 +164,31 @@ class ProductRepo
         }
 
         if (isset($filters['sku']) || isset($filters['model'])) {
-            $builder->whereHas('skus', function ($query) use ($filters, $likeOperator) {
+            $builder->whereHas('skus', function ($query) use ($filters) {
                 if (isset($filters['sku'])) {
-                    $query->where('sku', $likeOperator, "%{$filters['sku']}%");
+                    $query->where('sku', 'like', "%{$filters['sku']}%");
                 }
                 if (isset($filters['model'])) {
-                    $query->where('model', $likeOperator, "%{$filters['model']}%");
+                    $query->where('model', 'like', "%{$filters['model']}%");
                 }
             });
         }
 
         if (isset($filters['price']) && $filters['price']) {
-            $builder->whereHas('skus', function ($query) use ($driver, $filters) {
-                // price 格式:price=30-100
+            $rate = current_currency_rate();
+            $builder->whereHas('skus', function ($query) use ($driver, $filters, $rate) {
                 $prices = explode('-', $filters['price']);
-                if (! $prices[1]) {
-                    $query->where('price', '>', $prices[0] ?: 0)->where('is_default', $driver == 'mysql' ? 1 : true);
+
+                // 转换回基准货币
+                $min = isset($prices[0]) && is_numeric($prices[0]) ? floatval($prices[0]) / $rate : 0;
+                $max = isset($prices[1]) && is_numeric($prices[1]) ? floatval($prices[1]) / $rate : null;
+
+                $query->where('is_default', $driver == 'mysql' ? 1 : true);
+
+                if (is_null($max)) {
+                    $query->where('price', '>=', $min);
                 } else {
-                    $query->whereBetween('price', [$prices[0] ?? 0, $prices[1]])->where('is_default', $driver == 'mysql' ? 1 : true);
+                    $query->whereBetween('price', [$min, $max]);
                 }
             });
         }
@@ -222,7 +228,7 @@ class ProductRepo
         }
 
         if (isset($filters['active'])) {
-            $builder->where('active', (int) $filters['active']);
+            $builder->where('products.active', (int) $filters['active']);
         }
 
         // 回收站
@@ -230,13 +236,8 @@ class ProductRepo
             $builder->onlyTrashed();
         }
 
-        if (is_admin()) {
-            $sort  = $filters['sort']  ?? 'products.created_at';
-            $order = $filters['order'] ?? 'desc';
-        } else {
-            $sort  = $filters['sort']  ?? 'products.position';
-            $order = $filters['order'] ?? 'asc';
-        }
+        $sort  = $filters['sort']  ?? 'products.created_at';
+        $order = $filters['order'] ?? 'desc';
 
         if ($sort == 'product_skus.price') {
             $builder->join('product_skus', function ($query) {
@@ -251,6 +252,10 @@ class ProductRepo
 
         if (in_array($sort, ['products.created_at', 'products.updated_at', 'products.sales', 'pd.name', 'products.position', 'product_skus.price'])) {
             $builder->orderBy($sort, $order);
+
+            if ($sort === 'products.position') {
+                $builder->orderBy('products.id', 'desc');
+            }
         }
 
         return hook_filter('repo.product.builder', $builder);
@@ -328,16 +333,22 @@ class ProductRepo
 
     public static function getFilterPrice($data)
     {
-        $selectPrice = $data['price'] ?? '-';
-        // unset($data['price']);
-        $builder = static::getBuilder(['category_id' => $data['category_id']])->leftJoin('product_skus as ps', 'products.id', 'ps.product_id')
-            ->where('ps.is_default', 1);
-        $min = $builder->min('ps.price');
-        $max = $builder->max('ps.price');
+        $selectPrice    = $data['price'] ?? '-';
+        $currencyRate   = current_currency_rate();
+        $priceArr       = explode('-', $selectPrice);
 
-        $priceArr  = explode('-', $selectPrice);
-        $selectMin = $priceArr[0];
-        $selectMax = $priceArr[1];
+        $builder = static::getBuilder(['category_id' => $data['category_id']])
+            ->leftJoin('product_skus as ps', 'products.id', '=', 'ps.product_id')
+            ->where('ps.is_default', 1);
+
+        $minRaw = $builder->min('ps.price');
+        $maxRaw = $builder->max('ps.price');
+
+        $min = round($minRaw * $currencyRate, 2);
+        $max = round($maxRaw * $currencyRate, 2);
+
+        $selectMin = floatval($priceArr[0] ?? 0);
+        $selectMax = floatval($priceArr[1] ?? 0);
 
         return [
             'min'        => $min,
@@ -352,15 +363,15 @@ class ProductRepo
         return static::getBuilder($data)->paginate($data['per_page'] ?? 20);
     }
 
-    public static function autocomplete($name)
+    public static function autocomplete($name, $limit = 50)
     {
         $likeOperator = self::getLikeOperator();
-        $products = Product::query()->with('description')
+        $products = Product::query()->with('description')->where('active', 1)
             ->whereHas('description', function ($query) use ($name, $likeOperator) {
                 $query->where('name', $likeOperator, "%{$name}%");
-            })->orderByDesc('id')->limit(30)->get();
+            })->orderByDesc('created_at')->limit($limit)->get();
 
-        return \Beike\Admin\Http\Resources\ProductSimple::collection($products)->jsonSerialize();
+        return \Beike\Shop\Http\Resources\ProductSimple::collection($products)->jsonSerialize();
     }
 
     /**
@@ -400,13 +411,22 @@ class ProductRepo
             return self::$allProductsWithName;
         }
 
-        $items    = [];
-        $products = static::getBuilder()->select('id')->get();
-        foreach ($products as $product) {
-            $items[$product->id] = [
-                'id'   => $product->id,
-                'name' => $product->description->name ?? '',
-            ];
+        $items     = [];
+        $productIds = static::getBuilder()->select('products.id')->pluck('id');
+
+        if ($productIds->isNotEmpty()) {
+            $names = DB::table('product_descriptions')
+                ->whereIn('product_id', $productIds)
+                ->where('locale', locale())
+                ->select(['product_id', 'name'])
+                ->get();
+
+            foreach ($names as $row) {
+                $items[$row->product_id] = [
+                    'id'   => $row->product_id,
+                    'name' => $row->name ?? '',
+                ];
+            }
         }
 
         return self::$allProductsWithName = $items;
@@ -422,8 +442,8 @@ class ProductRepo
 
         return $products->map(function ($product) {
             return [
-                'id'   => $product->id,
-                'name' => $product->description->name ?? '',
+                'id'    => $product->id,
+                'name'  => $product->description->name ?? '',
                 'image' => image_resize($product->image, 100, 100),
             ];
         })->toArray();
@@ -433,21 +453,28 @@ class ProductRepo
      * 通过商品ID获取商品列表
      * @return array|Builder[]|Collection
      */
-    public static function getListByProductIds($productIds)
+    public static function getListByProductIds(array $productIds)
     {
         if (empty($productIds)) {
-            return [];
+            return collect();
         }
 
         $productIds = array_map('intval', $productIds);
+        $driver     = getDBDriver();
 
-        $products = Product::query()
+        $query = Product::query()
             ->with(['description'])
-            ->whereIn('id', $productIds)
-            ->orderByRaw('FIELD(id, ' . implode(',', $productIds) . ')')
-            ->get();
+            ->whereIn('id', $productIds);
 
-        return $products;
+        if ($driver === 'mysql') {
+            $idList = implode(',', $productIds);
+            $query->orderByRaw("FIELD(id, {$idList})");
+        } else {
+            $idList = implode(',', $productIds);
+            $query->orderByRaw("array_position(ARRAY[{$idList}]::bigint[], id)");
+        }
+
+        return $query->get();
     }
 
     public static function DeleteByIds($ids)
@@ -487,6 +514,8 @@ class ProductRepo
             'customer_id' => current_customer()->id ?? 0,
             'ip'          => request()->getClientIp(),
             'session_id'  => get_session_id(),
+            'referer'     => request()->header('referer'),
+            'user_agent'  => request()->header('user-agent'),
         ]);
     }
 }

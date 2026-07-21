@@ -3,7 +3,7 @@
 /**
  * @copyright     2024 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        guangda <service@guangda.work>
+ * @author        guangda <service@guangda.work>
  * @Date          2024-03-13 15:31:31
  * @LastEditTime  2024-03-13 15:31:57
  */
@@ -36,6 +36,10 @@ body.help-page {
     margin-right: -1rem;
     background-image: linear-gradient(180deg, #fff7f7 0, #fff 78%);
     padding: 40px 30px;
+    html[data-bs-theme="dark"] & {
+      background-color: transparent;
+      background-image: linear-gradient(180deg, #212529 0, #212529 78%);
+    }
 
     @media (max-width: 768px) {
       padding: 20px 0;
@@ -50,6 +54,12 @@ body.help-page {
       transition: all 0.3s;
       background-image: linear-gradient(180deg, #fff 0, #fffcfa 100%);
       box-shadow: 0 10px 30px #f2eeed;
+      html[data-bs-theme="dark"] & {
+        background-color: #010409;
+        border-color: #3d444d;
+        background-image: none;
+        box-shadow: none;
+      }
 
       &:hover {
         border-color: $primary;
@@ -65,6 +75,9 @@ body.help-page {
         border-radius: 8px;
         line-height: 100px;
         position: relative;
+        html[data-bs-theme="dark"] & {
+          color: $primary;
+        }
 
         span {
           position: relative;
@@ -82,6 +95,11 @@ body.help-page {
           background: #edf1f9;
           transform: rotate(45deg);
           background-image: linear-gradient(-45deg, #ffe2d4 0, #fff 78%);
+
+          html[data-bs-theme="dark"] & {
+            background: transparent;
+            background-image: linear-gradient(-45deg, #49413c 0, #000000 68%);
+          }
         }
 
         i {
@@ -110,6 +128,10 @@ body.help-page {
     padding: 40px 30px;
     margin-left: -1rem;
     margin-right: -1rem;
+
+    html[data-bs-theme="dark"] & {
+      background-image: none;
+    }
     @media (max-width: 768px) {
       padding: 20px 0;
     }
@@ -125,6 +147,10 @@ body.help-page {
       margin-bottom: 24px;
       background-color: #fff;
       transition: all 0.3s;
+      html[data-bs-theme="dark"] & {
+        background-color: #010409;
+        border-color: #3d444d;
+      }
 
       &:hover {
         box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);

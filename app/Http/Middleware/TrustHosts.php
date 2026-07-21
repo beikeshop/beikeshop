@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Middleware\TrustHosts as Middleware;
+use Illuminate\Http\Request;
 
 class TrustHosts extends Middleware
 {
@@ -11,8 +11,8 @@ class TrustHosts extends Middleware
      * Handle the incoming request.
      * 当 trust_hosts_enabled 为 false 时跳过 Host 校验。
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      * @return \Illuminate\Http\Response
      */
     public function handle(Request $request, $next)
@@ -48,7 +48,7 @@ class TrustHosts extends Middleware
         // 支持常规域名和多级顶级域名（如 .co.uk, .com.au 等）
         // 例如：www.example.com → example.com
         //      api.shop.example.co.uk → example.co.uk
-        $rootDomain = get_domain($trustedHost);
+        $rootDomain        = get_domain($trustedHost);
         $escapedRootDomain = preg_quote($rootDomain, '/');
 
         return [

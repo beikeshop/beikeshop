@@ -6,7 +6,7 @@
 <div class="card">
   <div class="card-body h-min-600">
     @hook('admin.multi_filter.index.content.before')
-    <form action="{{ admin_route('multi_filter.store') }}" class="needs-validation" novalidate method="POST" id="app">
+    <form action="{{ admin_route('multi_filter.store') }}" class="needs-validation" novalidate method="POST" id="form-app">
       @csrf
       @if (session('success'))
         <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
@@ -56,7 +56,7 @@
 @push('footer')
   <script>
     let app = new Vue({
-      el: '#app',
+      el: '#form-app',
       data: {
         multi_filter: {
           keyword: '',

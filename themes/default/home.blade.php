@@ -15,3 +15,13 @@
 </div>
 
 @endsection
+
+@if ($design)
+@push('add-scripts')
+<script>
+  document.addEventListener('click', function(event) {
+    event.preventDefault();
+  });
+</script>
+@endpush
+@endif

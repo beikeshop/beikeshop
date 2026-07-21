@@ -6,7 +6,7 @@ This file provides standardized installation instructions for AI Agents to autom
 
 ## System Architecture
 
-BeikeShop is a modern e-commerce platform built on Laravel 10, featuring a modular architecture with clear separation of concerns.
+BeikeShop is a modern e-commerce platform built on Laravel 12, featuring a modular architecture with clear separation of concerns.
 
 ### Core Architecture
 
@@ -58,7 +58,8 @@ beikeshop/
 ├── database/            # Migrations, seeds, factories
 ├── plugins/             # Third-party plugins directory
 ├── public/              # Web root (index.php, assets)
-├── resources/           # Views, assets, data, and language files
+├── lang/                # Multi-language files for admin and shop
+├── resources/           # Views, frontend assets, and data
 ├── routes/              # Route definitions
 ├── storage/             # Logs, cache, uploads
 ├── tests/               # PHPUnit tests
@@ -89,6 +90,15 @@ The `beike/` directory contains all BeikeShop-specific business logic:
 | `Notifications/` | Notification classes |
 | `Plugin/` | Plugin system core (loader, hooks, lifecycle) |
 
+### Language Structure (`lang/`)
+
+Language files are stored at the top-level `lang/` directory:
+
+| Directory | Description |
+|-----------|-------------|
+| `{locale}/admin/` | Admin panel translations |
+| `{locale}/shop/` | Shop frontend translations |
+
 ### Resources Structure (`resources/`)
 
 Application resources are organized by runtime area:
@@ -99,7 +109,6 @@ Application resources are organized by runtime area:
 | `beike/shop/` | Shop frontend assets and default theme resources |
 | `data/` | Seed and static data files |
 | `js/` | Shared frontend JavaScript entry points |
-| `lang/` | Multi-language files for admin and shop |
 | `views/` | Laravel views and vendor-published views |
 
 ### Theme Structure (`themes/default/`)
@@ -193,11 +202,11 @@ php artisan plugin:model-show
 | Component | Minimum Version | Recommended | Notes |
 |-----------|----------------|-------------|-------|
 | **PHP** | 8.2 | 8.2+ | Required extensions: pdo_mysql, mbstring, gd, zip, bcmath, exif, pcntl, opcache |
-| **MySQL** | 8.0 | 8.0+ | Also supports PostgreSQL 14+ |
+| **MySQL** | 5.7 | 8.0+ | Also supports PostgreSQL 14+ |
 | **Nginx** | 1.20 | 1.24+ | Required modules: rewrite, fastcgi |
 | **Apache** | 2.4 | 2.4+ | Required modules: mod_rewrite, mod_headers |
 | **Composer** | 2.0 | 2.5+ | PHP dependency manager |
-| **Node.js** | 16 | 18+ | Only needed for theme development |
+| **Node.js** | 22 | 22+ | Only needed for theme development |
 | **Docker** | 20.10 | 24+ | Only needed for Docker deployment |
 | **Docker Compose** | 2.0 | 2.20+ | V2 syntax (`docker compose`) |
 
@@ -250,18 +259,18 @@ DB_PASSWORD=*** \
 
 ```bash
 # Clone repository
-git clone https://github.com/beikeshop/beikeshop-installer.git
-cd beikeshop-installer
+git clone https://github.com/beikeshop/beikeshop.git
+cd beikeshop
 
 # Configure environment
 cp .env.example .env
 vim .env
 
 # Start services (Nginx + PHP by default)
-docker compose up -d
+docker compose --profile nginx up -d --build
 
 # Execute installation
-docker compose exec web php artisan beikeshop:install --force
+docker compose exec nginx php artisan beikeshop:install --force
 
 # Or use Apache instead of Nginx
 docker compose --profile apache up -d
@@ -291,7 +300,7 @@ docker compose down
 docker compose --profile apache up -d
 
 # Switch back to Nginx
-docker compose up -d
+docker compose --profile nginx up -d
 ```
 
 ## Environment Detection Logic

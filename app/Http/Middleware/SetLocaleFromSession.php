@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 class SetLocaleFromSession
@@ -19,9 +19,9 @@ class SetLocaleFromSession
     public function handle(Request $request, Closure $next): mixed
     {
         $enabledLanguages = languages()->toArray();
-        $rawPath = $this->getRawPath($request);
-        $locale = $this->resolveLocale($request, $enabledLanguages, $rawPath);
-        $defaultLocale = system_setting('base.locale');
+        $rawPath          = $this->getRawPath($request);
+        $locale           = $this->resolveLocale($request, $enabledLanguages, $rawPath);
+        $defaultLocale    = system_setting('base.locale');
 
         // 设置语言
         App::setLocale($locale);
@@ -40,10 +40,10 @@ class SetLocaleFromSession
      * 检查并在需要时重定向到带有语言代码的URL
      *
      * @param Request $request
-     * @param string $rawPath
-     * @param string $locale
-     * @param string $defaultLocale
-     * @param array $enabledLanguages
+     * @param string  $rawPath
+     * @param string  $locale
+     * @param string  $defaultLocale
+     * @param array   $enabledLanguages
      */
     private function redirectIfNeeded(
         Request $request,
@@ -51,8 +51,7 @@ class SetLocaleFromSession
         string $locale,
         string $defaultLocale,
         array $enabledLanguages
-    ): ?RedirectResponse
-    {
+    ): ?RedirectResponse {
         $segments = array_values(array_filter(explode('/', trim($rawPath, '/'))));
 
         // 语言切换路由自身不做重写，避免干扰切换逻辑
@@ -60,15 +59,15 @@ class SetLocaleFromSession
             return null;
         }
 
-        $knownLanguages = config('app.langs', $enabledLanguages);
-        $urlLocale = $segments[0] ?? null;
+        $knownLanguages  = config('app.langs', $enabledLanguages);
+        $urlLocale       = $segments[0] ?? null;
         $hasLocalePrefix = $urlLocale && in_array($urlLocale, $knownLanguages, true);
 
         $targetPath = null;
 
         // URL包含语言前缀时：默认语言或未启用语言都应移除前缀
         if ($hasLocalePrefix) {
-            $shouldRemovePrefix = ($urlLocale === $defaultLocale) || !in_array($urlLocale, $enabledLanguages, true);
+            $shouldRemovePrefix = ($urlLocale === $defaultLocale) || ! in_array($urlLocale, $enabledLanguages, true);
             if ($shouldRemovePrefix) {
                 array_shift($segments);
                 $targetPath = '/' . implode('/', $segments);
@@ -83,7 +82,7 @@ class SetLocaleFromSession
         }
 
         $targetPath = $targetPath === '' ? '/' : $targetPath;
-        if (!str_starts_with($targetPath, '/')) {
+        if (! str_starts_with($targetPath, '/')) {
             $targetPath = '/' . $targetPath;
         }
 
@@ -101,7 +100,7 @@ class SetLocaleFromSession
 
     private function getRawPath(Request $request): string
     {
-        $uri = $_SERVER['REQUEST_URI'] ?? $request->server('REQUEST_URI', '/');
+        $uri  = $_SERVER['REQUEST_URI'] ?? $request->server('REQUEST_URI', '/');
         $path = parse_url($uri, PHP_URL_PATH);
 
         return $path ?: '/';
@@ -115,7 +114,7 @@ class SetLocaleFromSession
         }
 
         $segments = array_values(array_filter(explode('/', trim($rawPath, '/'))));
-        if (!empty($segments) && in_array($segments[0], $enabledLanguages, true)) {
+        if (! empty($segments) && in_array($segments[0], $enabledLanguages, true)) {
             return $segments[0];
         }
 

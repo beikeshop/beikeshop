@@ -2,11 +2,9 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Repositories\SettingRepo;
-use Illuminate\Http\JsonResponse;
+use Beike\Admin\Services\UniPushService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Beike\Admin\Services\UniPushService;
 
 class AppPushController extends Controller
 {

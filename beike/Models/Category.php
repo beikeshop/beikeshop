@@ -61,4 +61,17 @@ class Category extends Base
 
         return $filters['url'] ?? '';
     }
+
+    // 获取所有子孙分类 ID（避免递归选择自己作为父级）
+    public function getDescendantIds(): array
+    {
+        $ids = [];
+
+        foreach ($this->children as $child) {
+            $ids[] = $child->id;
+            $ids   = array_merge($ids, $child->getDescendantIds());
+        }
+
+        return $ids;
+    }
 }

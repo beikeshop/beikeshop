@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('page_categories', function (Blueprint $table) {
             $table->comment('文章分类');
             $table->id()->comment('ID');
-            $table->integer('parent_id')->comment('父级分类')->comment('parent_id');
+            $table->integer('parent_id')->comment('父级分类');
             $table->integer('position')->comment('排序');
             $table->boolean('active')->comment('是否启用');
             $table->timestamp('created_at')->nullable()->comment('创建时间');

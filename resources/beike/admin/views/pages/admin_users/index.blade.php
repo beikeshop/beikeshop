@@ -2,18 +2,13 @@
 
 @section('title', __('admin/common.admin_user'))
 
-@section('content')
-  <ul class="nav-bordered nav nav-tabs mb-3">
-    @hook('admin_user.index.tabs.before')
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{{ admin_route('admin_users.index') }}">{{ __('admin/common.admin_user') }}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{ admin_route('admin_roles.index') }}">{{ __('admin/common.admin_role') }}</a>
-    </li>
-    @hook('admin_user.index.tabs.after')
-  </ul>
+@section('page-title-back', true)
 
+@section('page-title-right')
+<a class="btn btn-primary" href="{{ admin_route('admin_roles.index') }}"><i class="bi bi-box-arrow-up-right"></i> {{ __('admin/common.admin_role') }}</a>
+@endsection
+
+@section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       @hook('admin_user.index.content.before')
@@ -23,7 +18,7 @@
         @hook('admin_user.index.content.top_buttons.after')
       </div>
       <div class="table-push">
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
@@ -37,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="tax, index in admin_users" :key="index">
+            <tr v-for="tax, index in admin_users" :key="index" class="cursor-pointer" @click="checkedCreate('edit', index)">
               <td>@{{ tax.id }}</td>
               <td>@{{ tax.name }}</td>
               <td>@{{ tax.email }}</td>
@@ -51,7 +46,6 @@
               @hook('admin_user.index.table.body')
               <td class="text-end">
                 @hook('admin_user.index.table.body.actions.before')
-                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
                 @hook('admin_user.index.table.body.actions.after')
               </td>
@@ -92,9 +86,14 @@
         </el-form-item>
 
         <el-form-item label="{{ __('admin/admin_roles.role') }}" prop="roles">
-          <el-checkbox-group v-model="dialog.form.roles">
-            <el-checkbox v-for="roles, index in source.roles" :label="roles.id">@{{roles.name}}</el-checkbox>
-          </el-checkbox-group>
+          <div v-if="source.roles && source.roles.length > 0">
+            <el-checkbox-group v-model="dialog.form.roles">
+              <el-checkbox v-for="role, index in source.roles" :label="role.id" :key="index">@{{role.name}}</el-checkbox>
+            </el-checkbox-group>
+          </div>
+          <div v-else>
+            <a class="btn btn-primary" href="{{ admin_route('admin_roles.index') }}"><i class="bi bi-box-arrow-up-right"></i> {{ __('admin/common.admin_role') }}</a>
+          </div>
         </el-form-item>
 
         @hook('admin_user.index.dialog.after')
@@ -156,6 +155,12 @@
           this.dialog.type = type
           this.dialog.index = index
 
+          $http.get('{{ admin_route('admin_roles.list') }}', null, {hload: true}).then((res) => {
+            if (res.data.length) {
+              this.source.roles = res.data;
+            }
+          })
+
           if (type == 'edit') {
             let tax = this.admin_users[index];
 
@@ -194,6 +199,7 @@
         },
 
         deleteCustomer(id, index) {
+          event.stopPropagation();
           const self = this;
           this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',

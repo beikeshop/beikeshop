@@ -52,11 +52,10 @@ class ModelShowCommand extends ShowModelCommand
             config('plugins.paths.generator.model.path') . DIRECTORY_SEPARATOR .
             "$model.php");
 
-        if (!count($modelPath)) {
+        if (! count($modelPath)) {
             return $model;
         }
 
         return str_replace(['/', '.php'], ['\\', ''], $modelPath[0]);
     }
-
 }

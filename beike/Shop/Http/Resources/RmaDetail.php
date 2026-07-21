@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BrandDetail.php
  *
@@ -23,25 +24,34 @@ class RmaDetail extends JsonResource
             $reason = '';
         }
 
+        $images = $this->images;
+        $images = array_map(function ($image) {
+            return image_origin($image);
+        }, $images);
+
         return [
-            'id'               => $this->id,
-            'order_id'         => $this->order_id,
-            'order_product_id' => $this->order_product_id,
-            'quantity'         => $this->quantity,
-            'opened'           => $this->opened,
-            'type'             => $this->type,
-            'type_format'      => $this->type_format,
-            'comment'          => $this->comment,
-            'status'           => $this->status,
-            'status_format'    => $this->status_format,
-            'created_at'       => time_format($this->created_at),
-            'email'            => $this->email,
-            'telephone'        => $this->telephone,
-            'product_name'     => $this->product_name,
-            'name'             => $this->name,
-            'sku'              => $this->sku,
-            'images'           => $this->images,
-            'reason'           => $reason,
+            'id'                      => $this->id,
+            'order_id'                => $this->order_id,
+            'order_product_id'        => $this->order_product_id,
+            'quantity'                => $this->quantity,
+            'opened'                  => $this->opened,
+            'type'                    => $this->type,
+            'type_format'             => $this->type_format,
+            'comment'                 => $this->comment,
+            'status'                  => $this->status,
+            'status_format'           => $this->status_format,
+            'express_com'             => $this->express_com,
+            'express_com_format'      => $this->express_com_format,
+            'express_no'              => $this->express_no,
+            'express_no_format'       => $this->express_no_format,
+            'created_at'              => time_format($this->created_at),
+            'email'                   => $this->email,
+            'telephone'               => $this->telephone,
+            'product_name'            => $this->product_name,
+            'name'                    => $this->name,
+            'sku'                     => $this->sku,
+            'images'                  => $images,
+            'reason'                  => $reason,
         ];
     }
 }

@@ -10,8 +10,10 @@ use Beike\Plugin\Plugin;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Services\CurrencyService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +45,7 @@ function system_setting($key, $default = null)
     $data = [
         'key'     => $key,
         'default' => $default,
-        'setting' => setting("system.{$key}", $default)
+        'setting' => setting("system.{$key}", $default),
     ];
     $data = hook_filter('helpers.system_setting', $data);
 
@@ -123,25 +125,25 @@ function admin_route($route, $params = []): string
 function shop_route($route, $params = [], $isLang = true): string
 {
     $langs = array_map(function ($item) {
-        return '/lang/'.$item;
+        return '/lang/' . $item;
     }, config('app.langs'));
 
-    $uri = route('shop.' . $route, $params);
+    $uri  = route('shop.' . $route, $params);
     $host = get_base_url($uri);
 
     $lang = session()->get('locale') ?? system_setting('base.locale');
 
     $uri = str_replace($host, '', $uri);
 
-    if (in_array($uri, $langs) || ($lang === system_setting('base.locale')) || !$isLang)
-    {
+    if (in_array($uri, $langs) || ($lang === system_setting('base.locale')) || ! $isLang) {
         return $host . $uri;
     }
 
     return $host . '/' . $lang . $uri;
 }
 
-function get_base_url($url) {
+function get_base_url($url)
+{
     $parsed = parse_url($url);
 
     // 组合协议部分（如 "https://"）
@@ -245,6 +247,7 @@ function current_route(): string
     if (Route::getCurrentRoute()) {
         return Route::getCurrentRoute()->getName();
     }
+
     return '';
 }
 
@@ -334,7 +337,7 @@ function locale(): string
         $locales    = collect(locales())->pluck('code');
         $userLocale = current_user()->locale ?? 'en';
 
-        return ($locales->contains($userLocale)) ? $userLocale : 'en';
+        return ($locales->contains($userLocale)) ? $userLocale : system_setting('base.locale', 'en');
     }
 
     $registerLocale = registry('locale');
@@ -353,7 +356,7 @@ function locale(): string
 function admin_locale(): string
 {
     if (is_admin()) {
-        return current_user()->locale;
+        return current_user()->locale ?? locale();
     }
 
     return locale();
@@ -480,8 +483,14 @@ function plugin_origin($pluginCode, $image)
  */
 function image_resize($image, int $width = 100, int $height = 100)
 {
+    $image = $image['src'] ?? $image;
+
     if (Str::startsWith($image, 'http')) {
         return $image;
+    }
+
+    if (str_contains($image, '.gif') || str_contains($image, '.webp')) {
+        return image_origin($image);
     }
 
     return (new \Beike\Services\ImageService($image))->resize($width, $height);
@@ -493,6 +502,8 @@ function image_resize($image, int $width = 100, int $height = 100)
  */
 function image_origin($image)
 {
+    $image = $image['src'] ?? $image;
+
     if (Str::startsWith($image, 'http')) {
         return $image;
     }
@@ -531,7 +542,7 @@ function admin_languages(): array
 {
     $packages       = language_packages();
     $adminLanguages = collect($packages)->filter(function ($package) {
-        return file_exists(resource_path("lang/{$package}/admin"));
+        return file_exists(base_path("lang/{$package}/admin"));
     })->toArray();
 
     return array_values($adminLanguages);
@@ -543,7 +554,7 @@ function admin_languages(): array
  */
 function language_packages(): array
 {
-    $languageDir = resource_path('lang');
+    $languageDir = base_path('lang');
 
     return array_values(array_diff(scandir($languageDir), ['..', '.', '.DS_Store']));
 }
@@ -568,7 +579,7 @@ function current_currency_code(): string
         return $registerLocale;
     }
 
-    return Session::get('currency') ?? system_setting('base.currency');
+    return Session::get('currency') ?? system_setting('base.currency', '');
 }
 
 /**
@@ -603,7 +614,6 @@ function quantity_format($quantity)
     }
 
     return $quantity;
-
 }
 
 /**
@@ -782,7 +792,7 @@ function installed(): bool
  */
 function is_mobile(): bool
 {
-    return (new \Jenssegers\Agent\Agent())->isMobile();
+    return (new \Jenssegers\Agent\Agent)->isMobile();
 }
 
 /**
@@ -860,11 +870,11 @@ function clean_domain($domain): string
  * @return bool
  * @throws Exception
  */
-function check_license() : bool
+function check_license(): bool
 {
-    $configLicenceCode = system_setting('base.license_code');
+    $configLicenceCode      = system_setting('base.license_code');
     $configLicenseExpiredAt = system_setting('base.license_expired_at');
-    $appDomain         = clean_domain(request()->getHost());
+    $appDomain              = clean_domain(request()->getHost());
 
     try {
         $domain         = new \Utopia\Domains\Domain($appDomain);
@@ -885,7 +895,7 @@ function check_license() : bool
     if (! empty($configLicenceCode)) {
         if (! empty($configLicenseExpiredAt)) {
             $configLicenseDate = date('Y-m-d', strtotime($configLicenseExpiredAt));
-            $todayDate = date('Y-m-d');
+            $todayDate         = date('Y-m-d');
 
             return $configLicenseDate >= $todayDate;
         }
@@ -964,9 +974,9 @@ function has_translator(): bool
 function beike_api_url(): string
 {
     //    $adminLocale = admin_locale();
-//    if ($adminLocale == 'zh_cn') {
-//        return str_replace('beikeshop.com', 'beikeshop.cn', $apiUrl);
-//    }
+    //    if ($adminLocale == 'zh_cn') {
+    //        return str_replace('beikeshop.com', 'beikeshop.cn', $apiUrl);
+    //    }
 
     return config('beike.api_url');
 }
@@ -976,7 +986,7 @@ function beike_api_url(): string
  */
 function beike_url(): string
 {
-    $url      = config('beike.official_website');
+    $url         = config('beike.official_website');
     $adminLocale = admin_locale();
     if ($adminLocale == 'zh_cn') {
         return str_replace('beikeshop.com', 'beikeshop.cn', $url);
@@ -992,9 +1002,9 @@ function beike_url(): string
  */
 function get_domain_compare_info(): array
 {
-    $request = request();
-    $appUrl = (string) env('APP_URL');
-    $envDomainRaw = clean_domain($appUrl);
+    $request       = request();
+    $appUrl        = (string) env('APP_URL');
+    $envDomainRaw  = clean_domain($appUrl);
     $envRootDomain = get_domain($envDomainRaw);
 
     $host = strtolower((string) $request->getHost());
@@ -1007,16 +1017,16 @@ function get_domain_compare_info(): array
     }
 
     $requestRootDomain = get_domain($requestDomainRaw);
-    $isConfigured = $envDomainRaw !== '' && $envDomainRaw !== 'localhost';
-    $isSameDomain = $isConfigured && $envRootDomain === $requestRootDomain;
+    $isConfigured      = $envDomainRaw !== '' && $envDomainRaw !== 'localhost';
+    $isSameDomain      = $isConfigured        && $envRootDomain === $requestRootDomain;
 
     return [
-        'same_domain'         => $isSameDomain,
-        'app_url'             => $appUrl,
-        'app_url_domain'      => $envDomainRaw,
-        'app_url_root_domain' => $envRootDomain,
-        'current_domain'      => $requestDomainRaw,
-        'current_root_domain' => $requestRootDomain,
+        'same_domain'           => $isSameDomain,
+        'app_url'               => $appUrl,
+        'app_url_domain'        => $envDomainRaw,
+        'app_url_root_domain'   => $envRootDomain,
+        'current_domain'        => $requestDomainRaw,
+        'current_root_domain'   => $requestRootDomain,
         'is_app_url_configured' => $isConfigured,
     ];
 }
@@ -1047,7 +1057,7 @@ function is_miniapp(): bool
 function get_domain($domain = null)
 {
     // 如果没有传入域名参数，则使用当前浏览器的域名
-    if (!$domain) {
+    if (! $domain) {
         // 获取主机名并移除可能的端口号
         $domain = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST) ?: $_SERVER['HTTP_HOST'];
     } else {
@@ -1059,7 +1069,7 @@ function get_domain($domain = null)
     $domain = preg_replace('/:\d+$/', '', $domain);
 
     // 常见的多级顶级域名列表
-    $known_tlds = array('co.uk', 'gov.uk', 'ac.uk', 'org.uk', 'com.au', 'net.au');
+    $known_tlds = ['co.uk', 'gov.uk', 'ac.uk', 'org.uk', 'com.au', 'net.au'];
 
     // 提取顶级域名部分
     $parts = explode('.', $domain);
@@ -1067,7 +1077,7 @@ function get_domain($domain = null)
 
     if ($count > 2) {
         // 处理类似 'example.co.uk' 或 'sub.example.co.uk' 的域名
-        $last_two = implode('.', array_slice($parts, -2));
+        $last_two   = implode('.', array_slice($parts, -2));
         $last_three = implode('.', array_slice($parts, -3));
 
         if (in_array($last_two, $known_tlds)) {
@@ -1083,12 +1093,12 @@ function get_domain($domain = null)
 
 function getDBDriver()
 {
-    return config('database.connections.' . config('database.default') . '.driver');  //如: mysql, sqlite, postgresql, sqlsrv
+    return config('database.connections.' . config('database.default') . '.driver');  // 如: mysql, sqlite, postgresql, sqlsrv
 }
 
 function is_associative_array($array): bool
 {
-    if (!is_array($array)) {
+    if (! is_array($array)) {
         return false;
     }
 
@@ -1097,10 +1107,9 @@ function is_associative_array($array): bool
     return array_keys($keys) !== $keys;
 }
 
-
 function isTwoDimensionalArray($array): bool
 {
-    if (!is_array($array)) {
+    if (! is_array($array)) {
         return false;
     }
 
@@ -1112,10 +1121,9 @@ function isTwoDimensionalArray($array): bool
 function replace_url($url): string
 {
     $urlInfo = parse_url($url);
-    $lang = (locale() === system_setting('base.locale')) ? null : session()->get('locale');
-    $path = $urlInfo['path'];
+    $lang    = (locale() === system_setting('base.locale')) ? null : session()->get('locale');
+    $path    = $urlInfo['path'];
     if ($lang) {
-
         $path = '/' . $lang . $urlInfo['path'];
     }
 
@@ -1130,11 +1138,115 @@ function replace_url($url): string
  */
 function calculate_height_by_ratio($width): int
 {
-    $originWidth = system_setting('base.product_image_origin_width', '800');
+    $originWidth  = system_setting('base.product_image_origin_width', '800');
     $originHeight = system_setting('base.product_image_origin_height', '800');
-    $ratio = $originHeight / $originWidth;
+    $ratio        = $originHeight / $originWidth;
 
     return round($width * $ratio);
+}
+
+if (! function_exists('image_path')) {
+    /**
+     * Get the path to the public/image folder.
+     *
+     * @param string $path
+     * @return string
+     * @throws BindingResolutionException
+     */
+    function image_path(string $path = ''): string
+    {
+        $publicPath = app()->make('path.public');
+        $imagePath  = $publicPath . DIRECTORY_SEPARATOR . 'image';
+
+        if (empty($path)) {
+            return $imagePath;
+        }
+
+        return $imagePath . DIRECTORY_SEPARATOR . ltrim($path, DIRECTORY_SEPARATOR);
+    }
+}
+
+if (! function_exists('catalog_path')) {
+    /**
+     * Get the path to the public/image/catalog folder.
+     *
+     * @param string $path
+     * @return string
+     * @throws BindingResolutionException
+     */
+    function catalog_path(string $path = ''): string
+    {
+        $publicPath  = app()->make('path.public');
+        $catalogPath = $publicPath . DIRECTORY_SEPARATOR . 'image/catalog';
+
+        if (empty($path)) {
+            return $catalogPath;
+        }
+
+        return $catalogPath . DIRECTORY_SEPARATOR . ltrim($path, DIRECTORY_SEPARATOR);
+    }
+}
+
+/**
+ * 从 URL 中删除指定的查询参数
+ *
+ * @param string       $url
+ * @param string|array $keys
+ * @return string
+ */
+function remove_url_param(string $url, $keys): string
+{
+    if (! $url) {
+        return $url;
+    }
+
+    // 支持传入单个 key 或多个 key
+    $keys = (array) $keys;
+
+    $parsed = parse_url($url);
+
+    $query = [];
+    if (isset($parsed['query'])) {
+        parse_str($parsed['query'], $query);
+
+        // 移除参数
+        foreach ($keys as $key) {
+            unset($query[$key]);
+        }
+    }
+
+    // 重建 URL
+    $cleanUrl = $parsed['path'];
+
+    if (! empty($query)) {
+        $cleanUrl .= '?' . http_build_query($query);
+    }
+
+    return $cleanUrl;
+}
+
+function getClientIp(Request $request)
+{
+    $request = $request ?? request();
+
+    $ip = null;
+
+    // 1. Cloudflare 专用头部
+    if (! empty($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+        $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+    }
+
+    // 2. Laravel 自带获取 REMOTE_ADDR
+    if (! $ip) {
+        $ip = $request->server('REMOTE_ADDR');
+    }
+
+    // 3. 校验 IP 格式
+    if ($ip && filter_var($ip, FILTER_VALIDATE_IP)) {
+        return $ip;
+    }
+
+    return null;
 }
 
 /**
@@ -1146,7 +1258,7 @@ function calculate_height_by_ratio($width): int
 function get_safe_host(): string
 {
     // 允许的 Host 白名单（从配置文件读取）
-    $allowedHosts = config('beike.allowed_hosts', []);
+    $allowedHosts      = config('beike.allowed_hosts', []);
     $allowedHostsLower = array_map('strtolower', $allowedHosts);
 
     // 1. 优先使用 app.url 配置（应用 canonical URL，支持多域名场景）
@@ -1157,7 +1269,7 @@ function get_safe_host(): string
             $appHost = explode('/', clean_domain($appUrl))[0] ?? '';
             $appHost = explode(':', $appHost)[0];
         }
-        if (!empty($appHost)) {
+        if (! empty($appHost)) {
             $hostLower = strtolower($appHost);
             if (empty($allowedHosts) || in_array($hostLower, $allowedHostsLower, true)) {
                 return $appHost;
@@ -1170,7 +1282,7 @@ function get_safe_host(): string
     $serverAddr = $_SERVER['SERVER_ADDR'] ?? null;
 
     // 3. 使用 SERVER_NAME（服务端配置的主机名）
-    if (!empty($serverName)) {
+    if (! empty($serverName)) {
         $nameLower = strtolower($serverName);
         if (empty($allowedHosts) || in_array($nameLower, $allowedHostsLower, true)) {
             return $serverName;
@@ -1178,14 +1290,14 @@ function get_safe_host(): string
     }
 
     // 4. 再退回 SERVER_ADDR（服务端 IP）
-    if (!empty($serverAddr)) {
+    if (! empty($serverAddr)) {
         // 一般只要是你机器 IP 就可以认为是可信，不强制在白名单
         return $serverAddr;
     }
 
     // 5. 如果配置了白名单，可以在严格校验后使用 HTTP_HOST 兜底
     $httpHost = $_SERVER['HTTP_HOST'] ?? null;
-    if (!empty($httpHost) && !empty($allowedHosts)) {
+    if (! empty($httpHost) && ! empty($allowedHosts)) {
         // 去掉端口，只比对域名部分
         $hostWithoutPort = strtolower(explode(':', $httpHost)[0]);
         if (in_array($hostWithoutPort, $allowedHostsLower, true)) {
@@ -1194,7 +1306,7 @@ function get_safe_host(): string
     }
 
     // 6. 最后一层兜底：返回配置中的第一个允许 host
-    if (!empty($allowedHosts)) {
+    if (! empty($allowedHosts)) {
         return $allowedHosts[0];
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OrderProductRepo.php
  *
@@ -101,8 +102,7 @@ class OrderProductRepo
             $builder->limit($limit);
         }
 
-        if (getDBDriver() == 'mysql')
-        {
+        if (getDBDriver() == 'mysql') {
             $expression = '`product_id`, SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount';
         } else {
             $expression = 'product_id, SUM(quantity) AS total_quantity, SUM(price * quantity) AS total_amount';

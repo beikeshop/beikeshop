@@ -45,7 +45,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AF",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 2,
@@ -53,7 +53,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AL",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 3,
@@ -61,7 +61,7 @@ class CountriesSeeder extends Seeder
                 "code" => "DZ",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 4,
@@ -69,7 +69,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AS",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 5,
@@ -77,7 +77,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AD",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 6,
@@ -85,7 +85,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AO",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 7,
@@ -93,7 +93,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AI",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 8,
@@ -101,7 +101,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AQ",
                 "continent" => "AN",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 9,
@@ -109,7 +109,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AG",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 10,
@@ -117,7 +117,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AR",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 11,
@@ -125,7 +125,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AM",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 12,
@@ -133,7 +133,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AW",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 13,
@@ -141,7 +141,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AU",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 14,
@@ -149,7 +149,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AT",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 15,
@@ -157,7 +157,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AZ",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 16,
@@ -165,7 +165,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BS",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 17,
@@ -173,7 +173,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BH",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 18,
@@ -181,7 +181,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BD",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 19,
@@ -189,7 +189,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BB",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 20,
@@ -197,7 +197,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BY",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 21,
@@ -205,7 +205,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BE",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 22,
@@ -213,7 +213,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BZ",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 23,
@@ -221,7 +221,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BJ",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 24,
@@ -229,7 +229,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BM",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 25,
@@ -237,7 +237,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BT",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 26,
@@ -245,7 +245,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BO",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 27,
@@ -253,7 +253,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BA",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 28,
@@ -261,7 +261,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BW",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 29,
@@ -269,7 +269,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BV",
                 "continent" => "AN",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 30,
@@ -277,7 +277,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BR",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 31,
@@ -285,7 +285,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IO",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 32,
@@ -293,7 +293,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BN",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 33,
@@ -301,7 +301,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BG",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 34,
@@ -309,7 +309,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BF",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 35,
@@ -317,7 +317,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BI",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 36,
@@ -325,7 +325,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KH",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 37,
@@ -333,7 +333,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CM",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 38,
@@ -341,7 +341,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CA",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 39,
@@ -349,7 +349,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CV",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 40,
@@ -357,7 +357,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KY",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 41,
@@ -365,7 +365,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CF",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 42,
@@ -373,7 +373,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TD",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 43,
@@ -381,7 +381,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CL",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 44,
@@ -389,7 +389,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CN",
                 "continent" => "AS",
                 "sort_order" => -1,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 45,
@@ -397,7 +397,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CX",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 46,
@@ -405,7 +405,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CC",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 47,
@@ -413,7 +413,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CO",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 48,
@@ -421,7 +421,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KM",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 49,
@@ -429,7 +429,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CG",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 50,
@@ -437,7 +437,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CK",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 51,
@@ -445,7 +445,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CR",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 52,
@@ -453,7 +453,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CI",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 53,
@@ -461,7 +461,7 @@ class CountriesSeeder extends Seeder
                 "code" => "HR",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 54,
@@ -469,7 +469,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CU",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 55,
@@ -477,7 +477,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CY",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 56,
@@ -485,7 +485,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CZ",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 57,
@@ -493,7 +493,7 @@ class CountriesSeeder extends Seeder
                 "code" => "DK",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 58,
@@ -501,7 +501,7 @@ class CountriesSeeder extends Seeder
                 "code" => "DJ",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 59,
@@ -509,7 +509,7 @@ class CountriesSeeder extends Seeder
                 "code" => "DM",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 60,
@@ -517,7 +517,7 @@ class CountriesSeeder extends Seeder
                 "code" => "DO",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 61,
@@ -525,7 +525,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TL",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 62,
@@ -533,7 +533,7 @@ class CountriesSeeder extends Seeder
                 "code" => "EC",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 63,
@@ -541,7 +541,7 @@ class CountriesSeeder extends Seeder
                 "code" => "EG",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 64,
@@ -549,7 +549,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SV",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 65,
@@ -557,7 +557,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GQ",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 66,
@@ -565,7 +565,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ER",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 67,
@@ -573,7 +573,7 @@ class CountriesSeeder extends Seeder
                 "code" => "EE",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 68,
@@ -581,7 +581,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ET",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 69,
@@ -589,7 +589,7 @@ class CountriesSeeder extends Seeder
                 "code" => "FK",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 70,
@@ -597,7 +597,7 @@ class CountriesSeeder extends Seeder
                 "code" => "FO",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 71,
@@ -605,7 +605,7 @@ class CountriesSeeder extends Seeder
                 "code" => "FJ",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 72,
@@ -613,7 +613,7 @@ class CountriesSeeder extends Seeder
                 "code" => "FI",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 74,
@@ -621,7 +621,7 @@ class CountriesSeeder extends Seeder
                 "code" => "FR",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 75,
@@ -629,7 +629,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GF",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 76,
@@ -637,7 +637,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PF",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 77,
@@ -645,7 +645,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TF",
                 "continent" => "AN",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 78,
@@ -653,7 +653,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GA",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 79,
@@ -661,7 +661,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GM",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 80,
@@ -669,7 +669,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GE",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 81,
@@ -677,7 +677,7 @@ class CountriesSeeder extends Seeder
                 "code" => "DE",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 82,
@@ -685,7 +685,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GH",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 83,
@@ -693,7 +693,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GI",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 84,
@@ -701,7 +701,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GR",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 85,
@@ -709,7 +709,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GL",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 86,
@@ -717,7 +717,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GD",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 87,
@@ -725,7 +725,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GP",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 88,
@@ -733,7 +733,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GU",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 89,
@@ -741,7 +741,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GT",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 90,
@@ -749,7 +749,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GN",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 91,
@@ -757,7 +757,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GW",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 92,
@@ -765,7 +765,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GY",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 93,
@@ -773,7 +773,7 @@ class CountriesSeeder extends Seeder
                 "code" => "HT",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 94,
@@ -781,7 +781,7 @@ class CountriesSeeder extends Seeder
                 "code" => "HM",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 95,
@@ -789,7 +789,7 @@ class CountriesSeeder extends Seeder
                 "code" => "HN",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 97,
@@ -797,7 +797,7 @@ class CountriesSeeder extends Seeder
                 "code" => "HU",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 98,
@@ -805,7 +805,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IS",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 99,
@@ -813,7 +813,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IN",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 100,
@@ -821,7 +821,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ID",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 101,
@@ -829,7 +829,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IR",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 102,
@@ -837,7 +837,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IQ",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 103,
@@ -845,7 +845,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IE",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 104,
@@ -853,7 +853,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IL",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 105,
@@ -861,7 +861,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IT",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 106,
@@ -869,7 +869,7 @@ class CountriesSeeder extends Seeder
                 "code" => "JM",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 107,
@@ -877,7 +877,7 @@ class CountriesSeeder extends Seeder
                 "code" => "JP",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 108,
@@ -885,7 +885,7 @@ class CountriesSeeder extends Seeder
                 "code" => "JO",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 109,
@@ -893,7 +893,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KZ",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 110,
@@ -901,7 +901,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KE",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 111,
@@ -909,7 +909,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KI",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 112,
@@ -917,7 +917,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KP",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 113,
@@ -925,7 +925,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KR",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 114,
@@ -933,7 +933,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KW",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 115,
@@ -941,7 +941,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KG",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 116,
@@ -949,7 +949,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LA",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 117,
@@ -957,7 +957,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LV",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 118,
@@ -965,7 +965,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LB",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 119,
@@ -973,7 +973,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LS",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 120,
@@ -981,7 +981,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LR",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 121,
@@ -989,7 +989,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LY",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 122,
@@ -997,7 +997,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LI",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 123,
@@ -1005,7 +1005,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LT",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 124,
@@ -1013,7 +1013,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LU",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 126,
@@ -1021,7 +1021,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MK",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 127,
@@ -1029,7 +1029,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MG",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 128,
@@ -1037,7 +1037,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MW",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 129,
@@ -1045,7 +1045,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MY",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 130,
@@ -1053,7 +1053,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MV",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 131,
@@ -1061,7 +1061,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ML",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 132,
@@ -1069,7 +1069,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MT",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 133,
@@ -1077,7 +1077,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MH",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 134,
@@ -1085,7 +1085,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MQ",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 135,
@@ -1093,7 +1093,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MR",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 136,
@@ -1101,7 +1101,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MU",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 137,
@@ -1109,7 +1109,7 @@ class CountriesSeeder extends Seeder
                 "code" => "YT",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 138,
@@ -1117,7 +1117,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MX",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 139,
@@ -1125,7 +1125,7 @@ class CountriesSeeder extends Seeder
                 "code" => "FM",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 140,
@@ -1133,7 +1133,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MD",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 141,
@@ -1141,7 +1141,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MC",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 142,
@@ -1149,7 +1149,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MN",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 143,
@@ -1157,7 +1157,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MS",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 144,
@@ -1165,7 +1165,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MA",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 145,
@@ -1173,7 +1173,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MZ",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 146,
@@ -1181,7 +1181,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MM",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 147,
@@ -1189,7 +1189,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NA",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 148,
@@ -1197,7 +1197,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NR",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 149,
@@ -1205,7 +1205,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NP",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 150,
@@ -1213,7 +1213,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NL",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 151,
@@ -1221,7 +1221,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AN",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 152,
@@ -1229,7 +1229,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NC",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 153,
@@ -1237,7 +1237,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NZ",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 154,
@@ -1245,7 +1245,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NI",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 155,
@@ -1253,7 +1253,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NE",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 156,
@@ -1261,7 +1261,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NG",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 157,
@@ -1269,7 +1269,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NU",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 158,
@@ -1277,7 +1277,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NF",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 159,
@@ -1285,7 +1285,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MP",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 160,
@@ -1293,7 +1293,7 @@ class CountriesSeeder extends Seeder
                 "code" => "NO",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 161,
@@ -1301,7 +1301,7 @@ class CountriesSeeder extends Seeder
                 "code" => "OM",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 162,
@@ -1309,7 +1309,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PK",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 163,
@@ -1317,7 +1317,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PW",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 164,
@@ -1325,7 +1325,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PA",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 165,
@@ -1333,7 +1333,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PG",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 166,
@@ -1341,7 +1341,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PY",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 167,
@@ -1349,7 +1349,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PE",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 168,
@@ -1357,7 +1357,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PH",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 169,
@@ -1365,7 +1365,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PN",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 170,
@@ -1373,7 +1373,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PL",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 171,
@@ -1381,7 +1381,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PT",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 172,
@@ -1389,7 +1389,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PR",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 173,
@@ -1397,7 +1397,7 @@ class CountriesSeeder extends Seeder
                 "code" => "QA",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 174,
@@ -1405,7 +1405,7 @@ class CountriesSeeder extends Seeder
                 "code" => "RE",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 175,
@@ -1413,7 +1413,7 @@ class CountriesSeeder extends Seeder
                 "code" => "RO",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 176,
@@ -1421,7 +1421,7 @@ class CountriesSeeder extends Seeder
                 "code" => "RU",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 177,
@@ -1429,7 +1429,7 @@ class CountriesSeeder extends Seeder
                 "code" => "RW",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 178,
@@ -1437,7 +1437,7 @@ class CountriesSeeder extends Seeder
                 "code" => "KN",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 179,
@@ -1445,7 +1445,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LC",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 180,
@@ -1453,7 +1453,7 @@ class CountriesSeeder extends Seeder
                 "code" => "VC",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 181,
@@ -1461,7 +1461,7 @@ class CountriesSeeder extends Seeder
                 "code" => "WS",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 182,
@@ -1469,7 +1469,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SM",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 183,
@@ -1477,7 +1477,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ST",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 184,
@@ -1485,7 +1485,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SA",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 185,
@@ -1493,7 +1493,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SN",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 186,
@@ -1501,7 +1501,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SC",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 187,
@@ -1509,7 +1509,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SL",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 188,
@@ -1517,7 +1517,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SG",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 189,
@@ -1525,7 +1525,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SK",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 190,
@@ -1533,7 +1533,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SI",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 191,
@@ -1541,7 +1541,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SB",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 192,
@@ -1549,7 +1549,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SO",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 193,
@@ -1557,7 +1557,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ZA",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 194,
@@ -1565,7 +1565,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GS",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 195,
@@ -1573,7 +1573,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ES",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 196,
@@ -1581,7 +1581,7 @@ class CountriesSeeder extends Seeder
                 "code" => "LK",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 197,
@@ -1589,7 +1589,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SH",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 198,
@@ -1597,7 +1597,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PM",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 199,
@@ -1605,7 +1605,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SD",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 200,
@@ -1613,7 +1613,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SR",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 201,
@@ -1621,7 +1621,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SJ",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 202,
@@ -1629,7 +1629,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SZ",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 203,
@@ -1637,7 +1637,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SE",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 204,
@@ -1645,7 +1645,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CH",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 205,
@@ -1653,7 +1653,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SY",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 207,
@@ -1661,7 +1661,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TJ",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 208,
@@ -1669,7 +1669,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TZ",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 209,
@@ -1677,7 +1677,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TH",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 210,
@@ -1685,7 +1685,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TG",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 211,
@@ -1693,7 +1693,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TK",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 212,
@@ -1701,7 +1701,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TO",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 213,
@@ -1709,7 +1709,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TT",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 214,
@@ -1717,7 +1717,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TN",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 215,
@@ -1725,7 +1725,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TR",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 216,
@@ -1733,7 +1733,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TM",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 217,
@@ -1741,7 +1741,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TC",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 218,
@@ -1749,7 +1749,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TV",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 219,
@@ -1757,7 +1757,7 @@ class CountriesSeeder extends Seeder
                 "code" => "UG",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 220,
@@ -1765,7 +1765,7 @@ class CountriesSeeder extends Seeder
                 "code" => "UA",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 221,
@@ -1773,7 +1773,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AE",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 222,
@@ -1781,7 +1781,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GB",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 223,
@@ -1789,7 +1789,7 @@ class CountriesSeeder extends Seeder
                 "code" => "US",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 224,
@@ -1797,7 +1797,7 @@ class CountriesSeeder extends Seeder
                 "code" => "UM",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 225,
@@ -1805,7 +1805,7 @@ class CountriesSeeder extends Seeder
                 "code" => "UY",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 226,
@@ -1813,7 +1813,7 @@ class CountriesSeeder extends Seeder
                 "code" => "UZ",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 227,
@@ -1821,7 +1821,7 @@ class CountriesSeeder extends Seeder
                 "code" => "VU",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 228,
@@ -1829,7 +1829,7 @@ class CountriesSeeder extends Seeder
                 "code" => "VA",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 229,
@@ -1837,7 +1837,7 @@ class CountriesSeeder extends Seeder
                 "code" => "VE",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 230,
@@ -1845,7 +1845,7 @@ class CountriesSeeder extends Seeder
                 "code" => "VN",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 231,
@@ -1853,7 +1853,7 @@ class CountriesSeeder extends Seeder
                 "code" => "VG",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 232,
@@ -1861,7 +1861,7 @@ class CountriesSeeder extends Seeder
                 "code" => "VI",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 233,
@@ -1869,7 +1869,7 @@ class CountriesSeeder extends Seeder
                 "code" => "WF",
                 "continent" => "OA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 234,
@@ -1877,7 +1877,7 @@ class CountriesSeeder extends Seeder
                 "code" => "EH",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 235,
@@ -1885,7 +1885,7 @@ class CountriesSeeder extends Seeder
                 "code" => "YE",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 237,
@@ -1893,7 +1893,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CD",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 238,
@@ -1901,7 +1901,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ZM",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 239,
@@ -1909,7 +1909,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ZW",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 242,
@@ -1917,7 +1917,7 @@ class CountriesSeeder extends Seeder
                 "code" => "ME",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 243,
@@ -1925,7 +1925,7 @@ class CountriesSeeder extends Seeder
                 "code" => "RS",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 244,
@@ -1933,7 +1933,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AX",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 245,
@@ -1941,7 +1941,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BQ",
                 "continent" => "SA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 246,
@@ -1949,7 +1949,7 @@ class CountriesSeeder extends Seeder
                 "code" => "CW",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 247,
@@ -1957,7 +1957,7 @@ class CountriesSeeder extends Seeder
                 "code" => "PS",
                 "continent" => "AS",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 248,
@@ -1965,7 +1965,7 @@ class CountriesSeeder extends Seeder
                 "code" => "SS",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 249,
@@ -1973,7 +1973,7 @@ class CountriesSeeder extends Seeder
                 "code" => "BL",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 250,
@@ -1981,7 +1981,7 @@ class CountriesSeeder extends Seeder
                 "code" => "MF",
                 "continent" => "NA",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 251,
@@ -1989,7 +1989,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IC",
                 "continent" => "AF",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 252,
@@ -1997,7 +1997,7 @@ class CountriesSeeder extends Seeder
                 "code" => "AC",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 253,
@@ -2005,7 +2005,7 @@ class CountriesSeeder extends Seeder
                 "code" => "XK",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 254,
@@ -2013,7 +2013,7 @@ class CountriesSeeder extends Seeder
                 "code" => "IM",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 255,
@@ -2021,7 +2021,7 @@ class CountriesSeeder extends Seeder
                 "code" => "TA",
                 "continent" => "none",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 256,
@@ -2029,7 +2029,7 @@ class CountriesSeeder extends Seeder
                 "code" => "GG",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ],
             [
                 "id" => 257,
@@ -2037,7 +2037,7 @@ class CountriesSeeder extends Seeder
                 "code" => "JE",
                 "continent" => "EU",
                 "sort_order" => 0,
-                "status" => 1,
+                "active" => 1,
             ]
         ];
     }
