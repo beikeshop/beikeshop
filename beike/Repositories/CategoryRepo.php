@@ -16,11 +16,16 @@ use Beike\Models\CategoryPath;
 use Beike\Shop\Http\Resources\CategoryDetail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class CategoryRepo
 {
     private static $allCategoryWithName = null;
+
+    private const CACHE_TTL = 86400;
+
+    private const CACHE_VERSION_KEY = 'category_cache_version';
 
     /**
      * 后台获取分类列表
@@ -30,9 +35,13 @@ class CategoryRepo
     {
         self::cleanCategories();
 
-        return Category::with(['description', 'children.description', 'children.children.description'])
-            ->where('parent_id', 0)
-            ->get();
+        $cacheKey = self::cacheKey('admin_list', [locale()]);
+
+        return Cache::remember($cacheKey, self::CACHE_TTL, function () {
+            return Category::with(['description', 'children.description', 'children.children.description'])
+                ->where('parent_id', 0)
+                ->get();
+        });
     }
 
     /**
@@ -40,48 +49,69 @@ class CategoryRepo
      */
     public static function cleanCategories()
     {
-        $categories = Category::with([
-            'parent',
-            'description',
-        ])->get();
+        $cacheKey = self::cacheKey('cleaned');
+        if (Cache::has($cacheKey)) {
+            return;
+        }
 
-        foreach ($categories as $category) {
-            if ($category->parent_id && empty($category->parent)) {
-                $category->parent_id = 0;
-                $category->save();
-            }
-            if (empty($category->descriptions)) {
-                $category->delete();
-            }
+        $changed = false;
+
+        Category::query()
+            ->select(['id', 'parent_id'])
+            ->with(['parent:id'])
+            ->withCount('descriptions')
+            ->chunkById(500, function ($categories) use (&$changed) {
+                foreach ($categories as $category) {
+                    if ($category->parent_id && empty($category->parent)) {
+                        $category->parent_id = 0;
+                        $category->save();
+                        $changed = true;
+                    }
+
+                    if ((int) $category->descriptions_count === 0) {
+                        $category->delete();
+                        $changed = true;
+                    }
+                }
+            });
+
+        if ($changed) {
+            self::clearCache();
+        } else {
+            Cache::put($cacheKey, true, 3600);
         }
     }
 
     public static function flatten(string $locale, $includeInactive = true, $separator = ' > ')
     {
-        $aggregateFunc = getDBDriver() == 'mysql'
-            ? "GROUP_CONCAT(cd.name ORDER BY cp.level SEPARATOR '{$separator}')"
-            : "STRING_AGG(cd.name, '{$separator}' ORDER BY cp.level)";
+        $cacheKey = self::cacheKey('flatten', [$locale, $includeInactive, $separator]);
 
-        return CategoryPath::query()
-            ->select([
-                'categories.id',
-                DB::raw("TRIM(LOWER({$aggregateFunc})) as name"),
-                'categories.parent_id',
-                'categories.position'
-            ])
-            ->from('category_paths as cp')
-            ->join('categories', 'cp.category_id', '=', 'categories.id')
-            ->join('category_descriptions as cd', function($join) use ($locale) {
-                $join->on('cp.path_id', '=', 'cd.category_id')
-                    ->where('cd.locale', $locale);
-            })
-            ->when(!$includeInactive, function ($query) {
-                $query->where('categories.active', true);
-            })
-            ->groupBy('categories.id', 'categories.parent_id', 'categories.position')
-            ->orderBy('categories.position')
-            ->orderBy('name')
-            ->get();
+        return Cache::remember($cacheKey, self::CACHE_TTL, function () use ($locale, $includeInactive, $separator) {
+            $aggregateFunc = getDBDriver() == 'mysql'
+                ? "GROUP_CONCAT(cd.name ORDER BY cp.level SEPARATOR '{$separator}')"
+                : "STRING_AGG(cd.name, '{$separator}' ORDER BY cp.level)";
+
+            return CategoryPath::query()
+                ->select([
+                    'categories.id',
+                    DB::raw("TRIM(LOWER({$aggregateFunc})) as name"),
+                    'categories.parent_id',
+                    'categories.position'
+                ])
+                ->from('category_paths as cp')
+                ->join('categories', 'cp.category_id', '=', 'categories.id')
+                ->join('category_descriptions as cd', function($join) use ($locale) {
+                    $join->on('cp.path_id', '=', 'cd.category_id')
+                        ->where('cd.locale', $locale);
+                })
+                ->when(!$includeInactive, function ($query) {
+                    $query->where('categories.active', true);
+                })
+                ->groupBy('categories.id', 'categories.parent_id', 'categories.position')
+                ->orderBy('categories.position')
+                ->orderBy('name')
+                ->get();
+        });
     }
 
     /**
@@ -105,17 +135,21 @@ class CategoryRepo
      */
     public static function getTwoLevelCategories()
     {
-        $topCategories = Category::query()
-            ->from('categories as c')
-            ->with(['description', 'activeChildren.description'])
-            ->where('parent_id', 0)
-            ->where('active', true)
-            ->orderBy('position')
-            ->get();
+        $cacheKey = self::cacheKey('two_level', [locale()]);
 
-        $categoryList = CategoryDetail::collection($topCategories);
+        return Cache::remember($cacheKey, self::CACHE_TTL, function () {
+            $topCategories = Category::query()
+                ->from('categories as c')
+                ->with(['description', 'activeChildren.description'])
+                ->where('parent_id', 0)
+                ->where('active', true)
+                ->orderBy('position')
+                ->get();
 
-        return json_decode($categoryList->toJson(), true);
+            $categoryList = CategoryDetail::collection($topCategories);
+
+            return json_decode($categoryList->toJson(), true);
+        });
     }
 
     /**
@@ -195,7 +229,7 @@ class CategoryRepo
      * 删除商品分类
      * @throws \Exception
      */
-    public static function delete($category)
+    public static function delete($category, bool $clearCache = true)
     {
         if (is_int($category)) {
             $category = Category::query()->findOrFail($category);
@@ -204,13 +238,17 @@ class CategoryRepo
         }
 
         foreach ($category->children as $child) {
-            self::delete($child);
+            self::delete($child, false);
         }
 
         $category->descriptions()->delete();
         $category->paths()->delete();
         $category->productCategories()->delete();
         $category->delete();
+
+        if ($clearCache) {
+            self::clearCache();
+        }
     }
 
     /**
@@ -236,15 +274,47 @@ class CategoryRepo
             return self::$allCategoryWithName;
         }
 
-        $items      = [];
-        $categories = self::getBuilder()->select('id')->get();
-        foreach ($categories as $category) {
-            $items[$category->id] = [
-                'id'   => $category->id,
-                'name' => $category->description->name ?? '',
-            ];
-        }
+        $cacheKey = self::cacheKey('names', [locale()]);
 
-        return self::$allCategoryWithName = $items;
+        return self::$allCategoryWithName = Cache::remember($cacheKey, self::CACHE_TTL, function () {
+            $items        = [];
+            $categoryIds = self::getBuilder()->select('categories.id')->pluck('id');
+
+            if ($categoryIds->isNotEmpty()) {
+                $names = DB::table('category_descriptions')
+                    ->whereIn('category_id', $categoryIds)
+                    ->where('locale', locale())
+                    ->select(['category_id', 'name'])
+                    ->get();
+
+                foreach ($names as $row) {
+                    $items[$row->category_id] = [
+                        'id'   => $row->category_id,
+                        'name' => $row->name ?? '',
+                    ];
+                }
+            }
+
+            return $items;
+        });
+    }
+
+    public static function clearCache(): void
+    {
+        self::$allCategoryWithName = null;
+
+        Cache::forever(self::CACHE_VERSION_KEY, (string) microtime(true));
+    }
+
+    public static function cacheVersion(): string
+    {
+        return (string) Cache::get(self::CACHE_VERSION_KEY, '1');
+    }
+
+    private static function cacheKey(string $name, array $parts = []): string
+    {
+        $parts[] = self::cacheVersion();
+
+        return 'category.' . $name . '.' . md5(json_encode($parts));
     }
 }

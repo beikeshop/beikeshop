@@ -11,6 +11,8 @@
 
 namespace Beike\Repositories;
 
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Beike\Models\Category;
 
 class FlattenCategoryRepo
@@ -20,6 +22,8 @@ class FlattenCategoryRepo
     public static $children = [];
 
     private static $allCategories = null;
+
+    private const CACHE_TTL = 86400;
 
     /**
      * 将顶级分类ID和所有的子分类ID组合成一个数组
@@ -70,17 +74,16 @@ class FlattenCategoryRepo
      */
     public static function getCategoryList($parentId = 0): array
     {
-        $categoryIds = self::getFlattenChildren($parentId);
-        $categories  = self::getFlattenCategories($categoryIds);
-        foreach ($categories as $index => $category) {
-            $categoryId                     = $category['id'];
-            $children                       = self::getCategoryList($categoryId);
-            if ($children) {
-                $categories[$index]['children'] = $children;
-            }
-        }
+        $cacheKey = self::cacheKey('tree', [
+            (int) $parentId,
+            locale(),
+            (int) request('width', 300),
+            (int) request('height', 300),
+        ]);
 
-        return $categories;
+        return Cache::remember($cacheKey, self::CACHE_TTL, function () use ($parentId) {
+            return self::buildCategoryList((int) $parentId);
+        });
     }
 
     /**
@@ -103,15 +106,32 @@ class FlattenCategoryRepo
 
     private static function getAllSubCategories($categoryId, &$result = [])
     {
-        $categories = Category::query()
-            ->where('parent_id', $categoryId)
-            ->get();
+        $categories = self::getAllCategories();
         foreach ($categories as $category) {
-            $result[] = $category->category_id;
-            self::getAllSubCategories($category->category_id, $result);
+            if ((int) $category['parent_id'] !== (int) $categoryId) {
+                continue;
+            }
+
+            $result[] = $category['id'];
+            self::getAllSubCategories($category['id'], $result);
         }
 
         return $result;
+    }
+
+    private static function buildCategoryList(int $parentId = 0): array
+    {
+        $categoryIds = self::getFlattenChildren($parentId);
+        $categories  = self::getFlattenCategories($categoryIds);
+        foreach ($categories as $index => $category) {
+            $categoryId = $category['id'];
+            $children   = self::buildCategoryList($categoryId);
+            if ($children) {
+                $categories[$index]['children'] = $children;
+            }
+        }
+
+        return $categories;
     }
 
     /**
@@ -175,14 +195,14 @@ class FlattenCategoryRepo
         if (self::$children) {
             return self::$children;
         }
-        $builder = Category::query()
+        $categories = DB::table('categories')
             ->select(['id', 'parent_id'])
             ->orderBy('categories.position')
-            ->orderBy('categories.parent_id');
-        $categories = $builder->get()->toArray();
+            ->orderBy('categories.parent_id')
+            ->get();
         $result     = [];
         foreach ($categories as $category) {
-            $result[$category['parent_id']][] = $category['id'];
+            $result[$category->parent_id][] = $category->id;
         }
         self::$children = $result;
 
@@ -211,10 +231,10 @@ class FlattenCategoryRepo
         }
         foreach ($allCategories as $category) {
             if ($category['parent_id'] == $categoryId) {
-                if (! in_array($category['category_id'], $subCategoryIds)) {
-                    $subCategoryIds[] = $category['category_id'];
+                if (! in_array($category['id'], $subCategoryIds)) {
+                    $subCategoryIds[] = $category['id'];
                 }
-                $subCategoryIds = self::getAllSubCategoryIdsByCategoryId($category['category_id'], $subCategoryIds);
+                $subCategoryIds = self::getAllSubCategoryIdsByCategoryId($category['id'], $subCategoryIds);
             }
         }
 
@@ -222,7 +242,7 @@ class FlattenCategoryRepo
     }
 
     /**
-     * 获取所有分类， 只包含category_id, parent_id
+     * 获取所有分类， 只包含id, parent_id
      * @return array
      */
     private static function getAllCategories(): array
@@ -230,12 +250,25 @@ class FlattenCategoryRepo
         if (! is_null(self::$allCategories)) {
             return self::$allCategories;
         }
-        $allCategories = Category::query()
-            ->select(['category_id', 'parent_id'])
+        $allCategories = DB::table('categories')
+            ->select(['id', 'parent_id'])
             ->get()
+            ->map(function ($category) {
+                return [
+                    'id'        => (int) $category->id,
+                    'parent_id' => (int) $category->parent_id,
+                ];
+            })
             ->toArray();
         self::$allCategories = $allCategories;
 
         return $allCategories;
+    }
+
+    private static function cacheKey(string $name, array $parts = []): string
+    {
+        $parts[] = CategoryRepo::cacheVersion();
+
+        return 'category.flatten.' . $name . '.' . md5(json_encode($parts));
     }
 }

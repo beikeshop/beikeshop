@@ -18,10 +18,15 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class BrandRepo
 {
     private static $allBrandsWithName;
+
+    private const CACHE_TTL = 86400;
+
+    private const CACHE_VERSION_KEY = 'brand_cache_version';
 
     /**
      * 创建一个记录
@@ -38,7 +43,10 @@ class BrandRepo
             'status'     => (bool) ($data['status'] ?? 1),
         ];
 
-        return Brand::query()->create($brandData);
+        $brand = Brand::query()->create($brandData);
+        self::clearCache();
+
+        return $brand;
     }
 
     /**
@@ -64,6 +72,7 @@ class BrandRepo
             'status'     => (bool) ($data['status'] ?? 1),
         ];
         $brand->update($brandData);
+        self::clearCache();
 
         return $brand;
     }
@@ -89,6 +98,7 @@ class BrandRepo
 
         if ($brand) {
             $brand->delete();
+            self::clearCache();
         }
     }
 
@@ -115,7 +125,7 @@ class BrandRepo
             $builder->where('name', 'like', "%{$filters['name']}%");
         }
         if (isset($filters['first'])) {
-            $builder->where('first', $filters['email']);
+            $builder->where('first', $filters['first']);
         }
         if (isset($filters['status'])) {
             $builder->where('status', $filters['status']);
@@ -127,15 +137,19 @@ class BrandRepo
 
     public static function listGroupByFirst(): array
     {
-        $brands = Brand::query()->where('status', true)->get();
+        $cacheKey = self::cacheKey('group_by_first', [locale()]);
 
-        $results = [];
-        foreach ($brands as $brand) {
-            $results[$brand->first][] = (new BrandDetail($brand))->jsonSerialize();
-        }
-        ksort($results);
+        return Cache::remember($cacheKey, self::CACHE_TTL, function () {
+            $brands = Brand::query()->where('status', true)->get();
 
-        return $results;
+            $results = [];
+            foreach ($brands as $brand) {
+                $results[$brand->first][] = (new BrandDetail($brand))->jsonSerialize();
+            }
+            ksort($results);
+
+            return $results;
+        });
     }
 
     public static function autocomplete($name, $onlyActive = 1)
@@ -221,15 +235,38 @@ class BrandRepo
             return self::$allBrandsWithName;
         }
 
-        $items  = [];
-        $brands = self::getBuilder()->select(['id', 'name'])->get();
-        foreach ($brands as $brand) {
-            $items[$brand->id] = [
-                'id'   => $brand->id,
-                'name' => $brand->name ?? '',
-            ];
-        }
+        $cacheKey = self::cacheKey('names');
 
-        return self::$allBrandsWithName = $items;
+        return self::$allBrandsWithName = Cache::remember($cacheKey, self::CACHE_TTL, function () {
+            $items  = [];
+            $brands = self::getBuilder()->select(['id', 'name'])->get();
+            foreach ($brands as $brand) {
+                $items[$brand->id] = [
+                    'id'   => $brand->id,
+                    'name' => $brand->name ?? '',
+                ];
+            }
+
+            return $items;
+        });
+    }
+
+    public static function clearCache(): void
+    {
+        self::$allBrandsWithName = null;
+
+        Cache::forever(self::CACHE_VERSION_KEY, (string) microtime(true));
+    }
+
+    private static function cacheVersion(): string
+    {
+        return (string) Cache::get(self::CACHE_VERSION_KEY, '1');
+    }
+
+    private static function cacheKey(string $name, array $parts = []): string
+    {
+        $parts[] = self::cacheVersion();
+
+        return 'brand.' . $name . '.' . md5(json_encode($parts));
     }
 }

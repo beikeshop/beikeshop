@@ -13,6 +13,7 @@ namespace Beike\Admin\Services;
 
 use Beike\Models\Category;
 use Beike\Models\CategoryPath;
+use Beike\Repositories\CategoryRepo;
 use Illuminate\Support\Facades\DB;
 
 class CategoryService
@@ -53,6 +54,7 @@ class CategoryService
             }
 
             DB::commit();
+            CategoryRepo::clearCache();
         } catch (\Exception $e) {
             DB::rollBack();
 
