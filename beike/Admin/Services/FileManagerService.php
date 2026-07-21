@@ -24,7 +24,7 @@ class FileManagerService
 
     public function __construct()
     {
-        $this->fileBasePath = public_path('catalog') . $this->basePath;
+        $this->fileBasePath = rtrim(public_path('catalog') . $this->basePath, '/\\');
         File::ensureDirectoryExists($this->fileBasePath);
     }
 
@@ -40,7 +40,7 @@ class FileManagerService
         $result = [];
         foreach ($directories as $directory) {
             $baseName = basename($directory);
-            $dirName  = str_replace($this->fileBasePath, '', $directory);
+            $dirName  = $this->filesystemPathToCatalogPath($directory);
             if (is_dir($directory)) {
                 $item           = $this->handleFolder($dirName, $baseName);
                 $subDirectories = $this->getDirectories($dirName);
@@ -107,7 +107,7 @@ class FileManagerService
 
         // 处理文件
         $images = array_map(function ($file) {
-            return $this->handleImage(str_replace(public_path('catalog'), '', $file['path']), $file['basename']);
+            return $this->handleImage($this->filesystemPathToCatalogPath($file['path']), $file['basename']);
         }, $fileData);
 
         return [
@@ -427,10 +427,31 @@ class FileManagerService
 
     private function isPathInside(string $path, string $basePath): bool
     {
-        $path     = rtrim($path, '/');
-        $basePath = rtrim($basePath, '/');
+        $path     = $this->normalizeFilesystemPath($path);
+        $basePath = $this->normalizeFilesystemPath($basePath);
 
         return $path === $basePath || str_starts_with($path, $basePath . '/');
+    }
+
+    private function filesystemPathToCatalogPath(string $path): string
+    {
+        $path     = $this->normalizeFilesystemPath($path);
+        $basePath = $this->normalizeFilesystemPath($this->fileBasePath);
+
+        if ($path === $basePath) {
+            return '/';
+        }
+
+        if (! str_starts_with($path, $basePath . '/')) {
+            throw new \Exception(trans('admin/file_manager.invalid_path'));
+        }
+
+        return substr($path, strlen($basePath));
+    }
+
+    private function normalizeFilesystemPath(string $path): string
+    {
+        return rtrim(str_replace('\\', '/', $path), '/');
     }
 
     private function isValidFileName(string $fileName): bool
