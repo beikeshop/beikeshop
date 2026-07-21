@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     bash \
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
+    && if ! command -v npm >/dev/null 2>&1; then apt-get install -y npm; fi \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
         pdo_mysql \
