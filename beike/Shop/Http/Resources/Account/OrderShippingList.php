@@ -19,14 +19,16 @@ class OrderShippingList extends JsonResource
     public function toArray($request): array
     {
         $products = OrderProductSimple::collection($this->orderProducts)->jsonSerialize();
+        $products = $this->formatProductsWithOrderCurrency($products);
+
         $data     = [
             'store_name'              => system_setting('base.store_name', 'BeikeShop'),
             'id'                      => $this->id,
             'number'                  => $this->number,
             'customer_name'           => $this->customer_name,
             'email'                   => $this->email,
-            'total'                   => currency_format($this->total),
-            'product_total'           => currency_format(array_sum(array_column($products, 'total'))),
+            'total'                   => $this->formatCurrency($this->total),
+            'product_total'           => $this->formatCurrency(array_sum(array_column($products, 'total'))),
             'shipping_customer_name'  => $this->shipping_customer_name,
             'shipping_calling_code'   => $this->shipping_calling_code,
             'shipping_telephone'      => $this->shipping_telephone,
@@ -43,5 +45,20 @@ class OrderShippingList extends JsonResource
         ];
 
         return $data;
+    }
+
+    private function formatProductsWithOrderCurrency(array $products): array
+    {
+        foreach ($products as $index => $product) {
+            $products[$index]['price']        = $this->formatCurrency($product['total'] / max((int) $product['quantity'], 1));
+            $products[$index]['total_format'] = $this->formatCurrency($product['total']);
+        }
+
+        return $products;
+    }
+
+    private function formatCurrency($amount): string
+    {
+        return currency_format($amount, $this->currency_code, $this->currency_value);
     }
 }
