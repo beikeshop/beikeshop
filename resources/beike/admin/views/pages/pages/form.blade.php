@@ -160,7 +160,7 @@
                 </div>
               </x-admin::form.row>
 
-              <x-admin-form-image name="image" title="{{ __('admin/page.cover_picture') }}" value="{{ old('image', $page->image ?? '') }}">
+              <x-admin-form-image name="image" :is-remove="true" title="{{ __('admin/page.cover_picture') }}" value="{{ old('image', $page->image ?? '') }}">
                 <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }}: 500*350</div>
               </x-admin-form-image>
 
