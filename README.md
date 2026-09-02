@@ -88,7 +88,7 @@ Engineered for seamless secondary development, BeikeShop follows a **modular, ev
 
 BeikeShop can be installed via **package distribution**, **source code**, or **Docker**.
 
-### I. Package Installation
+### 👤 1. Regular User Installation
 
 1. Download BeikeShop: https://beikeshop.com/download
 
@@ -106,7 +106,7 @@ BeikeShop can be installed via **package distribution**, **source code**, or **D
    php artisan migrate
    ```
 
-### II. Source Code Installation
+### 👨‍💻 2. Developer Installation
 
 ```bash
 git clone https://github.com/beikeshop/beikeshop.git
@@ -129,7 +129,7 @@ composer install
 php artisan migrate
 ```
 
-### III. Docker Installation
+### 🐳 3. Docker Installation
 
 1. Install Docker & Docker Compose
     [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
