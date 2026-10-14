@@ -14,6 +14,7 @@ namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Models\Customer;
 use Beike\Repositories\CartRepo;
+use Beike\Repositories\OrderRepo;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\RegisterRequest;
 use Beike\Shop\Services\AccountService;
@@ -33,6 +34,7 @@ class RegisterController extends Controller
         $guestCartProduct       = CartRepo::allCartProducts(0);
         auth(Customer::AUTH_GUARD)->attempt($credentials);
         CartRepo::mergeGuestCart($customer, $guestCartProduct);
+        OrderRepo::claimGuestOrdersForCustomerInSession($customer, (array) session('guest_order_numbers', []));
 
         if ($customer->status == 'approved') {
             return json_success(trans('shop/login.register_success'));

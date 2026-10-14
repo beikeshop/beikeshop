@@ -25,6 +25,56 @@ use Illuminate\Database\Eloquent\Model;
 class OrderRepo
 {
     /**
+     * 将与客户邮箱匹配的游客订单绑定到客户。
+     *
+     * 只处理尚未绑定客户的订单，兼容历史数据中的 NULL 和当前流程使用的 0。
+     * 订单邮箱是下单时的快照，因此绑定不会覆盖订单上的收货人或联系方式。
+     */
+    public static function claimGuestOrdersForCustomer(Customer $customer): int
+    {
+        return self::claimGuestOrders($customer, null);
+    }
+
+    /**
+     * 将当前会话中、与客户邮箱匹配的游客订单绑定到客户。
+     */
+    public static function claimGuestOrdersForCustomerInSession(Customer $customer, array $orderNumbers): int
+    {
+        return self::claimGuestOrders($customer, $orderNumbers);
+    }
+
+    private static function claimGuestOrders(Customer $customer, ?array $orderNumbers): int
+    {
+        $customerId = (int) $customer->id;
+        $email      = strtolower(trim((string) $customer->email));
+
+        if ($customerId <= 0 || $email === '') {
+            return 0;
+        }
+
+        $query = Order::query()
+            ->where(function (Builder $query): void {
+                $query->whereNull('customer_id')->orWhere('customer_id', 0);
+            })
+            ->whereRaw('LOWER(TRIM(email)) = ?', [$email]);
+
+        if ($orderNumbers !== null) {
+            $orderNumbers = array_values(array_unique(array_filter(array_map(
+                static fn ($number): string => trim((string) $number),
+                $orderNumbers
+            ))));
+
+            if ($orderNumbers === []) {
+                return 0;
+            }
+
+            $query->whereIn('number', $orderNumbers);
+        }
+
+        return $query->update(['customer_id' => $customerId]);
+    }
+
+    /**
      * 获取所有客户订单列表
      *
      * @param array $filters

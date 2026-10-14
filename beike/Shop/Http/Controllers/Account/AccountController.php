@@ -38,6 +38,7 @@ class AccountController extends Controller
     public function index()
     {
         $customer = current_customer();
+        OrderRepo::claimGuestOrdersForCustomer($customer);
         $data     = [
             'customer'      => new CustomerResource($customer),
             'latest_orders' => OrderSimpleList::collection(OrderRepo::getLatestOrders($customer, 10)),

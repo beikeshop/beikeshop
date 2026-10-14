@@ -14,6 +14,7 @@ namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Models\Customer;
 use Beike\Repositories\CartRepo;
+use Beike\Repositories\OrderRepo;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
@@ -66,6 +67,7 @@ class LoginController extends Controller
                 throw new NotFoundHttpException(trans('shop/login.customer_rejected'));
             }
 
+            OrderRepo::claimGuestOrdersForCustomer($customer);
             CartRepo::mergeGuestCart($customer, $guestCartProduct);
 
             hook_action('shop.account.login.after', $data);
