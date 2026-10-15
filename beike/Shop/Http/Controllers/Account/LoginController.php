@@ -37,6 +37,7 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request)
     {
+        $guestSessionId = get_session_id();
         $data = [
             'request_data' => $request->all(),
         ];
@@ -68,7 +69,7 @@ class LoginController extends Controller
             }
 
             OrderRepo::claimGuestOrdersForCustomer($customer);
-            CartRepo::mergeGuestCart($customer, $guestCartProduct);
+            CartRepo::mergeGuestCart($customer, $guestCartProduct, $guestSessionId);
 
             hook_action('shop.account.login.after', $data);
 

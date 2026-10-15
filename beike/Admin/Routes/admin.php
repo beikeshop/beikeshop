@@ -96,6 +96,7 @@ Route::prefix($adminName)
                 Route::middleware('can:zones_delete')->delete('zones/{id}', [Controllers\ZoneController::class, 'destroy'])->name('zones.destroy');
 
                 // 客户
+                Route::middleware('can:customers_show')->get('customer-carts', [Controllers\CartObservationController::class, 'index'])->name('customer_carts.index');
                 Route::middleware('can:customers_index')->get('customers/trashed', [Controllers\CustomerController::class, 'trashed'])->name('customers.trashed');
                 Route::middleware('can:customers_index')->get('customers', [Controllers\CustomerController::class, 'index'])->name('customers.index');
                 Route::middleware('can:customers_create')->post('customers', [Controllers\CustomerController::class, 'store'])->name('customers.store');

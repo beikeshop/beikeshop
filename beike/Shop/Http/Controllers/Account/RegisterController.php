@@ -28,12 +28,13 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request)
     {
+        $guestSessionId = get_session_id();
         $credentials = $request->only('email', 'password');
 
         $customer               = AccountService::register($credentials);
         $guestCartProduct       = CartRepo::allCartProducts(0);
         auth(Customer::AUTH_GUARD)->attempt($credentials);
-        CartRepo::mergeGuestCart($customer, $guestCartProduct);
+        CartRepo::mergeGuestCart($customer, $guestCartProduct, $guestSessionId);
         OrderRepo::claimGuestOrdersForCustomerInSession($customer, (array) session('guest_order_numbers', []));
 
         if ($customer->status == 'approved') {

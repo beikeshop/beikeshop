@@ -13,10 +13,13 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Cart;
+use Beike\Models\CartAddEvent;
 use Beike\Models\CartProduct;
 use Beike\Models\Customer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class CartRepo
 {
@@ -164,16 +167,38 @@ class CartRepo
      * @param $customer
      * @return void
      */
-    public static function mergeGuestCart($customer, $guestCartProduct): void
+    public static function mergeGuestCart($customer, $guestCartProduct, string|null $guestSessionId = null): void
     {
+        $visitorKeys = [];
+        if ($guestSessionId) {
+            $visitorKeys[] = hash('sha256', $guestSessionId);
+        }
         foreach ($guestCartProduct as $cartProduct) {
             self::allCartProductsBuilder($customer->id)
                 ->where('product_sku', $cartProduct->product_sku)
                 ->where('line_key', $cartProduct->line_key ?? '')
                 ->delete();
 
+            if (! empty($cartProduct->session_id)) {
+                $visitorKeys[] = hash('sha256', (string) $cartProduct->session_id);
+            }
+
             $cartProduct->customer_id = $customer->id;
             $cartProduct->save();
+        }
+
+        if ($visitorKeys) {
+            try {
+                CartAddEvent::query()
+                    ->whereNull('customer_id')
+                    ->whereIn('visitor_key', array_unique($visitorKeys))
+                    ->update(['customer_id' => $customer->id]);
+            } catch (Throwable $exception) {
+                Log::warning('Failed to associate guest cart events with customer.', [
+                    'customer_id' => $customer->id,
+                    'exception'   => $exception->getMessage(),
+                ]);
+            }
         }
     }
 }

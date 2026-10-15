@@ -251,7 +251,7 @@ class Sidebar extends Component
      */
     private function getCustomerSubPrefix()
     {
-        $prefix = ['customers', 'customer_groups'];
+        $prefix = ['customers', 'customer_groups', 'customer_carts'];
 
         return hook_filter('admin.sidebar.customer.prefix', $prefix);
     }
@@ -354,6 +354,7 @@ class Sidebar extends Component
     {
         $routes = [
             ['route' => 'customers.index', 'prefixes' => ['customers'], 'excludes' => ['customers.trashed']],
+            ['route' => 'customer_carts.index', 'prefixes' => ['customer_carts']],
             ['route' => 'customer_groups.index', 'prefixes' => ['customer_groups']],
             ['route' => 'customers.trashed', 'prefixes' => ['customers'], 'excludes' => ['customers.index', 'customers.edit']],
         ];

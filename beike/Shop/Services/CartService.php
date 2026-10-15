@@ -12,10 +12,13 @@
 
 namespace Beike\Shop\Services;
 
+use Beike\Models\CartAddEvent;
 use Beike\Models\CartProduct;
 use Beike\Repositories\CartRepo;
 use Beike\Shop\Http\Resources\CartDetail;
 use Exception;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class CartService
 {
@@ -119,7 +122,30 @@ class CartService
             throw new Exception(trans('cart.stock_out'));
         }
 
+        self::recordAddEvent($sku, $quantity, $customerId);
+
         return $cart;
+    }
+
+    private static function recordAddEvent($sku, int $quantity, int $customerId): void
+    {
+        try {
+            $product = $sku->product;
+            CartAddEvent::query()->create([
+                'customer_id'  => $customerId ?: null,
+                'visitor_key'  => hash('sha256', (string) get_session_id()),
+                'product_id'   => $sku->product_id,
+                'product_sku'  => (string) $sku->sku,
+                'product_name' => (string) ($product->description->name ?? ''),
+                'sku_model'    => (string) ($sku->model ?? ''),
+                'quantity'     => $quantity,
+            ]);
+        } catch (Throwable $exception) {
+            Log::warning('Failed to record cart addition event.', [
+                'product_id' => $sku->product_id ?? null,
+                'exception'  => $exception->getMessage(),
+            ]);
+        }
     }
 
     /**
