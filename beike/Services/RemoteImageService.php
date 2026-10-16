@@ -3,7 +3,6 @@
 namespace Beike\Services;
 
 use Illuminate\Support\Str;
-use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use RuntimeException;
 
@@ -23,7 +22,7 @@ class RemoteImageService
 
         // Decode and re-encode: never persist the remote filename or untrusted bytes.
         $extension = $extensions[$info[2]];
-        $image     = (new ImageManager(new Driver))->read($body)->encodeByExtension($extension);
+        $image     = (new ImageManager(['driver' => 'gd']))->make($body)->encode($extension);
         if (strlen((string) $image) > self::MAX_BYTES) {
             throw new RuntimeException('Encoded image is too large.');
         }
