@@ -63,8 +63,8 @@ class RemoteImageService
             CURLOPT_PROTOCOLS      => CURLPROTO_HTTP | CURLPROTO_HTTPS,
             CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_PROXY          => '',
-            CURLOPT_CONNECTTIMEOUT => 3,
-            CURLOPT_TIMEOUT        => 10,
+            CURLOPT_CONNECTTIMEOUT => 10,
+            CURLOPT_TIMEOUT        => 30,
             CURLOPT_SSL_VERIFYPEER => true,
             CURLOPT_SSL_VERIFYHOST => 2,
             CURLOPT_HTTPHEADER     => ['Accept: image/jpeg,image/png,image/gif,image/webp'],
@@ -98,7 +98,12 @@ class RemoteImageService
             $success = curl_exec($curl);
             $status  = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
             if ($success === false || $status !== 200) {
-                throw new RuntimeException('Image download failed.');
+                throw new RuntimeException(sprintf(
+                    'Image download failed (HTTP %d, cURL %d): %s',
+                    $status,
+                    curl_errno($curl),
+                    curl_error($curl)
+                ));
             }
         } finally {
             curl_close($curl);
