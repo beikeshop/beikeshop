@@ -2,6 +2,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Services\RemoteImageService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -130,9 +131,27 @@ class FileController extends Controller
 
     public function catchImages(Request $request)
     {
-        // Remote downloads must not write untrusted content into the public directory.
-        return response()->json([
-            'message' => 'Remote image fetching is disabled. Please upload images directly.',
-        ], 410);
+        $request->validate([
+            'source'   => 'present|array|max:10',
+            'source.*' => 'required|string|max:2048',
+            'type'     => 'sometimes|in:image',
+        ]);
+
+        $images  = [];
+        $service = new RemoteImageService;
+        foreach (array_unique($request->input('source')) as $url) {
+            $image = ['url' => $url, 'path' => $url, 'origin' => $url];
+
+            try {
+                $path          = $service->download($url);
+                $image['url']  = asset($path);
+                $image['path'] = $path;
+            } catch (\Throwable $e) {
+                // Keep the original editor image when fetching is unsafe or unavailable.
+            }
+            $images[] = $image;
+        }
+
+        return json_success(trans('common.success'), $images);
     }
 }
