@@ -82,7 +82,7 @@ BeikeShop 是一款基于 PHP 和 Laravel 开发的开源电子商务平台建�
 
 BeikeShop 可以通过 **安装包**、**源码** 或 **Docker** 进行安装。
 
-### 1. 安装包安装
+### 👤 1. 普通用户安装
 
 1. 下载 BeikeShop：[https://beikeshop.com/download](https://beikeshop.com/download)
 
@@ -101,7 +101,7 @@ BeikeShop 可以通过 **安装包**、**源码** 或 **Docker** 进行安装。
   ```
 
 
-### 2. 源码安装
+### 👨‍💻 2. 开发者安装
 
 ```
 git clone https://github.com/beikeshop/beikeshop.git
@@ -124,7 +124,7 @@ composer install
 php artisan migrate
 ```
 
-### 3. Docker 安装
+### 🐳 3. Docker 安装
 
 1. 安装 Docker & Docker Compose。
 
