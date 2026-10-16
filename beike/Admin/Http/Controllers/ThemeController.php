@@ -64,6 +64,10 @@ class ThemeController extends Controller
      */
     public function update(Request $request, $themeCode)
     {
+        if ($themeCode !== 'default' && ! PluginRepo::getEnabledThemes()->contains('code', $themeCode)) {
+            abort(422, 'Invalid or disabled theme.');
+        }
+
         $importDemo = $request->get('import_demo');
         if ($importDemo) {
             if ($themeCode == 'default') {

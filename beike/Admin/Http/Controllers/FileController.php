@@ -2,10 +2,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Promise;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileController extends Controller
@@ -131,65 +128,11 @@ class FileController extends Controller
         return true;
     }
 
-    /**
-     * @throws \Exception
-     */
     public function catchImages(Request $request)
     {
-        $sources = $request->get('source');
-        $type    = $request->get('type');
-        $images  = [];
-
-        $dirname   = 'upload/' . $type;
-        $localPath = public_path($dirname . '/');
-        if (! is_dir($localPath)) {
-            mkdir($localPath, 0777, true);
-        }
-
-        $client = new Client([
-            'timeout' => 10,
-            'verify'  => false,
-            'headers' => [
-                'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-                'Referer'    => env('APP_URL', ''),
-                'Accept'     => 'image/webp,image/apng,image/*,*/*;q=0.8',
-            ],
-        ]);
-
-        // 创建所有请求的 Promise
-        $promises = [];
-        foreach ($sources as $url) {
-            $promises[$url] = $client->getAsync($url)
-                ->then(
-                    function ($response) use ($url, $localPath, $dirname) {
-                        $ext      = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
-                        $filename = Str::random(40) . '.' . $ext;
-                        file_put_contents($localPath . '/' . $filename, $response->getBody());
-
-                        return [
-                            'url'    => asset($dirname . '/' . $filename),
-                            'path'   => $dirname . '/' . $filename,
-                            'origin' => $url,
-                        ];
-                    },
-                    function () use ($url) {
-                        // 下载失败直接返回原始 URL
-                        return [
-                            'url'    => $url,
-                            'path'   => $url,
-                            'origin' => $url,
-                        ];
-                    }
-                );
-        }
-
-        // 并发执行所有下载
-        $results = Promise\Utils::settle($promises)->wait();
-
-        foreach ($results as $result) {
-            $images[] = $result['value'];
-        }
-
-        return json_success('上传成功', $images);
+        // Remote downloads must not write untrusted content into the public directory.
+        return response()->json([
+            'message' => 'Remote image fetching is disabled. Please upload images directly.',
+        ], 410);
     }
 }
