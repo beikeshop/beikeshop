@@ -183,6 +183,7 @@ Route::prefix($adminName)
                 Route::middleware('can:orders_export')->get('orders/export', [Controllers\OrderController::class, 'export'])->name('orders.export');
                 Route::middleware('can:orders_show')->get('orders/shipping', [Controllers\OrderController::class, 'shipping'])->name('orders.shipping.get');
                 Route::middleware('can:orders_show')->post('orders/shipping', [Controllers\OrderController::class, 'shipping'])->name('orders.shipping.post');
+                Route::middleware('can:orders_export')->get('orders/{order}/export-word', [Controllers\OrderController::class, 'exportWord'])->name('orders.export_word');
                 Route::middleware('can:orders_show')->get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
                 Route::middleware('can:orders_delete')->delete('orders/{order}', [Controllers\OrderController::class, 'destroy'])->name('orders.destroy');
                 Route::middleware('can:orders_update_status')->put('orders/{order}/status', [Controllers\OrderController::class, 'updateStatus'])->name('orders.update_status');

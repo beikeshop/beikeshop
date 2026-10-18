@@ -30,6 +30,7 @@ return [
     'orders_create'            => '創建訂單',
     'orders_delete'            => '刪除訂單',
     'orders_export'            => '導出訂單',
+    'export_word'              => '訂貨單',
     'orders_index'             => '訂單列表',
     'orders_restore'           => '恢復訂單',
     'orders_show'              => '訂單詳情',

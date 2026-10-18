@@ -28,6 +28,7 @@ return [
     'orders_create'                 => 'Create',
     'orders_delete'                 => 'Delete',
     'orders_export'                 => 'Export',
+    'export_word'                   => 'Order sheet',
     'orders_index'                  => 'Index',
     'orders_restore'                => 'Restore',
     'orders_show'                   => 'Detail',

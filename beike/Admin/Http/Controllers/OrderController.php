@@ -13,6 +13,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\OrderSimple;
+use Beike\Admin\Services\OrderWordExportService;
 use Beike\Models\Order;
 use Beike\Models\OrderShipment;
 use Beike\Repositories\OrderRepo;
@@ -104,6 +105,19 @@ class OrderController extends Controller
         hook_action('admin.order.show.after', $data);
 
         return view('admin::pages.orders.form', $data);
+    }
+
+    /**
+     * 导出订单商品明细 Word 文档。
+     */
+    public function exportWord(Order $order, OrderWordExportService $exporter)
+    {
+        $filePath = $exporter->create($order);
+        $fileName = basename($filePath);
+
+        return response()->download($filePath, $fileName, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        ])->deleteFileAfterSend(true);
     }
 
     /**

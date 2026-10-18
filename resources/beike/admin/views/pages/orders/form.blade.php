@@ -7,6 +7,9 @@
 @endsection
 
 @section('page-title-right')
+  @can('orders_export')
+  <a href="{{ admin_route('orders.export_word', ['order' => $order->id]) }}" class="btn btn-outline-primary me-2"><i class="bi bi-file-earmark-word"></i> {{ __('admin/order.export_word') }}</a>
+  @endcan
   <a href="{{ admin_route('orders.shipping.get') }}?order_id={{ $order->id }}"target="_blank" class="btn btn-outline-secondary"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</a>
 @endsection
 
