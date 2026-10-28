@@ -78,7 +78,7 @@ return [
         'form' => [
             'rules' => [
                 'database_connection' => 'required|string|max:50',
-                'database_hostname'   => 'required|string|max:50',
+                'database_hostname'   => 'required|string',
                 'database_port'       => 'required|numeric',
                 'database_name'       => 'required|string|max:50',
                 'database_username'   => 'required|string|max:50',
