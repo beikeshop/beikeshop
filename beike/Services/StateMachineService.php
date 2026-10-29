@@ -13,11 +13,14 @@
 namespace Beike\Services;
 
 use Beike\Admin\Services\UniPushService;
+use Beike\Exceptions\CartException;
 use beike\Models\Customer;
 use Beike\Models\Order;
 use Beike\Models\OrderHistory;
 use Beike\Models\Product;
+use Beike\Models\ProductSku;
 use Beike\Repositories\OrderPaymentRepo;
+use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class StateMachineService
@@ -214,34 +217,40 @@ class StateMachineService
      */
     public function changeStatus($status, string $comment = '', bool $notify = true)
     {
-        $order         = $this->order;
-        $oldStatusCode = $order->status;
-        $newStatusCode = $status;
+        // Serialize transitions so concurrent payment callbacks cannot deduct stock twice.
+        DB::transaction(function () use ($status, $comment, $notify) {
+            Order::query()->whereKey($this->orderId)->lockForUpdate()->firstOrFail();
+            $this->order->refresh();
 
-        $this->setComment($comment)->setNotify($notify);
+            $order         = $this->order;
+            $oldStatusCode = $order->status;
+            $newStatusCode = $status;
 
-        $this->validStatusCode($status);
-        $functions = $this->getFunctions($oldStatusCode, $newStatusCode);
-        if ($functions) {
-            foreach ($functions as $function) {
-                if ($function instanceof \Closure) {
-                    $function();
+            $this->setComment($comment)->setNotify($notify);
 
-                    continue;
+            $this->validStatusCode($status);
+            $functions = $this->getFunctions($oldStatusCode, $newStatusCode);
+            if ($functions) {
+                foreach ($functions as $function) {
+                    if ($function instanceof \Closure) {
+                        $function();
+
+                        continue;
+                    }
+
+                    if (! method_exists($this, $function)) {
+                        throw new \Exception("{$function} not exist in StateMachine!");
+                    }
+                    $this->{$function}($oldStatusCode, $status);
                 }
-
-                if (! method_exists($this, $function)) {
-                    throw new \Exception("{$function} not exist in StateMachine!");
-                }
-                $this->{$function}($oldStatusCode, $status);
             }
-        }
 
-        hook_filter('service.state_machine.change_status.after', ['order' => $order, 'status' => $status, 'comment' => $comment, 'notify' => $notify]);
+            hook_filter('service.state_machine.change_status.after', ['order' => $order, 'status' => $status, 'comment' => $comment, 'notify' => $notify]);
 
-        if (! $order->shipping_method_code && $status == self::PAID) {
-            $this->changeStatus(self::COMPLETED, $comment, $notify);
-        }
+            if (! $order->shipping_method_code && $status == self::PAID) {
+                $this->changeStatus(self::COMPLETED, $comment, $notify);
+            }
+        });
     }
 
     /**
@@ -355,7 +364,16 @@ class StateMachineService
             if (empty($productSku)) {
                 continue;
             }
-            $productSku->decrement('quantity', $orderProduct->quantity);
+            if ($orderProduct->quantity < 1) {
+                throw new CartException(trans('cart.stock_out'));
+            }
+            $updated = ProductSku::query()->whereKey($productSku->id)
+                ->where('quantity', '>=', $orderProduct->quantity)
+                ->decrement('quantity', $orderProduct->quantity);
+            if (! $updated) {
+                throw new CartException(trans('cart.stock_out'));
+            }
+            $productSku->refresh();
             hook_action('service.state_machine.sub_stock.after', ['order_product' => $orderProduct, 'order_number' => $this->order->number]);
         }
     }

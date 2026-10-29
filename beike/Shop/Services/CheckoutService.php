@@ -17,6 +17,7 @@ use Beike\Libraries\Weight;
 use Beike\Models\Address;
 use Beike\Models\Country;
 use Beike\Models\Order;
+use Beike\Models\ProductSku;
 use Beike\Models\Zone;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CartRepo;
@@ -119,6 +120,7 @@ class CheckoutService
         try {
             DB::beginTransaction();
 
+            $this->validateStock($checkoutData['carts']['carts']);
             $order = OrderRepo::create($checkoutData);
             StateMachineService::getInstance($order)->changeStatus(StateMachineService::UNPAID, '', true);
             CartRepo::clearSelectedCartProducts($customer);
@@ -133,6 +135,21 @@ class CheckoutService
         }
 
         return $order;
+    }
+
+    private function validateStock(array $cartProducts): void
+    {
+        $productsBySku = collect($cartProducts)->groupBy('product_sku');
+        $skus          = ProductSku::query()->whereIn('sku', $productsBySku->keys())
+            ->orderBy('id')->lockForUpdate()->get()->keyBy('sku');
+
+        foreach ($productsBySku as $skuCode => $products) {
+            $sku = $skus->get($skuCode);
+            if (! $sku || $products->contains(fn ($product) => $product['quantity'] < 1)
+                       || $products->sum('quantity') > $sku->quantity) {
+                throw new CartException(trans('cart.stock_out'));
+            }
+        }
     }
 
     /**
