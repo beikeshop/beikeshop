@@ -36,7 +36,11 @@ class WishlistController extends Controller
      */
     public function add(Request $request): JsonResponse
     {
-        $productId = $request->get('product_id');
+        $data = $request->validate([
+            'product_id' => 'bail|required|integer|min:1|exists:products,id,deleted_at,NULL',
+        ]);
+
+        $productId = $data['product_id'];
         $wishlist  = CustomerRepo::addToWishlist(current_customer(), $productId);
 
         return json_success(trans('shop/wishlist.add_wishlist_success'), $wishlist);

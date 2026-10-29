@@ -188,7 +188,8 @@ class CustomerRepo
             $customer = Customer::query()->findOrFail($customer);
         }
 
-        if (! $customer->wishlists()->where('product_id', $productId)->first()) {
+        $wishlist = $customer->wishlists()->where('product_id', $productId)->first();
+        if (! $wishlist) {
             $wishlist = $customer->wishlists()->save(new CustomerWishlist(['product_id' => $productId]));
         }
 
