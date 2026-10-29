@@ -219,38 +219,6 @@ class Manager
     }
 
     /**
-     * 上传插件并解压
-     * @throws \Exception
-     */
-    public function import(UploadedFile $file)
-    {
-        // 验证文件类型
-        $this->validatePluginFile($file);
-
-        $originalName = $file->getClientOriginalName();
-        $destPath     = storage_path('upload');
-        $safeFileName = $this->generateSafeFileName($originalName);
-        $newFilePath  = $destPath . '/' . $safeFileName;
-
-        // 确保目录存在
-        if (! is_dir($destPath)) {
-            mkdir($destPath, 0755, true);
-        }
-
-        $file->move($destPath, $safeFileName);
-
-        try {
-            // 安全解压ZIP文件
-            $this->safeExtractZip($newFilePath, base_path('plugins'));
-        } finally {
-            // 清理临时文件
-            if (file_exists($newFilePath)) {
-                @unlink($newFilePath);
-            }
-        }
-    }
-
-    /**
      * 验证插件文件
      */
     private function validatePluginFile(UploadedFile $file): void
