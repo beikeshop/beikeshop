@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Exceptions\RegisterErrorViewPaths;
 use Illuminate\Session\TokenMismatchException;
@@ -140,6 +141,10 @@ class Handler extends ExceptionHandler
             // 其他 Ajax 异常
             $statusCode = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500;
             $message    = $exception->getMessage();
+
+            if ($exception instanceof QueryException && ! config('app.debug')) {
+                $message = 'Server Error';
+            }
 
             if (empty($message) || $message === 'Server Error') {
                 $message = '服务器错误，请联系管理员';

@@ -13,9 +13,11 @@
 namespace Beike\Shop\Services;
 
 use Beike\Models\CartProduct;
+use Beike\Models\ProductSku;
 use Beike\Repositories\CartRepo;
 use Beike\Shop\Http\Resources\CartDetail;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class CartService
 {
@@ -79,45 +81,42 @@ class CartService
 
         self::validateQuantity($quantity);
 
-        $productId  = $sku->product_id;
-        $skuCode    = $sku->sku;
+        return DB::transaction(function () use ($sku, $quantity, $customerId) {
+            // Lock the SKU even when no cart row exists yet.
+            $sku = ProductSku::query()->lockForUpdate()->findOrFail($sku->id);
 
-        if ($customerId) {
-            $builder = CartProduct::query()->where('customer_id', $customerId);
-        } else {
-            $builder = CartProduct::query()->where('session_id', get_session_id());
-        }
-        $cart = $builder->where('product_id', $productId)
-            ->where('product_sku', $skuCode)
-            ->first();
-
-        if ($cart) {
-            if ($cart->quantity + $quantity > $cart->sku->quantity) {
+            if ($customerId) {
+                $builder = CartProduct::query()->where('customer_id', $customerId);
+            } else {
+                $builder = CartProduct::query()->where('session_id', get_session_id());
+            }
+            $builder->where('product_id', $sku->product_id)->where('product_sku', $sku->sku);
+            $cartItems     = (clone $builder)->lockForUpdate()->get();
+            $totalQuantity = $cartItems->sum('quantity') + $quantity;
+            if ($totalQuantity > $sku->quantity) {
                 throw new Exception(trans('cart.stock_out'));
             }
-            $cart->selected = true;
-            $cart->increment('quantity', $quantity);
-        } else {
-            if (count(self::list(current_customer())) >= 500) {
-                throw new Exception(trans('cart.cart_quantity_max_500'));
+
+            $cart = $cartItems->first();
+            if ($cart) {
+                $cart->update(['quantity' => $cart->quantity + $quantity, 'selected' => true]);
+            } else {
+                if (CartRepo::allCartProductsBuilder($customerId)->count() >= 500) {
+                    throw new Exception(trans('cart.cart_quantity_max_500'));
+                }
+                $cart = CartProduct::query()->create([
+                    'customer_id' => $customerId,
+                    'session_id'  => get_session_id(),
+                    'product_id'  => $sku->product_id,
+                    'product_sku' => $sku->sku,
+                    'quantity'    => $quantity,
+                    'selected'    => true,
+                ]);
             }
-            $cart = CartProduct::query()->create([
-                'customer_id'    => $customerId,
-                'session_id'     => get_session_id(),
-                'product_id'     => $productId,
-                'product_sku'    => $skuCode,
-                'quantity'       => $quantity,
-                'selected'       => true,
-            ]);
-        }
+            self::$cartList = null;
 
-        $cartQuantity = $cart->quantity;
-        $skuQuantity  = $cart->sku->quantity;
-        if ($cartQuantity > $skuQuantity) {
-            throw new Exception(trans('cart.stock_out'));
-        }
-
-        return $cart;
+            return $cart;
+        });
     }
 
     /**
@@ -179,16 +178,26 @@ class CartService
             $builder = CartProduct::query()->where('session_id', get_session_id());
         }
 
-        $cart = $builder->where('id', $cartId)->first();
+        $cart = (clone $builder)->where('id', $cartId)->first();
         if (empty($cart)) {
             return;
         }
 
-        if ($quantity > $cart->sku->quantity) {
-            throw new Exception(trans('cart.stock_out'));
-        }
+        DB::transaction(function () use ($builder, $cartId, $cart, $quantity) {
+            $sku       = ProductSku::query()->where('sku', $cart->product_sku)->lockForUpdate()->firstOrFail();
+            $cartItems = (clone $builder)->where('product_sku', $sku->sku)->lockForUpdate()->get();
+            $cart      = $cartItems->firstWhere('id', $cartId);
+            if (! $cart) {
+                return;
+            }
+            $totalQuantity = $cartItems->where('id', '<>', $cartId)->sum('quantity') + $quantity;
+            if ($totalQuantity > $sku->quantity) {
+                throw new Exception(trans('cart.stock_out'));
+            }
 
-        $cart->update(['quantity' => $quantity, 'selected' => 1]);
+            $cart->update(['quantity' => $quantity, 'selected' => 1]);
+            self::$cartList = null;
+        });
     }
 
     /**

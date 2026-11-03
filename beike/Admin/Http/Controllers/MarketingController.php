@@ -132,6 +132,9 @@ class MarketingController
 
             if ($request->get('type') == 'update') {
                 $plugin = app('plugin')->getPluginOrFail($pluginCode);
+                PluginRepo::publishPluginFiles($plugin);
+                PluginRepo::publishThemeFiles($plugin);
+                PluginRepo::publishLangFiles($plugin);
                 PluginRepo::migrateDatabase($plugin);
 
                 return json_success(trans('admin/marketing.update_success'));
