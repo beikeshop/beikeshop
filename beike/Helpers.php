@@ -72,7 +72,7 @@ function plugin_setting($key, $default = null)
  */
 function plugin_asset($code, $filePath): string
 {
-    return shop_route('plugin.asset', ['code' => $code, 'path' => $filePath]);
+    return shop_route('plugin.asset', ['code' => $code, 'path' => $filePath], false);
 }
 
 /**
