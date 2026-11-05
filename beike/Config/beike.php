@@ -13,7 +13,7 @@
 return [
     'api_url'          => env('BEIKE_API', 'https://api2.beikeshop.com'),
     'official_website' => env('BEIKE_OFFICIAL_WEBSITE', 'https://beikeshop.com'),
-    'version'          => '2.0.0.31',
+    'version'          => '2.0.0.32',
     'build'            => '20260519',
     'website_key'      => 'OR5DOG3vnhM5A9iFz4WePCyjiDmglEbeFK8xiypjxvM=',
 

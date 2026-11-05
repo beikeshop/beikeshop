@@ -43,7 +43,7 @@
       </div>
     </div>
     <div>
-      <button class="btn btn-primary btn-lg" type="button" @click="checkedBtnCheckoutConfirm">{{
+      <button class="btn btn-primary btn-lg" type="button" :disabled="submitting" @click="checkedBtnCheckoutConfirm">{{
         __('Stripe::common.btn_submit') }}</button>
     </div>
   </div>
@@ -74,6 +74,7 @@
         cardCvc: '',
         cardholderName: ''
       },
+      submitting: false,
     },
 
     beforeMount() {
@@ -136,41 +137,45 @@
       },
 
       checkedBtnCheckoutConfirm() {
-        // 判断 stripeForm.errors 里面的值是否都为空
-        if (stripeForm.form.cardholder_Name == '') {
-          stripeForm.errors.cardholderName = 'Please fill out a cardholder name.'
+        if (this.submitting) return;
+        if (stripeForm.form.cardholder_Name.trim() == '') {
+          stripeForm.errors.cardholderName = 'Please fill out a cardholder name.';
+          return;
         }
 
-        // if (Object.values(stripeForm.errors).every(e => e == '')) {
-        const options = {
-          name: stripeForm.form.cardholder_Name,
-        };
+        this.submitting = true;
+        layer.load(2, {shade: [0.3, '#fff']});
 
-        layer.load(2, {shade: [0.3, '#fff']})
+        $http.post('/stripe/payment-intent', {order_number: orderNumber}, {hload: true})
+          .then(async (intent) => {
+            if (intent.status !== 'success') throw new Error(intent.message);
 
-        stripe.createToken(cardNumberElement, options).then(function (stripeResult) {
-          if (stripeResult.error) {
+            const result = await stripe.confirmCardPayment(intent.data.client_secret, {
+              payment_method: {
+                card: cardNumberElement,
+                billing_details: {name: stripeForm.form.cardholder_Name.trim()},
+              },
+            });
+            if (result.error) throw new Error(result.error.message);
 
-            layer.msg(stripeResult.error.message, () => {
-            })
-            layer.closeAll('loading')
-          } else {
-            $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: orderNumber}).then((pay) => {
-              if (pay.status == 'success') {
+            const pay = await $http.post('/stripe/capture', {
+              payment_intent_id: result.paymentIntent.id,
+              order_number: orderNumber,
+            }, {hload: true});
+            if (pay.status !== 'success') throw new Error(pay.message);
 
-                const lang = "{{ locale() === system_setting('base.locale') ? "null": session()->get('locale') }}";
-                let path = "/" + "{{ session()->get('locale') }}" + "/checkout/success?order_number=" + orderNumber;
-                if(lang === "null") {
-                  path = "/checkout/success?order_number=" + orderNumber
-                }
-                location = path;
-              } else {
-                layer.msg(pay.message, () => {
-                })
-              }
-            })
-          }
-        })
+            const lang = "{{ locale() === system_setting('base.locale') ? "null": session()->get('locale') }}";
+            let path = "/" + "{{ session()->get('locale') }}" + "/checkout/success?order_number=" + orderNumber;
+            if (lang === "null") path = "/checkout/success?order_number=" + orderNumber;
+            location = path;
+          })
+          .catch((error) => {
+            layer.msg(error.response?.data?.message || error.message);
+          })
+          .finally(() => {
+            this.submitting = false;
+            layer.closeAll('loading');
+          });
       },
     }
   })

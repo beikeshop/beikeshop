@@ -25,6 +25,22 @@ use Stripe\Webhook;
 
 class StripeController extends Controller
 {
+    public function createPaymentIntent(Request $request): JsonResponse
+    {
+        try {
+            $order         = $this->getPayableOrder($request->input('order_number'));
+            $paymentIntent = (new StripeService($order))->createWebPaymentIntent();
+            OrderPaymentRepo::createOrUpdatePayment($order->id, [
+                'transaction_id' => $paymentIntent->id,
+                'request'        => ['payment_intent_id' => $paymentIntent->id],
+            ]);
+
+            return json_success('', ['client_secret' => $paymentIntent->client_secret]);
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
     /**
      * 订单支付扣款
      *
@@ -35,14 +51,25 @@ class StripeController extends Controller
     public function capture(Request $request): JsonResponse
     {
         try {
-            $number         = request('order_number');
-            $customer       = current_customer();
-            $order          = OrderRepo::getOrderByNumber($number, $customer);
-            $creditCardData = $request->all();
+            $order           = $this->getPayableOrder($request->input('order_number'), true);
+            $creditCardData  = $request->all();
+            $paymentIntentId = StripeService::getPaymentIntentId($creditCardData);
+            if (in_array($order->status, ['paid', 'shipped', 'completed'], true)) {
+                return $paymentIntentId && $order->orderPayments()->where('transaction_id', $paymentIntentId)->exists()
+                    ? json_success(trans('Stripe::common.capture_success'))
+                    : json_fail(trans('Stripe::common.capture_fail'));
+            }
+            $service = new StripeService($order);
 
-            OrderPaymentRepo::createOrUpdatePayment($order->id, ['request' => $creditCardData]);
-            $result = (new StripeService($order))->capture($creditCardData);
-            OrderPaymentRepo::createOrUpdatePayment($order->id, ['response' => $result]);
+            $result      = $service->capture($creditCardData);
+            $paymentData = [
+                'request'        => $creditCardData,
+                'response'       => ['verified' => $result],
+            ];
+            if ($result) {
+                $paymentData['transaction_id'] = $paymentIntentId;
+            }
+            OrderPaymentRepo::createOrUpdatePayment($order->id, $paymentData);
 
             if ($result) {
                 StateMachineService::getInstance($order)->setShipment()->changeStatus(StateMachineService::PAID);
@@ -50,7 +77,7 @@ class StripeController extends Controller
                 return json_success(trans('Stripe::common.capture_success'));
             }
 
-            return json_success(trans('Stripe::common.capture_fail'));
+            return json_fail(trans('Stripe::common.capture_fail'));
 
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
@@ -68,28 +95,23 @@ class StripeController extends Controller
         Log::info('====== Start Stripe Callback ======');
 
         try {
-            $webhookSecret = plugin_setting('stripe.webhook_secret');
-            $payload       = $request->getContent();
-            $requestData   = [];
-
-            if (! empty($webhookSecret)) {
-                $signature = $request->header('Stripe-Signature', '');
-                if (empty($signature)) {
-                    Log::warning('Stripe callback missing signature header');
-
-                    return json_fail('Invalid Stripe signature', [], 400);
-                }
-
-                $event       = Webhook::constructEvent($payload, $signature, $webhookSecret);
-                $requestData = $event->toArray();
-            } else {
-                Log::warning('Stripe webhook secret is not configured, skip signature verification');
-
-                $requestData = json_decode($payload, true);
-                if (! is_array($requestData)) {
-                    return json_fail('Invalid Stripe payload', [], 400);
-                }
+            if (! app('plugin')->checkActive('stripe')) {
+                return json_fail(trans('shop/order.invalid_order'), [], 400);
             }
+            $webhookSecret = plugin_setting('stripe.webhook_secret');
+            if (empty($webhookSecret)) {
+                Log::warning('Stripe webhook secret is not configured');
+
+                return json_fail('Stripe webhook secret is not configured', [], 500);
+            }
+
+            $signature = $request->header('Stripe-Signature', '');
+            if (empty($signature)) {
+                return json_fail('Invalid Stripe signature', [], 400);
+            }
+
+            $event       = Webhook::constructEvent($request->getContent(), $signature, $webhookSecret);
+            $requestData = $event->toArray();
 
             Log::info('Request data: ' . json_encode($requestData));
 
@@ -100,8 +122,15 @@ class StripeController extends Controller
             Log::info('Request type: ' . $type);
             Log::info('Request number: ' . $orderNumber);
 
-            if ($type == 'charge.succeeded' && $order) {
-                StateMachineService::getInstance($order)->setShipment()->changeStatus(StateMachineService::PAID);
+            $intentId            = $requestData['data']['object']['id'] ?? '';
+            $matchesOrderPayment = $order
+                && $order->payment_method_code === 'stripe'
+                && $order->orderPayments()->where('transaction_id', $intentId)->exists();
+            if ($type === 'payment_intent.succeeded' && $matchesOrderPayment) {
+                if ($order->status === 'unpaid' && (new StripeService($order))->capture(['payment_intent_id' => $intentId])) {
+                    OrderPaymentRepo::createOrUpdatePayment($order->id, ['callback' => $requestData]);
+                    StateMachineService::getInstance($order)->setShipment()->changeStatus(StateMachineService::PAID);
+                }
 
                 return json_success(trans('Stripe::common.capture_success'));
             }
@@ -117,5 +146,28 @@ class StripeController extends Controller
 
             return json_fail($e->getMessage(), [], 500);
         }
+    }
+
+    private function getPayableOrder($number, bool $allowPaid = false)
+    {
+        if (! app('plugin')->checkActive('stripe')) {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
+        $customer = current_customer();
+        $order    = OrderRepo::getOrderByNumber($number, $customer);
+
+        $statuses = $allowPaid ? ['unpaid', 'paid', 'shipped', 'completed'] : ['unpaid'];
+        if (! $order || $order->payment_method_code !== 'stripe' || ! in_array($order->status, $statuses, true)) {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
+        if ($customer && (int) $order->customer_id !== (int) $customer->id) {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
+
+        if (! $customer && ! OrderRepo::isGuestOrderAuthorized($order)) {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
+
+        return $order;
     }
 }

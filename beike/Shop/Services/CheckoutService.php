@@ -134,6 +134,15 @@ class CheckoutService
             throw $e;
         }
 
+        // UniApp guests keep the existing Bksessionid header as their order authorization.
+        if (! $customer && request()->is('api/*') && request()->header('Bksessionid')) {
+            cache()->put(
+                'guest_order.' . $order->number,
+                hash('sha256', request()->header('Bksessionid')),
+                (int) config('session.lifetime') * 60
+            );
+        }
+
         return $order;
     }
 
@@ -178,14 +187,14 @@ class CheckoutService
         if ($this->customer) {
             if ($this->shippingRequired()) {
                 $shippingAddressId = $current['shipping_address_id'];
-                $shippingAddress = Address::query()->find($shippingAddressId);
+                $shippingAddress   = Address::query()->find($shippingAddressId);
                 if (empty($shippingAddress) || $shippingAddress->customer_id != $this->customer->id) {
                     throw new \Exception(trans('shop/carts.invalid_shipping_address'));
                 }
             }
 
             $paymentAddressId = $current['payment_address_id'];
-            $paymentAddress = Address::query()->find($paymentAddressId);
+            $paymentAddress   = Address::query()->find($paymentAddressId);
             if (empty($paymentAddress) || $paymentAddress->customer_id != $this->customer->id) {
                 throw new \Exception(trans('shop/carts.invalid_payment_address'));
             }

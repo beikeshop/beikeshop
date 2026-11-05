@@ -17,13 +17,13 @@ return [
 <div class="mt-2 rounded-3 border border-warning-subtle bg-light p-3">
   <div class="fw-bold mb-2">How to get this value</div>
   <div class="text-muted mb-2">To verify Stripe webhook signatures, enter the webhook signing secret that starts with <code>whsec_</code>. Do not use the API Secret Key such as <code>sk_test_...</code> or <code>sk_live_...</code>.</div>
-  <div class="text-muted mb-2">When configured, BeikeShop uses this secret to verify that webhook requests really come from Stripe. If left empty, webhook signature verification is skipped.</div>
+  <div class="text-muted mb-2">When configured, BeikeShop uses this secret to verify that webhook requests really come from Stripe. If left empty, webhook requests are rejected; synchronous payment confirmation remains available.</div>
   <div class="mb-1">Steps:</div>
   <ol class="mb-2 ps-3">
     <li>Log in to Stripe Dashboard.</li>
     <li>Open <strong>Developers</strong> -> <strong>Webhooks</strong>.</li>
     <li>Click your Webhook Endpoint. If you do not have one yet, create an Endpoint first.</li>
-    <li>When creating the Endpoint, choose the event <code>checkout.session.completed</code>.</li>
+    <li>When creating the Endpoint, choose the event <code>payment_intent.succeeded</code>.</li>
     <li>After the Endpoint is created, open it and find <strong>Signing secret</strong>.</li>
     <li>Click <strong>Reveal</strong> to show the secret.</li>
     <li>Copy the displayed Signing Secret and paste it into this Webhook Secret field.</li>

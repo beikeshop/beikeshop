@@ -56,8 +56,7 @@ class PaypalController
             return response()->json(['message' => 'orderNumber is required'], 422);
         }
 
-        $customer      = current_customer();
-        $order         = OrderRepo::getOrderByNumber($orderNumber, $customer);
+        $order         = $this->getPayableOrder($orderNumber);
         $paypalService = $this->initPaypal($order);
 
         if ($paypalService->isNvpApi()) {
@@ -84,8 +83,7 @@ class PaypalController
             return response()->json(['message' => 'orderNumber is required'], 422);
         }
 
-        $customer      = current_customer();
-        $order         = OrderRepo::getOrderByNumber($orderNumber, $customer);
+        $order         = $this->getPayableOrder($orderNumber);
         $paypalService = $this->initPaypal($order);
 
         OrderPaymentRepo::createOrUpdatePayment($order->id, ['request' => $data]);
@@ -110,10 +108,14 @@ class PaypalController
                 return response()->json(['message' => 'PayPal REST client is not initialized'], 500);
             }
 
-            $result = $paypalService->paypalClient->capturePaymentOrder($paypalOrderId);
+            $result = $paypalService->captureRestOrder($paypalOrderId);
         }
 
-        OrderPaymentRepo::createOrUpdatePayment($order->id, ['response' => $result]);
+        $paymentData = ['response' => $result];
+        if ($paypalService->isPaymentSuccessful($result)) {
+            $paymentData['transaction_id'] = data_get($result, 'purchase_units.0.payments.captures.0.id') ?? ($result['id'] ?? null);
+        }
+        OrderPaymentRepo::createOrUpdatePayment($order->id, $paymentData);
         $this->markOrderPaid($paypalService, $order, $result);
 
         return response()->json($result);
@@ -131,13 +133,16 @@ class PaypalController
         }
 
         try {
-            $customer      = current_customer();
-            $order         = OrderRepo::getOrderByNumber($orderNumber, $customer);
+            $order         = $this->getPayableOrder($orderNumber);
             $paypalService = $this->initPaypal($order);
 
             OrderPaymentRepo::createOrUpdatePayment($order->id, ['request' => $data]);
-            $result = $paypalService->captureNvpPayment($token, $payerId);
-            OrderPaymentRepo::createOrUpdatePayment($order->id, ['response' => $result]);
+            $result      = $paypalService->captureNvpPayment($token, $payerId);
+            $paymentData = ['response' => $result];
+            if ($paypalService->isPaymentSuccessful($result)) {
+                $paymentData['transaction_id'] = $result['id'] ?? null;
+            }
+            OrderPaymentRepo::createOrUpdatePayment($order->id, $paymentData);
             $this->markOrderPaid($paypalService, $order, $result);
 
             $paid = $paypalService->isPaymentSuccessful($result);
@@ -178,6 +183,7 @@ class PaypalController
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+
             throw $e;
         }
     }
@@ -206,6 +212,28 @@ class PaypalController
     private function getOrderNumberFromData(array $data, Request $request): string
     {
         return trim((string) ($data['orderNumber'] ?? $data['order_number'] ?? $request->input('orderNumber') ?? $request->input('order_number') ?? ''));
+    }
+
+    private function getPayableOrder(string $orderNumber)
+    {
+        if (! app('plugin')->checkActive('paypal')) {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
+        $customer = current_customer();
+        $order    = OrderRepo::getOrderByNumber($orderNumber, $customer);
+
+        if (! $order || $order->payment_method_code !== 'paypal' || $order->status !== 'unpaid') {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
+        if ($customer && (int) $order->customer_id !== (int) $customer->id) {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
+
+        if (! $customer && ! OrderRepo::isGuestOrderAuthorized($order)) {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
+
+        return $order;
     }
 
     private function hasNvpCaptureData(array $data, Request $request): bool

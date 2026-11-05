@@ -13,6 +13,7 @@
 namespace Plugin\Stripe\Services;
 
 use Beike\Models\Country;
+use Beike\Repositories\OrderPaymentRepo;
 use Beike\Shop\Services\PaymentService;
 use Stripe\Customer;
 use Stripe\Exception\ApiErrorException;
@@ -48,59 +49,31 @@ class StripeService extends PaymentService
      */
     public function capture($creditCardData): bool
     {
-        // web
-        if (isset($creditCardData['token'])) {
-            $tokenId  = $creditCardData['token'] ?? '';
-            $currency = $this->order->currency_code;
+        $paymentIntentId = self::getPaymentIntentId($creditCardData);
+        $paymentIntent   = $this->stripeClient->paymentIntents->retrieve($paymentIntentId);
 
-            if (! in_array($currency, self::ZERO_DECIMAL)) {
-                $total = round($this->order->total, 2) * 100;
-            } else {
-                $total = floor($this->order->total);
-            }
+        return $paymentIntent->livemode                         === ! (bool) plugin_setting('stripe.test_mode')
+            && $paymentIntent->status                           === 'succeeded'
+            && ($paymentIntent->metadata['order_number'] ?? '') === $this->order->number
+            && $paymentIntent->amount                           === $this->getAmount()
+            && strtolower($paymentIntent->currency)             === strtolower($this->order->currency_code);
 
-            $stripeCustomer = $this->createCustomer($tokenId);
+    }
 
-            $stripeChargeParameters = [
-                'amount'   => $total,
-                'currency' => $currency,
-                'metadata' => [
-                    'order_number' => $this->order->number,
-                ],
-                'customer' => $stripeCustomer->id,
-                'shipping' => $this->getShippingAddress(),
-            ];
-
-            // $charge = \Stripe\Charge::create($stripeChargeParameters);
-            $charge = $this->stripeClient->charges->create($stripeChargeParameters);
-
-            return $charge['paid'] && $charge['captured'];
+    public static function getPaymentIntentId(array $paymentData): string
+    {
+        $paymentIntentId = (string) ($paymentData['payment_intent_id'] ?? '');
+        if ($paymentIntentId !== '') {
+            return $paymentIntentId;
         }
-        // app
-        // 从返回的 client_secret 中提取 payment_intent_id
-        $clientSecret = $creditCardData['paymentIntent'] ?? '';
-        if (empty($clientSecret)) {
+
+        $clientSecret   = (string) ($paymentData['paymentIntent'] ?? '');
+        $secretPosition = strpos($clientSecret, '_secret');
+        if ($secretPosition === false) {
             throw new \Exception('Invalid paymentIntent');
         }
 
-        // 提取 payment_intent_id (前缀到第一个 '_secret' 之前的部分)
-        $paymentIntentId = substr($clientSecret, 0, strpos($clientSecret, '_secret'));
-
-        // 检查是否成功提取 payment_intent_id
-        if (empty($paymentIntentId)) {
-            throw new \Exception('Invalid paymentIntent ID');
-        }
-
-        // 根据 PaymentIntent ID 查询支付状态
-        $paymentIntent = $this->stripeClient->paymentIntents->retrieve($paymentIntentId);
-
-        // 检查支付状态
-        if ($paymentIntent->status === 'succeeded') {
-            return true;
-        }
-
-        return false;
-
+        return substr($clientSecret, 0, $secretPosition);
     }
 
     /**
@@ -109,7 +82,7 @@ class StripeService extends PaymentService
      * @return Customer
      * @throws ApiErrorException
      */
-    private function createCustomer(string $source = ''): Customer
+    private function createCustomer(): Customer
     {
         $paymentCountry = Country::query()->find($this->order->payment_country_id);
         $customerData   = [
@@ -130,10 +103,6 @@ class StripeService extends PaymentService
                 'order_number' => $this->order->number,
             ],
         ];
-
-        if ($source) {
-            $customerData['source'] = $source;
-        }
 
         return $this->stripeClient->customers->create($customerData);
     }
@@ -168,6 +137,10 @@ class StripeService extends PaymentService
     {
         $stripeCustomer = $this->createCustomer();
         $paymentIntent  = $this->createPaymentIntent($stripeCustomer);
+        OrderPaymentRepo::createOrUpdatePayment($this->order->id, [
+            'transaction_id' => $paymentIntent->id,
+            'request'        => ['payment_intent_id' => $paymentIntent->id],
+        ]);
 
         return [
             'isAllowDelay'   => true,
@@ -211,16 +184,9 @@ class StripeService extends PaymentService
      */
     public function createPaymentIntent($stripeCustomer): PaymentIntent
     {
-        $currency = $this->order->currency_code;
-        if (! in_array($currency, self::ZERO_DECIMAL)) {
-            $total = round($this->order->total, 2) * 100;
-        } else {
-            $total = floor($this->order->total);
-        }
-
         return $this->stripeClient->paymentIntents->create([
-            'amount'                    => $total,
-            'currency'                  => $currency,
+            'amount'                    => $this->getAmount(),
+            'currency'                  => strtolower($this->order->currency_code),
             'automatic_payment_methods' => [
                 'enabled' => true,
             ],
@@ -230,5 +196,25 @@ class StripeService extends PaymentService
             ],
             'shipping' => $this->getShippingAddress(),
         ]);
+    }
+
+    public function createWebPaymentIntent(): PaymentIntent
+    {
+        return $this->stripeClient->paymentIntents->create([
+            'amount'                    => $this->getAmount(),
+            'currency'                  => strtolower($this->order->currency_code),
+            'automatic_payment_methods' => ['enabled' => true],
+            'metadata'                  => ['order_number' => $this->order->number],
+            'shipping'                  => $this->getShippingAddress(),
+        ], ['idempotency_key' => 'beikeshop-web-order-' . $this->order->id]);
+    }
+
+    private function getAmount(): int
+    {
+        if (in_array(strtoupper($this->order->currency_code), self::ZERO_DECIMAL)) {
+            return (int) floor($this->order->total);
+        }
+
+        return (int) round(round($this->order->total, 2) * 100);
     }
 }

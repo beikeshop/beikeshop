@@ -169,6 +169,24 @@ class OrderRepo
         return $builder->first();
     }
 
+    public static function isGuestOrderAuthorized(Order $order): bool
+    {
+        if ($order->customer_id) {
+            return false;
+        }
+
+        if (request()->is('api/*')) {
+            $sessionId         = (string) request()->header('Bksessionid', '');
+            $authorizedSession = cache()->get('guest_order.' . $order->number);
+
+            return $sessionId !== '' && is_string($authorizedSession)
+                                     && hash_equals($authorizedSession, hash('sha256', $sessionId));
+        }
+
+        return request()->hasSession()
+            && in_array((string) $order->number, array_map('strval', session('guest_order_numbers', [])), true);
+    }
+
     /**
      * 通过订单ID或者订单号获取订单
      *

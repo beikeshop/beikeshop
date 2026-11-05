@@ -51,11 +51,11 @@ class PaypalService extends PaymentService
             'mode'    => $mode,
             'sandbox' => [
                 'client_id'     => $paypalSetting['sandbox_client_id'] ?? '',
-                'client_secret' => $paypalSetting['sandbox_secret'] ?? '',
+                'client_secret' => $paypalSetting['sandbox_secret']    ?? '',
             ],
             'live' => [
                 'client_id'     => $paypalSetting['live_client_id'] ?? '',
-                'client_secret' => $paypalSetting['live_secret'] ?? '',
+                'client_secret' => $paypalSetting['live_secret']    ?? '',
             ],
             'payment_action' => 'Sale',
             'currency'       => $this->getPaymentCurrency(),
@@ -87,8 +87,8 @@ class PaypalService extends PaymentService
                 'clientId'    => '',
                 'currency'    => $this->getPaymentCurrency(),
                 'environment' => $mode,
-                'orderId'     => $paypalOrder['id'] ?? null,
-                'token'       => $paypalOrder['token'] ?? null,
+                'orderId'     => $paypalOrder['id']           ?? null,
+                'token'       => $paypalOrder['token']        ?? null,
                 'approvalUrl' => $paypalOrder['approval_url'] ?? null,
                 'userAction'  => 'paynow',
             ];
@@ -126,7 +126,6 @@ class PaypalService extends PaymentService
             $this->initPaypal();
         }
 
-        $order = $this->order;
         $total = $this->formatPaymentAmount();
 
         return $this->paypalClient->createOrder([
@@ -137,6 +136,7 @@ class PaypalService extends PaymentService
                         'currency_code' => $this->getPaymentCurrency(),
                         'value'         => $total,
                     ],
+                    'custom_id'   => $this->getOrderNumber(),
                     'description' => $this->getOrderDescription(),
                 ],
             ],
@@ -194,6 +194,35 @@ class PaypalService extends PaymentService
         ];
     }
 
+    public function captureRestOrder(string $paypalOrderId): array
+    {
+        if ($this->paypalClient === null) {
+            throw new \RuntimeException('PayPal REST client is not initialized.');
+        }
+
+        $paypalOrder  = $this->paypalClient->showOrderDetails($paypalOrderId);
+        $purchaseUnit = $paypalOrder['purchase_units'][0] ?? [];
+        $amount       = $purchaseUnit['amount']           ?? [];
+
+        if (! in_array($paypalOrder['status'] ?? '', ['APPROVED', 'COMPLETED'], true)
+            || (string) ($purchaseUnit['custom_id'] ?? '')           !== $this->getOrderNumber()
+            || $this->formatAmount($amount['value'] ?? '')           !== $this->formatPaymentAmount()
+            || strtoupper((string) ($amount['currency_code'] ?? '')) !== $this->getPaymentCurrency()) {
+            throw new \RuntimeException('PayPal order does not match the shop order.');
+        }
+
+        // Recover a completed capture if the previous confirmation request was interrupted.
+        if (($paypalOrder['status'] ?? '') === 'COMPLETED') {
+            if (! $this->isPaymentSuccessful($paypalOrder)) {
+                throw new \RuntimeException('PayPal capture does not match the shop order.');
+            }
+
+            return $paypalOrder;
+        }
+
+        return $this->paypalClient->capturePaymentOrder($paypalOrderId);
+    }
+
     public function captureNvpPayment(string $token, string $payerId): array
     {
         $token   = trim($token);
@@ -245,7 +274,19 @@ class PaypalService extends PaymentService
             $status = strtoupper((string) ($response['PAYMENTINFO_0_PAYMENTSTATUS'] ?? $response['PAYMENTSTATUS'] ?? ''));
         }
 
-        return $status === 'COMPLETED';
+        if ($this->isNvpApi()) {
+            return $status === 'COMPLETED';
+        }
+
+        $purchaseUnit = $result['purchase_units'][0]             ?? [];
+        $capture      = $purchaseUnit['payments']['captures'][0] ?? [];
+        $amount       = $capture['amount']                       ?? [];
+
+        return $status                                               === 'COMPLETED'
+            && ($capture['status'] ?? '')                            === 'COMPLETED'
+            && (string) ($purchaseUnit['custom_id'] ?? '')           === $this->getOrderNumber()
+            && $this->formatAmount($amount['value'] ?? '')           === $this->formatPaymentAmount()
+            && strtoupper((string) ($amount['currency_code'] ?? '')) === $this->getPaymentCurrency();
     }
 
     public function isNvpApi(): bool
@@ -348,7 +389,7 @@ class PaypalService extends PaymentService
         $invoiceNumber = $details['PAYMENTREQUEST_0_INVNUM'] ?? $details['INVNUM'] ?? null;
         $orderNumber   = $this->getOrderNumber();
 
-        if ($invoiceNumber !== null && $orderNumber !== '' && (string) $invoiceNumber !== $orderNumber) {
+        if ($invoiceNumber === null || $orderNumber === '' || (string) $invoiceNumber !== $orderNumber) {
             throw new \RuntimeException('PayPal invoice number does not match the order number.');
         }
     }
