@@ -200,13 +200,20 @@ class StripeService extends PaymentService
 
     public function createWebPaymentIntent(): PaymentIntent
     {
-        return $this->stripeClient->paymentIntents->create([
+        $parameters = [
             'amount'                    => $this->getAmount(),
             'currency'                  => strtolower($this->order->currency_code),
             'automatic_payment_methods' => ['enabled' => true],
             'metadata'                  => ['order_number' => $this->order->number],
             'shipping'                  => $this->getShippingAddress(),
-        ], ['idempotency_key' => 'beikeshop-web-order-' . $this->order->id]);
+        ];
+
+        // Reuse the key only when every Stripe request parameter is unchanged.
+        $idempotencyKey = 'beikeshop-web-' . hash('sha256', json_encode($parameters));
+
+        return $this->stripeClient->paymentIntents->create($parameters, [
+            'idempotency_key' => $idempotencyKey,
+        ]);
     }
 
     private function getAmount(): int

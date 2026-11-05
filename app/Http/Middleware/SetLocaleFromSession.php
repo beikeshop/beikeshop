@@ -52,6 +52,11 @@ class SetLocaleFromSession
         string $defaultLocale,
         array $enabledLanguages
     ): ?RedirectResponse {
+        // 非 GET/HEAD 请求不重写 URL（POST/PUT/DELETE 重定向会丢失方法）
+        if (! $request->isMethod('get') && ! $request->isMethod('head')) {
+            return null;
+        }
+
         $segments = array_values(array_filter(explode('/', trim($rawPath, '/'))));
 
         // 语言切换路由自身不做重写，避免干扰切换逻辑

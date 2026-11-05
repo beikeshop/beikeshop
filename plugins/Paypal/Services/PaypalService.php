@@ -220,6 +220,9 @@ class PaypalService extends PaymentService
             return $paypalOrder;
         }
 
+        // Payment verification requires the complete order and capture details.
+        $this->paypalClient->setRequestHeader('Prefer', 'return=representation');
+
         return $this->paypalClient->capturePaymentOrder($paypalOrderId);
     }
 
