@@ -24,6 +24,7 @@ class ForgottenRequest extends FormRequest
     public function rules()
     {
         return [
+            'code'     => ['required', 'string', 'regex:/^[0-9]{6}$/D'],
             'password' => 'required|confirmed',
         ];
     }

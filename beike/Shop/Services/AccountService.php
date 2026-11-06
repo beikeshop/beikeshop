@@ -95,7 +95,7 @@ class AccountService
             throw new \Exception(trans('shop/account.verify_code_expired'));
         }
 
-        if ($verifyCode->code != $code) {
+        if (! is_string($code) || ! hash_equals((string) $verifyCode->code, $code)) {
             throw new \Exception(trans('shop/account.verify_code_error'));
         }
 
