@@ -6,19 +6,6 @@
 
 @section('page-title-right')
   <div class="d-flex align-items-center gap-2">
-    <!-- Signature Secret Button -->
-    <div id="signature-secret-app" v-cloak style="display: none;">
-      <el-button
-        v-if="!signatureStatus.has_secret"
-        size="small"
-        type="warning"
-        :loading="fetchingSecret"
-        @click="fetchSignatureSecret">
-        <i class="bi bi-key me-1"></i>
-        @{{ getSecretRetryButtonText() }}
-      </el-button>
-    </div>
-
     @hookwrapper('admin.plugin.marketing')
     <a href="{{ admin_route('marketing.index', isset($type) ? ['type' => $type]: '') }}"
        class="btn btn-outline-info">{{ __('common.get_more') }}</a>
@@ -92,58 +79,12 @@
   <script>
     const plugins = @json($plugins ?? []);
 
-    // 签名密钥状态管理
-    let signatureSecretApp = new Vue({
-      el: '#signature-secret-app',
-      data: {
-        signatureStatus: {
-          has_secret: false,
-          secret_length: 0,
-          secret_preview: '',
-        },
-        fetchingSecret: false,
-      },
-      mounted() {
-        this.loadSignatureSecretStatus();
-      },
-      methods: {
-        loadSignatureSecretStatus() {
-          $http.get('{{ admin_route('settings.signature_secret_status') }}', null, {hload: true}).then((res) => {
-            if (res.data) {
-              this.signatureStatus = res.data;
-            }
-          }).catch((err) => {
-            console.error('{{ trans('admin/plugin.load_signature_secret_failed') }}:', err);
-          });
-        },
-        fetchSignatureSecret() {
-          this.fetchingSecret = true;
-          $http.post('{{ admin_route('settings.fetch_signature_secret') }}').then((res) => {
-            this.fetchingSecret = false;
-            if (res.data) {
-              layer.msg(res.message || '{{ trans('admin/plugin.signature_secret_fetched') }}');
-              this.loadSignatureSecretStatus();
-            }
-          }).catch((err) => {
-            this.fetchingSecret = false;
-            const message = err.response?.data?.message || err.message || '{{ trans('admin/plugin.signature_secret_fetch_failed') }}';
-            layer.msg(message, () => {});
-          });
-        },
-        getSecretRetryButtonText() {
-          if (this.fetchingSecret) {
-            return '{{ trans('admin/plugin.fetching') }}';
-          }
-          return '{{ trans('admin/plugin.retry_fetch_signature_secret') }}';
-        }
-      }
-    });
-
     let app = new Vue({
       el: '#plugins-app',
 
       data: {
         plugins: plugins,
+        hasSignatureSecret: @json($has_signature_secret),
         pluginUpdates: {},
         free_plugin_codes: @json(config('app.free_plugin_codes')),
         statusLoading: {},
@@ -155,6 +96,10 @@
       },
 
       methods: {
+        fetchSignatureSecret() {
+          $http.post('{{ admin_route('settings.fetch_signature_secret') }}', null, {hload: true, hmsg: true}).catch(() => {});
+        },
+
         checkPluginVersions() {
           if (!plugins.some(plugin => plugin.can_update)) {
             return;
@@ -162,9 +107,7 @@
 
           $http.get('{{ admin_route('plugins.check_versions') }}', null, {hload: true, hmsg: true}).then((res) => {
             this.pluginUpdates = res.data || {};
-          }).catch((err) => {
-            console.error('Failed to check plugin versions:', err);
-          });
+          })
         },
 
         toBkTicket(code) {
@@ -292,6 +235,10 @@
       },
 
       mounted() {
+        if (!this.hasSignatureSecret) {
+          this.fetchSignatureSecret();
+        }
+
         this.checkPluginVersions();
 
         // 高亮并滚动到指定插件

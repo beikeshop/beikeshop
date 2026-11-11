@@ -32,7 +32,9 @@ class PluginController extends Controller
     {
         $plugins         = app('plugin')->getPlugins();
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
-        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        $data['has_signature_secret'] = ! empty(system_setting('base.signature_secret'));
+        $data                         = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -47,7 +49,9 @@ class PluginController extends Controller
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
-        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        $data['has_signature_secret'] = ! empty(system_setting('base.signature_secret'));
+        $data                         = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -62,7 +66,9 @@ class PluginController extends Controller
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
-        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        $data['has_signature_secret'] = ! empty(system_setting('base.signature_secret'));
+        $data                         = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -77,7 +83,9 @@ class PluginController extends Controller
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
-        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        $data['has_signature_secret'] = ! empty(system_setting('base.signature_secret'));
+        $data                         = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -92,7 +100,9 @@ class PluginController extends Controller
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
-        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        $data['has_signature_secret'] = ! empty(system_setting('base.signature_secret'));
+        $data                         = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -107,7 +117,9 @@ class PluginController extends Controller
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
-        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        $data['has_signature_secret'] = ! empty(system_setting('base.signature_secret'));
+        $data                         = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -122,7 +134,9 @@ class PluginController extends Controller
         $plugins         = $plugins->whereIn('type', [$type, 'translator']);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
-        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        $data['has_signature_secret'] = ! empty(system_setting('base.signature_secret'));
+        $data                         = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -137,7 +151,9 @@ class PluginController extends Controller
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
-        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        $data['has_signature_secret'] = ! empty(system_setting('base.signature_secret'));
+        $data                         = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -149,7 +165,9 @@ class PluginController extends Controller
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
-        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        $data['has_signature_secret'] = ! empty(system_setting('base.signature_secret'));
+        $data                         = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
