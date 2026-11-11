@@ -60,7 +60,7 @@
                         <a v-if="plugin.type != 'theme'" class="btn btn-sm btn-outline-secondary" :href="plugin.edit_url">{{ __('admin/common.edit') }}</a>
                         <a v-else :style="!plugin.status ? 'cursor: not-allowed' : ''" :class="['btn btn-sm btn-outline-secondary', !plugin.status ? 'disabled' : '' ]" href="{{ admin_route('theme.index') }}">{{ __('admin/plugin.to_enable') }}</a>
                         <button type="button" v-if="!free_plugin_codes.includes(plugin.code)" class="btn btn-sm btn-outline-secondary" target="_blank" href="javascript:void(0)" @click="toBkTicket(plugin.code)">{{ __('admin/plugin.ticket') }}</button>
-                        <a v-if="plugin.can_update" class="btn btn-sm btn-outline-success" @click="updatePlugin(plugin.code, 'install', index)">{{ __('admin/plugin.update') }}</a>
+                        <a v-if="plugin.can_update && pluginUpdates[plugin.code]" class="btn btn-sm btn-outline-success" @click="updatePlugin(plugin.code, 'install', index)">{{ __('admin/plugin.update') }}</a>
                         <a class="btn btn-outline-danger btn-sm" @click="installedPlugin(plugin.code, 'uninstall', index)">{{ __('admin/common.uninstall') }}</a>
                       </div>
                       <div v-else>
@@ -144,6 +144,7 @@
 
       data: {
         plugins: plugins,
+        pluginUpdates: {},
         free_plugin_codes: @json(config('app.free_plugin_codes')),
         statusLoading: {},
         statusRollbackGuard: {},
@@ -154,6 +155,18 @@
       },
 
       methods: {
+        checkPluginVersions() {
+          if (!plugins.some(plugin => plugin.can_update)) {
+            return;
+          }
+
+          $http.get('{{ admin_route('plugins.check_versions') }}', null, {hload: true, hmsg: true}).then((res) => {
+            this.pluginUpdates = res.data || {};
+          }).catch((err) => {
+            console.error('Failed to check plugin versions:', err);
+          });
+        },
+
         toBkTicket(code) {
           this.pluginServiceExpired(code).then(() => {
             window.open(`{{ beike_url() }}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`);
@@ -279,6 +292,8 @@
       },
 
       mounted() {
+        this.checkPluginVersions();
+
         // 高亮并滚动到指定插件
         const urlParams = new URLSearchParams(window.location.search);
         const highlightCode = urlParams.get('highlight');

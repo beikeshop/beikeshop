@@ -34,8 +34,6 @@ class PluginController extends Controller
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data            = hook_filter('admin.plugin.index.data', $data);
 
-        $this->updateVersion($data['plugins']);
-
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -50,7 +48,6 @@ class PluginController extends Controller
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
-        $this->updateVersion($data['plugins']);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -67,8 +64,6 @@ class PluginController extends Controller
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
 
-        $this->updateVersion($data['plugins']);
-
         return view('admin::pages.plugins.index', $data);
     }
 
@@ -83,7 +78,6 @@ class PluginController extends Controller
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
-        $this->updateVersion($data['plugins']);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -99,7 +93,6 @@ class PluginController extends Controller
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
-        $this->updateVersion($data['plugins']);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -115,7 +108,6 @@ class PluginController extends Controller
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
-        $this->updateVersion($data['plugins']);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -131,7 +123,6 @@ class PluginController extends Controller
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
-        $this->updateVersion($data['plugins']);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -147,7 +138,6 @@ class PluginController extends Controller
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
-        $this->updateVersion($data['plugins']);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -160,7 +150,6 @@ class PluginController extends Controller
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
-        $this->updateVersion($data['plugins']);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -305,12 +294,35 @@ class PluginController extends Controller
         }
     }
 
+    public function checkVersions(): JsonResponse
+    {
+        $plugins = app('plugin')->getPlugins()->map(function (Plugin $plugin) {
+            return [
+                'code'       => $plugin->code,
+                'version'    => $plugin->version,
+                'can_update' => $plugin->getCanUpdate(),
+            ];
+        })->values()->all();
+
+        $this->updateVersion($plugins);
+
+        return json_success(trans('common.success'), array_column($plugins, 'can_update', 'code'));
+    }
+
     private function updateVersion(&$plugins): void
     {
         // 判断版本是否可以更新
         $freePluginCodes = config('app.free_plugin_codes');
         $pluginCodes     = \Beike\Models\Plugin::pluck('code')->toArray();
         $pluginCodes     = array_diff($pluginCodes, $freePluginCodes);
+        if (empty($pluginCodes)) {
+            foreach ($plugins as &$item) {
+                $item['can_update'] = false;
+            }
+
+            return;
+        }
+
         $pluginCodes     = implode('|', $pluginCodes);
         $pluginVersion   = MarketingService::getInstance()->checkPluginVersion($pluginCodes);
         $pluginData      = data_get($pluginVersion, 'data');

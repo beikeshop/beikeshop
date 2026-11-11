@@ -189,6 +189,7 @@ Route::prefix($adminName)
                 Route::middleware('can:orders_update_status')->post('orders/{order}/shipments', [Controllers\OrderController::class, 'createShipment'])->name('orders.create_shipment');
 
                 // 插件
+                Route::middleware('can:plugins_index')->get('plugins/check_versions', [Controllers\PluginController::class, 'checkVersions'])->name('plugins.check_versions');
                 Route::middleware('can:plugins_index')->get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
                 Route::middleware('can:plugins_show')->get('plugins/{code}/edit', [Controllers\PluginController::class, 'edit'])->name('plugins.edit');
                 Route::middleware('can:plugins_update')->put('plugins/{code}', [Controllers\PluginController::class, 'update'])->name('plugins.update');
