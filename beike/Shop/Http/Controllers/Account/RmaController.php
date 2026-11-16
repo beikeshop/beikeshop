@@ -76,6 +76,10 @@ class RmaController extends Controller
         try {
             $rma = RmaRepo::find($id);
 
+            if (! $rma || $rma->customer_id != current_customer()->id) {
+                return abort(404);
+            }
+
             if ($rma->status !== 'approved') {
                 return response()->json(['success' => false, 'message' => trans('shop/account/rma.update_failed')]);
             }
