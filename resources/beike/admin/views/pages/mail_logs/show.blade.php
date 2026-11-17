@@ -91,9 +91,9 @@
             <h5 class="card-title mb-0">邮件内容</h5>
           </div>
           <div class="card-body">
-            <div class="border p-3" style="max-height: 500px; overflow-y: auto;">
-              {!! $mail_log->content !!}
-            </div>
+            <iframe class="border w-100" style="height: 500px; display: block;"
+                    sandbox srcdoc="{{ $mail_log->content }}"
+                    title="{{ __('admin/mail_log.detail') }}"></iframe>
           </div>
         </div>
       @endif

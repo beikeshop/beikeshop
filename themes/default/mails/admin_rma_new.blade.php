@@ -95,7 +95,7 @@
             </tr>
             <tr>
               <td style="border: 1px solid #eee;padding:4px; background-color: #f8f9fa;font-size:13px;padding: 7px;width: 30%">{{ __('shop/account/rma_form.remark') }}</td>
-              <td style="border: 1px solid #eee;padding:4px;font-size:13px;padding: 7px">{!! $rma['comment'] !!}</td>
+              <td style="border: 1px solid #eee;padding:4px;font-size:13px;padding: 7px;white-space: pre-wrap;">{{ $rma['comment'] }}</td>
             </tr>
           </tbody>
         </table>
