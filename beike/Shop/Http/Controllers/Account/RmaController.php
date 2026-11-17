@@ -73,9 +73,12 @@ class RmaController extends Controller
             return response()->json(['success' => false, 'message' => trans('shop/account/rma.please_fill_required_fields')]);
         }
 
-        try {
-            $rma = RmaRepo::find($id);
+        $rma = RmaRepo::find($id);
+        if (! $rma || $rma->customer_id != current_customer()->id) {
+            return abort(404);
+        }
 
+        try {
             if ($rma->status !== 'approved') {
                 return response()->json(['success' => false, 'message' => trans('shop/account/rma.update_failed')]);
             }
